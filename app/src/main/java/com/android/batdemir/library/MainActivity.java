@@ -2,6 +2,8 @@ package com.android.batdemir.library;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -77,6 +79,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 fillStringList();
+            }
+        });
+
+        binding.btnChangeBorderColorSpinner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        binding.btnChangeBorderColorEdittext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeBorderColorEdittext();
             }
         });
 
@@ -159,6 +175,16 @@ public class MainActivity extends AppCompatActivity {
         ).fill_spinnerStringArray(
                 strings
         );
+    }
+
+    private void changeBorderColorSpinner(){
+
+    }
+
+    private void changeBorderColorEdittext(){
+        GradientDrawable gradientDrawable = (GradientDrawable) binding.edittext.get_editText().getBackground();
+        gradientDrawable.setStroke(1, Color.CYAN);
+        gradientDrawable.setCornerRadius(16F);
     }
 
     private class TestingModel implements Serializable {

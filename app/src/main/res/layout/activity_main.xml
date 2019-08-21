@@ -64,6 +64,20 @@
             android:text="Fill String List"
             android:textAllCaps="false"/>
 
+        <Button
+            android:id="@+id/btnChangeBorderColorEdittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Change Border Color Edittext"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/btnChangeBorderColorSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Change Border Color Spinner"
+            android:textAllCaps="false"/>
+
     </LinearLayout>
 
 </layout>
