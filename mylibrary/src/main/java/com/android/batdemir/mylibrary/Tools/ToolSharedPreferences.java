@@ -6,7 +6,7 @@ import android.preference.PreferenceManager;
 
 public class ToolSharedPreferences {
 
-    private String TAG="ToolSharedPreferences";
+    private String TAG=ToolSharedPreferences.class.getSimpleName();
     private Context context;
 
     public ToolSharedPreferences(Context context) {

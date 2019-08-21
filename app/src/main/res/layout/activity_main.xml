@@ -12,13 +12,13 @@
         android:orientation="vertical"
         tools:context=".MainActivity">
 
-        <com.android.batdemir.mylibrary.MySpinnerView
+        <com.android.batdemir.mylibrary.MySpinner
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"/>
 
-        <com.android.batdemir.mylibrary.MyEditTextView
+        <com.android.batdemir.mylibrary.MyEditText
             android:id="@+id/edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,6 +41,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Border Off EditText"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/btnFillCustomList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fill Custom List"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/btnFillArrayList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fill Array List"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/btnFillStringList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fill String List"
             android:textAllCaps="false"/>
 
     </LinearLayout>

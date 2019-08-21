@@ -8,29 +8,29 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
-public class MyEditTextView extends RelativeLayout {
+public class MyEditText extends RelativeLayout {
 
-    private String TAG = "MyEditTextView";
+    private String TAG = MyEditText.class.getSimpleName();
     private EditText _editText;
     private Boolean enableBorder;
     private Integer confirmativeCharCount;
 
-    public MyEditTextView(Context context) {
+    public MyEditText(Context context) {
         super(context);
         init();
     }
 
-    public MyEditTextView(Context context, AttributeSet attrs) {
+    public MyEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public MyEditTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MyEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
-    public MyEditTextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public MyEditText(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init();
     }
@@ -42,7 +42,7 @@ public class MyEditTextView extends RelativeLayout {
     }
 
     public Boolean getEnableBorder() {
-        return enableBorder==null?true:enableBorder;
+        return enableBorder==null?false:enableBorder;
     }
 
     public void setEnableBorder(Boolean enableBorder) {
@@ -75,7 +75,7 @@ public class MyEditTextView extends RelativeLayout {
     }
 
     private TextWatcher textWatcher(Boolean enableBorder){
-        TextWatcher textWatcher = new TextWatcher() {
+        return new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -110,7 +110,5 @@ public class MyEditTextView extends RelativeLayout {
 
             }
         };
-        return textWatcher;
     };
-
 }

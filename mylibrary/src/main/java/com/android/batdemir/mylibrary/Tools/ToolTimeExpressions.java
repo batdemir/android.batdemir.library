@@ -17,7 +17,7 @@ import java.util.Date;
 
 public class ToolTimeExpressions {
 
-    private String TAG="ToolTimeExpressions";
+    private String TAG=ToolTimeExpressions.class.getSimpleName();
     private Context context;
 
     public ToolTimeExpressions(@NonNull Context context) {
