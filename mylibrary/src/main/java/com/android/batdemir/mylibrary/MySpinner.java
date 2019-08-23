@@ -1,8 +1,16 @@
 package com.android.batdemir.mylibrary;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.DrawableContainer;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -11,11 +19,24 @@ import com.android.batdemir.mylibrary.Tools.Spinner.AdapterSpinner;
 
 import java.lang.reflect.Field;
 
-public class MySpinner extends RelativeLayout{
+public class MySpinner extends RelativeLayout {
 
     private String TAG = MySpinner.class.getSimpleName();
     private Spinner _spinner;
-    private Boolean enableBorder;
+
+    private GradientDrawable gradientDrawableStyle;
+    private GradientDrawable gradientDrawableIcon;
+    private boolean enableBorder = false;
+    private int borderWidth = 1;
+    private int borderColor = Color.BLACK;
+    private int confirmativeBorderColor = Color.GREEN;
+    private int nonConfirmativeBorderColor = Color.RED;
+    private float borderRadius = 0F;
+    private int solidColor = Color.TRANSPARENT;
+
+    private Drawable spinnerArrowIcon = getResources().getDrawable(R.drawable.ic_spinner_arrow,null);
+    private boolean addFirstItem = false;
+    private String firstItemName = "";
 
     public MySpinner(Context context) {
         super(context);
@@ -43,17 +64,89 @@ public class MySpinner extends RelativeLayout{
         return _spinner;
     }
 
-    public Boolean getEnableBorder() {
-        return enableBorder==null?false:enableBorder;
+    public boolean isEnableBorder() {
+        return enableBorder;
     }
 
-    public void setEnableBorder(Boolean enableBorder) {
+    public void setEnableBorder(boolean enableBorder) {
         this.enableBorder = enableBorder;
-        if (getEnableBorder()) {
-            _spinner.setBackground(getContext().getDrawable(R.drawable.gradient_unselected_spinner_box));
-        } else {
-            _spinner.setBackground(getContext().getDrawable(R.drawable.gradient_non_border_spinner_box));
-        }
+    }
+
+    public int getBorderWidth() {
+        return borderWidth;
+    }
+
+    public void setBorderWidth(int borderWidth) {
+        this.borderWidth = borderWidth;
+        gradientDrawableStyle.setStroke(getBorderWidth(),getBorderColor());
+    }
+
+    public int getBorderColor() {
+        return borderColor;
+    }
+
+    public void setBorderColor(int borderColor) {
+        this.borderColor = borderColor;
+        gradientDrawableStyle.setStroke(getBorderWidth(),getBorderColor());
+    }
+
+    public int getConfirmativeBorderColor() {
+        return confirmativeBorderColor;
+    }
+
+    public void setConfirmativeBorderColor(int confirmativeBorderColor) {
+        this.confirmativeBorderColor = confirmativeBorderColor;
+    }
+
+    public int getNonConfirmativeBorderColor() {
+        return nonConfirmativeBorderColor;
+    }
+
+    public void setNonConfirmativeBorderColor(int nonConfirmativeBorderColor) {
+        this.nonConfirmativeBorderColor = nonConfirmativeBorderColor;
+    }
+
+    public float getBorderRadius() {
+        return borderRadius;
+    }
+
+    public void setBorderRadius(float borderRadius) {
+        this.borderRadius = borderRadius;
+        gradientDrawableStyle.setCornerRadius(getBorderRadius());
+    }
+
+    public int getSolidColor() {
+        return solidColor;
+    }
+
+    public void setSolidColor(int solidColor) {
+        this.solidColor = solidColor;
+        gradientDrawableStyle.setColor(getSolidColor());
+    }
+
+    public Drawable getSpinnerArrowIcon() {
+        return spinnerArrowIcon;
+    }
+
+    public void setSpinnerArrowIcon(Drawable spinnerArrowIcon) {
+        this.spinnerArrowIcon = spinnerArrowIcon;
+        gradientDrawableIcon.set
+    }
+
+    public boolean isAddFirstItem() {
+        return addFirstItem;
+    }
+
+    public void setAddFirstItem(boolean addFirstItem) {
+        this.addFirstItem = addFirstItem;
+    }
+
+    public String getFirstItemName() {
+        return firstItemName;
+    }
+
+    public void setFirstItemName(String firstItemName) {
+        this.firstItemName = firstItemName;
     }
 
     //---functions---//
@@ -62,9 +155,40 @@ public class MySpinner extends RelativeLayout{
         try {
             inflate(getContext(),R.layout.view_my_spinner,this);
             _spinner = findViewById(R.id.viewMySpinner);
+            _spinner.setOnItemSelectedListener(onItemSelectedListener());
+            StateListDrawable stateListDrawable = (StateListDrawable) _spinner.getBackground();
+            DrawableContainer.DrawableContainerState drawableContainerState = (DrawableContainer.DrawableContainerState) stateListDrawable.getConstantState();
+            Drawable[] drawables = drawableContainerState.getChildren();
+            LayerDrawable layerDrawable = (LayerDrawable) drawables[0];
+            gradientDrawableStyle = (GradientDrawable) layerDrawable.findDrawableByLayerId(R.id.spinnerStyle);
+            gradientDrawableIcon = (GradientDrawable) layerDrawable.findDrawableByLayerId(R.id.spinnerIcon);
         }catch (Exception e){
             Log.e(TAG,e.getMessage());
         }
+    }
+
+    private AdapterView.OnItemSelectedListener onItemSelectedListener(){
+        return new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(isEnableBorder()){
+                    if(isAddFirstItem()){
+                        if(_spinner.getCount()!=0){
+                            if(getSelectedItemPosition()==0){
+                                gradientDrawableStyle.setStroke(getBorderWidth(),getNonConfirmativeBorderColor());
+                            }else {
+                                gradientDrawableStyle.setStroke(getBorderWidth(),getConfirmativeBorderColor());
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        };
     }
 
     public void setAdapter(AdapterSpinner adapter){

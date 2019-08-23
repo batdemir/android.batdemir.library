@@ -14,14 +14,10 @@ public class HelperSpinner<T> {
     private String TAG = HelperSpinner.class.getSimpleName();
     private Context context;
     private MySpinner mySpinner;
-    private Boolean addFirstItem;
-    private String firstItemName;
 
-    public HelperSpinner(Context context, MySpinner mySpinner, Boolean addFirstItem, String firstItemName) {
+    public HelperSpinner(Context context, MySpinner mySpinner) {
         this.context = context;
         this.mySpinner = mySpinner;
-        this.addFirstItem = addFirstItem;
-        this.firstItemName = firstItemName;
     }
 
     public void fill_spinnerCustomModel(ArrayList<T> models,
@@ -41,8 +37,8 @@ public class HelperSpinner<T> {
             Resources res = context.getResources();
             String[] strings = res.getStringArray(arrayId);
             ArrayList<ModelSpinner> tempSpinnerModels = new ArrayList<>();
-            if(addFirstItem){
-                tempSpinnerModels.add(0,new ModelSpinner(-1,firstItemName));
+            if(mySpinner.isAddFirstItem()){
+                tempSpinnerModels.add(0,new ModelSpinner(-1,mySpinner.getFirstItemName()));
             }
             for(int i=0;i<strings.length-1;i++){
                 tempSpinnerModels.add(new ModelSpinner(i,strings[i]));
@@ -63,8 +59,8 @@ public class HelperSpinner<T> {
     public void fill_spinnerStringArray(ArrayList<String> models){
         try {
             ArrayList<ModelSpinner> tempSpinnerModels = new ArrayList<>();
-            if(addFirstItem){
-                tempSpinnerModels.add(0,new ModelSpinner(-1,firstItemName));
+            if(mySpinner.isAddFirstItem()){
+                tempSpinnerModels.add(0,new ModelSpinner(-1,mySpinner.getFirstItemName()));
             }
             for(int i=0;i<models.size();i++){
                 tempSpinnerModels.add(new ModelSpinner(i,models.get(i)));

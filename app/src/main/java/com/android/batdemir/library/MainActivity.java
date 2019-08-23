@@ -17,6 +17,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -107,6 +108,34 @@ public class MainActivity extends AppCompatActivity {
                         count++;
                         break;
                     case 5:
+                        binding.spinner.setBorderColor(Color.RED);
+                        count++;
+                        break;
+                    case 6:
+                        binding.spinner.setBorderWidth(5);
+                        count++;
+                        break;
+                    case 7:
+                        binding.spinner.setAddFirstItem(true);
+                        count++;
+                        break;
+                    case 8:
+                        binding.spinner.setFirstItemName("Deneme");
+                        count++;
+                        break;
+                    case 9:
+                        binding.spinner.setBorderRadius(16f);
+                        count++;
+                        break;
+                    case 10:
+                        binding.spinner.setBorderRadius(0f);
+                        count++;
+                        break;
+                    case 11:
+                        binding.spinner.setSpinnerArrowIcon(getDrawable(R.drawable.ic_resize));
+                        count++;
+                        break;
+                    case 12:
                         count = 0;
                         break;
                 }
@@ -146,9 +175,8 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             new HelperSpinner<>(
-                    context,binding.spinner,
-                    true,
-                    "Select"
+                    context,
+                    binding.spinner
             ).fill_spinnerCustomModel(
                     testingModels,
                     TestingModel.class.getDeclaredField("Id"),
@@ -160,11 +188,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fillArrayList(){
+
+        binding.spinner.setEnableBorder(true);
+        binding.spinner.setAddFirstItem(true);
+        binding.spinner.setFirstItemName("Selam");
+
         new HelperSpinner<>(
                 context,
-                binding.spinner,
-                true,
-                "Selam"
+                binding.spinner
         ).fill_spinnerStringList(
                 R.array.test
         );
@@ -184,11 +215,13 @@ public class MainActivity extends AppCompatActivity {
         strings.add("StringTest9");
         strings.add("StringTest10");
 
+        binding.spinner.setEnableBorder(true);
+        binding.spinner.setAddFirstItem(true);
+        binding.spinner.setFirstItemName("Meyaba");
+
         new HelperSpinner<>(
                 context,
-                binding.spinner,
-                true,
-                "Meyaba"
+                binding.spinner
         ).fill_spinnerStringArray(
                 strings
         );

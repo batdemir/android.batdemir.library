@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"/>
 
-        <com.android.batdemir.mylibrary.MyEditText
+        spinner<com.android.batdemir.mylibrary.MyEditText
             android:id="@+id/edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

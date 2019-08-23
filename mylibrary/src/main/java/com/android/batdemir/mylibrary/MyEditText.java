@@ -15,12 +15,16 @@ public class MyEditText extends RelativeLayout{
     private String TAG = MyEditText.class.getSimpleName();
     private EditText _editText;
 
-    private Boolean enableBorder=false;
-    private Integer confirmativeCharCount=10;
+    private GradientDrawable gradientDrawable;
+    private boolean enableBorder = false;
     private int borderWidth = 1;
     private int borderColor = Color.BLACK;
+    private int confirmativeBorderColor = Color.GREEN;
+    private int nonConfirmativeBorderColor = Color.RED;
     private float borderRadius = 0F;
     private int solidColor = Color.TRANSPARENT;
+
+    private int confirmativeCharCount=10;
 
     public MyEditText(Context context) {
         super(context);
@@ -48,27 +52,12 @@ public class MyEditText extends RelativeLayout{
         return _editText;
     }
 
-
-    public Boolean getEnableBorder() {
-        return enableBorder==null?false:enableBorder;
+    public boolean isEnableBorder() {
+        return enableBorder;
     }
 
-    public void setEnableBorder(Boolean enableBorder) {
+    public void setEnableBorder(boolean enableBorder) {
         this.enableBorder = enableBorder;
-        if (getEnableBorder()) {
-            _editText.setBackground(getContext().getDrawable(R.drawable.gradient_unselected_box));
-        } else {
-            _editText.setBackground(getContext().getDrawable(R.drawable.gradient_non_border_box));
-        }
-        _editText.addTextChangedListener(textWatcher(getEnableBorder()));
-    }
-
-    public Integer getConfirmativeCharCount() {
-        return confirmativeCharCount==null?1:confirmativeCharCount;
-    }
-
-    public void setConfirmativeCharCount(Integer confirmativeCharCount) {
-        this.confirmativeCharCount = confirmativeCharCount;
     }
 
     public int getBorderWidth() {
@@ -77,8 +66,7 @@ public class MyEditText extends RelativeLayout{
 
     public void setBorderWidth(int borderWidth) {
         this.borderWidth = borderWidth;
-        GradientDrawable gradientDrawable = (GradientDrawable) _editText.getBackground();
-        gradientDrawable.setStroke(1,getBorderColor());
+        gradientDrawable.setStroke(getBorderWidth(),getBorderColor());
     }
 
     public int getBorderColor() {
@@ -87,8 +75,23 @@ public class MyEditText extends RelativeLayout{
 
     public void setBorderColor(int borderColor) {
         this.borderColor = borderColor;
-        GradientDrawable gradientDrawable = (GradientDrawable) _editText.getBackground();
-        gradientDrawable.setStroke(getBorderWidth(),borderColor);
+        gradientDrawable.setStroke(getBorderWidth(),getBorderColor());
+    }
+
+    public int getConfirmativeBorderColor() {
+        return confirmativeBorderColor;
+    }
+
+    public void setConfirmativeBorderColor(int confirmativeBorderColor) {
+        this.confirmativeBorderColor = confirmativeBorderColor;
+    }
+
+    public int getNonConfirmativeBorderColor() {
+        return nonConfirmativeBorderColor;
+    }
+
+    public void setNonConfirmativeBorderColor(int nonConfirmativeBorderColor) {
+        this.nonConfirmativeBorderColor = nonConfirmativeBorderColor;
     }
 
     public float getBorderRadius() {
@@ -97,8 +100,7 @@ public class MyEditText extends RelativeLayout{
 
     public void setBorderRadius(float borderRadius) {
         this.borderRadius = borderRadius;
-        GradientDrawable gradientDrawable = (GradientDrawable) _editText.getBackground();
-        gradientDrawable.setCornerRadius(borderRadius);
+        gradientDrawable.setCornerRadius(getBorderRadius());
     }
 
     public int getSolidColor() {
@@ -107,8 +109,15 @@ public class MyEditText extends RelativeLayout{
 
     public void setSolidColor(int solidColor) {
         this.solidColor = solidColor;
-        GradientDrawable gradientDrawable = (GradientDrawable) _editText.getBackground();
-        gradientDrawable.setColor(solidColor);
+        gradientDrawable.setColor(getSolidColor());
+    }
+
+    public int getConfirmativeCharCount() {
+        return confirmativeCharCount;
+    }
+
+    public void setConfirmativeCharCount(int confirmativeCharCount) {
+        this.confirmativeCharCount = confirmativeCharCount;
     }
 
     //---functions---//
@@ -117,12 +126,14 @@ public class MyEditText extends RelativeLayout{
         try {
             inflate(getContext(), R.layout.view_my_edittext, this);
             _editText = findViewById(R.id.viewMyEditText);
+            _editText.addTextChangedListener(textWatcher());
+            gradientDrawable = (GradientDrawable) _editText.getBackground();
         }catch (Exception e){
             Log.e(TAG,e.getMessage());
         }
     }
 
-    private TextWatcher textWatcher(Boolean enableBorder){
+    private TextWatcher textWatcher(){
         return new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -131,22 +142,22 @@ public class MyEditText extends RelativeLayout{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(enableBorder){
+                if(isEnableBorder()){
                     if(_editText.getText().toString().isEmpty()){
-                        _editText.setBackground(getContext().getDrawable(R.drawable.gradient_unselected_box));
+                        gradientDrawable.setStroke(getBorderWidth(),getNonConfirmativeBorderColor());
                     }else if(_editText.getText().toString().length()>=getConfirmativeCharCount()){
-                        _editText.setBackground(getContext().getDrawable(R.drawable.gradient_selected_box));
+                        gradientDrawable.setStroke(getBorderWidth(),getConfirmativeBorderColor());
                     }else {
-                        _editText.setBackground(getContext().getDrawable(R.drawable.gradient_unselected_box));
+                        gradientDrawable.setStroke(getBorderWidth(),getNonConfirmativeBorderColor());
                     }
                 }else {
-                    _editText.setBackground(getContext().getDrawable(R.drawable.gradient_non_border_box));
+                    gradientDrawable.setStroke(getBorderWidth(),getBorderColor());
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(enableBorder){
+                if(isEnableBorder()){
                     if(_editText.getText().toString().length()>=getConfirmativeCharCount()){
                         _editText.setError(null);
                     }else {
