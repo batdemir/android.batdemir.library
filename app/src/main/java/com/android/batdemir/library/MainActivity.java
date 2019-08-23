@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.android.batdemir.library.databinding.ActivityMainBinding;
+import com.android.batdemir.mylibrary.MyEditText;
 import com.android.batdemir.mylibrary.Tools.Spinner.HelperSpinner;
 import com.google.gson.annotations.SerializedName;
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private Context context;
+    private int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
 
         context = MainActivity.this;
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
-
-        binding.edittext.setConfirmativeCharCount(15);
 
         binding.btnOnOffSpinner.setSelected(false);
 
@@ -82,17 +82,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        binding.btnChangeBorderColorSpinner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
         binding.btnChangeBorderColorEdittext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeBorderColorEdittext();
+                switch (count){
+                    case 0:
+                        binding.edittext.setBorderColor(Color.MAGENTA);
+                        count++;
+                        break;
+                    case 1:
+                        binding.edittext.setBorderWidth(5);
+                        count++;
+                        break;
+                    case 2:
+                        binding.edittext.setBorderRadius(32F);
+                        count++;
+                        break;
+                    case 3:
+                        binding.edittext.setConfirmativeCharCount(15);
+                        count++;
+                        break;
+                    case 4:
+                        binding.edittext.setSolidColor(Color.YELLOW);
+                        count++;
+                        break;
+                    case 5:
+                        count = 0;
+                        break;
+                }
             }
         });
 
@@ -175,16 +192,6 @@ public class MainActivity extends AppCompatActivity {
         ).fill_spinnerStringArray(
                 strings
         );
-    }
-
-    private void changeBorderColorSpinner(){
-
-    }
-
-    private void changeBorderColorEdittext(){
-        GradientDrawable gradientDrawable = (GradientDrawable) binding.edittext.get_editText().getBackground();
-        gradientDrawable.setStroke(1, Color.CYAN);
-        gradientDrawable.setCornerRadius(16F);
     }
 
     private class TestingModel implements Serializable {

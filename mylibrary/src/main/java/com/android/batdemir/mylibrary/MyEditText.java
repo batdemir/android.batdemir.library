@@ -1,6 +1,8 @@
 package com.android.batdemir.mylibrary;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -8,12 +10,17 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
-public class MyEditText extends RelativeLayout {
+public class MyEditText extends RelativeLayout{
 
     private String TAG = MyEditText.class.getSimpleName();
     private EditText _editText;
-    private Boolean enableBorder;
-    private Integer confirmativeCharCount;
+
+    private Boolean enableBorder=false;
+    private Integer confirmativeCharCount=10;
+    private int borderWidth = 1;
+    private int borderColor = Color.BLACK;
+    private float borderRadius = 0F;
+    private int solidColor = Color.TRANSPARENT;
 
     public MyEditText(Context context) {
         super(context);
@@ -41,6 +48,7 @@ public class MyEditText extends RelativeLayout {
         return _editText;
     }
 
+
     public Boolean getEnableBorder() {
         return enableBorder==null?false:enableBorder;
     }
@@ -61,6 +69,46 @@ public class MyEditText extends RelativeLayout {
 
     public void setConfirmativeCharCount(Integer confirmativeCharCount) {
         this.confirmativeCharCount = confirmativeCharCount;
+    }
+
+    public int getBorderWidth() {
+        return borderWidth;
+    }
+
+    public void setBorderWidth(int borderWidth) {
+        this.borderWidth = borderWidth;
+        GradientDrawable gradientDrawable = (GradientDrawable) _editText.getBackground();
+        gradientDrawable.setStroke(1,getBorderColor());
+    }
+
+    public int getBorderColor() {
+        return borderColor;
+    }
+
+    public void setBorderColor(int borderColor) {
+        this.borderColor = borderColor;
+        GradientDrawable gradientDrawable = (GradientDrawable) _editText.getBackground();
+        gradientDrawable.setStroke(getBorderWidth(),borderColor);
+    }
+
+    public float getBorderRadius() {
+        return borderRadius;
+    }
+
+    public void setBorderRadius(float borderRadius) {
+        this.borderRadius = borderRadius;
+        GradientDrawable gradientDrawable = (GradientDrawable) _editText.getBackground();
+        gradientDrawable.setCornerRadius(borderRadius);
+    }
+
+    public int getSolidColor() {
+        return solidColor;
+    }
+
+    public void setSolidColor(int solidColor) {
+        this.solidColor = solidColor;
+        GradientDrawable gradientDrawable = (GradientDrawable) _editText.getBackground();
+        gradientDrawable.setColor(solidColor);
     }
 
     //---functions---//
