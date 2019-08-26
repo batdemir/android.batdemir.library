@@ -46,4 +46,7 @@ dependencies {
 
     //JETBRAINS
     implementation 'org.jetbrains:annotations:15.0'
+
+    //Google API
+    implementation 'com.googlecode.libphonenumber:libphonenumber:8.10.17'
 }

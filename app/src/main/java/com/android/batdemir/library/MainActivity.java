@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         binding.btnChangeBorderColorSpinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.edittext.setEmailValid(true);
+                binding.edittext.setPhoneValid(true);
             }
         });
 

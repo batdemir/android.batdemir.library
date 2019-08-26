@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.android.batdemir.mylibrary.Tools.EditTextTools.CharCountValidWatcher;
 import com.android.batdemir.mylibrary.Tools.EditTextTools.EmailValidWatcher;
 import com.android.batdemir.mylibrary.Tools.EditTextTools.HelperEditText;
+import com.android.batdemir.mylibrary.Tools.EditTextTools.PhoneValidWatcher;
 
 public class MyEditText extends RelativeLayout{
 
@@ -32,6 +33,7 @@ public class MyEditText extends RelativeLayout{
 
     private int confirmativeCharCount=10;
     private boolean emailValid=false;
+    private boolean phoneValid=false;
 
     public MyEditText(Context context) {
         super(context);
@@ -140,6 +142,16 @@ public class MyEditText extends RelativeLayout{
         this.emailValid = emailValid;
         _editText.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         _editText.addTextChangedListener(new EmailValidWatcher(this));
+    }
+
+    public boolean isPhoneValid() {
+        return phoneValid;
+    }
+
+    public void setPhoneValid(boolean phoneValid) {
+        this.phoneValid = phoneValid;
+        _editText.setInputType(InputType.TYPE_CLASS_PHONE);
+        _editText.addTextChangedListener(new PhoneValidWatcher(this));
     }
 
     //---functions---//

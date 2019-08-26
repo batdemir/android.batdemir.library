@@ -5,16 +5,19 @@ import android.text.TextWatcher;
 
 import com.android.batdemir.mylibrary.MyEditText;
 
-public class EmailValidWatcher implements TextWatcher {
+import java.util.Locale;
+
+public class PhoneValidWatcher implements TextWatcher {
 
     private final MyEditText myEditText;
 
-    public EmailValidWatcher(MyEditText myEditText) {
+    public PhoneValidWatcher(MyEditText myEditText) {
         this.myEditText = myEditText;
     }
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
     }
 
     @Override
@@ -26,12 +29,12 @@ public class EmailValidWatcher implements TextWatcher {
     public void afterTextChanged(Editable s) {
         if(myEditText.get_editText().getText().toString().isEmpty()){
             myEditText.getGradientDrawable().setStroke(myEditText.getBorderWidth(),myEditText.getNonConfirmativeBorderColor());
-        }else if(new HelperEditText().isEmailValid(myEditText.get_editText().getText().toString())){
+        }else if(new HelperEditText().isPhoneNumberValid(myEditText.get_editText().getText().toString(), Locale.getDefault().getCountry())){
             myEditText.getGradientDrawable().setStroke(myEditText.getBorderWidth(),myEditText.getConfirmativeBorderColor());
             myEditText.get_editText().setError(null);
         }else {
             myEditText.getGradientDrawable().setStroke(myEditText.getBorderWidth(),myEditText.getNonConfirmativeBorderColor());
-            myEditText.get_editText().setError("Input could not be match e-mail format.");
+            myEditText.get_editText().setError("Input could not be match phone format.");
         }
     }
 }
