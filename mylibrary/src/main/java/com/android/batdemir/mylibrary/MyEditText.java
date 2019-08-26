@@ -4,11 +4,17 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.android.batdemir.mylibrary.Tools.EditTextTools.CharCountValidWatcher;
+import com.android.batdemir.mylibrary.Tools.EditTextTools.EmailValidWatcher;
+import com.android.batdemir.mylibrary.Tools.EditTextTools.HelperEditText;
 
 public class MyEditText extends RelativeLayout{
 
@@ -25,6 +31,7 @@ public class MyEditText extends RelativeLayout{
     private int solidColor = Color.TRANSPARENT;
 
     private int confirmativeCharCount=10;
+    private boolean emailValid=false;
 
     public MyEditText(Context context) {
         super(context);
@@ -50,6 +57,10 @@ public class MyEditText extends RelativeLayout{
 
     public EditText get_editText() {
         return _editText;
+    }
+
+    public GradientDrawable getGradientDrawable() {
+        return gradientDrawable;
     }
 
     public boolean isEnableBorder() {
@@ -118,6 +129,17 @@ public class MyEditText extends RelativeLayout{
 
     public void setConfirmativeCharCount(int confirmativeCharCount) {
         this.confirmativeCharCount = confirmativeCharCount;
+        _editText.addTextChangedListener(new CharCountValidWatcher(this));
+    }
+
+    public boolean isEmailValid() {
+        return emailValid;
+    }
+
+    public void setEmailValid(boolean emailValid) {
+        this.emailValid = emailValid;
+        _editText.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        _editText.addTextChangedListener(new EmailValidWatcher(this));
     }
 
     //---functions---//
@@ -126,48 +148,9 @@ public class MyEditText extends RelativeLayout{
         try {
             inflate(getContext(), R.layout.view_my_edittext, this);
             _editText = findViewById(R.id.viewMyEditText);
-            _editText.addTextChangedListener(textWatcher());
             gradientDrawable = (GradientDrawable) _editText.getBackground();
         }catch (Exception e){
             Log.e(TAG,e.getMessage());
         }
     }
-
-    private TextWatcher textWatcher(){
-        return new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(isEnableBorder()){
-                    if(_editText.getText().toString().isEmpty()){
-                        gradientDrawable.setStroke(getBorderWidth(),getNonConfirmativeBorderColor());
-                    }else if(_editText.getText().toString().length()>=getConfirmativeCharCount()){
-                        gradientDrawable.setStroke(getBorderWidth(),getConfirmativeBorderColor());
-                    }else {
-                        gradientDrawable.setStroke(getBorderWidth(),getNonConfirmativeBorderColor());
-                    }
-                }else {
-                    gradientDrawable.setStroke(getBorderWidth(),getBorderColor());
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(isEnableBorder()){
-                    if(_editText.getText().toString().length()>=getConfirmativeCharCount()){
-                        _editText.setError(null);
-                    }else {
-                        _editText.setError("Input can't be lower than "+String.valueOf(getConfirmativeCharCount())+" character.");
-                    }
-                }else {
-                    _editText.setError(null);
-                }
-
-            }
-        };
-    };
 }

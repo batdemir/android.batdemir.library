@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
-import com.android.batdemir.mylibrary.Tools.Spinner.AdapterSpinner;
+import com.android.batdemir.mylibrary.Tools.SpinnerTools.AdapterSpinner;
 
 import java.lang.reflect.Field;
 

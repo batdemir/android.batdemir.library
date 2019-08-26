@@ -1,4 +1,4 @@
-package com.android.batdemir.mylibrary.Tools.Spinner;
+package com.android.batdemir.mylibrary.Tools.SpinnerTools;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

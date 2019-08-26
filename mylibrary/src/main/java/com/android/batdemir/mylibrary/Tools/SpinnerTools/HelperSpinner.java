@@ -1,4 +1,4 @@
-package com.android.batdemir.mylibrary.Tools.Spinner;
+package com.android.batdemir.mylibrary.Tools.SpinnerTools;
 
 import android.content.Context;
 import android.content.res.Resources;

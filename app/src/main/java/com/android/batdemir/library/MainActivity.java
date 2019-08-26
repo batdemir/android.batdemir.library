@@ -3,7 +3,6 @@ package com.android.batdemir.library;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,13 +10,11 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.android.batdemir.library.databinding.ActivityMainBinding;
-import com.android.batdemir.mylibrary.MyEditText;
-import com.android.batdemir.mylibrary.Tools.Spinner.HelperSpinner;
+import com.android.batdemir.mylibrary.Tools.SpinnerTools.HelperSpinner;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.TreeMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -100,9 +97,6 @@ public class MainActivity extends AppCompatActivity {
                         count++;
                         break;
                     case 3:
-                        binding.edittext.setConfirmativeCharCount(15);
-                        count++;
-                        break;
                     case 4:
                         binding.edittext.setSolidColor(Color.YELLOW);
                         count++;
@@ -139,6 +133,13 @@ public class MainActivity extends AppCompatActivity {
                         count = 0;
                         break;
                 }
+            }
+        });
+
+        binding.btnChangeBorderColorSpinner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.edittext.setEmailValid(true);
             }
         });
 
