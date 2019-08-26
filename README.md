@@ -16,7 +16,7 @@ setSpinnerArrowIcon(...) | setConfirmativeBorderColor(...)
 setAddFirstItem(...)
 setFirstItemName(...)
 ## Preview
-![20190826_095241](https://user-images.githubusercontent.com/24320016/63671363-0151f800-c7e8-11e9-8f08-5a2203d44c8b.gif)
+![giphy](https://user-images.githubusercontent.com/24320016/63677792-74626b00-c7f6-11e9-89fb-879ff01d5799.gif)
 
 
 # License
