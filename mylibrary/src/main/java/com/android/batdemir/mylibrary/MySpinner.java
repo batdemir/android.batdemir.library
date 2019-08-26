@@ -25,7 +25,7 @@ public class MySpinner extends RelativeLayout {
     private Spinner _spinner;
 
     private GradientDrawable gradientDrawableStyle;
-    private GradientDrawable gradientDrawableIcon;
+    private LayerDrawable layerDrawableIcon;
     private boolean enableBorder = false;
     private int borderWidth = 1;
     private int borderColor = Color.BLACK;
@@ -130,7 +130,7 @@ public class MySpinner extends RelativeLayout {
 
     public void setSpinnerArrowIcon(Drawable spinnerArrowIcon) {
         this.spinnerArrowIcon = spinnerArrowIcon;
-        gradientDrawableIcon.set
+        layerDrawableIcon.setDrawableByLayerId(R.id.spinnerIcon,spinnerArrowIcon);
     }
 
     public boolean isAddFirstItem() {
@@ -161,7 +161,7 @@ public class MySpinner extends RelativeLayout {
             Drawable[] drawables = drawableContainerState.getChildren();
             LayerDrawable layerDrawable = (LayerDrawable) drawables[0];
             gradientDrawableStyle = (GradientDrawable) layerDrawable.findDrawableByLayerId(R.id.spinnerStyle);
-            gradientDrawableIcon = (GradientDrawable) layerDrawable.findDrawableByLayerId(R.id.spinnerIcon);
+            layerDrawableIcon = (LayerDrawable) drawables[0];
         }catch (Exception e){
             Log.e(TAG,e.getMessage());
         }
