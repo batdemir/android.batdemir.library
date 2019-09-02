@@ -1,6 +1,7 @@
 package com.android.batdemir.library;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         context = MainActivity.this;
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         binding.btnOnOffSpinner.setSelected(false);
 
@@ -51,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 binding.btnOnOffEditText.setSelected(!binding.btnOnOffEditText.isSelected());
                 binding.edittext.setEnableBorder(!binding.btnOnOffEditText.isSelected());
-                if(binding.btnOnOffEditText.isSelected()){
+                if (binding.btnOnOffEditText.isSelected()) {
                     binding.btnOnOffEditText.setText("Border Off EditText");
-                }else {
+                } else {
                     binding.btnOnOffEditText.setText("Border On EditText");
                 }
             }
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         binding.btnChangeBorderColorEdittext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (count){
+                switch (count) {
                     case 0:
                         binding.edittext.setBorderColor(Color.MAGENTA);
                         count++;
@@ -151,7 +152,8 @@ public class MainActivity extends AppCompatActivity {
                 message += "\n" + "Selected Item Value:\t" + binding.spinner.getSelectedItemValue();
                 message += "\n" + "Selected Item Position:\t" + binding.spinner.getSelectedItemPosition();
                 message += "\n";
-                Toast.makeText(context,message,Toast.LENGTH_SHORT).show();;
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                ;
             }
 
             @Override
@@ -159,20 +161,29 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        binding.btnNextPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gp = new Intent(context, RecyclerActivity.class);
+                startActivity(gp);
+                finish();
+            }
+        });
     }
 
-    private void fillCustomList(){
+    private void fillCustomList() {
         ArrayList<Object> testingModels = new ArrayList<>();
 
-        testingModels.add(new TestingModel(123,"test1",1,null));
-        testingModels.add(new TestingModel(234,"test2",null,"subTest2"));
-        testingModels.add(new TestingModel(356,"test3",3,null));
-        testingModels.add(new TestingModel(478,"test4",null,null));
-        testingModels.add(new TestingModel(590,"test5",5,"subTest5"));
-        testingModels.add(new TestingModel(612,"test6",null,null));
-        testingModels.add(new TestingModel(723,"test7",7,null));
-        testingModels.add(new TestingModel(834,"test8",8,"subTest8"));
-        testingModels.add(new TestingModel(945,"test9",null,"subTest9"));
+        testingModels.add(new TestingModel(123, "test1", 1, null));
+        testingModels.add(new TestingModel(234, "test2", null, "subTest2"));
+        testingModels.add(new TestingModel(356, "test3", 3, null));
+        testingModels.add(new TestingModel(478, "test4", null, null));
+        testingModels.add(new TestingModel(590, "test5", 5, "subTest5"));
+        testingModels.add(new TestingModel(612, "test6", null, null));
+        testingModels.add(new TestingModel(723, "test7", 7, null));
+        testingModels.add(new TestingModel(834, "test8", 8, "subTest8"));
+        testingModels.add(new TestingModel(945, "test9", null, "subTest9"));
 
         try {
             new HelperSpinner<>(
@@ -188,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void fillArrayList(){
+    private void fillArrayList() {
 
         binding.spinner.setEnableBorder(true);
         binding.spinner.setAddFirstItem(true);
@@ -202,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
-    private void fillStringList(){
+    private void fillStringList() {
         ArrayList<String> strings = new ArrayList<>();
 
         strings.add("StringTest1");

@@ -1,83 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <ScrollView
         android:id="@+id/rootMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         tools:context=".MainActivity">
 
-        <com.android.batdemir.mylibrary.MySpinner
-            android:id="@+id/spinner"
+        <LinearLayout
+            android:id="@+id/linearProps"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        spinner<com.android.batdemir.mylibrary.MyEditText
-            android:id="@+id/edittext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"/>
+            <Button
+                android:id="@+id/btnNextPage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Go Next Page"
+                android:textAllCaps="false" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"/>
+            <com.android.batdemir.mylibrary.MySpinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp" />
 
-        <Button
-            android:id="@+id/btnOnOffSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Border Off Spinner"
-            android:textAllCaps="false"/>
+            <com.android.batdemir.mylibrary.MyEditText
+                android:id="@+id/edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp" />
 
-        <Button
-            android:id="@+id/btnOnOffEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Border Off EditText"
-            android:textAllCaps="false"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp" />
 
-        <Button
-            android:id="@+id/btnFillCustomList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Fill Custom List"
-            android:textAllCaps="false"/>
+            <Button
+                android:id="@+id/btnOnOffSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Border Off Spinner"
+                android:textAllCaps="false" />
 
-        <Button
-            android:id="@+id/btnFillArrayList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Fill Array List"
-            android:textAllCaps="false"/>
+            <Button
+                android:id="@+id/btnOnOffEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Border Off EditText"
+                android:textAllCaps="false" />
 
-        <Button
-            android:id="@+id/btnFillStringList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Fill String List"
-            android:textAllCaps="false"/>
+            <Button
+                android:id="@+id/btnFillCustomList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fill Custom List"
+                android:textAllCaps="false" />
 
-        <Button
-            android:id="@+id/btnChangeBorderColorEdittext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Change Border Color Edittext"
-            android:textAllCaps="false"/>
+            <Button
+                android:id="@+id/btnFillArrayList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fill Array List"
+                android:textAllCaps="false" />
 
-        <Button
-            android:id="@+id/btnChangeBorderColorSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Change Border Color Spinner"
-            android:textAllCaps="false"/>
+            <Button
+                android:id="@+id/btnFillStringList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fill String List"
+                android:textAllCaps="false" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/btnChangeBorderColorEdittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Change Border Color Edittext"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btnChangeBorderColorSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Change Border Color Spinner"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </layout>
+
