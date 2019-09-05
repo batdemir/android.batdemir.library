@@ -17,10 +17,18 @@
             android:text="Go Previous Page"
             android:textAllCaps="false" />
 
-        <android.support.v7.widget.RecyclerView
+        <Button
+            android:id="@+id/btnShowAlertDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Show Alert Dialog"
+            android:textAllCaps="false" />
+
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerListView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:listitem="@layout/recycler_view_item"/>
 
     </LinearLayout>
 

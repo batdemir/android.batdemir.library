@@ -3,23 +3,26 @@ package com.android.batdemir.library;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 
 import com.android.batdemir.library.Models.AdapterRecyclerView;
 import com.android.batdemir.library.Models.Player;
 import com.android.batdemir.library.databinding.ActivityRecyclerBinding;
+import com.android.batdemir.mylibrary.Components.MyAlertDialog;
 import com.android.batdemir.mylibrary.Tools.SwipeTools.SwipeController;
 import com.android.batdemir.mylibrary.Tools.SwipeTools.SwipeControllerActions;
 
 import java.util.ArrayList;
 
 public class RecyclerActivity extends AppCompatActivity implements
-        BaseActions {
+        BaseActions,
+        MyAlertDialog.AlertClickListener{
 
     //EXAMPLE OF RECYCLER VIEW WITH SWIPE
     private Context context;
@@ -52,6 +55,13 @@ public class RecyclerActivity extends AppCompatActivity implements
                 Intent gp = new Intent(context, MainActivity.class);
                 startActivity(gp);
                 finish();
+            }
+        });
+
+        binding.btnShowAlertDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyAlertDialog.newInstance("Deneme",true,true).show(getSupportFragmentManager(),"this");
             }
         });
     }
@@ -129,5 +139,15 @@ public class RecyclerActivity extends AppCompatActivity implements
 
         ItemTouchHelper itemTouchHelperEdit = new ItemTouchHelper(swipeControllerEdit);
         itemTouchHelperEdit.attachToRecyclerView(binding.recyclerListView);
+    }
+
+    @Override
+    public void alertOkey() {
+
+    }
+
+    @Override
+    public void alertCancel() {
+
     }
 }

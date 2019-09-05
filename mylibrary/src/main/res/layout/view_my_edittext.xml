@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<EditText
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<EditText xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/viewMyEditText"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:inputType="text"
-    android:background="@drawable/gradient_border_box" />
+    android:background="@drawable/gradient_border_box"
+    android:inputType="text" />

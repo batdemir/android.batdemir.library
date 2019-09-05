@@ -15,6 +15,7 @@ public class EmailValidWatcher implements TextWatcher {
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
     }
 
     @Override
@@ -24,13 +25,13 @@ public class EmailValidWatcher implements TextWatcher {
 
     @Override
     public void afterTextChanged(Editable s) {
-        if(myEditText.get_editText().getText().toString().isEmpty()){
-            myEditText.getGradientDrawable().setStroke(myEditText.getBorderWidth(),myEditText.getNonConfirmativeBorderColor());
-        }else if(new HelperEditText().isEmailValid(myEditText.get_editText().getText().toString())){
-            myEditText.getGradientDrawable().setStroke(myEditText.getBorderWidth(),myEditText.getConfirmativeBorderColor());
+        if (myEditText.get_editText().getText().toString().isEmpty()) {
+            myEditText.getGradientDrawable().setStroke(myEditText.getBorderWidth(), myEditText.getNonConfirmativeBorderColor());
+        } else if (new HelperEditText().isEmailValid(myEditText.get_editText().getText().toString())) {
+            myEditText.getGradientDrawable().setStroke(myEditText.getBorderWidth(), myEditText.getConfirmativeBorderColor());
             myEditText.get_editText().setError(null);
-        }else {
-            myEditText.getGradientDrawable().setStroke(myEditText.getBorderWidth(),myEditText.getNonConfirmativeBorderColor());
+        } else {
+            myEditText.getGradientDrawable().setStroke(myEditText.getBorderWidth(), myEditText.getNonConfirmativeBorderColor());
             myEditText.get_editText().setError("Input could not be match e-mail format.");
         }
     }

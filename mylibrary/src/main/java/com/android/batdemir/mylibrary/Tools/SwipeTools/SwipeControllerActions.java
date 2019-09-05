@@ -1,8 +1,9 @@
 package com.android.batdemir.mylibrary.Tools.SwipeTools;
 
 import android.graphics.Color;
-import android.support.design.widget.Snackbar;
 import android.view.View;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public abstract class SwipeControllerActions {
     public void onLeftSwiped(int position, View rootView, String message, View.OnClickListener onClickListener) {

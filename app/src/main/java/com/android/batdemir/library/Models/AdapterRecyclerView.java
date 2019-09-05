@@ -2,12 +2,13 @@ package com.android.batdemir.library.Models;
 
 import android.app.Activity;
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.RecyclerViewItemBinding;

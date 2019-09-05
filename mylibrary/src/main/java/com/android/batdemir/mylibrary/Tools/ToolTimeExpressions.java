@@ -3,7 +3,6 @@ package com.android.batdemir.mylibrary.Tools;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,13 +10,17 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import androidx.annotation.NonNull;
+
+import com.android.batdemir.mylibrary.GlobalVariable;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class ToolTimeExpressions {
 
-    private String TAG=ToolTimeExpressions.class.getSimpleName();
+    private String TAG = ToolTimeExpressions.class.getSimpleName();
     private Context context;
 
     public ToolTimeExpressions(@NonNull Context context) {
@@ -25,41 +28,41 @@ public class ToolTimeExpressions {
     }
 
     public Date set_stringToDate(@NonNull String stringDate,
-                                 @NonNull GlobalVariable.DateFormat outputFormat){
+                                 @NonNull GlobalVariable.DateFormat outputFormat) {
         Date date = null;
         try {
             if (stringDate != null) {
                 SimpleDateFormat sdf = new SimpleDateFormat(outputFormat.toString());
                 date = sdf.parse(stringDate);
             }
-        }catch (Exception e){
-            Log.e(TAG,e.getMessage());
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
         }
         return date;
     }
 
     public String set_dateToString(@NonNull Date date,
-                                   @NonNull GlobalVariable.DateFormat outputFormat){
+                                   @NonNull GlobalVariable.DateFormat outputFormat) {
         String result = "";
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat(outputFormat.toString());
             result = dateFormat.format(date);
-        }catch (Exception e){
-            Log.e(TAG,e.getMessage());
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
         }
         return result;
     }
 
     public String set_dateFormat(@NonNull String stringDate,
                                  @NonNull GlobalVariable.DateFormat inputFormat,
-                                 @NonNull GlobalVariable.DateFormat outputFormat){
+                                 @NonNull GlobalVariable.DateFormat outputFormat) {
         String result = "";
         try {
-            Date date = set_stringToDate(stringDate,inputFormat);
+            Date date = set_stringToDate(stringDate, inputFormat);
             SimpleDateFormat dateFormat = new SimpleDateFormat(outputFormat.toString());
             result = dateFormat.format(date);
-        }catch (Exception e){
-            Log.e(TAG,e.getMessage());
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
         }
         return result;
     }
@@ -67,7 +70,7 @@ public class ToolTimeExpressions {
     public void show_datePicker(@NonNull final View buttonOrTextView,
                                 @NonNull final String titleText,
                                 @NonNull final String positiveButtonText,
-                                @NonNull final String negativeButtonText){
+                                @NonNull final String negativeButtonText) {
         buttonOrTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,21 +83,21 @@ public class ToolTimeExpressions {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         Calendar selectedDate = Calendar.getInstance();
-                        selectedDate.set(year,month,dayOfMonth);
-                        if(buttonOrTextView.getClass()== Button.class){
+                        selectedDate.set(year, month, dayOfMonth);
+                        if (buttonOrTextView.getClass() == Button.class) {
                             Button button = (Button) buttonOrTextView;
-                            button.setText(set_dateToString(selectedDate.getTime(),GlobalVariable.DateFormat.SHOW_DATE_FORMAT));
+                            button.setText(set_dateToString(selectedDate.getTime(), GlobalVariable.DateFormat.SHOW_DATE_FORMAT));
                         }
-                        if(buttonOrTextView.getClass()== TextView.class){
+                        if (buttonOrTextView.getClass() == TextView.class) {
                             TextView textView = (TextView) buttonOrTextView;
-                            textView.setText(set_dateToString(selectedDate.getTime(),GlobalVariable.DateFormat.SHOW_DATE_FORMAT));
+                            textView.setText(set_dateToString(selectedDate.getTime(), GlobalVariable.DateFormat.SHOW_DATE_FORMAT));
                         }
                     }
-                },year,month,day);
+                }, year, month, day);
 
                 datePickerDialog.setTitle(titleText);
-                datePickerDialog.setButton(DatePickerDialog.BUTTON_POSITIVE,positiveButtonText,datePickerDialog);
-                datePickerDialog.setButton(DatePickerDialog.BUTTON_NEGATIVE,negativeButtonText,datePickerDialog);
+                datePickerDialog.setButton(DatePickerDialog.BUTTON_POSITIVE, positiveButtonText, datePickerDialog);
+                datePickerDialog.setButton(DatePickerDialog.BUTTON_NEGATIVE, negativeButtonText, datePickerDialog);
                 datePickerDialog.show();
             }
         });
@@ -103,7 +106,7 @@ public class ToolTimeExpressions {
     public void show_timePicker(@NonNull final View buttonOrTextView,
                                 @NonNull final String titleText,
                                 @NonNull final String positiveButtonText,
-                                @NonNull final String negativeButtonText){
+                                @NonNull final String negativeButtonText) {
         buttonOrTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,21 +118,21 @@ public class ToolTimeExpressions {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         Calendar selectedTime = Calendar.getInstance();
-                        selectedTime.set(Calendar.YEAR,Calendar.MONTH,Calendar.DAY_OF_MONTH,hourOfDay,minute,Calendar.SECOND);
-                        if(buttonOrTextView.getClass()==Button.class){
+                        selectedTime.set(Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH, hourOfDay, minute, Calendar.SECOND);
+                        if (buttonOrTextView.getClass() == Button.class) {
                             Button button = (Button) buttonOrTextView;
-                            button.setText(set_dateToString(selectedTime.getTime(),GlobalVariable.DateFormat.SMALL_TIME_FORMAT));
+                            button.setText(set_dateToString(selectedTime.getTime(), GlobalVariable.DateFormat.SMALL_TIME_FORMAT));
                         }
-                        if(buttonOrTextView.getClass()== TextView.class){
+                        if (buttonOrTextView.getClass() == TextView.class) {
                             TextView textView = (TextView) buttonOrTextView;
-                            textView.setText(set_dateToString(selectedTime.getTime(),GlobalVariable.DateFormat.SMALL_TIME_FORMAT));
+                            textView.setText(set_dateToString(selectedTime.getTime(), GlobalVariable.DateFormat.SMALL_TIME_FORMAT));
                         }
                     }
-                }, hour,minute,true);
+                }, hour, minute, true);
 
                 timePickerDialog.setTitle(titleText);
-                timePickerDialog.setButton(DatePickerDialog.BUTTON_POSITIVE,positiveButtonText,timePickerDialog);
-                timePickerDialog.setButton(DatePickerDialog.BUTTON_NEGATIVE,negativeButtonText,timePickerDialog);
+                timePickerDialog.setButton(DatePickerDialog.BUTTON_POSITIVE, positiveButtonText, timePickerDialog);
+                timePickerDialog.setButton(DatePickerDialog.BUTTON_NEGATIVE, negativeButtonText, timePickerDialog);
                 timePickerDialog.show();
             }
         });

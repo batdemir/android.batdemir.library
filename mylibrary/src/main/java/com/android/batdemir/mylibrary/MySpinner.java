@@ -34,7 +34,7 @@ public class MySpinner extends RelativeLayout {
     private float borderRadius = 0F;
     private int solidColor = Color.TRANSPARENT;
 
-    private Drawable spinnerArrowIcon = getResources().getDrawable(R.drawable.ic_spinner_arrow,null);
+    private Drawable spinnerArrowIcon = getResources().getDrawable(R.drawable.ic_spinner_arrow_mini, null);
     private boolean addFirstItem = false;
     private String firstItemName = "";
 
@@ -78,7 +78,7 @@ public class MySpinner extends RelativeLayout {
 
     public void setBorderWidth(int borderWidth) {
         this.borderWidth = borderWidth;
-        gradientDrawableStyle.setStroke(getBorderWidth(),getBorderColor());
+        gradientDrawableStyle.setStroke(getBorderWidth(), getBorderColor());
     }
 
     public int getBorderColor() {
@@ -87,7 +87,7 @@ public class MySpinner extends RelativeLayout {
 
     public void setBorderColor(int borderColor) {
         this.borderColor = borderColor;
-        gradientDrawableStyle.setStroke(getBorderWidth(),getBorderColor());
+        gradientDrawableStyle.setStroke(getBorderWidth(), getBorderColor());
     }
 
     public int getConfirmativeBorderColor() {
@@ -130,7 +130,7 @@ public class MySpinner extends RelativeLayout {
 
     public void setSpinnerArrowIcon(Drawable spinnerArrowIcon) {
         this.spinnerArrowIcon = spinnerArrowIcon;
-        layerDrawableIcon.setDrawableByLayerId(R.id.spinnerIcon,spinnerArrowIcon);
+        layerDrawableIcon.setDrawableByLayerId(R.id.spinnerIcon, spinnerArrowIcon);
     }
 
     public boolean isAddFirstItem() {
@@ -151,9 +151,9 @@ public class MySpinner extends RelativeLayout {
 
     //---functions---//
 
-    private void init(){
+    private void init() {
         try {
-            inflate(getContext(),R.layout.view_my_spinner,this);
+            inflate(getContext(), R.layout.view_my_spinner, this);
             _spinner = findViewById(R.id.viewMySpinner);
             _spinner.setOnItemSelectedListener(onItemSelectedListener());
             StateListDrawable stateListDrawable = (StateListDrawable) _spinner.getBackground();
@@ -162,22 +162,22 @@ public class MySpinner extends RelativeLayout {
             LayerDrawable layerDrawable = (LayerDrawable) drawables[0];
             gradientDrawableStyle = (GradientDrawable) layerDrawable.findDrawableByLayerId(R.id.spinnerStyle);
             layerDrawableIcon = (LayerDrawable) drawables[0];
-        }catch (Exception e){
-            Log.e(TAG,e.getMessage());
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
         }
     }
 
-    private AdapterView.OnItemSelectedListener onItemSelectedListener(){
-        return new AdapterView.OnItemSelectedListener(){
+    private AdapterView.OnItemSelectedListener onItemSelectedListener() {
+        return new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(isEnableBorder()){
-                    if(isAddFirstItem()){
-                        if(_spinner.getCount()!=0){
-                            if(getSelectedItemPosition()==0){
-                                gradientDrawableStyle.setStroke(getBorderWidth(),getNonConfirmativeBorderColor());
-                            }else {
-                                gradientDrawableStyle.setStroke(getBorderWidth(),getConfirmativeBorderColor());
+                if (isEnableBorder()) {
+                    if (isAddFirstItem()) {
+                        if (_spinner.getCount() != 0) {
+                            if (getSelectedItemPosition() == 0) {
+                                gradientDrawableStyle.setStroke(getBorderWidth(), getNonConfirmativeBorderColor());
+                            } else {
+                                gradientDrawableStyle.setStroke(getBorderWidth(), getConfirmativeBorderColor());
                             }
                         }
                     }
@@ -191,63 +191,63 @@ public class MySpinner extends RelativeLayout {
         };
     }
 
-    public void setAdapter(AdapterSpinner adapter){
+    public void setAdapter(AdapterSpinner adapter) {
         _spinner.setAdapter(adapter);
     }
 
-    public SpinnerAdapter getAdapter(){
+    public SpinnerAdapter getAdapter() {
         return _spinner.getAdapter();
     }
 
-    public int getSelectedItemPosition(){
+    public int getSelectedItemPosition() {
         return _spinner.getSelectedItemPosition();
     }
 
-    public Object getItemAtPosition(int position){
+    public Object getItemAtPosition(int position) {
         return _spinner.getItemAtPosition(position);
     }
 
-    public Object getSelectedItemId(){
+    public Object getSelectedItemId() {
         try {
             AdapterSpinner adapterSpinner = (AdapterSpinner) _spinner.getAdapter();
             Field fieldId = adapterSpinner.getModels().get(getSelectedItemPosition()).getClass().getDeclaredField(adapterSpinner.getFieldId().getName());
             fieldId.setAccessible(true);
             return fieldId.get(adapterSpinner.getModels().get(getSelectedItemPosition()));
         } catch (NoSuchFieldException e) {
-            Log.e(TAG,e.getMessage());
+            Log.e(TAG, e.getMessage());
             return null;
         } catch (IllegalAccessException e) {
-            Log.e(TAG,e.getMessage());
+            Log.e(TAG, e.getMessage());
             return null;
         }
     }
 
-    public String getSelectedItemValue(){
+    public String getSelectedItemValue() {
         try {
             AdapterSpinner adapterSpinner = (AdapterSpinner) _spinner.getAdapter();
             Field fieldDescription = adapterSpinner.getModels().get(getSelectedItemPosition()).getClass().getDeclaredField(adapterSpinner.getFieldDescription().getName());
             fieldDescription.setAccessible(true);
             return String.valueOf(fieldDescription.get(adapterSpinner.getModels().get(getSelectedItemPosition())));
         } catch (NoSuchFieldException e) {
-            Log.e(TAG,e.getMessage());
+            Log.e(TAG, e.getMessage());
             return null;
         } catch (IllegalAccessException e) {
-            Log.e(TAG,e.getMessage());
+            Log.e(TAG, e.getMessage());
             return null;
         }
     }
 
-    public void setSelectionByPosition(int position){
+    public void setSelectionByPosition(int position) {
         _spinner.setSelection(position);
     }
 
-    public void setSelectionById(Object id){
+    public void setSelectionById(Object id) {
         try {
             AdapterSpinner adapterSpinner = (AdapterSpinner) _spinner.getAdapter();
-            for(int i=0;i<adapterSpinner.getModels().size();i++){
+            for (int i = 0; i < adapterSpinner.getModels().size(); i++) {
                 Field fieldId = adapterSpinner.getModels().get(i).getClass().getDeclaredField(adapterSpinner.getFieldId().getName());
                 fieldId.setAccessible(true);
-                if(fieldId.get(adapterSpinner.getModels().get(i)).equals(id)){
+                if (fieldId.get(adapterSpinner.getModels().get(i)).equals(id)) {
                     _spinner.setSelection(i);
                 }
             }
@@ -258,13 +258,13 @@ public class MySpinner extends RelativeLayout {
         }
     }
 
-    public void setSelectionByValue(String value){
+    public void setSelectionByValue(String value) {
         try {
             AdapterSpinner adapterSpinner = (AdapterSpinner) _spinner.getAdapter();
-            for(int i=0;i<adapterSpinner.getModels().size();i++){
+            for (int i = 0; i < adapterSpinner.getModels().size(); i++) {
                 Field fieldDescription = adapterSpinner.getModels().get(i).getClass().getDeclaredField(adapterSpinner.getFieldDescription().getName());
                 fieldDescription.setAccessible(true);
-                if(fieldDescription.get(adapterSpinner.getModels().get(i)).equals(value)){
+                if (fieldDescription.get(adapterSpinner.getModels().get(i)).equals(value)) {
                     _spinner.setSelection(i);
                 }
             }

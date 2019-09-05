@@ -26,14 +26,14 @@ public class CharCountValidWatcher implements TextWatcher {
 
     @Override
     public void afterTextChanged(Editable s) {
-        if(myEditText.get_editText().getText().toString().isEmpty()){
-            myEditText.getGradientDrawable().setStroke(myEditText.getBorderWidth(),myEditText.getNonConfirmativeBorderColor());
-        }else if(myEditText.get_editText().getText().toString().length()>=count){
-            myEditText.getGradientDrawable().setStroke(myEditText.getBorderWidth(),myEditText.getConfirmativeBorderColor());
+        if (myEditText.get_editText().getText().toString().isEmpty()) {
+            myEditText.getGradientDrawable().setStroke(myEditText.getBorderWidth(), myEditText.getNonConfirmativeBorderColor());
+        } else if (myEditText.get_editText().getText().toString().length() >= count) {
+            myEditText.getGradientDrawable().setStroke(myEditText.getBorderWidth(), myEditText.getConfirmativeBorderColor());
             myEditText.get_editText().setError(null);
-        }else {
-            myEditText.getGradientDrawable().setStroke(myEditText.getBorderWidth(),myEditText.getNonConfirmativeBorderColor());
-            myEditText.get_editText().setError("Input could not be lower than "+String.valueOf(count)+" character.");
+        } else {
+            myEditText.getGradientDrawable().setStroke(myEditText.getBorderWidth(), myEditText.getNonConfirmativeBorderColor());
+            myEditText.get_editText().setError("Input could not be lower than " + String.valueOf(count) + " character.");
         }
     }
 }

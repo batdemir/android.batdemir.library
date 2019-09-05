@@ -3,21 +3,17 @@ package com.android.batdemir.mylibrary;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.android.batdemir.mylibrary.Tools.EditTextTools.CharCountValidWatcher;
 import com.android.batdemir.mylibrary.Tools.EditTextTools.EmailValidWatcher;
-import com.android.batdemir.mylibrary.Tools.EditTextTools.HelperEditText;
 import com.android.batdemir.mylibrary.Tools.EditTextTools.PhoneValidWatcher;
 
-public class MyEditText extends RelativeLayout{
+public class MyEditText extends RelativeLayout {
 
     private String TAG = MyEditText.class.getSimpleName();
     private EditText _editText;
@@ -31,9 +27,9 @@ public class MyEditText extends RelativeLayout{
     private float borderRadius = 0F;
     private int solidColor = Color.TRANSPARENT;
 
-    private int confirmativeCharCount=10;
-    private boolean emailValid=false;
-    private boolean phoneValid=false;
+    private int confirmativeCharCount = 10;
+    private boolean emailValid = false;
+    private boolean phoneValid = false;
 
     public MyEditText(Context context) {
         super(context);
@@ -79,7 +75,7 @@ public class MyEditText extends RelativeLayout{
 
     public void setBorderWidth(int borderWidth) {
         this.borderWidth = borderWidth;
-        gradientDrawable.setStroke(getBorderWidth(),getBorderColor());
+        gradientDrawable.setStroke(getBorderWidth(), getBorderColor());
     }
 
     public int getBorderColor() {
@@ -88,7 +84,7 @@ public class MyEditText extends RelativeLayout{
 
     public void setBorderColor(int borderColor) {
         this.borderColor = borderColor;
-        gradientDrawable.setStroke(getBorderWidth(),getBorderColor());
+        gradientDrawable.setStroke(getBorderWidth(), getBorderColor());
     }
 
     public int getConfirmativeBorderColor() {
@@ -161,8 +157,8 @@ public class MyEditText extends RelativeLayout{
             inflate(getContext(), R.layout.view_my_edittext, this);
             _editText = findViewById(R.id.viewMyEditText);
             gradientDrawable = (GradientDrawable) _editText.getBackground();
-        }catch (Exception e){
-            Log.e(TAG,e.getMessage());
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
         }
     }
 }
