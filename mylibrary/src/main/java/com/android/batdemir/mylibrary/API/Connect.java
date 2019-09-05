@@ -20,9 +20,11 @@ public class Connect<T> implements MyAlertDialog.AlertClickListener {
 
     public void connect(Context context, Call call, String operationType) {
         if (!ToolConnection.isConnected(context)) {
-            MyAlertDialog
-                    .newInstance("Lütfen, Internet Bağlantınızı Kontrol Ediniz.", false, false)
-                    .show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
+            MyAlertDialog.newInstance(
+                    "Lütfen, Internet Bağlantınızı Kontrol Ediniz.",
+                    Boolean.FALSE,
+                    Boolean.FALSE
+            ).show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
             return;
         }
         new AsyncConnectService(context, operationType).execute(call);
@@ -76,19 +78,25 @@ public class Connect<T> implements MyAlertDialog.AlertClickListener {
                 }
             } catch (Exception e) {
                 if (e instanceof SocketTimeoutException) {
-                    MyAlertDialog
-                            .newInstance("Servis İle Bağlantı Sağlanamadı. Lütfen Tekrar Deneyiniz.", false, false)
-                            .show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
+                    MyAlertDialog.newInstance(
+                            "Servis İle Bağlantı Sağlanamadı. Lütfen Tekrar Deneyiniz.",
+                            Boolean.FALSE,
+                            Boolean.FALSE
+                    ).show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
                     connectServiceListener.onException(operationType, e);
                 } else if (e instanceof NullPointerException) {
-                    MyAlertDialog
-                            .newInstance("Servis İle Bağlantı Sağlanamadı. Lütfen Tekrar Deneyiniz.", false, false)
-                            .show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
+                    MyAlertDialog.newInstance(
+                            "Servis İle Bağlantı Sağlanamadı. Lütfen Tekrar Deneyiniz.",
+                            Boolean.FALSE,
+                            Boolean.FALSE
+                    ).show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
                     connectServiceListener.onException(operationType, e);
                 } else {
-                    MyAlertDialog
-                            .newInstance(e.getMessage(), false, false)
-                            .show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
+                    MyAlertDialog.newInstance(
+                            e.getMessage(),
+                            Boolean.FALSE,
+                            Boolean.FALSE
+                    ).show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
                     connectServiceListener.onException(operationType, e);
                 }
             }
