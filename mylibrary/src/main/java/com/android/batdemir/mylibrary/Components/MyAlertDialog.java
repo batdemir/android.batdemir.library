@@ -60,7 +60,10 @@ public class MyAlertDialog extends DialogFragment {
         if (showCancelButton) {
             binding.btnCancel.setOnTouchListener(new OnTouchEvent(binding.btnCancel));
         } else {
-            binding.btnCancel.setLayoutParams(new LinearLayout.LayoutParams(0, 0, 0));
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT,0);
+            layoutParams.setMargins(0,0,0,0);
+            binding.btnCancel.setLayoutParams(layoutParams);
+            binding.btnCancel.setPadding(0,0,0,0);
         }
 
         binding.btnCancel.setOnClickListener(new View.OnClickListener() {
