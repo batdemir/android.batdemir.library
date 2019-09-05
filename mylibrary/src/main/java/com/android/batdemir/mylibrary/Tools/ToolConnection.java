@@ -11,6 +11,7 @@ import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.List;
 
+@SuppressLint("MissingPermission")
 public class ToolConnection {
 
     /**
@@ -19,7 +20,6 @@ public class ToolConnection {
      * @param context
      * @return
      */
-    @SuppressLint("MissingPermission")
     public static NetworkInfo getNetworkInfo(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo();
