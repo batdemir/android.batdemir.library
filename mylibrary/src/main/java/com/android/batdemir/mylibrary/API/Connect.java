@@ -72,27 +72,24 @@ public class Connect<T> implements MyAlertDialog.AlertClickListener {
                     connectServiceListener.onSuccess(operationType, response);
                 } else {
                     assert response.errorBody() != null;
-                    MyAlertDialog
-                            .newInstance(response.errorBody().string(), false, false)
-                            .show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
-                    connectServiceListener.onFailure(operationType, null);
+                    connectServiceListener.onFailure(operationType, response);
                 }
             } catch (Exception e) {
                 if (e instanceof SocketTimeoutException) {
                     MyAlertDialog
                             .newInstance("Servis İle Bağlantı Sağlanamadı. Lütfen Tekrar Deneyiniz.", false, false)
                             .show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
-                    connectServiceListener.onFailure(operationType, e);
+                    connectServiceListener.onException(operationType, e);
                 } else if (e instanceof NullPointerException) {
                     MyAlertDialog
                             .newInstance("Servis İle Bağlantı Sağlanamadı. Lütfen Tekrar Deneyiniz.", false, false)
                             .show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
-                    connectServiceListener.onFailure(operationType, e);
+                    connectServiceListener.onException(operationType, e);
                 } else {
                     MyAlertDialog
                             .newInstance(e.getMessage(), false, false)
                             .show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
-                    connectServiceListener.onFailure(operationType, e);
+                    connectServiceListener.onException(operationType, e);
                 }
             }
         }
@@ -101,7 +98,9 @@ public class Connect<T> implements MyAlertDialog.AlertClickListener {
     public interface ConnectServiceListener<T> {
         void onSuccess(String operationType, Response<T> response);
 
-        void onFailure(String operationType, Exception e);
+        void onFailure(String operationType, Response<T> response);
+
+        void onException(String operationType, Exception e);
     }
 
     @Override
