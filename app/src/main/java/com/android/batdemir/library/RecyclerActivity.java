@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 
@@ -62,10 +63,11 @@ public class RecyclerActivity extends AppCompatActivity implements
         binding.btnShowAlertDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                MyAlertDialog myAlertDialog = MyAlertDialog.newInstance("Deneme",Boolean.TRUE,Boolean.FALSE);
-//                myAlertDialog.setShowEditText(false);
-//                myAlertDialog.show(getSupportFragmentManager(),"meyaba");
-                MyAlertDialog.newInstance("deneme",Boolean.FALSE,Boolean.FALSE).show(getSupportFragmentManager(),"ths");
+                MyAlertDialog myAlertDialog = MyAlertDialog.newInstance("Deneme",Boolean.TRUE,Boolean.FALSE);
+                myAlertDialog.setShowEditText(true);
+                myAlertDialog.setEditTextInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                myAlertDialog.setAutoDismiss(false);
+                myAlertDialog.show(getSupportFragmentManager(),"meyaba");
             }
         });
     }
@@ -150,6 +152,7 @@ public class RecyclerActivity extends AppCompatActivity implements
         Log.d("TAG", myAlertDialog.getTag());
         Log.d("EdiText",myAlertDialog.getEditText().getText().toString());
         Log.d("TextView", myAlertDialog.getMessage().toString());
+        myAlertDialog.dismiss();
     }
 
     @Override

@@ -27,6 +27,8 @@ public class MyAlertDialog extends DialogFragment {
     private String message;
     private boolean showCancelButton = false;
     private boolean showEditText = false;
+    private int inputType = -1;
+    private boolean autoDismiss = true;
     private MyAlertDialog myAlertDialog;
 
     public static MyAlertDialog newInstance(String message, boolean isCancelable, boolean showCancelButton) {
@@ -82,13 +84,18 @@ public class MyAlertDialog extends DialogFragment {
             binding.editText.setVisibility(View.INVISIBLE);
         }
 
+        if (inputType != -1) {
+            binding.editText.setInputType(inputType);
+        }
+
         binding.btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertClickListener clickCancel = (MyAlertDialog.AlertClickListener) getActivity();
                 assert clickCancel != null;
                 clickCancel.alertCancel(myAlertDialog);
-                dismiss();
+                if(autoDismiss)
+                    dismiss();
             }
         });
 
@@ -98,7 +105,8 @@ public class MyAlertDialog extends DialogFragment {
                 AlertClickListener clickOkey = (MyAlertDialog.AlertClickListener) getActivity();
                 assert clickOkey != null;
                 clickOkey.alertOkey(myAlertDialog);
-                dismiss();
+                if(autoDismiss)
+                    dismiss();
             }
         });
     }
@@ -107,11 +115,19 @@ public class MyAlertDialog extends DialogFragment {
         this.showEditText = showEditText;
     }
 
+    public void setEditTextInputType(int inputType) {
+        this.inputType = inputType;
+    }
+
+    public void setAutoDismiss(boolean autoDismiss){
+        this.autoDismiss = autoDismiss;
+    }
+
     public String getMessage() {
         return message;
     }
 
-    public EditText getEditText(){
+    public EditText getEditText() {
         return binding.editText;
     }
 
