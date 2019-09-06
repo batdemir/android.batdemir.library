@@ -76,8 +76,10 @@ public class MyAlertDialog extends DialogFragment {
 
         if (showEditText) {
             binding.editText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            binding.editText.setVisibility(View.VISIBLE);
         } else {
             binding.editText.setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+            binding.editText.setVisibility(View.INVISIBLE);
         }
 
         binding.btnCancel.setOnClickListener(new View.OnClickListener() {

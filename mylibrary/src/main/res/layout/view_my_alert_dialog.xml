@@ -24,7 +24,7 @@
 
                 <EditText
                     android:id="@+id/editText"
-                    style="@style/alert_dialog_edit_text" />
+                    style="@style/alert_dialog_edit_text"/>
 
                 <LinearLayout
                     android:id="@+id/linearButtons"

@@ -62,9 +62,10 @@ public class RecyclerActivity extends AppCompatActivity implements
         binding.btnShowAlertDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyAlertDialog myAlertDialog = MyAlertDialog.newInstance("Deneme",Boolean.TRUE,Boolean.FALSE);
-                myAlertDialog.setShowEditText(true);
-                myAlertDialog.show(getSupportFragmentManager(),"meyaba");
+//                MyAlertDialog myAlertDialog = MyAlertDialog.newInstance("Deneme",Boolean.TRUE,Boolean.FALSE);
+//                myAlertDialog.setShowEditText(false);
+//                myAlertDialog.show(getSupportFragmentManager(),"meyaba");
+                MyAlertDialog.newInstance("deneme",Boolean.FALSE,Boolean.FALSE).show(getSupportFragmentManager(),"ths");
             }
         });
     }
