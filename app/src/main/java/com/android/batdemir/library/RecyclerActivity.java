@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -61,11 +62,9 @@ public class RecyclerActivity extends AppCompatActivity implements
         binding.btnShowAlertDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyAlertDialog.newInstance(
-                        "Deneme",
-                        Boolean.TRUE,
-                        Boolean.FALSE
-                ).show(getSupportFragmentManager(),"this");
+                MyAlertDialog myAlertDialog = MyAlertDialog.newInstance("Deneme",Boolean.TRUE,Boolean.FALSE);
+                myAlertDialog.setShowEditText(true);
+                myAlertDialog.show(getSupportFragmentManager(),"meyaba");
             }
         });
     }
@@ -146,12 +145,14 @@ public class RecyclerActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void alertOkey() {
-
+    public void alertOkey(MyAlertDialog myAlertDialog) {
+        Log.d("TAG", myAlertDialog.getTag());
+        Log.d("EdiText",myAlertDialog.getEditText().getText().toString());
+        Log.d("TextView", myAlertDialog.getMessage().toString());
     }
 
     @Override
-    public void alertCancel() {
+    public void alertCancel(MyAlertDialog myAlertDialog) {
 
     }
 }

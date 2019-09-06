@@ -112,12 +112,12 @@ public class Connect<T> implements MyAlertDialog.AlertClickListener {
     }
 
     @Override
-    public void alertOkey() {
+    public void alertOkey(MyAlertDialog myAlertDialog) {
 
     }
 
     @Override
-    public void alertCancel() {
+    public void alertCancel(MyAlertDialog myAlertDialog) {
 
     }
 }

@@ -1,9 +1,11 @@
 package com.android.batdemir.mylibrary.Components;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import com.android.batdemir.mylibrary.R;
 import com.android.batdemir.mylibrary.Tools.ButtonTools.OnTouchEvent;
 import com.android.batdemir.mylibrary.Tools.Tool;
 import com.android.batdemir.mylibrary.databinding.ViewMyAlertDialogBinding;
+import com.google.gson.Gson;
 
 public class MyAlertDialog extends DialogFragment {
 
@@ -22,16 +25,18 @@ public class MyAlertDialog extends DialogFragment {
     private static final String key_message = "KEY_MESSAGE";
     private static final String key_showCancelButton = "KEY_SHOWCANCELBUTTON";
     private String message;
-    private Boolean showCancelButton;
+    private boolean showCancelButton = false;
+    private boolean showEditText = false;
+    private MyAlertDialog myAlertDialog;
 
     public static MyAlertDialog newInstance(String message, boolean isCancelable, boolean showCancelButton) {
-        MyAlertDialog toolAlertDialog = new MyAlertDialog();
+        MyAlertDialog myAlertDialog = new MyAlertDialog();
         Bundle bundle = new Bundle();
         bundle.putString(key_message, message);
         bundle.putBoolean(key_showCancelButton, showCancelButton);
-        toolAlertDialog.setArguments(bundle);
-        toolAlertDialog.setCancelable(isCancelable);
-        return toolAlertDialog;
+        myAlertDialog.setArguments(bundle);
+        myAlertDialog.setCancelable(isCancelable);
+        return myAlertDialog;
     }
 
     @Nullable
@@ -44,26 +49,35 @@ public class MyAlertDialog extends DialogFragment {
         return binding.getRoot();
     }
 
-    public void getObjectReferences() {
+    private void getObjectReferences() {
         assert getArguments() != null;
+        myAlertDialog = this;
         message = getArguments().getString(key_message);
         showCancelButton = getArguments().getBoolean(key_showCancelButton);
         new Tool(getContext()).animDialog(binding.cardView);
     }
 
-    public void loadData() {
+    private void loadData() {
         binding.txtEditMessage.setText(message);
     }
 
-    public void setListeners() {
+    @SuppressLint("ClickableViewAccessibility")
+    private void setListeners() {
         binding.btnOkey.setOnTouchListener(new OnTouchEvent(binding.btnOkey));
+
         if (showCancelButton) {
             binding.btnCancel.setOnTouchListener(new OnTouchEvent(binding.btnCancel));
         } else {
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT,0);
-            layoutParams.setMargins(0,0,0,0);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 0);
+            layoutParams.setMargins(0, 0, 0, 0);
             binding.btnCancel.setLayoutParams(layoutParams);
-            binding.btnCancel.setPadding(0,0,0,0);
+            binding.btnCancel.setPadding(0, 0, 0, 0);
+        }
+
+        if (showEditText) {
+            binding.editText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        } else {
+            binding.editText.setLayoutParams(new LinearLayout.LayoutParams(0, 0));
         }
 
         binding.btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +85,7 @@ public class MyAlertDialog extends DialogFragment {
             public void onClick(View v) {
                 AlertClickListener clickCancel = (MyAlertDialog.AlertClickListener) getActivity();
                 assert clickCancel != null;
-                clickCancel.alertCancel();
+                clickCancel.alertCancel(myAlertDialog);
                 dismiss();
             }
         });
@@ -81,15 +95,27 @@ public class MyAlertDialog extends DialogFragment {
             public void onClick(View v) {
                 AlertClickListener clickOkey = (MyAlertDialog.AlertClickListener) getActivity();
                 assert clickOkey != null;
-                clickOkey.alertOkey();
+                clickOkey.alertOkey(myAlertDialog);
                 dismiss();
             }
         });
     }
 
-    public interface AlertClickListener {
-        void alertOkey();
+    public void setShowEditText(boolean showEditText) {
+        this.showEditText = showEditText;
+    }
 
-        void alertCancel();
+    public String getMessage() {
+        return message;
+    }
+
+    public EditText getEditText(){
+        return binding.editText;
+    }
+
+    public interface AlertClickListener {
+        void alertOkey(MyAlertDialog myAlertDialog);
+
+        void alertCancel(MyAlertDialog myAlertDialog);
     }
 }
