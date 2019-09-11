@@ -171,22 +171,18 @@ public class MySpinner extends RelativeLayout {
         return new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (isEnableBorder()) {
-                    if (isAddFirstItem()) {
-                        if (_spinner.getCount() != 0) {
-                            if (getSelectedItemPosition() == 0) {
+                if (isEnableBorder() && isAddFirstItem() && _spinner.getCount() != 0) {
+                    if (getSelectedItemPosition() == 0) {
                                 gradientDrawableStyle.setStroke(getBorderWidth(), getNonConfirmativeBorderColor());
                             } else {
                                 gradientDrawableStyle.setStroke(getBorderWidth(), getConfirmativeBorderColor());
-                            }
                         }
-                    }
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                throw new UnsupportedOperationException();
             }
         };
     }

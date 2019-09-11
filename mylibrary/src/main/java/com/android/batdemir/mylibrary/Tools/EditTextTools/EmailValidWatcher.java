@@ -15,12 +15,12 @@ public class EmailValidWatcher implements TextWatcher {
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override

@@ -5,14 +5,14 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
+import android.util.Log;
 
 import java.lang.reflect.Method;
 
 @SuppressLint("MissingPermission")
 public class BluetoothHelper {
 
-    private int REQUEST_ENABLE_BT = 1;
-    private int REQUEST_DISABLE_BT = 2;
+    private static final int REQUEST_ENABLE_BT = 1;
     private BluetoothAdapter bluetoothAdapter;
 
     public BluetoothHelper(BluetoothAdapter bluetoothAdapter) {
@@ -23,20 +23,20 @@ public class BluetoothHelper {
         return bluetoothAdapter;
     }
 
-    public void request_bluetoothOn(Activity activity) {
+    public void requestBluetoothOn(Activity activity) {
         if (!bluetoothAdapter.isEnabled()) {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             activity.startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }
     }
 
-    public void request_bluetoothOff() {
+    public void requestBluetoothOff() {
         if (bluetoothAdapter.isEnabled()) {
             bluetoothAdapter.disable();
         }
     }
 
-    public void pairUnPair_Device(BluetoothDevice device) {
+    public void pairUnPairDevice(BluetoothDevice device) {
         try {
             if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
                 Method method = device.getClass().getMethod("createBond", (Class[]) null);
@@ -46,7 +46,7 @@ public class BluetoothHelper {
                 method.invoke(device, (Object[]) null);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(BluetoothHelper.class.getSimpleName(),e.getMessage());
         }
     }
 }

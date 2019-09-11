@@ -1,13 +1,10 @@
 package com.android.batdemir.mylibrary.Tools.EditTextTools;
 
-import android.telephony.PhoneNumberUtils;
 import android.util.Log;
 
-import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber;
 
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,15 +22,10 @@ public class HelperEditText {
                             + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
                             + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$";
 
-            CharSequence inputStr = email;
-
             Pattern pattern = Pattern.compile(regExpn, Pattern.CASE_INSENSITIVE);
-            Matcher matcher = pattern.matcher(inputStr);
+            Matcher matcher = pattern.matcher(email);
 
-            if (matcher.matches())
-                return true;
-            else
-                return false;
+            return matcher.matches();
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
             return false;

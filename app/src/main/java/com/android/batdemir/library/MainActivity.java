@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
             new HelperSpinner<>(
                     context,
                     binding.spinner
-            ).fill_spinnerCustomModel(
+            ).fillSpinnerCustomModel(
                     testingModels,
                     TestingModel.class.getDeclaredField("id"),
                     TestingModel.class.getDeclaredField("description")
@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
         new HelperSpinner<>(
                 context,
                 binding.spinner
-        ).fill_spinnerStringList(
+        ).fillSpinnerStringList(
                 R.array.test
         );
     }
@@ -238,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
         new HelperSpinner<>(
                 context,
                 binding.spinner
-        ).fill_spinnerStringArray(
+        ).fillSpinnerStringArray(
                 strings
         );
     }

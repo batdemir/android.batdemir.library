@@ -10,6 +10,7 @@ import com.android.batdemir.mylibrary.MySpinner;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
 
 public class HelperSpinner<T> {
     private String TAG = HelperSpinner.class.getSimpleName();
@@ -21,9 +22,9 @@ public class HelperSpinner<T> {
         this.mySpinner = mySpinner;
     }
 
-    public void fill_spinnerCustomModel(ArrayList<T> models,
-                                        Field propertyId,
-                                        Field propertyDescription) {
+    public void fillSpinnerCustomModel(List<T> models,
+                                       Field propertyId,
+                                       Field propertyDescription) {
         try {
             AdapterSpinner<T> adapterSpinner = new AdapterSpinner<>(context, models, propertyId, propertyDescription);
             mySpinner.getSpinner().setAdapter(adapterSpinner);
@@ -33,7 +34,7 @@ public class HelperSpinner<T> {
         }
     }
 
-    public void fill_spinnerStringList(@ArrayRes int arrayId) {
+    public void fillSpinnerStringList(@ArrayRes int arrayId) {
         try {
             Resources res = context.getResources();
             String[] strings = res.getStringArray(arrayId);
@@ -57,7 +58,7 @@ public class HelperSpinner<T> {
         }
     }
 
-    public void fill_spinnerStringArray(ArrayList<String> models) {
+    public void fillSpinnerStringArray(List<String> models) {
         try {
             ArrayList<ModelSpinner> tempSpinnerModels = new ArrayList<>();
             if (mySpinner.isAddFirstItem()) {

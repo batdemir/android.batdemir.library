@@ -17,11 +17,12 @@ public class CharCountValidWatcher implements TextWatcher {
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -33,7 +34,7 @@ public class CharCountValidWatcher implements TextWatcher {
             myEditText.get_editText().setError(null);
         } else {
             myEditText.getGradientDrawable().setStroke(myEditText.getBorderWidth(), myEditText.getNonConfirmativeBorderColor());
-            myEditText.get_editText().setError("Input could not be lower than " + String.valueOf(count) + " character.");
+            myEditText.get_editText().setError("Input could not be lower than " + count + " character.");
         }
     }
 }

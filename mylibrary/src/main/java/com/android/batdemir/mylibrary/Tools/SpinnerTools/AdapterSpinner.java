@@ -69,9 +69,7 @@ public class AdapterSpinner<T> extends ArrayAdapter<T> {
             fieldDescription.setAccessible(true);
             Object descriptionValue = fieldDescription.get(models.get(position));
             viewMySpinnerItem.setText(descriptionValue.toString());
-        } catch (NoSuchFieldException e) {
-            Log.e(TAG, e.getMessage());
-        } catch (IllegalAccessException e) {
+        } catch (Exception e) {
             Log.e(TAG, e.getMessage());
         }
 
@@ -90,9 +88,7 @@ public class AdapterSpinner<T> extends ArrayAdapter<T> {
             Object descriptionValue = fieldDescription.get(models.get(position));
             viewMySpinnerItem.setText(descriptionValue.toString());
             viewMySpinnerItem.setPadding(0, 32, 0, 32);
-        } catch (NoSuchFieldException e) {
-            Log.e(TAG, e.getMessage());
-        } catch (IllegalAccessException e) {
+        } catch (Exception e) {
             Log.e(TAG, e.getMessage());
         }
 

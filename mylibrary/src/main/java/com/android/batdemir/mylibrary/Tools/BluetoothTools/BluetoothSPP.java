@@ -90,6 +90,8 @@ public class BluetoothSPP {
                         isConnecting = false;
                     }
                     break;
+                default:
+                    break;
             }
         }
     };
@@ -156,7 +158,7 @@ public class BluetoothSPP {
     }
 
     public void setupService() {
-        mChatService = new BluetoothService(mContext, mHandler);
+        mChatService = new BluetoothService(mHandler);
     }
 
     public BluetoothAdapter getBluetoothAdapter() {
@@ -185,12 +187,10 @@ public class BluetoothSPP {
             isServiceRunning = false;
             mChatService.stop();
         }
-        new Handler().postDelayed(new Runnable() {
-            public void run() {
-                if (mChatService != null) {
-                    isServiceRunning = false;
-                    mChatService.stop();
-                }
+        new Handler().postDelayed(() -> {
+            if (mChatService != null) {
+                isServiceRunning = false;
+                mChatService.stop();
             }
         }, 500);
     }
@@ -281,23 +281,23 @@ public class BluetoothSPP {
     public String[] getPairedDeviceName() {
         int c = 0;
         Set<BluetoothDevice> devices = mBluetoothAdapter.getBondedDevices();
-        String[] name_list = new String[devices.size()];
+        String[] nameList = new String[devices.size()];
         for (BluetoothDevice device : devices) {
-            name_list[c] = device.getName();
+            nameList[c] = device.getName();
             c++;
         }
-        return name_list;
+        return nameList;
     }
 
     public String[] getPairedDeviceAddress() {
         int c = 0;
         Set<BluetoothDevice> devices = mBluetoothAdapter.getBondedDevices();
-        String[] address_list = new String[devices.size()];
+        String[] addressList = new String[devices.size()];
         for (BluetoothDevice device : devices) {
-            address_list[c] = device.getAddress();
+            addressList[c] = device.getAddress();
             c++;
         }
-        return address_list;
+        return addressList;
     }
 
     public void autoConnect(String keywordName) {
@@ -307,14 +307,14 @@ public class BluetoothSPP {
             isAutoConnecting = true;
             if (mAutoConnectionListener != null)
                 mAutoConnectionListener.onAutoConnectionStarted();
-            final ArrayList<String> arr_filter_address = new ArrayList<String>();
-            final ArrayList<String> arr_filter_name = new ArrayList<String>();
-            String[] arr_name = getPairedDeviceName();
-            String[] arr_address = getPairedDeviceAddress();
-            for (int i = 0; i < arr_name.length; i++) {
-                if (arr_name[i].contains(keywordName)) {
-                    arr_filter_address.add(arr_address[i]);
-                    arr_filter_name.add(arr_name[i]);
+            final ArrayList<String> arrFilterAddress = new ArrayList<>();
+            final ArrayList<String> arrFilterName = new ArrayList<>();
+            String[] arrName = getPairedDeviceName();
+            String[] arrAddress = getPairedDeviceAddress();
+            for (int i = 0; i < arrName.length; i++) {
+                if (arrName[i].contains(keywordName)) {
+                    arrFilterAddress.add(arrAddress[i]);
+                    arrFilterName.add(arrName[i]);
                 }
             }
 
@@ -325,6 +325,7 @@ public class BluetoothSPP {
                 }
 
                 public void onDeviceDisconnected() {
+                    throw new UnsupportedOperationException();
                 }
 
                 public void onDeviceConnectionFailed() {
@@ -332,13 +333,13 @@ public class BluetoothSPP {
                     if (isServiceRunning) {
                         if (isAutoConnectionEnabled) {
                             c++;
-                            if (c >= arr_filter_address.size())
+                            if (c >= arrFilterAddress.size())
                                 c = 0;
-                            connect(arr_filter_address.get(c));
+                            connect(arrFilterAddress.get(c));
                             Log.e("CHeck", "Connect");
                             if (mAutoConnectionListener != null)
-                                mAutoConnectionListener.onNewConnection(arr_filter_name.get(c)
-                                        , arr_filter_address.get(c));
+                                mAutoConnectionListener.onNewConnection(arrFilterName.get(c)
+                                        , arrFilterAddress.get(c));
                         } else {
                             bcl = null;
                             isAutoConnecting = false;
@@ -350,9 +351,9 @@ public class BluetoothSPP {
             setBluetoothConnectionListener(bcl);
             c = 0;
             if (mAutoConnectionListener != null)
-                mAutoConnectionListener.onNewConnection(arr_name[c], arr_address[c]);
-            if (arr_filter_address.size() > 0)
-                connect(arr_filter_address.get(c));
+                mAutoConnectionListener.onNewConnection(arrName[c], arrAddress[c]);
+            if (!arrFilterAddress.isEmpty())
+                connect(arrFilterAddress.get(c));
             else
                 Toast.makeText(mContext, "Device name mismatch", Toast.LENGTH_SHORT).show();
         }

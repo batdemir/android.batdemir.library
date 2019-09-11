@@ -1,5 +1,6 @@
 package com.android.batdemir.mylibrary.Tools;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -27,22 +28,22 @@ public class ToolTimeExpressions {
         this.context = context;
     }
 
-    public Date set_stringToDate(@NonNull String stringDate,
-                                 @NonNull GlobalVariable.DateFormat outputFormat) {
+    @SuppressLint("SimpleDateFormat")
+    public Date setStringToDate(@NonNull String stringDate,
+                                @NonNull GlobalVariable.DateFormat outputFormat) {
         Date date = null;
         try {
-            if (stringDate != null) {
-                SimpleDateFormat sdf = new SimpleDateFormat(outputFormat.toString());
-                date = sdf.parse(stringDate);
-            }
+            SimpleDateFormat sdf = new SimpleDateFormat(outputFormat.toString());
+            date = sdf.parse(stringDate);
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
         }
         return date;
     }
 
-    public String set_dateToString(@NonNull Date date,
-                                   @NonNull GlobalVariable.DateFormat outputFormat) {
+    @SuppressLint("SimpleDateFormat")
+    public String setDateToString(@NonNull Date date,
+                                  @NonNull GlobalVariable.DateFormat outputFormat) {
         String result = "";
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat(outputFormat.toString());
@@ -53,12 +54,13 @@ public class ToolTimeExpressions {
         return result;
     }
 
-    public String set_dateFormat(@NonNull String stringDate,
-                                 @NonNull GlobalVariable.DateFormat inputFormat,
-                                 @NonNull GlobalVariable.DateFormat outputFormat) {
+    @SuppressLint("SimpleDateFormat")
+    public String setDateFormat(@NonNull String stringDate,
+                                @NonNull GlobalVariable.DateFormat inputFormat,
+                                @NonNull GlobalVariable.DateFormat outputFormat) {
         String result = "";
         try {
-            Date date = set_stringToDate(stringDate, inputFormat);
+            Date date = setStringToDate(stringDate, inputFormat);
             SimpleDateFormat dateFormat = new SimpleDateFormat(outputFormat.toString());
             result = dateFormat.format(date);
         } catch (Exception e) {
@@ -67,10 +69,10 @@ public class ToolTimeExpressions {
         return result;
     }
 
-    public void show_datePicker(@NonNull final View buttonOrTextView,
-                                @NonNull final String titleText,
-                                @NonNull final String positiveButtonText,
-                                @NonNull final String negativeButtonText) {
+    public void showDatePicker(@NonNull final View buttonOrTextView,
+                               @NonNull final String titleText,
+                               @NonNull final String positiveButtonText,
+                               @NonNull final String negativeButtonText) {
         buttonOrTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,11 +88,11 @@ public class ToolTimeExpressions {
                         selectedDate.set(year, month, dayOfMonth);
                         if (buttonOrTextView.getClass() == Button.class) {
                             Button button = (Button) buttonOrTextView;
-                            button.setText(set_dateToString(selectedDate.getTime(), GlobalVariable.DateFormat.SHOW_DATE_FORMAT));
+                            button.setText(setDateToString(selectedDate.getTime(), GlobalVariable.DateFormat.SHOW_DATE_FORMAT));
                         }
                         if (buttonOrTextView.getClass() == TextView.class) {
                             TextView textView = (TextView) buttonOrTextView;
-                            textView.setText(set_dateToString(selectedDate.getTime(), GlobalVariable.DateFormat.SHOW_DATE_FORMAT));
+                            textView.setText(setDateToString(selectedDate.getTime(), GlobalVariable.DateFormat.SHOW_DATE_FORMAT));
                         }
                     }
                 }, year, month, day);
@@ -103,10 +105,10 @@ public class ToolTimeExpressions {
         });
     }
 
-    public void show_timePicker(@NonNull final View buttonOrTextView,
-                                @NonNull final String titleText,
-                                @NonNull final String positiveButtonText,
-                                @NonNull final String negativeButtonText) {
+    public void showTimePicker(@NonNull final View buttonOrTextView,
+                               @NonNull final String titleText,
+                               @NonNull final String positiveButtonText,
+                               @NonNull final String negativeButtonText) {
         buttonOrTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,11 +123,11 @@ public class ToolTimeExpressions {
                         selectedTime.set(Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH, hourOfDay, minute, Calendar.SECOND);
                         if (buttonOrTextView.getClass() == Button.class) {
                             Button button = (Button) buttonOrTextView;
-                            button.setText(set_dateToString(selectedTime.getTime(), GlobalVariable.DateFormat.SMALL_TIME_FORMAT));
+                            button.setText(setDateToString(selectedTime.getTime(), GlobalVariable.DateFormat.SMALL_TIME_FORMAT));
                         }
                         if (buttonOrTextView.getClass() == TextView.class) {
                             TextView textView = (TextView) buttonOrTextView;
-                            textView.setText(set_dateToString(selectedTime.getTime(), GlobalVariable.DateFormat.SMALL_TIME_FORMAT));
+                            textView.setText(setDateToString(selectedTime.getTime(), GlobalVariable.DateFormat.SMALL_TIME_FORMAT));
                         }
                     }
                 }, hour, minute, true);
