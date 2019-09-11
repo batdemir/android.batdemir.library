@@ -1,6 +1,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![API](https://img.shields.io/badge/API-23%2B-red.svg?style=flat)](https://android-arsenal.com/api?level=23)
 [![](https://jitpack.io/v/batdemirorg/android.batdemir.library.svg)](https://jitpack.io/#batdemirorg/android.batdemir.library)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/764fdb1f562044499de6efb70ee53664)](https://www.codacy.com/manual/batdemir/android.batdemir.library?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=batdemirorg/android.batdemir.library&amp;utm_campaign=Badge_Grade)
 # Batdemir Library
 
 Spinner Component | EditText Component
