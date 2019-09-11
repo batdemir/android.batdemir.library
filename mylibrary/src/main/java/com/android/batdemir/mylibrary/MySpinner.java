@@ -209,10 +209,7 @@ public class MySpinner extends RelativeLayout {
             Field fieldId = adapterSpinner.getModels().get(getSelectedItemPosition()).getClass().getDeclaredField(adapterSpinner.getFieldId().getName());
             fieldId.setAccessible(true);
             return fieldId.get(adapterSpinner.getModels().get(getSelectedItemPosition()));
-        } catch (NoSuchFieldException e) {
-            Log.e(TAG, e.getMessage());
-            return null;
-        } catch (IllegalAccessException e) {
+        } catch (Exception e) {
             Log.e(TAG, e.getMessage());
             return null;
         }
@@ -224,10 +221,7 @@ public class MySpinner extends RelativeLayout {
             Field fieldDescription = adapterSpinner.getModels().get(getSelectedItemPosition()).getClass().getDeclaredField(adapterSpinner.getFieldDescription().getName());
             fieldDescription.setAccessible(true);
             return String.valueOf(fieldDescription.get(adapterSpinner.getModels().get(getSelectedItemPosition())));
-        } catch (NoSuchFieldException e) {
-            Log.e(TAG, e.getMessage());
-            return null;
-        } catch (IllegalAccessException e) {
+        } catch (Exception e) {
             Log.e(TAG, e.getMessage());
             return null;
         }
@@ -247,10 +241,8 @@ public class MySpinner extends RelativeLayout {
                     _spinner.setSelection(i);
                 }
             }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Log.e(TAG,e.getMessage());
         }
     }
 
@@ -264,10 +256,8 @@ public class MySpinner extends RelativeLayout {
                     _spinner.setSelection(i);
                 }
             }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Log.e(TAG,e.getMessage());
         }
     }
 }

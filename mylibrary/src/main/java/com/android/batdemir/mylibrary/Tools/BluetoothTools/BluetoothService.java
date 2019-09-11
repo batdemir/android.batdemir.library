@@ -93,8 +93,6 @@ public class BluetoothService {
             if (mConnectThread != null) {
                 mConnectThread.cancel();
                 mConnectThread = null;
-            }else {
-                //else
             }
         }
 
