@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -134,6 +135,9 @@ public class MainActivity extends AppCompatActivity {
                     case 12:
                         count = 0;
                         break;
+                    default:
+                        count = 0;
+                        break;
                 }
             }
         });
@@ -149,17 +153,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String message = "";
-                message += "\n" + "Selected Item Id:\t" + binding.spinner.getSelectedItemId();
+                message += "\n" + "Selected Item id:\t" + binding.spinner.getSelectedItemId();
                 message += "\n" + "Selected Item Value:\t" + binding.spinner.getSelectedItemValue();
                 message += "\n" + "Selected Item Position:\t" + binding.spinner.getSelectedItemPosition();
                 message += "\n";
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                ;
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                //onNothingSelected
             }
         });
 
@@ -192,11 +195,11 @@ public class MainActivity extends AppCompatActivity {
                     binding.spinner
             ).fill_spinnerCustomModel(
                     testingModels,
-                    TestingModel.class.getDeclaredField("Id"),
-                    TestingModel.class.getDeclaredField("Description")
+                    TestingModel.class.getDeclaredField("id"),
+                    TestingModel.class.getDeclaredField("description")
             );
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Log.e(MainActivity.class.getSimpleName(),e.getMessage());
         }
     }
 
@@ -240,45 +243,45 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
-    private class TestingModel implements Serializable {
+    private static class TestingModel implements Serializable {
 
-        @SerializedName("Id")
-        private Integer Id;
+        @SerializedName("id")
+        private Integer id;
 
-        @SerializedName("Description")
-        private String Description;
+        @SerializedName("description")
+        private String description;
 
-        @SerializedName("SubId")
-        private Integer SubId;
+        @SerializedName("subId")
+        private Integer subId;
 
-        @SerializedName("SubDescription")
-        private String SubDescription;
+        @SerializedName("subDescription")
+        private String subDescription;
 
-        public TestingModel(Integer id, String description, Integer subId, String subDescription) {
-            Id = id;
-            Description = description;
-            SubId = subId;
-            SubDescription = subDescription;
+        TestingModel(Integer id, String description, Integer subId, String subDescription) {
+            this.id = id;
+            this.description = description;
+            this.subId = subId;
+            this.subDescription = subDescription;
         }
 
-        public Integer getId() {
-            return Id;
+        Integer getId() {
+            return id;
         }
 
         public void setId(Integer id) {
-            Id = id;
+            this.id = id;
         }
 
-        public String getDescription() {
-            return Description;
+        String getDescription() {
+            return description;
         }
 
         public void setDescription(String description) {
-            Description = description;
+            this.description = description;
         }
 
-        public Integer getSubId() {
-            return SubId;
+        Integer getSubId() {
+            return subId;
         }
 
         @Override
@@ -307,15 +310,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public void setSubId(Integer subId) {
-            SubId = subId;
+            this.subId = subId;
         }
 
-        public String getSubDescription() {
-            return SubDescription;
+        String getSubDescription() {
+            return subDescription;
         }
 
         public void setSubDescription(String subDescription) {
-            SubDescription = subDescription;
+            this.subDescription = subDescription;
         }
     }
 }
