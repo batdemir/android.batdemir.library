@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 
@@ -14,17 +13,23 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 
 import com.android.batdemir.library.Models.AdapterRecyclerView;
+import com.android.batdemir.library.Models.CallTest;
 import com.android.batdemir.library.Models.Player;
 import com.android.batdemir.library.databinding.ActivityRecyclerBinding;
+import com.android.batdemir.mylibrary.API.Connect;
+import com.android.batdemir.mylibrary.API.RetrofitClient;
 import com.android.batdemir.mylibrary.Components.MyAlertDialog;
 import com.android.batdemir.mylibrary.Tools.SwipeTools.SwipeController;
 import com.android.batdemir.mylibrary.Tools.SwipeTools.SwipeControllerActions;
 
 import java.util.ArrayList;
 
+import retrofit2.Response;
+
 public class RecyclerActivity extends AppCompatActivity implements
         BaseActions,
-        MyAlertDialog.AlertClickListener{
+        MyAlertDialog.AlertClickListener,
+        Connect.ConnectServiceListener{
 
     //EXAMPLE OF RECYCLER VIEW WITH SWIPE
     private Context context;
@@ -51,42 +56,36 @@ public class RecyclerActivity extends AppCompatActivity implements
 
     @Override
     public void setListeners() {
-        binding.btnPreviousPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent gp = new Intent(context, MainActivity.class);
-                startActivity(gp);
-                finish();
-            }
+        binding.btnPreviousPage.setOnClickListener(v -> {
+            Intent gp = new Intent(context, MainActivity.class);
+            startActivity(gp);
+            finish();
         });
 
-        binding.btnShowAlertDialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MyAlertDialog myAlertDialog = MyAlertDialog.newInstance("Deneme",Boolean.TRUE,Boolean.FALSE);
-                myAlertDialog.setShowEditText(true);
-                myAlertDialog.setEditTextInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-                myAlertDialog.setAutoDismiss(false);
-                myAlertDialog.show(getSupportFragmentManager(),"meyaba");
-            }
+        binding.btnShowAlertDialog.setOnClickListener(v -> {
+            MyAlertDialog myAlertDialog = MyAlertDialog.getInstance("Deneme");
+            myAlertDialog.setIsCancelable(true);
+            myAlertDialog.setShowCancelButton(true);
+            myAlertDialog.setShowEditText(true);
+            myAlertDialog.setAutoDismiss(true);
+            myAlertDialog.show(getSupportFragmentManager(), "meyaba");
+        });
+
+        binding.btnConnectService.setOnClickListener(v -> {
+            RetrofitClient.setBaseUrl("https://api.github.com");
+            new Connect<>().connect(context, RetrofitClient.getInstance().create(CallTest.class).callTest(), "Test");
         });
     }
 
     private ArrayList<Player> getPlayers() {
         ArrayList<Player> players = new ArrayList<>();
-        players.add(0, new Player("Batuhan", "Turkey", "BatSport", 90, 13));
-        players.add(1, new Player("Batuhan1", "Turkey", "BatSport", 91, 12));
-        players.add(2, new Player("Batuhan2", "Turkey", "BatSport", 92, 11));
-        players.add(3, new Player("Batuhan3", "Turkey", "BatSport", 93, 29));
-        players.add(4, new Player("Batuhan4", "Turkey", "BatSport", 94, 28));
-        players.add(5, new Player("Batuhan5", "Turkey", "BatSport", 95, 27));
-        players.add(6, new Player("Batuhan6", "Turkey", "BatSport", 96, 26));
-        players.add(7, new Player("Batuhan7", "Turkey", "BatSport", 97, 25));
-        players.add(8, new Player("Batuhan8", "Turkey", "BatSport", 98, 24));
-        players.add(9, new Player("Batuhan9", "Turkey", "BatSport", 99, 23));
-        players.add(10, new Player("Batuhan10", "Turkey", "BatSport", 81, 22));
-        players.add(11, new Player("Batuhan11", "Turkey", "BatSport", 82, 21));
-        players.add(12, new Player("Batuhan12", "Turkey", "BatSport", 83, 20));
+        String name = "Batuhan";
+        String nationality = "Turkey";
+        String club = "BatSport";
+
+        for(int i = 0;i<20;i++){
+            players.add(i,new Player(name+players.size(),nationality,club,(9+i),(40-i)));
+        }
         return players;
     }
 
@@ -150,13 +149,28 @@ public class RecyclerActivity extends AppCompatActivity implements
     @Override
     public void alertOkey(MyAlertDialog myAlertDialog) {
         Log.d("TAG", myAlertDialog.getTag());
-        Log.d("EdiText",myAlertDialog.getEditText().getText().toString());
-        Log.d("TextView", myAlertDialog.getMessage().toString());
+        Log.d("EdiText", myAlertDialog.getEditText().getText().toString());
+        Log.d("TextView", myAlertDialog.getMessage());
         myAlertDialog.dismiss();
     }
 
     @Override
     public void alertCancel(MyAlertDialog myAlertDialog) {
+        myAlertDialog.dismiss();
+    }
 
+    @Override
+    public void onSuccess(String operationType, Response response) {
+        Log.d("onSucces",response.body().toString());
+    }
+
+    @Override
+    public void onFailure(String operationType, Response response) {
+        Log.d("onFailure",response.errorBody().toString());
+    }
+
+    @Override
+    public void onException(String operationType, Exception e) {
+        Log.d("onException",e.getMessage());
     }
 }
