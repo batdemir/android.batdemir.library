@@ -6,10 +6,18 @@ import android.preference.PreferenceManager;
 
 public class ToolSharedPreferences {
 
+    private static ToolSharedPreferences preferences = null;
     private SharedPreferences sharedPreferences;
 
-    public ToolSharedPreferences(Context context) {
+    private ToolSharedPreferences(Context context) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+    public static ToolSharedPreferences getInstance(Context context) {
+        if (preferences == null) {
+            preferences = new ToolSharedPreferences(context);
+        }
+        return preferences;
     }
 
     public void setInteger(String key, Integer value) {

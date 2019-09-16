@@ -28,11 +28,11 @@ public class MyAlertDialog extends DialogFragment {
     private String message;
 
     //Component Property
-    private boolean isCancelable = false;
-    private boolean showCancelButton = false;
-    private boolean showEditText = false;
-    private boolean autoDismiss = true;
-    private int inputType = -1;
+    private boolean isCancelable;
+    private boolean showCancelButton;
+    private boolean showEditText;
+    private boolean autoDismiss;
+    private int inputType;
 
     public static MyAlertDialog getInstance(String message) {
         if (myAlertDialog == null) {
@@ -42,10 +42,6 @@ public class MyAlertDialog extends DialogFragment {
         bundle.putString(key_message, message);
         myAlertDialog.setArguments(bundle);
         return myAlertDialog;
-    }
-
-    private MyAlertDialog() {
-
     }
 
     @Nullable
