@@ -3,6 +3,7 @@ package com.android.batdemir.mylibrary.Tools;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -21,10 +22,12 @@ public class Tool {
         this.context = context;
     }
 
-    public void move(Class<?> to, boolean isLeft, boolean isHistory) {
+    public void move(Class<?> to, boolean isLeft, boolean isHistory, Bundle bundle) {
         try {
             Activity activity = (Activity) context;
             Intent intent = new Intent(context, to);
+            if (bundle != null)
+                intent.putExtras(bundle);
             context.startActivity(intent);
             if (isLeft) {
                 activity.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
