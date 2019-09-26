@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.android.batdemir.mylibrary.R;
 import com.android.batdemir.mylibrary.Tools.ButtonTools.OnTouchEvent;
@@ -144,5 +145,11 @@ public class MyAlertDialog extends DialogFragment {
         void alertOkey(MyAlertDialog myAlertDialog);
 
         void alertCancel(MyAlertDialog myAlertDialog);
+    }
+
+    @Override
+    public void show(@NonNull FragmentManager manager, @Nullable String tag) {
+        if (!myAlertDialog.isAdded())
+            super.show(manager, tag);
     }
 }
