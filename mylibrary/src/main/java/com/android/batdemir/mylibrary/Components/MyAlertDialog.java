@@ -62,21 +62,9 @@ public class MyAlertDialog extends DialogFragment {
     }
 
     private void loadData() {
-        binding.txtEditMessage.setText(message);
+        binding.txtEditMessage.setText(message + "\n");
 
         myAlertDialog.setCancelable(isCancelable);
-
-        if (showCancelButton) {
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
-            layoutParams.setMargins(8, 0, 8, 0);
-            binding.btnCancel.setLayoutParams(layoutParams);
-            binding.btnCancel.setPadding(8, 8, 8, 8);
-        } else {
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 0);
-            layoutParams.setMargins(0, 0, 0, 0);
-            binding.btnCancel.setLayoutParams(layoutParams);
-            binding.btnCancel.setPadding(0, 0, 0, 0);
-        }
 
         if (showEditText) {
             binding.editText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -84,6 +72,18 @@ public class MyAlertDialog extends DialogFragment {
         } else {
             binding.editText.setLayoutParams(new LinearLayout.LayoutParams(0, 0));
             binding.editText.setVisibility(View.INVISIBLE);
+        }
+
+        if (showCancelButton) {
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+            layoutParams.setMargins(8, 0, 8, 0);
+            binding.btnCancel.setPadding(8, 8, 8, 8);
+            binding.btnCancel.setLayoutParams(layoutParams);
+        } else {
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 0);
+            layoutParams.setMargins(0, 0, 0, 0);
+            binding.btnCancel.setPadding(0, 0, 0, 0);
+            binding.btnCancel.setLayoutParams(layoutParams);
         }
 
         if (inputType != -1) {

@@ -63,11 +63,7 @@ public class RecyclerActivity extends AppCompatActivity implements
         });
 
         binding.btnShowAlertDialog.setOnClickListener(v -> {
-            MyAlertDialog myAlertDialog = MyAlertDialog.getInstance("Deneme");
-            myAlertDialog.setIsCancelable(true);
-            myAlertDialog.setShowCancelButton(true);
-            myAlertDialog.setShowEditText(true);
-            myAlertDialog.setAutoDismiss(true);
+            MyAlertDialog myAlertDialog = MyAlertDialog.getInstance("Lütfen \"Uygulamalar > " + getString(R.string.app_name) + " > İzinler\" bölümünden izinleri aktif ediniz.");
             myAlertDialog.show(getSupportFragmentManager(), "meyaba");
         });
 
