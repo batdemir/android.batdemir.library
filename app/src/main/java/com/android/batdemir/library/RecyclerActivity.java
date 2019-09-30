@@ -29,7 +29,7 @@ import retrofit2.Response;
 public class RecyclerActivity extends AppCompatActivity implements
         BaseActions,
         MyAlertDialog.AlertClickListener,
-        Connect.ConnectServiceListener{
+        Connect.ConnectServiceListener {
 
     //EXAMPLE OF RECYCLER VIEW WITH SWIPE
     private Context context;
@@ -81,8 +81,8 @@ public class RecyclerActivity extends AppCompatActivity implements
         String nationality = "Turkey";
         String club = "BatSport";
 
-        for(int i = 0;i<20;i++){
-            players.add(i,new Player(name+players.size(),nationality,club,(9+i),(40-i)));
+        for (int i = 0; i < 20; i++) {
+            players.add(i, new Player(name + players.size(), nationality, club, (9 + i), (40 - i)));
         }
         return players;
     }
@@ -159,16 +159,16 @@ public class RecyclerActivity extends AppCompatActivity implements
 
     @Override
     public void onSuccess(String operationType, Response response) {
-        Log.d("onSucces",response.body().toString());
+        Log.d("onSucces", response.body().toString());
     }
 
     @Override
     public void onFailure(String operationType, Response response) {
-        Log.d("onFailure",response.errorBody().toString());
+        Log.d("onFailure", response.errorBody().toString());
     }
 
     @Override
     public void onException(String operationType, Exception e) {
-        Log.d("onException",e.getMessage());
+        Log.d("onException", e.getMessage());
     }
 }

@@ -84,14 +84,20 @@ public class Connect<T> {
                     connectServiceListener.onFailure(operationType, response);
                 }
             } catch (NullPointerException e) {
-                MyAlertDialog
-                        .getInstance("Servis İle Bağlantı Sağlanamadı. Lütfen Tekrar Deneyiniz.")
-                        .show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
+                MyAlertDialog myAlertDialog = MyAlertDialog.getInstance("Servis İle Bağlantı Sağlanamadı. Lütfen Tekrar Deneyiniz.");
+                myAlertDialog.setShowCancelButton(false);
+                myAlertDialog.setShowEditText(false);
+                myAlertDialog.setIsCancelable(false);
+                myAlertDialog.setAutoDismiss(true);
+                myAlertDialog.show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
                 connectServiceListener.onException(operationType, e);
             } catch (Exception e) {
-                MyAlertDialog
-                        .getInstance(e.getMessage())
-                        .show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
+                MyAlertDialog myAlertDialog = MyAlertDialog.getInstance(e.getMessage());
+                myAlertDialog.setShowCancelButton(false);
+                myAlertDialog.setShowEditText(false);
+                myAlertDialog.setIsCancelable(false);
+                myAlertDialog.setAutoDismiss(true);
+                myAlertDialog.show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
                 connectServiceListener.onException(operationType, e);
             }
         }

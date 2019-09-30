@@ -1,9 +1,7 @@
 package com.android.batdemir.library.Models;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -26,10 +24,10 @@ public class AdapterRecyclerView extends RecyclerView.Adapter {
         this.models = models;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         public Player model;
 
-        public ViewHolder(RecyclerViewItemBinding binding) {
+        public MyViewHolder(RecyclerViewItemBinding binding) {
             super(binding.getRoot());
         }
 
@@ -47,12 +45,12 @@ public class AdapterRecyclerView extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.recycler_view_item, viewGroup, false);
-        return new ViewHolder(binding);
+        return new MyViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        ViewHolder holder = (ViewHolder) viewHolder;
+        MyViewHolder holder = (MyViewHolder) viewHolder;
         holder.setData(models.get(i));
     }
 

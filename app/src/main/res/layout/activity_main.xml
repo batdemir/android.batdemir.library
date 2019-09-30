@@ -23,23 +23,6 @@
                 android:text="Go Next Page"
                 android:textAllCaps="false" />
 
-            <com.android.batdemir.mylibrary.MySpinner
-                android:id="@+id/spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
-
-            <com.android.batdemir.mylibrary.MyEditText
-                android:id="@+id/edittext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
-
             <Button
                 android:id="@+id/btnOnOffSpinner"
                 android:layout_width="match_parent"
@@ -88,6 +71,11 @@
                 android:layout_height="wrap_content"
                 android:text="Change Border Color Spinner"
                 android:textAllCaps="false" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp" />
 
         </LinearLayout>
 

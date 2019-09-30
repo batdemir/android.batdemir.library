@@ -18,7 +18,6 @@ import com.android.batdemir.mylibrary.R;
 import com.android.batdemir.mylibrary.Tools.ButtonTools.OnTouchEvent;
 import com.android.batdemir.mylibrary.Tools.Tool;
 import com.android.batdemir.mylibrary.databinding.ViewMyAlertDialogBinding;
-import com.google.gson.Gson;
 
 public class MyAlertDialog extends DialogFragment {
 
@@ -48,7 +47,7 @@ public class MyAlertDialog extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.view_my_alert_dialog, null, false);
+        binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.view_my_alert_dialog, container, false);
         getObjectReferences();
         loadData();
         setListeners();

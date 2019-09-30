@@ -5,9 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.LinearLayout;
 
 import androidx.cardview.widget.CardView;
 
@@ -15,7 +15,6 @@ import com.android.batdemir.mylibrary.R;
 
 public class Tool {
 
-    private String TAG = Tool.class.getSimpleName();
     private Context context;
 
     public Tool(Context context) {
@@ -39,16 +38,16 @@ public class Tool {
                     activity.finish();
             }
         } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
+            Log.e(Tool.class.getSimpleName(), e.getMessage());
         }
     }
 
-    public void anim(LinearLayout linearProps) {
+    public void anim(View view) {
         try {
             Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_down);
-            linearProps.startAnimation(animation);
+            view.startAnimation(animation);
         } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
+            Log.e(Tool.class.getSimpleName(), e.getMessage());
         }
     }
 
@@ -57,7 +56,7 @@ public class Tool {
             Animation animation = AnimationUtils.loadAnimation(context, R.anim.zoom_in);
             cardView.startAnimation(animation);
         } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
+            Log.e(Tool.class.getSimpleName(), e.getMessage());
         }
     }
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -14,80 +15,52 @@ import java.util.List;
 @SuppressLint("MissingPermission")
 public class ToolConnection {
 
-    /**
-     * Get the network info
-     *
-     * @param context
-     * @return
-     */
+    private static ToolConnection ourInstance = null;
+
+    private ToolConnection() {
+    }
+
+    public static ToolConnection getInstance() {
+        if (ourInstance == null) {
+            ourInstance = new ToolConnection();
+        }
+        return ourInstance;
+    }
+
     public static NetworkInfo getNetworkInfo(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo();
     }
 
-    /**
-     * Check if there is any connectivity
-     *
-     * @param context
-     * @return
-     */
     public static boolean isConnected(Context context) {
         NetworkInfo info = getNetworkInfo(context);
         return (info != null && info.isConnected());
     }
 
-    /**
-     * Check if there is any connectivity to a Wifi network
-     *
-     * @param context
-     * @return
-     */
     public static boolean isConnectedWifi(Context context) {
         NetworkInfo info = getNetworkInfo(context);
         return (info != null && info.isConnected() && info.getType() == ConnectivityManager.TYPE_WIFI);
     }
 
-    /**
-     * Check if there is any connectivity to a mobile network
-     *
-     * @param context
-     * @return
-     */
     public static boolean isConnectedMobile(Context context) {
-        // NetworkInfo info = Connectivity.getNetworkInfo(context);
-        // return (info != null && info.isConnected() && info.getType() == ConnectivityManager.TYPE_MOBILE);
         boolean haveConnected = false;
 
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         @SuppressLint("MissingPermission") NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        if (activeNetwork != null) { // connected to the internet
-            if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
-                haveConnected = true;
+        if (activeNetwork != null) {
+            if (activeNetwork.getType() != ConnectivityManager.TYPE_MOBILE) {
+                return haveConnected;
             }
-        } else {
-            haveConnected = false;
+            haveConnected = true;
         }
         return haveConnected;
     }
 
-    /**
-     * Check if there is fast connectivity
-     *
-     * @param context
-     * @return
-     */
     public static boolean isConnectedFast(Context context) {
         NetworkInfo info = getNetworkInfo(context);
         return (info != null && info.isConnected() && isConnectionFast(info.getType(), info.getSubtype()));
     }
 
-    /**
-     * Check if the connection is fast
-     *
-     * @param type
-     * @param subType
-     * @return
-     */
     public static boolean isConnectionFast(int type, int subType) {
         if (type == ConnectivityManager.TYPE_WIFI) {
             return false;
@@ -137,18 +110,12 @@ public class ToolConnection {
         }
     }
 
-    /**
-     * Returns MAC address of the given interface name.
-     *
-     * @param interfaceName eth0, wlan0 or NULL=use first interface
-     * @return mac address or empty string
-     */
     public static String getMACAddress(String interfaceName) {
         try {
             List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
             for (NetworkInterface intf : interfaces) {
-                if (interfaceName != null) {
-                    if (!intf.getName().equalsIgnoreCase(interfaceName)) continue;
+                if (interfaceName != null && (!intf.getName().equalsIgnoreCase(interfaceName))) {
+                    continue;
                 }
                 byte[] mac = intf.getHardwareAddress();
                 if (mac == null) return "";
@@ -158,22 +125,11 @@ public class ToolConnection {
                 return buf.toString();
             }
         } catch (Exception ignored) {
-        } // for now eat exceptions
+            Log.e(ToolConnection.class.getSimpleName(), ignored.getMessage());
+        }
         return "";
-        /*try {
-            // this is so Linux hack
-            return loadFileAsString("/sys/class/net/" +interfaceName + "/address").toUpperCase().trim();
-        } catch (IOException ex) {
-            return null;
-        }*/
     }
 
-    /**
-     * Get IP address from first non-localhost interface
-     *
-     * @param useIPv4 true=return ipv4, false=return ipv6
-     * @return address or empty string
-     */
     public static String getIPAddress(boolean useIPv4) {
         try {
             List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
@@ -182,7 +138,6 @@ public class ToolConnection {
                 for (InetAddress addr : addrs) {
                     if (!addr.isLoopbackAddress()) {
                         String sAddr = addr.getHostAddress();
-                        //boolean isIPv4 = InetAddressUtils.isIPv4Address(sAddr);
                         boolean isIPv4 = sAddr.indexOf(':') < 0;
 
                         if (useIPv4) {
@@ -198,7 +153,8 @@ public class ToolConnection {
                 }
             }
         } catch (Exception ignored) {
-        } // for now eat exceptions
+            Log.e(ToolConnection.class.getSimpleName(), ignored.getMessage());
+        }
         return "";
     }
 

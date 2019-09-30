@@ -8,7 +8,6 @@ import android.view.View;
 
 public class OnTouchEvent implements View.OnTouchListener {
 
-    private final String TAG = OnTouchEvent.class.getSimpleName();
     private final View view;
 
     public OnTouchEvent(View view) {
@@ -34,7 +33,7 @@ public class OnTouchEvent implements View.OnTouchListener {
                     break;
             }
         } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
+            Log.e(OnTouchEvent.class.getSimpleName(), e.getMessage());
         }
         return false;
     }
