@@ -62,16 +62,18 @@ public class MyAlertDialog extends DialogFragment {
     }
 
     private void loadData() {
-        binding.txtEditMessage.setText(message + "\n");
 
         myAlertDialog.setCancelable(isCancelable);
 
         if (showEditText) {
             binding.editText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             binding.editText.setVisibility(View.VISIBLE);
+            binding.txtEditMessage.setText(message);
         } else {
+            String newLine = "\n";
             binding.editText.setLayoutParams(new LinearLayout.LayoutParams(0, 0));
             binding.editText.setVisibility(View.INVISIBLE);
+            binding.txtEditMessage.setText(String.format("%s%s", message, newLine));
         }
 
         if (showCancelButton) {
