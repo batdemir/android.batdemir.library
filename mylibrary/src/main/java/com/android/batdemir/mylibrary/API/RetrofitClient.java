@@ -41,6 +41,7 @@ public class RetrofitClient {
     public static void setBaseUrl(String newBaseUrl) {
         if (!baseUrl.equals(newBaseUrl)) {
             baseUrl = newBaseUrl;
+            retrofit = null;
             retrofit = getInstance();
         }
     }
@@ -48,6 +49,7 @@ public class RetrofitClient {
     public static void setSll(boolean newSsl) {
         if (ssl != newSsl) {
             ssl = newSsl;
+            retrofit = null;
             retrofit = getInstance();
         }
     }
