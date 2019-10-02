@@ -1,121 +1,107 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient"
-    tools:context=".SignUpActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
-        android:id="@+id/all"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:padding="15dp"
+    <ScrollView
+        android:id="@+id/rootSignUp"
+        style="@style/root"
         tools:context=".LoginActivity">
 
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/circularImageView"
-            android:layout_margin="5dp"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/edit_text_bg"
-            android:hint="Username"
-            android:padding="15dp"
-            android:textColor="@color/colorGrayLight"
-            android:textColorHint="@color/colorGrayLight"
+        <RelativeLayout
+            android:id="@+id/relativeSub"
+            style="@style/sub">
 
-            />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnLogin"
+                style="@style/login_button"
+                android:layout_below="@id/btnRegister"
+                android:backgroundTint="@color/colorSecondaryDark"
+                android:text="Login" />
 
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/username"
-            android:layout_margin="5dp"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/edit_text_bg"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:padding="15dp"
-            android:textColor="@color/colorGrayLight"
-            android:textColorHint="@color/colorGrayLight"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRegister"
+                style="@style/login_button"
+                android:layout_below="@+id/inputLayoutReMail"
+                android:backgroundTint="@color/colorSecondary"
+                android:text="Register" />
 
-            />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/circularImageView"
+                style="@style/login_imageView"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
 
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/email"
-            android:layout_margin="5dp"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/edit_text_bg"
-            android:hint="password"
-            android:inputType="textPassword"
-            android:padding="15dp"
-            android:textColor="@color/colorGrayLight"
-            android:textColorHint="@color/colorGrayLight"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputLayoutReMail"
+                style="@style/login_inputLayout"
+                android:layout_below="@id/inputLayoutMail"
+                android:hint="Confirm E-Mail">
 
-            />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextReMail"
+                    style="@style/login_editText"
+                    android:inputType="textEmailAddress"
+                    android:text="" />
 
-        <EditText
-            android:id="@+id/confirm_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/password"
-            android:layout_margin="5dp"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/edit_text_bg"
-            android:hint="Confirm Password"
-            android:inputType="textPassword"
-            android:padding="15dp"
-            android:textColor="@color/colorGrayLight"
-            android:textColorHint="@color/colorGrayLight"
+            </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputLayoutMail"
+                style="@style/login_inputLayout"
+                android:layout_below="@id/inputLayoutRePassword"
+                android:hint="E-Mail">
 
-            />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextMail"
+                    style="@style/login_editText"
+                    android:inputType="textEmailAddress"
+                    android:text="" />
 
-        <ImageView
-            android:id="@+id/circularImageView"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="25dp"
-            android:padding="10dp"
-            android:src="@mipmap/ic_launcher" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/signupbtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/confirm_password"
-            android:layout_margin="5dp"
-            android:background="@drawable/login_btn"
-            android:padding="15dp"
-            android:text="Sign Up"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/colorLoginBtn"
-            android:textSize="16dp"
-            android:textStyle="bold" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputLayoutRePassword"
+                style="@style/login_inputLayout"
+                android:layout_below="@id/inputLayoutPassword"
+                android:hint="Confirm Password">
 
-        <TextView
-            android:id="@+id/loginbtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/signupbtn"
-            android:layout_margin="5dp"
-            android:background="@drawable/go_login_page"
-            android:onClick="loginbtn"
-            android:padding="15dp"
-            android:text="Log In"
-            android:textAlignment="center"
-            android:textColor="@color/colorGrayLight"
-            android:textStyle="bold" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextRePassword"
+                    style="@style/login_editText"
+                    android:inputType="textPassword"
+                    android:text="" />
 
-    </RelativeLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-</RelativeLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputLayoutPassword"
+                style="@style/login_inputLayout"
+                android:layout_below="@id/inputLayoutUsername"
+                android:hint="Password">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextPassword"
+                    style="@style/login_editText"
+                    android:inputType="textPassword"
+                    android:text="" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputLayoutUsername"
+                style="@style/login_inputLayout"
+                android:layout_below="@id/circularImageView"
+                android:hint="Username">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextUsername"
+                    style="@style/login_editText"
+                    android:inputType="textVisiblePassword"
+                    android:text="" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</layout>

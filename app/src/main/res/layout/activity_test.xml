@@ -11,8 +11,7 @@
         android:layout_alignTop="@+id/imgGroup"
         android:layout_alignBottom="@id/imgGroup"
         android:layout_marginEnd="16dp"
-        android:layout_toStartOf="@+id/imgGroup"
-        android:src="@drawable/ic_changer" />
+        android:layout_toStartOf="@+id/imgGroup" />
 
     <ImageView
         android:id="@+id/imgGroup"

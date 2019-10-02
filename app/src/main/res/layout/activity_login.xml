@@ -1,121 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient"
-    tools:context=".LoginActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
-        android:id="@+id/all"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:padding="15dp"
+    <ScrollView
+        android:id="@+id/rootLogin"
+        style="@style/root"
         tools:context=".LoginActivity">
 
-        <CheckBox
-            android:id="@+id/checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/password"
-            android:layout_margin="5dp"
-            android:autoSizeMaxTextSize="32sp"
-            android:autoSizeTextType="uniform"
-            android:checked="true"
-            android:padding="5dp"
-            android:text="Remember me"
-            android:textColor="@color/colorGrayLight" />
+        <RelativeLayout
+            android:id="@+id/relativeSub"
+            style="@style/sub">
 
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/username"
-            android:layout_margin="5dp"
-            android:layout_marginLeft="5dp"
-            android:autoSizeMaxTextSize="32sp"
-            android:autoSizeTextType="uniform"
-            android:background="@drawable/edit_text_bg"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:padding="15dp"
-            android:textColor="@color/colorGrayLight"
-            android:textColorHint="@color/colorGrayLight" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSignUp"
+                style="@style/login_button"
+                android:layout_below="@id/btnLogin"
+                android:backgroundTint="@color/colorSecondaryDark"
+                android:text="Sign Up" />
 
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/circularImageView"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_margin="5dp"
-            android:layout_marginLeft="5dp"
-            android:autoSizeMaxTextSize="32sp"
-            android:autoSizeTextType="uniform"
-            android:background="@drawable/edit_text_bg"
-            android:hint="Username"
-            android:padding="15dp"
-            android:textColor="@color/colorGrayLight"
-            android:textColorHint="@color/colorGrayLight" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnLogin"
+                style="@style/login_button"
+                android:layout_below="@+id/checkBoxRememberMe"
+                android:backgroundTint="@color/colorSecondary"
+                android:text="Log In" />
 
-        <ImageView
-            android:id="@+id/circularImageView"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="25dp"
-            android:padding="10dp"
-            android:src="@mipmap/ic_launcher_round" />
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkBoxRememberMe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/inputLayoutPassword"
+                android:checked="true"
+                android:text="Remember me"
+                android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/loginbtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/checkbox"
-            android:layout_margin="5dp"
-            android:autoSizeMaxTextSize="32sp"
-            android:autoSizeTextType="uniform"
-            android:background="@drawable/login_btn"
-            android:padding="15dp"
-            android:text="Log In"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/colorLoginBtn"
-            android:textSize="16dp"
-            android:textStyle="bold" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/circularImageView"
+                style="@style/login_imageView"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/ic_launcher" />
 
-        <TextView
-            android:id="@+id/forgot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/signupbtn"
-            android:layout_margin="5dp"
-            android:autoSizeMaxTextSize="32sp"
-            android:autoSizeTextType="uniform"
-            android:padding="5dp"
-            android:text="Forgot your password ?"
-            android:textAllCaps="false"
-            android:textColor="@color/colorGrayLight" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/forgot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnSignUp"
+                android:text="Forgot your password ?"
+                android:textAlignment="textEnd"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/signupbtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/loginbtn"
-            android:layout_margin="5dp"
-            android:autoSizeMaxTextSize="32sp"
-            android:autoSizeTextType="uniform"
-            android:background="@drawable/go_signup_page"
-            android:onClick="signup"
-            android:padding="15dp"
-            android:text="Sign Up"
-            android:textAlignment="center"
-            android:textColor="@color/colorGrayLight"
-            android:textStyle="bold" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputLayoutPassword"
+                style="@style/login_inputLayout"
+                android:layout_below="@id/inputLayoutUsername"
+                android:hint="Password">
 
-    </RelativeLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextPassword"
+                    style="@style/login_editText"
+                    android:inputType="textPassword"
+                    android:text="" />
 
-</RelativeLayout>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputLayoutUsername"
+                style="@style/login_inputLayout"
+                android:layout_below="@id/circularImageView"
+                android:hint="Username">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextUsername"
+                    style="@style/login_editText"
+                    android:inputType="textVisiblePassword"
+                    android:text="" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</layout>
