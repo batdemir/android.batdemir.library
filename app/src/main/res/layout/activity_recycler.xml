@@ -18,13 +18,6 @@
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/btnShowAlertDialog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Show Alert Dialog"
-            android:textAllCaps="false" />
-
-        <Button
             android:id="@+id/btnConnectService"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

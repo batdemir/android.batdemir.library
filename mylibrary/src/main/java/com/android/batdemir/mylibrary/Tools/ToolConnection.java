@@ -124,8 +124,8 @@ public class ToolConnection {
                 if (buf.length() > 0) buf.deleteCharAt(buf.length() - 1);
                 return buf.toString();
             }
-        } catch (Exception ignored) {
-            Log.e(ToolConnection.class.getSimpleName(), ignored.getMessage());
+        } catch (Exception e) {
+            Log.e(ToolConnection.class.getSimpleName(), e.getMessage());
         }
         return "";
     }
@@ -139,21 +139,18 @@ public class ToolConnection {
                     if (!addr.isLoopbackAddress()) {
                         String sAddr = addr.getHostAddress();
                         boolean isIPv4 = sAddr.indexOf(':') < 0;
-
-                        if (useIPv4) {
-                            if (isIPv4)
-                                return sAddr;
-                        } else {
-                            if (!isIPv4) {
-                                int delim = sAddr.indexOf('%'); // drop ip6 zone suffix
-                                return delim < 0 ? sAddr.toUpperCase() : sAddr.substring(0, delim).toUpperCase();
-                            }
+                        if (useIPv4 && isIPv4) {
+                            return sAddr;
+                        }
+                        if (!useIPv4 && !isIPv4) {
+                            int delim = sAddr.indexOf('%'); // drop ip6 zone suffix
+                            return delim < 0 ? sAddr.toUpperCase() : sAddr.substring(0, delim).toUpperCase();
                         }
                     }
                 }
             }
-        } catch (Exception ignored) {
-            Log.e(ToolConnection.class.getSimpleName(), ignored.getMessage());
+        } catch (Exception e) {
+            Log.e(ToolConnection.class.getSimpleName(), e.getMessage());
         }
         return "";
     }

@@ -61,13 +61,6 @@ public class RecyclerActivity extends AppCompatActivity implements
     public void setListeners() {
         binding.btnPreviousPage.setOnClickListener(v -> new Tool(context).move(MainActivity.class, false, false, null));
 
-        binding.btnShowAlertDialog.setOnClickListener(v -> {
-            MyAlertDialog myAlertDialog = MyAlertDialog.getInstance("Lütfen \"Uygulamalar > " + getString(R.string.app_name) + " > İzinler\" bölümünden izinleri aktif ediniz.");
-            myAlertDialog.setShowEditText(true);
-            myAlertDialog.setShowCancelButton(true);
-            myAlertDialog.show(getSupportFragmentManager(), "meyaba");
-        });
-
         binding.btnConnectService.setOnClickListener(v -> {
             RetrofitClient.setBaseUrl("https://api.github.com");
             new Connect<>().connect(context, RetrofitClient.getInstance().create(CallTest.class).callTest(), "Test");

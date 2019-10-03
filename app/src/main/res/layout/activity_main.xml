@@ -24,58 +24,39 @@
                 android:textAllCaps="false" />
 
             <Button
-                android:id="@+id/btnOnOffSpinner"
+                android:id="@+id/btnDialogDefault"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Border Off Spinner"
+                android:text="DialogDefault"
                 android:textAllCaps="false" />
 
             <Button
-                android:id="@+id/btnOnOffEditText"
+                android:id="@+id/btnDialogEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Border Off EditText"
+                android:text="DialogEditText"
                 android:textAllCaps="false" />
 
             <Button
-                android:id="@+id/btnFillCustomList"
+                android:id="@+id/btnDialogNonEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fill Custom List"
+                android:text="DialogNonEditText"
                 android:textAllCaps="false" />
 
             <Button
-                android:id="@+id/btnFillArrayList"
+                android:id="@+id/btnDialogNonAutoDismiss"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fill Array List"
+                android:text="DialogNonAutoDismiss"
                 android:textAllCaps="false" />
 
             <Button
-                android:id="@+id/btnFillStringList"
+                android:id="@+id/btnDialogAutoDismiss"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fill String List"
+                android:text="DialogAutoDismiss"
                 android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/btnChangeBorderColorEdittext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Change Border Color Edittext"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/btnChangeBorderColorSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Change Border Color Spinner"
-                android:textAllCaps="false" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
 
         </LinearLayout>
 
