@@ -188,43 +188,43 @@ public class MyAlertDialog extends DialogFragment {
             this.inputType = inputType;
         }
 
-        boolean isCancelable() {
+        private boolean isCancelable() {
             return isCancelable;
         }
 
-        void setCancelable(boolean cancelable) {
+        private void setCancelable(boolean cancelable) {
             isCancelable = cancelable;
         }
 
-        boolean isShowCancelButton() {
+        private boolean isShowCancelButton() {
             return showCancelButton;
         }
 
-        void setShowCancelButton(boolean showCancelButton) {
+        private void setShowCancelButton(boolean showCancelButton) {
             this.showCancelButton = showCancelButton;
         }
 
-        boolean isShowEditText() {
+        private boolean isShowEditText() {
             return showEditText;
         }
 
-        void setShowEditText(boolean showEditText) {
+        private void setShowEditText(boolean showEditText) {
             this.showEditText = showEditText;
         }
 
-        boolean isAutoDismiss() {
+        private boolean isAutoDismiss() {
             return autoDismiss;
         }
 
-        void setAutoDismiss(boolean autoDismiss) {
+        private void setAutoDismiss(boolean autoDismiss) {
             this.autoDismiss = autoDismiss;
         }
 
-        int getInputType() {
+        private int getInputType() {
             return inputType;
         }
 
-        void setInputType(int inputType) {
+        private void setInputType(int inputType) {
             this.inputType = inputType;
         }
     }

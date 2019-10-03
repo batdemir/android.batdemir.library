@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 
+import com.android.batdemir.library.App.Base.BaseActivity;
 import com.android.batdemir.library.UI.Adapters.AdapterRecyclerView;
 import com.android.batdemir.library.Api.CallTest;
 import com.android.batdemir.library.App.Base.BaseActions;
@@ -29,8 +30,7 @@ import java.util.ArrayList;
 
 import retrofit2.Response;
 
-public class RecyclerActivity extends AppCompatActivity implements
-        BaseActions,
+public class RecyclerActivity extends BaseActivity implements
         MyAlertDialog.AlertClickListener,
         Connect.ConnectServiceListener {
 
@@ -39,15 +39,8 @@ public class RecyclerActivity extends AppCompatActivity implements
     private ActivityRecyclerBinding binding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getObjectReferences();
-        loadData();
-        setListeners();
-    }
-
-    @Override
     public void getObjectReferences() {
+        init(false, true, "RecyclerView", 16f);
         context = this;
         binding = DataBindingUtil.setContentView((Activity) context, R.layout.activity_recycler);
     }
@@ -67,7 +60,7 @@ public class RecyclerActivity extends AppCompatActivity implements
         });
     }
 
-    private ArrayList<Player> getPlayers() {
+    private void setupRecyclerView() {
         ArrayList<Player> players = new ArrayList<>();
         String name = "Batuhan";
         String nationality = "Turkey";
@@ -76,14 +69,11 @@ public class RecyclerActivity extends AppCompatActivity implements
         for (int i = 0; i < 20; i++) {
             players.add(i, new Player(name + players.size(), nationality, club, (9 + i), (40 - i)));
         }
-        return players;
-    }
 
-    private void setupRecyclerView() {
-        AdapterRecyclerView adapterRecyclerView = new AdapterRecyclerView(context, getPlayers());
+        AdapterRecyclerView adapterRecyclerView = new AdapterRecyclerView(context, players);
         binding.recyclerListView.setAdapter(adapterRecyclerView);
         binding.recyclerListView.setLayoutManager(new GridLayoutManager(context, 1, GridLayoutManager.VERTICAL, false));
-        binding.recyclerListView.setItemViewCacheSize(getPlayers().size());
+        binding.recyclerListView.setItemViewCacheSize(players.size());
         binding.recyclerListView.setHasFixedSize(true);
 
         SwipeController swipeControllerDelete = new SwipeController(true, getDrawable(android.R.drawable.ic_menu_delete), new SwipeControllerActions() {

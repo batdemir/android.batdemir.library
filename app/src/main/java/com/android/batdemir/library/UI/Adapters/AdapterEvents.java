@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.batdemir.library.Models.Event;
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ItemEventBinding;
-import com.android.batdemir.mylibrary.Tools.Tool;
 
 import java.util.List;
 
@@ -32,6 +31,7 @@ public class AdapterEvents extends RecyclerView.Adapter {
 
         MyViewHolder(ItemEventBinding binding) {
             super(binding.getRoot());
+            binding.getRoot().setOnClickListener(this);
         }
 
         private void setData(Event model) {
@@ -43,7 +43,8 @@ public class AdapterEvents extends RecyclerView.Adapter {
 
         @Override
         public void onClick(View v) {
-            new Tool(context).move(model.getTo(), true, true, null);
+            EventClickListener eventClickListener = (EventClickListener) context;
+            eventClickListener.eventClick(model);
         }
     }
 
@@ -67,6 +68,10 @@ public class AdapterEvents extends RecyclerView.Adapter {
 
     public List<Event> getModels() {
         return models;
+    }
+
+    public interface EventClickListener {
+        void eventClick(Event event);
     }
 
 }
