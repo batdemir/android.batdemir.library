@@ -12,22 +12,22 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".SettingsActivity"
+            android:name=".UI.Activities.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".MenuActivity">
+            android:parentActivityName=".UI.Activities.MenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.batdemir.library.MenuActivity" />
+                android:value="com.android.batdemir.library.UI.Activities.MenuActivity" />
         </activity>
         <activity
-            android:name=".MenuActivity"
+            android:name=".UI.Activities.MenuActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/MenuTheme" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".UI.Activities.SignUpActivity"
             android:screenOrientation="sensorPortrait" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".UI.Activities.LoginActivity"
             android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,8 +35,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RecyclerActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".UI.Activities.RecyclerActivity" />
+        <activity android:name=".UI.Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

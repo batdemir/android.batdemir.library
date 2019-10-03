@@ -1,4 +1,4 @@
-package com.android.batdemir.library.Models;
+package com.android.batdemir.library.Api;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

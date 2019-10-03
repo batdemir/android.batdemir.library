@@ -1,7 +1,5 @@
 package com.android.batdemir.library.Models;
 
-import android.graphics.drawable.Drawable;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;

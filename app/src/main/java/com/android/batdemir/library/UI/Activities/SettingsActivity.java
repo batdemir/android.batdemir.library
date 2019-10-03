@@ -1,10 +1,12 @@
-package com.android.batdemir.library;
+package com.android.batdemir.library.UI.Activities;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
+
+import com.android.batdemir.library.R;
 
 public class SettingsActivity extends AppCompatActivity {
 

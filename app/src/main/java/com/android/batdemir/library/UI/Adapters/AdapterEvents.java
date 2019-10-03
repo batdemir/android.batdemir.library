@@ -1,4 +1,4 @@
-package com.android.batdemir.library.Models;
+package com.android.batdemir.library.UI.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.batdemir.library.Models.Event;
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ItemEventBinding;
 import com.android.batdemir.mylibrary.Tools.Tool;

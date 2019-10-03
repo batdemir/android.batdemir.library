@@ -1,4 +1,4 @@
-package com.android.batdemir.library;
+package com.android.batdemir.library.App.Base;
 
 public interface BaseActions {
     void getObjectReferences();

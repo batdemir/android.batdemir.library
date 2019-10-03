@@ -1,15 +1,13 @@
-package com.android.batdemir.library;
+package com.android.batdemir.library.UI.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 
+import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ActivitySignUpBinding;
 import com.android.batdemir.mylibrary.Tools.Tool;
 

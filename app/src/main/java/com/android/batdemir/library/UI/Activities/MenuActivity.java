@@ -1,4 +1,4 @@
-package com.android.batdemir.library;
+package com.android.batdemir.library.UI.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -6,12 +6,11 @@ import androidx.databinding.DataBindingUtil;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.Menu;
 
-import com.android.batdemir.library.Models.AdapterEvents;
+import com.android.batdemir.library.UI.Adapters.AdapterEvents;
 import com.android.batdemir.library.Models.Event;
+import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ActivityMenuBinding;
-import com.android.batdemir.mylibrary.Tools.Tool;
 
 import java.util.ArrayList;
 

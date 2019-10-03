@@ -7,7 +7,7 @@
         android:id="@+id/rootMenu"
         style="@style/root"
         android:orientation="vertical"
-        tools:context=".MenuActivity">
+        tools:context=".UI.Activities.MenuActivity">
 
         <RelativeLayout
             android:id="@+id/relativeUserInfo"
@@ -36,16 +36,15 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtActiveTodoCount"
                         style="@style/menu_title_text_view"
-                        android:text="Active in Week" />
+                        android:text="@string/active_in_week" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/menu_title_text_view"
-                        android:text=":" />
+                        android:text="@string/dot" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtEditActiveTodoCount"
-                        style="@style/menu_value_text_view"
-                        android:text="3" />
+                        style="@style/menu_value_text_view" />
 
                 </TableRow>
 
@@ -54,16 +53,15 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtExpiredTodoCount"
                         style="@style/menu_title_text_view"
-                        android:text="Expired in Week" />
+                        android:text="@string/expired_in_week" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/menu_title_text_view"
-                        android:text=":" />
+                        android:text="@string/dot" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtEditExpiredTodoCount"
-                        style="@style/menu_value_text_view"
-                        android:text="3" />
+                        style="@style/menu_value_text_view" />
 
                 </TableRow>
 
@@ -72,16 +70,15 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtImmediateTodo"
                         style="@style/menu_title_text_view"
-                        android:text="Immediate" />
+                        android:text="@string/immediate" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/menu_title_text_view"
-                        android:text=":" />
+                        android:text="@string/dot" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtEditImmediateTodo"
-                        style="@style/menu_value_text_view"
-                        android:text="Meet With Friends" />
+                        style="@style/menu_value_text_view" />
 
                 </TableRow>
 

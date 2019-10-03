@@ -17,6 +17,20 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="log_in">Log In</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forgot_your_password">Forgot your password ?</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="register">Register</string>
+    <string name="confirm_e_mail">Confirm E-Mail</string>
+    <string name="e_mail">E-Mail</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="active_in_week">Active in Week</string>
+    <string name="dot">:</string>
+    <string name="expired_in_week">Expired in Week</string>
+    <string name="immediate">Immediate</string>
     <string-array name="test">
         <item>ArrayTest1</item>
         <item>ArrayTest2</item>

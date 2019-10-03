@@ -1,4 +1,4 @@
-package com.android.batdemir.library;
+package com.android.batdemir.library.UI.Activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,15 +12,18 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 
-import com.android.batdemir.library.Models.AdapterRecyclerView;
-import com.android.batdemir.library.Models.CallTest;
+import com.android.batdemir.library.UI.Adapters.AdapterRecyclerView;
+import com.android.batdemir.library.Api.CallTest;
+import com.android.batdemir.library.App.Base.BaseActions;
 import com.android.batdemir.library.Models.Player;
+import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ActivityRecyclerBinding;
 import com.android.batdemir.mylibrary.API.Connect;
 import com.android.batdemir.mylibrary.API.RetrofitClient;
 import com.android.batdemir.mylibrary.Components.MyAlertDialog;
 import com.android.batdemir.mylibrary.Tools.SwipeTools.SwipeController;
 import com.android.batdemir.mylibrary.Tools.SwipeTools.SwipeControllerActions;
+import com.android.batdemir.mylibrary.Tools.Tool;
 
 import java.util.ArrayList;
 
@@ -56,11 +59,7 @@ public class RecyclerActivity extends AppCompatActivity implements
 
     @Override
     public void setListeners() {
-        binding.btnPreviousPage.setOnClickListener(v -> {
-            Intent gp = new Intent(context, MainActivity.class);
-            startActivity(gp);
-            finish();
-        });
+        binding.btnPreviousPage.setOnClickListener(v -> new Tool(context).move(MainActivity.class, false, false, null));
 
         binding.btnShowAlertDialog.setOnClickListener(v -> {
             MyAlertDialog myAlertDialog = MyAlertDialog.getInstance("Lütfen \"Uygulamalar > " + getString(R.string.app_name) + " > İzinler\" bölümünden izinleri aktif ediniz.");

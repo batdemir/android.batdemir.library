@@ -1,10 +1,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <ScrollView
         android:id="@+id/rootSignUp"
         style="@style/root"
-        tools:context=".LoginActivity">
+        tools:context=".UI.Activities.LoginActivity">
 
         <RelativeLayout
             android:id="@+id/relativeSub"
@@ -15,14 +16,14 @@
                 style="@style/login_button"
                 android:layout_below="@id/btnRegister"
                 android:backgroundTint="@color/colorSecondaryDark"
-                android:text="Login" />
+                android:text="@string/log_in" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnRegister"
                 style="@style/login_button"
                 android:layout_below="@+id/inputLayoutReMail"
                 android:backgroundTint="@color/colorSecondary"
-                android:text="Register" />
+                android:text="@string/register" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/circularImageView"
@@ -34,13 +35,12 @@
                 android:id="@+id/inputLayoutReMail"
                 style="@style/login_inputLayout"
                 android:layout_below="@id/inputLayoutMail"
-                android:hint="Confirm E-Mail">
+                android:hint="@string/confirm_e_mail">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextReMail"
                     style="@style/login_editText"
-                    android:inputType="textEmailAddress"
-                    android:text="" />
+                    android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -48,13 +48,12 @@
                 android:id="@+id/inputLayoutMail"
                 style="@style/login_inputLayout"
                 android:layout_below="@id/inputLayoutRePassword"
-                android:hint="E-Mail">
+                android:hint="@string/e_mail">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextMail"
                     style="@style/login_editText"
-                    android:inputType="textEmailAddress"
-                    android:text="" />
+                    android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -62,13 +61,12 @@
                 android:id="@+id/inputLayoutRePassword"
                 style="@style/login_inputLayout"
                 android:layout_below="@id/inputLayoutPassword"
-                android:hint="Confirm Password">
+                android:hint="@string/confirm_password">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextRePassword"
                     style="@style/login_editText"
-                    android:inputType="textPassword"
-                    android:text="" />
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,13 +74,12 @@
                 android:id="@+id/inputLayoutPassword"
                 style="@style/login_inputLayout"
                 android:layout_below="@id/inputLayoutUsername"
-                android:hint="Password">
+                android:hint="@string/password">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextPassword"
                     style="@style/login_editText"
-                    android:inputType="textPassword"
-                    android:text="" />
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,13 +87,12 @@
                 android:id="@+id/inputLayoutUsername"
                 style="@style/login_inputLayout"
                 android:layout_below="@id/circularImageView"
-                android:hint="Username">
+                android:hint="@string/username">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextUsername"
                     style="@style/login_editText"
-                    android:inputType="textVisiblePassword"
-                    android:text="" />
+                    android:inputType="textVisiblePassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
