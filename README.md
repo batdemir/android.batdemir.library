@@ -4,20 +4,60 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/764fdb1f562044499de6efb70ee53664)](https://www.codacy.com/manual/batdemir/android.batdemir.library?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=batdemirorg/android.batdemir.library&amp;utm_campaign=Badge_Grade)
 # Batdemir Library
 
-Spinner Component | EditText Component
------------- | -------------
-setEnableBorder(...) | setEnableBorder(...)
-setBorderWidth(...) | setBorderWidth(...)
-setBorderColor(...) | setBorderColor(...)
-setConfirmativeBorderColor(...) | setConfirmativeBorderColor(...)
-setNonConfirmativeBorderColor(...) | setNonConfirmativeBorderColor(...)
-setBorderRadius(...) | setBorderRadius(...)
-setSolidColor(...) | setSolidColor(...)
-setSpinnerArrowIcon(...) | setConfirmativeBorderColor(...)
-setAddFirstItem(...)
-setFirstItemName(...)
-## Preview
-![giphy](https://user-images.githubusercontent.com/24320016/63677792-74626b00-c7f6-11e9-89fb-879ff01d5799.gif)
+# Tool
+#### void move(...)
+* This method is used for change effectiveness.
+* Activitiy means that you can use it for which activity you want to go to.
+* Direction means if the direction is right, animation is from right to left, and animation is from right to left.
+* IsStack means whether the current activity can be destroyed.
+* Bundle means that you can use this example if you want to pass data to other activities.
+#### void anim(...)
+#### void animDialog(...)
+
+# ToolConnection
+* This methods all about application network connection.
+#### NetworkInfo getNetworkInfo(...)
+#### boolean isConnected(...)
+#### boolean isConnectedWifi(...)
+#### boolean isConnectedMobile(...)
+#### boolean isConnectedFast(...)
+#### boolean isConnectionFast(...)
+#### String getMACAddress(...)
+#### String getIPAddress(...)
+
+# ToolSharedPreferences
+* This methods all about application registery. Easy use to one row.
+#### getInteger(...)/setInteger(...)
+#### getString(...)/setString(...)
+#### getBoolean(...)/setBoolean(...)
+#### getLong(...)/setLong(...)
+#### getFloat(...)/setFloat(...)
+
+# ToolTimeEexpressions
+* This methods all about casting date methods.
+#### setStringToDate(...)
+#### setDateToString(...)
+#### setDateFormat(...)
+
+# MyAlertDialog
+* This component default settings
+#### setComponentProperty(...)
+#### setIsCancelable(...)
+#### setShowCancelButton(...)
+#### setAutoDismiss(...)
+#### setShowEditText(...)
+#### setEditTextInputType(...)
+
+# RetrofitClient
+* This class using for service connections basic setting
+#### setBaseUrl(...)
+#### setSll(...)
+
+# Connect
+* If extends this class, it does auto connect service and getting datas for you
+* If connection gone wrong or some exception, it does auto exception dialog for you
+* If user has not any network connection, it does auto exception dialog for you
+* And it does auto async and showing progress bar for you
 
 
 # License
