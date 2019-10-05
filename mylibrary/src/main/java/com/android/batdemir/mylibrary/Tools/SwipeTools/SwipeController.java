@@ -47,7 +47,7 @@ public class SwipeController extends ItemTouchHelper.Callback {
     public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         boolean isCancelled = dX == 0 && !isCurrentlyActive;
         if (isCancelled) {
-            clearCanvas(c, viewHolder.itemView);
+            clearCanvas(viewHolder.itemView);
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
             return;
         }
@@ -101,9 +101,7 @@ public class SwipeController extends ItemTouchHelper.Callback {
         }
     }
 
-    private void clearCanvas(Canvas c, View itemView) {
-        Paint mClearPaint = new Paint();
-        mClearPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-        c.drawRect((float) itemView.getLeft(), (float) itemView.getTop(), (float) itemView.getRight(), (float) itemView.getBottom(), mClearPaint);
+    private void clearCanvas(View itemView) {
+        itemView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
     }
 }

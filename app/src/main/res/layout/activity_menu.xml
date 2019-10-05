@@ -68,9 +68,9 @@
                 <TableRow>
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/txtImmediateTodo"
+                        android:id="@+id/txtUpComingTodo"
                         style="@style/menu_title_text_view"
-                        android:text="@string/immediate" />
+                        android:text="@string/up_coming" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         style="@style/menu_title_text_view"

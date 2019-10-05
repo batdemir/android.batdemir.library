@@ -31,7 +31,7 @@
     <string name="active_in_week">Active in Week</string>
     <string name="dot">:</string>
     <string name="expired_in_week">Expired in Week</string>
-    <string name="immediate">Immediate</string>
+    <string name="up_coming">Up Coming</string>
     <string-array name="test">
         <item>ArrayTest1</item>
         <item>ArrayTest2</item>
