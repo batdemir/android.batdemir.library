@@ -29,7 +29,7 @@ public class MyAlertDialog extends DialogFragment {
     private ComponentProperty componentProperty;
     private String message;
 
-    private MyAlertDialog() {
+    protected MyAlertDialog() {
     }
 
     @Override
