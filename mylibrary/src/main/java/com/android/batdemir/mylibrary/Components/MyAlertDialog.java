@@ -47,6 +47,12 @@ public class MyAlertDialog extends DialogFragment {
             super.show(manager, tag);
     }
 
+    @Override
+    public void dismiss() {
+        if (myAlertDialog.isAdded())
+            super.dismiss();
+    }
+
     public static MyAlertDialog getInstance(String message) {
         if (myAlertDialog == null) {
             myAlertDialog = new MyAlertDialog();
@@ -109,26 +115,20 @@ public class MyAlertDialog extends DialogFragment {
         binding.btnCancel.setOnTouchListener(new OnTouchEvent(binding.btnCancel));
 
         binding.btnCancel.setOnClickListener(v -> {
-            AlertClickListener clickCancel = (AlertClickListener) getActivity();
+            MyAlertDialogListener clickCancel = (MyAlertDialogListener) getActivity();
             assert clickCancel != null;
-            clickCancel.alertCancel(myAlertDialog);
+            clickCancel.dialogCancel(myAlertDialog);
             if (myAlertDialog.getComponentProperty().isAutoDismiss())
                 dismiss();
         });
 
         binding.btnOkey.setOnClickListener(v -> {
-            AlertClickListener clickOkey = (AlertClickListener) getActivity();
+            MyAlertDialogListener clickOkey = (MyAlertDialogListener) getActivity();
             assert clickOkey != null;
-            clickOkey.alertOkey(myAlertDialog);
+            clickOkey.dialogOk(myAlertDialog);
             if (myAlertDialog.getComponentProperty().isAutoDismiss())
                 dismiss();
         });
-    }
-
-    public interface AlertClickListener {
-        void alertOkey(MyAlertDialog myAlertDialog);
-
-        void alertCancel(MyAlertDialog myAlertDialog);
     }
 
     //Component Set Props

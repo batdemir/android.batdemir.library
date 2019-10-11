@@ -20,19 +20,22 @@ import com.android.batdemir.library.Models.Player;
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ActivityRecyclerBinding;
 import com.android.batdemir.mylibrary.API.Connect;
+import com.android.batdemir.mylibrary.API.ConnectServiceListener;
 import com.android.batdemir.mylibrary.API.RetrofitClient;
 import com.android.batdemir.mylibrary.Components.MyAlertDialog;
+import com.android.batdemir.mylibrary.Components.MyAlertDialogListener;
 import com.android.batdemir.mylibrary.Tools.SwipeTools.SwipeController;
 import com.android.batdemir.mylibrary.Tools.SwipeTools.SwipeControllerActions;
 import com.android.batdemir.mylibrary.Tools.Tool;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
 import retrofit2.Response;
 
 public class RecyclerActivity extends BaseActivity implements
-        MyAlertDialog.AlertClickListener,
-        Connect.ConnectServiceListener {
+        MyAlertDialogListener,
+        ConnectServiceListener {
 
     //EXAMPLE OF RECYCLER VIEW WITH SWIPE
     private Context context;
@@ -56,7 +59,7 @@ public class RecyclerActivity extends BaseActivity implements
 
         binding.btnConnectService.setOnClickListener(v -> {
             RetrofitClient.setBaseUrl("https://api.github.com");
-            new Connect<>().connect(context, RetrofitClient.getInstance().create(CallTest.class).callTest(), "Test");
+            new Connect().connect(context, RetrofitClient.getInstance().create(CallTest.class).callTest(), "Test");
         });
     }
 
@@ -127,7 +130,7 @@ public class RecyclerActivity extends BaseActivity implements
     }
 
     @Override
-    public void alertOkey(MyAlertDialog myAlertDialog) {
+    public void dialogOk(MyAlertDialog myAlertDialog) {
         Log.d("TAG", myAlertDialog.getTag());
         Log.d("EdiText", myAlertDialog.getEditText().getText().toString());
         Log.d("TextView", myAlertDialog.getMessage());
@@ -135,22 +138,23 @@ public class RecyclerActivity extends BaseActivity implements
     }
 
     @Override
-    public void alertCancel(MyAlertDialog myAlertDialog) {
+    public void dialogCancel(MyAlertDialog myAlertDialog) {
         myAlertDialog.dismiss();
     }
 
     @Override
     public void onSuccess(String operationType, Response response) {
-        Log.d("onSucces", response.body().toString());
+        MyAlertDialog.getInstance("onSuccess" + new Gson().toJson(response.body())).show(getSupportFragmentManager(), "success");
     }
 
     @Override
     public void onFailure(String operationType, Response response) {
-        Log.d("onFailure", response.errorBody().toString());
+        MyAlertDialog.getInstance("onFailure" + new Gson().toJson(response.body())).show(getSupportFragmentManager(), "failure");
     }
 
     @Override
     public void onException(String operationType, Exception e) {
         Log.d("onException", e.getMessage());
     }
+
 }

@@ -8,10 +8,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.batdemir.library.R;
 import com.android.batdemir.mylibrary.Components.MyAlertDialog;
+import com.android.batdemir.mylibrary.Components.MyAlertDialogListener;
 
 public abstract class BaseActivity extends AppCompatActivity implements
         BaseActions,
-        MyAlertDialog.AlertClickListener {
+        MyAlertDialogListener {
 
     private boolean isFirstActivity;
 
@@ -66,7 +67,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void alertOkey(MyAlertDialog myAlertDialog) {
+    public void dialogOk(MyAlertDialog myAlertDialog) {
         if (myAlertDialog.getTag().equals(getString(R.string.alert_dialog_key_exit))) {
             finishAffinity();
             System.exit(0);
@@ -74,7 +75,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void alertCancel(MyAlertDialog myAlertDialog) {
+    public void dialogCancel(MyAlertDialog myAlertDialog) {
         if (myAlertDialog.getTag().equals(getString(R.string.alert_dialog_key_exit))) {
             myAlertDialog.dismiss();
         }

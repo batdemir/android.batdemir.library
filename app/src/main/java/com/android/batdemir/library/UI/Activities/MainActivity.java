@@ -8,26 +8,27 @@ import com.android.batdemir.library.App.Base.BaseActivity;
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ActivityMainBinding;
 import com.android.batdemir.mylibrary.Components.MyAlertDialog;
+import com.android.batdemir.mylibrary.Components.MyAlertDialogListener;
 import com.android.batdemir.mylibrary.Tools.Tool;
 
 public class MainActivity extends BaseActivity implements
-        MyAlertDialog.AlertClickListener {
+        MyAlertDialogListener {
 
     private ActivityMainBinding binding;
     private Context context;
     private static final String NON_AUTO_DISMISS = "nonAutoDismiss";
 
     @Override
-    public void alertOkey(MyAlertDialog myAlertDialog) {
-        super.alertOkey(myAlertDialog);
+    public void dialogOk(MyAlertDialog myAlertDialog) {
+        super.dialogOk(myAlertDialog);
         if (myAlertDialog.getTag().equals(NON_AUTO_DISMISS)) {
             myAlertDialog.dismiss();
         }
     }
 
     @Override
-    public void alertCancel(MyAlertDialog myAlertDialog) {
-        super.alertCancel(myAlertDialog);
+    public void dialogCancel(MyAlertDialog myAlertDialog) {
+        super.dialogCancel(myAlertDialog);
         if (myAlertDialog.getTag().equals(NON_AUTO_DISMISS))
             myAlertDialog.dismiss();
     }
