@@ -11,9 +11,18 @@ import retrofit2.Call;
 
 public class Connect {
 
+    private String noConnectionMessage = "Lütfen, Internet Bağlantınızı Kontrol Ediniz.";
+
+    public Connect() {
+    }
+
+    public void setNoConnectionMessage(String noConnectionMessage) {
+        this.noConnectionMessage = noConnectionMessage;
+    }
+
     public void connect(Context context, Call call, String operationType) {
         if (!ToolConnection.isConnected(context)) {
-            MyAlertDialog myAlertDialog = MyAlertDialog.getInstance("Lütfen, Internet Bağlantınızı Kontrol Ediniz.");
+            MyAlertDialog myAlertDialog = MyAlertDialog.getInstance(noConnectionMessage);
             myAlertDialog.setIsCancelable(false);
             myAlertDialog.setShowCancelButton(false);
             myAlertDialog.setShowEditText(false);

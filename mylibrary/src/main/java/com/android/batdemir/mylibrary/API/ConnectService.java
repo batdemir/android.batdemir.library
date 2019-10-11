@@ -15,6 +15,7 @@ import retrofit2.Response;
 
 @SuppressLint("StaticFieldLeak")
 public class ConnectService extends AsyncTask<Call, Void, Response> {
+
     private ProgressDialog progressDialog;
     private Context context;
     private String operationType;
@@ -22,7 +23,7 @@ public class ConnectService extends AsyncTask<Call, Void, Response> {
     private String progressBarMessage = "Lütfen Bekleyiniz...";
     private String connectionFailMessage = "Servis İle Bağlantı Sağlanamadı. Lütfen Tekrar Deneyiniz.";
 
-    ConnectService(Context context, String operationType) {
+    public ConnectService(Context context, String operationType) {
         this.context = context;
         this.operationType = operationType;
     }
