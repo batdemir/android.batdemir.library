@@ -24,6 +24,8 @@ import com.android.batdemir.mylibrary.databinding.ViewMyAlertDialogBinding;
 public class MyAlertDialog extends DialogFragment {
 
     private static MyAlertDialog myAlertDialog = null;
+    private static MyAlertDialogCreator myAlertDialogCreator = null;
+
     private static final String KEY_MESSAGE = "KEY_MESSAGE";
     private ViewMyAlertDialogBinding binding;
     private ComponentProperty componentProperty;
@@ -55,7 +57,11 @@ public class MyAlertDialog extends DialogFragment {
 
     public static MyAlertDialog getInstance(String message) {
         if (myAlertDialog == null) {
-            myAlertDialog = new MyAlertDialog();
+            if (myAlertDialogCreator == null) {
+                myAlertDialog = new MyAlertDialog();
+            } else {
+                myAlertDialog = myAlertDialogCreator.create();
+            }
             if (myAlertDialog.getComponentProperty() == null) {
                 myAlertDialog.setComponentProperty(new ComponentProperty(
                         true,
@@ -70,6 +76,10 @@ public class MyAlertDialog extends DialogFragment {
         bundle.putString(KEY_MESSAGE, message);
         myAlertDialog.setArguments(bundle);
         return myAlertDialog;
+    }
+
+    public static void setMyAlertDialogCreator(MyAlertDialogCreator myAlertDialogCreator) {
+        MyAlertDialog.myAlertDialogCreator = myAlertDialogCreator;
     }
 
     private void getObjectReferences() {
@@ -227,5 +237,9 @@ public class MyAlertDialog extends DialogFragment {
         private void setInputType(int inputType) {
             this.inputType = inputType;
         }
+    }
+
+    public static interface MyAlertDialogCreator {
+        MyAlertDialog create();
     }
 }
