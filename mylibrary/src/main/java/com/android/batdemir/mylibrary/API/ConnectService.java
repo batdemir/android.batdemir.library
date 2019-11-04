@@ -70,20 +70,10 @@ public class ConnectService extends AsyncTask<Call, Void, Response> {
                 connectServiceListener.onFailure(operationType, response);
             }
         } catch (NullPointerException e) {
-            MyAlertDialog myAlertDialog = MyAlertDialog.getInstance(connectionFailMessage);
-            myAlertDialog.setShowCancelButton(false);
-            myAlertDialog.setShowEditText(false);
-            myAlertDialog.setIsCancelable(false);
-            myAlertDialog.setAutoDismiss(true);
-            myAlertDialog.show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
+            MyAlertDialog.getInstance(connectionFailMessage, MyAlertDialog.DialogStyle.INFO).show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
             connectServiceListener.onException(operationType, e);
         } catch (Exception e) {
-            MyAlertDialog myAlertDialog = MyAlertDialog.getInstance(e.getMessage());
-            myAlertDialog.setShowCancelButton(false);
-            myAlertDialog.setShowEditText(false);
-            myAlertDialog.setIsCancelable(false);
-            myAlertDialog.setAutoDismiss(true);
-            myAlertDialog.show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
+            MyAlertDialog.getInstance(e.getMessage(), MyAlertDialog.DialogStyle.INFO).show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
             connectServiceListener.onException(operationType, e);
         }
     }

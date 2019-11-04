@@ -22,12 +22,7 @@ public class Connect {
 
     public void connect(Context context, Call call, String operationType) {
         if (!ToolConnection.isConnected(context)) {
-            MyAlertDialog myAlertDialog = MyAlertDialog.getInstance(noConnectionMessage);
-            myAlertDialog.setIsCancelable(false);
-            myAlertDialog.setShowCancelButton(false);
-            myAlertDialog.setShowEditText(false);
-            myAlertDialog.setAutoDismiss(true);
-            myAlertDialog.show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
+            MyAlertDialog.getInstance(noConnectionMessage, MyAlertDialog.DialogStyle.INFO).show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
             return;
         }
         new ConnectService(context, operationType).execute(call);

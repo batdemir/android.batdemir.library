@@ -1,10 +1,7 @@
 package com.android.batdemir.library.App;
 
 import android.app.Application;
-import android.text.InputType;
 import android.util.Log;
-
-import com.android.batdemir.mylibrary.Components.MyAlertDialog;
 
 public class MyApplication extends Application {
 
@@ -13,15 +10,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d(TAG,"Created");
-        MyAlertDialog myAlertDialog = MyAlertDialog.getInstance("");
-        myAlertDialog.setComponentProperty(new MyAlertDialog.ComponentProperty(
-                true,
-                true,
-                false,
-                true,
-                InputType.TYPE_CLASS_NUMBER
-        ));
+        Log.d(TAG, "Created");
     }
 
     @Override

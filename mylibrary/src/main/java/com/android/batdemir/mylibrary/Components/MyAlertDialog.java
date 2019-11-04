@@ -3,6 +3,7 @@ package com.android.batdemir.mylibrary.Components;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,6 @@ public class MyAlertDialog extends DialogFragment {
 
     private static final String KEY_MESSAGE = "KEY_MESSAGE";
     private ViewMyAlertDialogBinding binding;
-    private ComponentProperty componentProperty;
     private String message;
 
     protected MyAlertDialog() {
@@ -45,32 +45,50 @@ public class MyAlertDialog extends DialogFragment {
 
     @Override
     public void show(@NonNull FragmentManager manager, @Nullable String tag) {
-        if (!myAlertDialog.isAdded())
-            super.show(manager, tag);
+        try {
+            if (!myAlertDialog.isAdded()) {
+                super.show(manager, tag);
+            }
+        } catch (Exception e) {
+            Log.e(MyAlertDialog.class.getSimpleName() + "\tShow", e.getMessage());
+        }
     }
 
     @Override
     public void dismiss() {
-        if (myAlertDialog.isAdded())
-            super.dismiss();
+        try {
+            if (myAlertDialog.isAdded()) {
+                myAlertDialog.getEditText().setText("");
+                super.dismiss();
+                Thread.sleep(100);
+            }
+        } catch (Exception e) {
+            Log.e(MyAlertDialog.class.getSimpleName() + "\tDismiss", e.getMessage());
+        }
     }
 
-    public static MyAlertDialog getInstance(String message) {
+    public static MyAlertDialog getInstance(String message, DialogStyle dialogStyle) {
         if (myAlertDialog == null) {
             if (myAlertDialogCreator == null) {
                 myAlertDialog = new MyAlertDialog();
             } else {
                 myAlertDialog = myAlertDialogCreator.create();
             }
-            if (myAlertDialog.getComponentProperty() == null) {
-                myAlertDialog.setComponentProperty(new ComponentProperty(
-                        true,
-                        true,
-                        false,
-                        true,
-                        InputType.TYPE_CLASS_TEXT
-                ));
-            }
+        }
+        switch (dialogStyle) {
+            case INPUT:
+                myAlertDialog.setShowCancelButton(true);
+                myAlertDialog.setShowEditText(true);
+                break;
+            case ACTION:
+                myAlertDialog.setShowCancelButton(true);
+                myAlertDialog.setShowEditText(false);
+                break;
+            case INFO:
+            default:
+                myAlertDialog.setShowCancelButton(false);
+                myAlertDialog.setShowEditText(false);
+                break;
         }
         Bundle bundle = new Bundle();
         bundle.putString(KEY_MESSAGE, message);
@@ -85,14 +103,13 @@ public class MyAlertDialog extends DialogFragment {
     private void getObjectReferences() {
         assert getArguments() != null;
         message = getArguments().getString(KEY_MESSAGE);
-        componentProperty = myAlertDialog.getComponentProperty();
         new Tool(getContext()).animDialog(binding.cardView);
     }
 
     private void loadData() {
-        myAlertDialog.setCancelable(myAlertDialog.getComponentProperty().isCancelable());
+        myAlertDialog.setCancelable(false);
 
-        if (myAlertDialog.getComponentProperty().isShowEditText()) {
+        if (myAlertDialog.isShowEditText()) {
             binding.editText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             binding.editText.setVisibility(View.VISIBLE);
             binding.txtEditMessage.setText(message);
@@ -103,7 +120,7 @@ public class MyAlertDialog extends DialogFragment {
             binding.txtEditMessage.setText(String.format("%s%s", message, newLine));
         }
 
-        if (myAlertDialog.getComponentProperty().isShowCancelButton()) {
+        if (myAlertDialog.isShowCancelButton()) {
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
             layoutParams.setMargins(8, 0, 8, 0);
             binding.btnCancel.setPadding(8, 8, 8, 8);
@@ -115,8 +132,8 @@ public class MyAlertDialog extends DialogFragment {
             binding.btnCancel.setLayoutParams(layoutParams);
         }
 
-        if (myAlertDialog.getComponentProperty().getInputType() != -1) {
-            binding.editText.setInputType(myAlertDialog.getComponentProperty().getInputType());
+        if (myAlertDialog.getInputType() != -1) {
+            binding.editText.setInputType(myAlertDialog.getInputType());
         }
     }
 
@@ -128,43 +145,45 @@ public class MyAlertDialog extends DialogFragment {
             MyAlertDialogListener clickCancel = (MyAlertDialogListener) getActivity();
             assert clickCancel != null;
             clickCancel.dialogCancel(myAlertDialog);
-            if (myAlertDialog.getComponentProperty().isAutoDismiss())
-                dismiss();
+            dismiss();
         });
 
         binding.btnOkey.setOnClickListener(v -> {
-            MyAlertDialogListener clickOkey = (MyAlertDialogListener) getActivity();
-            assert clickOkey != null;
-            clickOkey.dialogOk(myAlertDialog);
-            if (myAlertDialog.getComponentProperty().isAutoDismiss())
-                dismiss();
+            MyAlertDialogListener clickOk = (MyAlertDialogListener) getActivity();
+            assert clickOk != null;
+            clickOk.dialogOk(myAlertDialog);
+            dismiss();
         });
     }
 
     //Component Set Props
 
-    public void setComponentProperty(ComponentProperty componentProperty) {
-        this.componentProperty = componentProperty;
+    private boolean showCancelButton = false;
+    private boolean showEditText = false;
+    private int inputType = InputType.TYPE_CLASS_TEXT;
+
+    private boolean isShowCancelButton() {
+        return showCancelButton;
     }
 
-    public void setIsCancelable(boolean isCancelable) {
-        myAlertDialog.getComponentProperty().setCancelable(isCancelable);
+    private boolean isShowEditText() {
+        return showEditText;
+    }
+
+    private int getInputType() {
+        return inputType;
     }
 
     public void setShowCancelButton(boolean showCancelButton) {
-        myAlertDialog.getComponentProperty().setShowCancelButton(showCancelButton);
-    }
-
-    public void setAutoDismiss(boolean autoDismiss) {
-        myAlertDialog.getComponentProperty().setAutoDismiss(autoDismiss);
+        this.showCancelButton = showCancelButton;
     }
 
     public void setShowEditText(boolean showEditText) {
-        myAlertDialog.getComponentProperty().setShowEditText(showEditText);
+        this.showEditText = showEditText;
     }
 
-    public void setEditTextInputType(int inputType) {
-        myAlertDialog.getComponentProperty().setInputType(inputType);
+    public void setInputType(int inputType) {
+        this.inputType = inputType;
     }
 
     //Component Get Props
@@ -177,66 +196,12 @@ public class MyAlertDialog extends DialogFragment {
         return binding.editText;
     }
 
-    private ComponentProperty getComponentProperty() {
-        return componentProperty;
-    }
-
     //Component Props
 
-    public static class ComponentProperty {
-        private boolean isCancelable;
-        private boolean showCancelButton;
-        private boolean showEditText;
-        private boolean autoDismiss;
-        private int inputType;
-
-        public ComponentProperty(boolean isCancelable, boolean showCancelButton, boolean showEditText, boolean autoDismiss, int inputType) {
-            this.isCancelable = isCancelable;
-            this.showCancelButton = showCancelButton;
-            this.showEditText = showEditText;
-            this.autoDismiss = autoDismiss;
-            this.inputType = inputType;
-        }
-
-        private boolean isCancelable() {
-            return isCancelable;
-        }
-
-        private void setCancelable(boolean cancelable) {
-            isCancelable = cancelable;
-        }
-
-        private boolean isShowCancelButton() {
-            return showCancelButton;
-        }
-
-        private void setShowCancelButton(boolean showCancelButton) {
-            this.showCancelButton = showCancelButton;
-        }
-
-        private boolean isShowEditText() {
-            return showEditText;
-        }
-
-        private void setShowEditText(boolean showEditText) {
-            this.showEditText = showEditText;
-        }
-
-        private boolean isAutoDismiss() {
-            return autoDismiss;
-        }
-
-        private void setAutoDismiss(boolean autoDismiss) {
-            this.autoDismiss = autoDismiss;
-        }
-
-        private int getInputType() {
-            return inputType;
-        }
-
-        private void setInputType(int inputType) {
-            this.inputType = inputType;
-        }
+    public enum DialogStyle {
+        INPUT,
+        ACTION,
+        INFO;
     }
 
     public static interface MyAlertDialogCreator {

@@ -38,24 +38,10 @@
                 android:textAllCaps="false" />
 
             <Button
-                android:id="@+id/btnDialogNonEditText"
+                android:id="@+id/btnDialogAction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="DialogNonEditText"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/btnDialogNonAutoDismiss"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="DialogNonAutoDismiss"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/btnDialogAutoDismiss"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="DialogAutoDismiss"
+                android:text="DialogAction"
                 android:textAllCaps="false" />
 
         </LinearLayout>

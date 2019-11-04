@@ -1,6 +1,7 @@
 package com.android.batdemir.library.UI.Activities;
 
 import android.content.Context;
+import android.text.InputType;
 
 import androidx.databinding.DataBindingUtil;
 
@@ -16,22 +17,6 @@ public class MainActivity extends BaseActivity implements
 
     private ActivityMainBinding binding;
     private Context context;
-    private static final String NON_AUTO_DISMISS = "nonAutoDismiss";
-
-    @Override
-    public void dialogOk(MyAlertDialog myAlertDialog) {
-        super.dialogOk(myAlertDialog);
-        if (myAlertDialog.getTag().equals(NON_AUTO_DISMISS)) {
-            myAlertDialog.dismiss();
-        }
-    }
-
-    @Override
-    public void dialogCancel(MyAlertDialog myAlertDialog) {
-        super.dialogCancel(myAlertDialog);
-        if (myAlertDialog.getTag().equals(NON_AUTO_DISMISS))
-            myAlertDialog.dismiss();
-    }
 
     @Override
     public void getObjectReferences() {
@@ -49,33 +34,18 @@ public class MainActivity extends BaseActivity implements
     public void setListeners() {
         binding.btnNextPage.setOnClickListener(v -> new Tool(context).move(RecyclerActivity.class, true, false, null));
 
-        binding.btnDialogDefault.setOnClickListener(v -> MyAlertDialog.getInstance("Default").show(getSupportFragmentManager(), "default"));
+        binding.btnDialogDefault.setOnClickListener(v -> MyAlertDialog.getInstance("Default", MyAlertDialog.DialogStyle.INFO).show(getSupportFragmentManager(), "default"));
 
         binding.btnDialogEditText.setOnClickListener(v -> {
-            MyAlertDialog myAlertDialog = MyAlertDialog.getInstance("EditText");
-            myAlertDialog.setShowEditText(true);
-            myAlertDialog.setShowCancelButton(false);
+            MyAlertDialog myAlertDialog = MyAlertDialog.getInstance("EditText", MyAlertDialog.DialogStyle.INPUT);
+            myAlertDialog.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
             myAlertDialog.show(getSupportFragmentManager(), "editText");
-        });
-
-        binding.btnDialogNonEditText.setOnClickListener(v -> {
-            MyAlertDialog myAlertDialog = MyAlertDialog.getInstance("NonEditTextNonCancelButton");
-            myAlertDialog.setShowEditText(false);
-            myAlertDialog.show(getSupportFragmentManager(), "nonEditText");
-        });
-
-        binding.btnDialogNonAutoDismiss.setOnClickListener(v -> {
-            MyAlertDialog myAlertDialog = MyAlertDialog.getInstance("NonEditTextNonCancelButtonNonAutoDismiss");
-            myAlertDialog.setAutoDismiss(false);
-            myAlertDialog.show(getSupportFragmentManager(), NON_AUTO_DISMISS);
-        });
-
-        binding.btnDialogAutoDismiss.setOnClickListener(v -> {
-            MyAlertDialog myAlertDialog = MyAlertDialog.getInstance("NonEditTextCancelAutoDismiss");
-            myAlertDialog.setAutoDismiss(true);
-            myAlertDialog.setShowCancelButton(true);
-            myAlertDialog.show(getSupportFragmentManager(), "autoDismiss");
 
         });
+
+        binding.btnDialogAction.setOnClickListener(v -> {
+            MyAlertDialog.getInstance("Action", MyAlertDialog.DialogStyle.ACTION).show(getSupportFragmentManager(), "action");
+        });
+
     }
 }

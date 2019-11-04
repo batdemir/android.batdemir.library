@@ -38,12 +38,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
     @Override
     public void onBackPressed() {
         if (isFirstActivity) {
-            MyAlertDialog myAlertDialog = MyAlertDialog.getInstance(getString(R.string.alert_dialog_key_exit));
-            myAlertDialog.setShowCancelButton(true);
-            myAlertDialog.setShowEditText(false);
-            myAlertDialog.setAutoDismiss(false);
-            myAlertDialog.setIsCancelable(true);
-            myAlertDialog.show(getSupportFragmentManager(), getString(R.string.alert_dialog_key_exit));
+            MyAlertDialog.getInstance(getString(R.string.alert_dialog_key_exit), MyAlertDialog.DialogStyle.ACTION).show(getSupportFragmentManager(), getString(R.string.alert_dialog_key_exit));
             return;
         } else {
             finish();

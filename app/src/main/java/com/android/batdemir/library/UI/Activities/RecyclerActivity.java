@@ -2,12 +2,9 @@ package com.android.batdemir.library.UI.Activities;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -15,7 +12,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import com.android.batdemir.library.App.Base.BaseActivity;
 import com.android.batdemir.library.UI.Adapters.AdapterRecyclerView;
 import com.android.batdemir.library.Api.CallTest;
-import com.android.batdemir.library.App.Base.BaseActions;
 import com.android.batdemir.library.Models.Player;
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ActivityRecyclerBinding;
@@ -144,12 +140,12 @@ public class RecyclerActivity extends BaseActivity implements
 
     @Override
     public void onSuccess(String operationType, Response response) {
-        MyAlertDialog.getInstance("onSuccess" + new Gson().toJson(response.body())).show(getSupportFragmentManager(), "success");
+        MyAlertDialog.getInstance("onSuccess" + new Gson().toJson(response.body()), MyAlertDialog.DialogStyle.ACTION).show(getSupportFragmentManager(), "success");
     }
 
     @Override
     public void onFailure(String operationType, Response response) {
-        MyAlertDialog.getInstance("onFailure" + new Gson().toJson(response.body())).show(getSupportFragmentManager(), "failure");
+        MyAlertDialog.getInstance("onFailure" + new Gson().toJson(response.body()), MyAlertDialog.DialogStyle.ACTION).show(getSupportFragmentManager(), "failure");
     }
 
     @Override
