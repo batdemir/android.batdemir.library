@@ -76,7 +76,7 @@ public class MyAlertDialog extends DialogFragment {
         }
     }
 
-    public static MyAlertDialog getInstance(String message, DialogStyle dialogStyle) {
+    public static synchronized MyAlertDialog getInstance(String message, DialogStyle dialogStyle) {
         if (myAlertDialog == null) {
             if (myAlertDialogCreator == null) {
                 myAlertDialog = new MyAlertDialog();
