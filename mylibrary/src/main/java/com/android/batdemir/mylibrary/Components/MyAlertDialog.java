@@ -3,7 +3,6 @@ package com.android.batdemir.mylibrary.Components;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,8 @@ import com.android.batdemir.mylibrary.R;
 import com.android.batdemir.mylibrary.Tools.ButtonTools.OnTouchEvent;
 import com.android.batdemir.mylibrary.Tools.Tool;
 import com.android.batdemir.mylibrary.databinding.ViewMyAlertDialogBinding;
+
+import java.util.Objects;
 
 @SuppressLint("ClickableViewAccessibility")
 public class MyAlertDialog extends DialogFragment {
@@ -43,35 +44,18 @@ public class MyAlertDialog extends DialogFragment {
         return binding.getRoot();
     }
 
+    @SuppressLint("StaticFieldLeak")
     @Override
     public void show(@NonNull FragmentManager manager, @Nullable String tag) {
-        try {
-            if (!myAlertDialog.isAdded()) {
-                super.show(manager, tag);
-            }
-        } catch (Exception e) {
-            Log.e(MyAlertDialog.class.getSimpleName() + "\tShow", e.getMessage());
-        }
+        if (!myAlertDialog.isAdded())
+            super.show(manager, tag);
     }
 
     @Override
     public void dismiss() {
-        new Thread() {
-            @Override
-            public void run() {
-                myAlertDialog.getActivity().runOnUiThread(() -> {
-                    if (myAlertDialog.isAdded()) {
-                        myAlertDialog.getEditText().setText("");
-                        MyAlertDialog.super.dismiss();
-                    }
-                });
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
+        myAlertDialog.getEditText().setText("");
+        myAlertDialog = null;
+        super.dismiss();
     }
 
     public static synchronized MyAlertDialog getInstance(String message, DialogStyle dialogStyle) {
@@ -149,28 +133,17 @@ public class MyAlertDialog extends DialogFragment {
         binding.btnCancel.setOnTouchListener(new OnTouchEvent(binding.btnCancel));
 
         binding.btnCancel.setOnClickListener(v -> {
+            MyAlertDialog result = myAlertDialog;
+            myAlertDialog.dismiss();
             MyAlertDialogListener clickCancel = (MyAlertDialogListener) getActivity();
-            assert clickCancel != null;
-            clickCancel.dialogCancel(myAlertDialog);
-            dismiss();
+            Objects.requireNonNull(clickCancel).dialogCancel(result);
         });
 
         binding.btnOkey.setOnClickListener(v -> {
+            MyAlertDialog result = myAlertDialog;
+            myAlertDialog.dismiss();
             MyAlertDialogListener clickOk = (MyAlertDialogListener) getActivity();
-            assert clickOk != null;
-            clickOk.dialogOk(myAlertDialog);
-            dismiss();
-            new Thread() {
-                @Override
-                public void run() {
-                    dismiss();
-                    try {
-                        Thread.sleep(100);
-                    } catch (Exception e) {
-                        Log.e("", "");
-                    }
-                }
-            }.start();
+            Objects.requireNonNull(clickOk).dialogOk(result);
         });
     }
 
@@ -222,7 +195,7 @@ public class MyAlertDialog extends DialogFragment {
         INFO;
     }
 
-    public static interface MyAlertDialogCreator {
+    public interface MyAlertDialogCreator {
         MyAlertDialog create();
     }
 }

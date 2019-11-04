@@ -9,19 +9,44 @@ import android.os.Bundle;
 
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ActivityLoginBinding;
+import com.android.batdemir.mylibrary.Components.MyAlertDialog;
+import com.android.batdemir.mylibrary.Components.MyAlertDialogListener;
 import com.android.batdemir.mylibrary.Tools.Tool;
 
-public class LoginActivity extends AppCompatActivity {
+import java.util.Objects;
+
+public class LoginActivity extends AppCompatActivity implements
+        MyAlertDialogListener {
 
     private Context context;
     private ActivityLoginBinding binding;
+
+    final static String DENEME = "DENEME";
+    final static String DENEME_2 = "DENEME_2";
+    final static String DENEME_3 = "DENEME_3";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = this;
         binding = DataBindingUtil.setContentView((Activity) context, R.layout.activity_login);
-        binding.btnLogin.setOnClickListener(v -> new Tool(context).move(MenuActivity.class, true, false, null));
+        binding.btnLogin.setOnClickListener(v -> MyAlertDialog.getInstance(DENEME, MyAlertDialog.DialogStyle.ACTION).show(getSupportFragmentManager(), DENEME));
         binding.btnSignUp.setOnClickListener(v -> new Tool(context).move(SignUpActivity.class, true, false, null));
+    }
+
+    @Override
+    public void dialogOk(MyAlertDialog myAlertDialog) {
+        if (Objects.equals(myAlertDialog.getTag(), DENEME))
+            MyAlertDialog.getInstance(DENEME_2, MyAlertDialog.DialogStyle.INPUT).show(getSupportFragmentManager(), DENEME_2);
+        if (Objects.equals(myAlertDialog.getTag(), DENEME_2))
+            MyAlertDialog.getInstance(DENEME_3, MyAlertDialog.DialogStyle.INFO).show(getSupportFragmentManager(), DENEME_3);
+    }
+
+    @Override
+    public void dialogCancel(MyAlertDialog myAlertDialog) {
+        if (Objects.equals(myAlertDialog.getTag(), DENEME))
+            MyAlertDialog.getInstance(DENEME_2, MyAlertDialog.DialogStyle.INPUT).show(getSupportFragmentManager(), DENEME_2);
+        if (Objects.equals(myAlertDialog.getTag(), DENEME))
+            MyAlertDialog.getInstance(DENEME_3, MyAlertDialog.DialogStyle.INFO).show(getSupportFragmentManager(), DENEME_3);
     }
 }
