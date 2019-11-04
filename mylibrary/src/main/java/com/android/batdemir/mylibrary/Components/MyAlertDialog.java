@@ -56,24 +56,22 @@ public class MyAlertDialog extends DialogFragment {
 
     @Override
     public void dismiss() {
-        try {
-            if (myAlertDialog.isAdded()) {
-                new Thread() {
-                    @Override
-                    public void run() {
+        new Thread() {
+            @Override
+            public void run() {
+                myAlertDialog.getActivity().runOnUiThread(() -> {
+                    if (myAlertDialog.isAdded()) {
                         myAlertDialog.getEditText().setText("");
                         MyAlertDialog.super.dismiss();
-                        try {
-                            Thread.sleep(100);
-                        } catch (Exception e) {
-                            Log.e(MyAlertDialog.class.getSimpleName() + "\tinDismiss", e.getMessage());
-                        }
                     }
-                }.start();
+                });
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (Exception e) {
-            Log.e(MyAlertDialog.class.getSimpleName() + "\tDismiss", e.getMessage());
-        }
+        }.start();
     }
 
     public static synchronized MyAlertDialog getInstance(String message, DialogStyle dialogStyle) {
@@ -162,6 +160,17 @@ public class MyAlertDialog extends DialogFragment {
             assert clickOk != null;
             clickOk.dialogOk(myAlertDialog);
             dismiss();
+            new Thread() {
+                @Override
+                public void run() {
+                    dismiss();
+                    try {
+                        Thread.sleep(100);
+                    } catch (Exception e) {
+                        Log.e("", "");
+                    }
+                }
+            }.start();
         });
     }
 
