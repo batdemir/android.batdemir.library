@@ -58,9 +58,18 @@ public class MyAlertDialog extends DialogFragment {
     public void dismiss() {
         try {
             if (myAlertDialog.isAdded()) {
-                myAlertDialog.getEditText().setText("");
-                super.dismiss();
-                Thread.sleep(100);
+                new Thread() {
+                    @Override
+                    public void run() {
+                        myAlertDialog.getEditText().setText("");
+                        MyAlertDialog.super.dismiss();
+                        try {
+                            Thread.sleep(100);
+                        } catch (Exception e) {
+                            Log.e(MyAlertDialog.class.getSimpleName() + "\tinDismiss", e.getMessage());
+                        }
+                    }
+                }.start();
             }
         } catch (Exception e) {
             Log.e(MyAlertDialog.class.getSimpleName() + "\tDismiss", e.getMessage());
