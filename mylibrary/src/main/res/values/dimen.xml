@@ -1,0 +1,7 @@
+<resources>
+    <dimen name="margin">8dp</dimen>
+    <dimen name="start">16dp</dimen>
+    <dimen name="end">16dp</dimen>
+    <dimen name="top">8dp</dimen>
+    <dimen name="bottom">8dp</dimen>
+</resources>

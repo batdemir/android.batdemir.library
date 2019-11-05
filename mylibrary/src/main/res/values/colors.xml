@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="alert_dialog_button_colors">#50DDDDDD</color>
+
+    <color name="divider">#000000</color>
+    <color name="spinner_title_color">#959DAD</color>
+    <color name="spinner_value_Color">#000000</color>
+
+    <color name="edit_text_title_color">#959DAD</color>
+    <color name="edit_text_value_color">#000000</color>
+    <color name="edit_text_warning_color">#DB4437</color>
 </resources>

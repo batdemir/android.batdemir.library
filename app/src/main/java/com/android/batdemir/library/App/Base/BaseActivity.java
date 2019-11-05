@@ -7,8 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.batdemir.library.R;
-import com.android.batdemir.mylibrary.Components.MyAlertDialog;
-import com.android.batdemir.mylibrary.Components.MyAlertDialogListener;
+import com.android.batdemir.mylibrary.Components.Dialog.MyAlertDialog;
+import com.android.batdemir.mylibrary.Components.Dialog.MyAlertDialogListener;
 
 public abstract class BaseActivity extends AppCompatActivity implements
         BaseActions,

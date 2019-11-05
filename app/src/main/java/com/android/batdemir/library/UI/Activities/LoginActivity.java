@@ -9,8 +9,8 @@ import android.os.Bundle;
 
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ActivityLoginBinding;
-import com.android.batdemir.mylibrary.Components.MyAlertDialog;
-import com.android.batdemir.mylibrary.Components.MyAlertDialogListener;
+import com.android.batdemir.mylibrary.Components.Dialog.MyAlertDialog;
+import com.android.batdemir.mylibrary.Components.Dialog.MyAlertDialogListener;
 import com.android.batdemir.mylibrary.Tools.Tool;
 
 import java.util.Objects;

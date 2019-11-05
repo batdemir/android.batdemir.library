@@ -16,14 +16,14 @@ import com.android.batdemir.library.Models.Player;
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ActivityRecyclerBinding;
 import com.android.batdemir.mylibrary.API.Connect;
+import com.android.batdemir.mylibrary.API.ConnectServiceErrorListener;
 import com.android.batdemir.mylibrary.API.ConnectServiceListener;
 import com.android.batdemir.mylibrary.API.RetrofitClient;
-import com.android.batdemir.mylibrary.Components.MyAlertDialog;
-import com.android.batdemir.mylibrary.Components.MyAlertDialogListener;
+import com.android.batdemir.mylibrary.Components.Dialog.MyAlertDialog;
+import com.android.batdemir.mylibrary.Components.Dialog.MyAlertDialogListener;
 import com.android.batdemir.mylibrary.Tools.SwipeTools.SwipeController;
 import com.android.batdemir.mylibrary.Tools.SwipeTools.SwipeControllerActions;
 import com.android.batdemir.mylibrary.Tools.Tool;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -31,7 +31,8 @@ import retrofit2.Response;
 
 public class RecyclerActivity extends BaseActivity implements
         MyAlertDialogListener,
-        ConnectServiceListener {
+        ConnectServiceListener,
+        ConnectServiceErrorListener {
 
     //EXAMPLE OF RECYCLER VIEW WITH SWIPE
     private Context context;
@@ -54,8 +55,8 @@ public class RecyclerActivity extends BaseActivity implements
         binding.btnPreviousPage.setOnClickListener(v -> new Tool(context).move(MainActivity.class, false, false, null));
 
         binding.btnConnectService.setOnClickListener(v -> {
-            RetrofitClient.setBaseUrl("https://api.github.com");
-            new Connect().connect(context, RetrofitClient.getInstance().create(CallTest.class).callTest(), "Test");
+            RetrofitClient.setBaseUrl("http://192.168.1.30/api/");
+            new Connect().connect(context, RetrofitClient.getInstance().create(CallTest.class).callTest("2019", "ss", false), "Test");
         });
     }
 
@@ -130,27 +131,24 @@ public class RecyclerActivity extends BaseActivity implements
         Log.d("TAG", myAlertDialog.getTag());
         Log.d("EdiText", myAlertDialog.getEditText().getText().toString());
         Log.d("TextView", myAlertDialog.getMessage());
-        myAlertDialog.dismiss();
     }
 
     @Override
     public void dialogCancel(MyAlertDialog myAlertDialog) {
-        myAlertDialog.dismiss();
     }
 
     @Override
     public void onSuccess(String operationType, Response response) {
-        MyAlertDialog.getInstance("onSuccess" + new Gson().toJson(response.body()), MyAlertDialog.DialogStyle.ACTION).show(getSupportFragmentManager(), "success");
+        MyAlertDialog.getInstance("onSuccess", MyAlertDialog.DialogStyle.ACTION).show(getSupportFragmentManager(), "success");
     }
 
     @Override
     public void onFailure(String operationType, Response response) {
-        MyAlertDialog.getInstance("onFailure" + new Gson().toJson(response.body()), MyAlertDialog.DialogStyle.ACTION).show(getSupportFragmentManager(), "failure");
+        MyAlertDialog.getInstance("onFailure", MyAlertDialog.DialogStyle.ACTION).show(getSupportFragmentManager(), "failure");
     }
 
     @Override
-    public void onException(String operationType, Exception e) {
-        Log.d("onException", e.getMessage());
+    public void onException(String operationType, String errorMessage) {
+        Log.v("test", "test");
     }
-
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ComponentSpinner">
+        <attr name="spinnerLabel" format="string" />
+        <attr name="spinnerLabelTextAppearance" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="ComponentEditText">
+        <attr name="editTextHint" format="string" />
+        <attr name="editTextHintTextAppearance" format="integer" />
+        <attr name="editTextValue" format="string" />
+        <attr name="editTextValueTextAppearance" format="integer" />
+        <attr name="editTextSubValueTextAppearance" format="integer" />
+        <attr name="maxCharCount" format="integer" />
+        <attr name="android:inputType" />
+    </declare-styleable>
+</resources>

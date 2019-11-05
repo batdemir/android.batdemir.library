@@ -1,4 +1,4 @@
-package com.android.batdemir.mylibrary.Components;
+package com.android.batdemir.mylibrary.Components.Dialog;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -18,7 +18,7 @@ import androidx.fragment.app.FragmentManager;
 import com.android.batdemir.mylibrary.R;
 import com.android.batdemir.mylibrary.Tools.ButtonTools.OnTouchEvent;
 import com.android.batdemir.mylibrary.Tools.Tool;
-import com.android.batdemir.mylibrary.databinding.ViewMyAlertDialogBinding;
+import com.android.batdemir.mylibrary.databinding.ComponentAlertDialogBinding;
 
 import java.util.Objects;
 
@@ -29,7 +29,7 @@ public class MyAlertDialog extends DialogFragment {
     private static MyAlertDialogCreator myAlertDialogCreator = null;
 
     private static final String KEY_MESSAGE = "KEY_MESSAGE";
-    private ViewMyAlertDialogBinding binding;
+    private ComponentAlertDialogBinding binding;
     private String message;
 
     protected MyAlertDialog() {
@@ -37,7 +37,7 @@ public class MyAlertDialog extends DialogFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.view_my_alert_dialog, container, false);
+        binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.component_alert_dialog, container, false);
         getObjectReferences();
         loadData();
         setListeners();

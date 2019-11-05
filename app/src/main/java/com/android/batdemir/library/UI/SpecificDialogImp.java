@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
-import com.android.batdemir.mylibrary.Components.MyAlertDialog;
+import com.android.batdemir.mylibrary.Components.Dialog.MyAlertDialog;
 
 public class SpecificDialogImp implements MyAlertDialog.MyAlertDialogCreator {
     @Override

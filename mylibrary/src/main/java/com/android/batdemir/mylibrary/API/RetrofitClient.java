@@ -1,8 +1,9 @@
 package com.android.batdemir.mylibrary.API;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
-import com.android.batdemir.mylibrary.GlobalVariable;
+import com.android.batdemir.mylibrary.Tools.GlobalVariable;
 import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeUnit;
@@ -88,14 +89,16 @@ public class RetrofitClient {
         try {
             final TrustManager[] trustAllCerts = new TrustManager[]{
                     new X509TrustManager() {
+                        @SuppressLint("TrustAllX509TrustManager")
                         @Override
                         public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) {
-                            //Not implemented
+                            Log.v(RetrofitClient.class.getSimpleName(), authType);
                         }
 
+                        @SuppressLint("TrustAllX509TrustManager")
                         @Override
                         public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) {
-                            //Not implemented
+                            Log.v(RetrofitClient.class.getSimpleName(), authType);
                         }
 
                         @Override

@@ -4,7 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.android.batdemir.library.UI.SpecificDialogImp;
-import com.android.batdemir.mylibrary.Components.MyAlertDialog;
+import com.android.batdemir.mylibrary.Components.Dialog.MyAlertDialog;
 
 public class MyApplication extends Application {
 

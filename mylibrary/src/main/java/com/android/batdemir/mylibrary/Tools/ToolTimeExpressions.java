@@ -5,8 +5,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.android.batdemir.mylibrary.GlobalVariable;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

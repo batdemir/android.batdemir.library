@@ -1,4 +1,6 @@
-package com.android.batdemir.mylibrary;
+package com.android.batdemir.mylibrary.Tools;
+
+import org.jetbrains.annotations.NotNull;
 
 public abstract class GlobalVariable {
 
@@ -17,6 +19,7 @@ public abstract class GlobalVariable {
             this.str = str;
         }
 
+        @NotNull
         @Override
         public String toString() {
             return str;
@@ -31,6 +34,7 @@ public abstract class GlobalVariable {
             this.str = str;
         }
 
+        @NotNull
         @Override
         public String toString() {
             return str;

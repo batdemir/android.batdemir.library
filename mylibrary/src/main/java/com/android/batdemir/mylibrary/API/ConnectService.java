@@ -8,7 +8,11 @@ import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.android.batdemir.mylibrary.Components.MyAlertDialog;
+import com.android.batdemir.mylibrary.Components.Dialog.MyAlertDialog;
+
+import java.io.IOException;
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -19,9 +23,12 @@ public class ConnectService extends AsyncTask<Call, Void, Response> {
     private ProgressDialog progressDialog;
     private Context context;
     private String operationType;
+    private ConnectServiceListener connectServiceListener;
+    private ConnectServiceErrorListener connectServiceErrorListener;
 
     private String progressBarMessage = "Lütfen Bekleyiniz...";
     private String connectionFailMessage = "Servis İle Bağlantı Sağlanamadı. Lütfen Tekrar Deneyiniz.";
+    private String connectionTimeOutMessage = "Servis İle Bağlantı Zaman Aşımına Uğradı. Lütfen Tekrar Deneyiniz.";
 
     public ConnectService(Context context, String operationType) {
         this.context = context;
@@ -36,8 +43,11 @@ public class ConnectService extends AsyncTask<Call, Void, Response> {
         this.connectionFailMessage = connectionFailMessage;
     }
 
-    @Override
-    protected void onPreExecute() {
+    public void setConnectionTimeOutMessage(String connectionTimeOutMessage) {
+        this.connectionTimeOutMessage = connectionTimeOutMessage;
+    }
+
+    private void showProgressBar() {
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(context);
             progressDialog.setMessage(progressBarMessage);
@@ -47,34 +57,56 @@ public class ConnectService extends AsyncTask<Call, Void, Response> {
         }
     }
 
+    private void hideProgressBar() {
+        if (progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+    }
+
+    @SuppressLint("LongLogTag")
+    @Override
+    protected void onPreExecute() {
+        showProgressBar();
+        connectServiceListener = (ConnectServiceListener) context;
+        try {
+            connectServiceErrorListener = (ConnectServiceErrorListener) context;
+        } catch (ClassCastException e) {
+            Log.e("ConnectionServiceErrorListener", "If you want to use this listener, main context must be implements to this listener");
+        }
+    }
+
     @Override
     protected Response doInBackground(Call... calls) {
         try {
             return calls[0].execute();
         } catch (Exception e) {
-            Log.e(ConnectService.class.getSimpleName(), e.getMessage());
+            cancel(true);
+            if (e.getClass().equals(ConnectException.class)) {
+                MyAlertDialog.getInstance(connectionFailMessage + "\n" + e.getMessage(), MyAlertDialog.DialogStyle.INFO).show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
+            } else if (e.getClass().equals(SocketTimeoutException.class) || e.getClass().equals(IOException.class)) {
+                MyAlertDialog.getInstance(connectionTimeOutMessage + "\n" + e.getMessage(), MyAlertDialog.DialogStyle.INFO).show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
+            } else {
+                MyAlertDialog.getInstance(e.getMessage(), MyAlertDialog.DialogStyle.INFO).show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
+            }
+            if (connectServiceErrorListener != null)
+                connectServiceErrorListener.onException(operationType, e.getMessage());
+            Log.e(operationType, e.getMessage());
+            return null;
         }
-        return null;
     }
 
     @Override
     protected void onPostExecute(Response response) {
-        if (progressDialog.isShowing()) {
-            progressDialog.dismiss();
-        }
-        ConnectServiceListener connectServiceListener = (ConnectServiceListener) context;
-        try {
-            if (response.isSuccessful()) {
-                connectServiceListener.onSuccess(operationType, response);
-            } else {
-                connectServiceListener.onFailure(operationType, response);
-            }
-        } catch (NullPointerException e) {
-            MyAlertDialog.getInstance(connectionFailMessage, MyAlertDialog.DialogStyle.INFO).show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
-            connectServiceListener.onException(operationType, e);
-        } catch (Exception e) {
-            MyAlertDialog.getInstance(e.getMessage(), MyAlertDialog.DialogStyle.INFO).show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
-            connectServiceListener.onException(operationType, e);
-        }
+        hideProgressBar();
+        if (response.isSuccessful())
+            connectServiceListener.onSuccess(operationType, response);
+        else
+            connectServiceListener.onFailure(operationType, response);
+    }
+
+    @Override
+    protected void onCancelled() {
+        super.onCancelled();
+        hideProgressBar();
     }
 }

@@ -6,6 +6,4 @@ public interface ConnectServiceListener {
     void onSuccess(String operationType, Response response);
 
     void onFailure(String operationType, Response response);
-
-    void onException(String operationType, Exception e);
 }

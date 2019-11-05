@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="@style/TitleTextAppearance">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/edit_text_value_color"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:textAppearance="@style/ValueTextAppearance" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtEditCharCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/inputLayout"
+        android:layout_alignTop="@id/txtSlash"
+        android:layout_alignBottom="@id/txtSlash"
+        android:layout_toStartOf="@id/txtSlash"
+        android:text="0"
+        android:textAppearance="@style/SubValueTextAppearance" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtSlash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/txtEditMaxCharCount"
+        android:layout_alignBottom="@id/txtEditMaxCharCount"
+        android:layout_toStartOf="@id/txtEditMaxCharCount"
+        android:text="/"
+        android:textAppearance="@style/SubValueTextAppearance" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtEditMaxCharCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/inputLayout"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="4dp"
+        android:text="0"
+        android:textAppearance="@style/SubValueTextAppearance" />
+
+
+</RelativeLayout>

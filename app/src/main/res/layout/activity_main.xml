@@ -44,6 +44,27 @@
                 android:text="DialogAction"
                 android:textAllCaps="false" />
 
+            <com.android.batdemir.mylibrary.MySpinner
+                android:id="@+id/mySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:spinnerLabel="Test" />
+
+            <Button
+                android:id="@+id/btnValidSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ValidSpinner"
+                android:textAllCaps="false" />
+
+            <com.android.batdemir.mylibrary.MyEditText
+                android:id="@+id/myEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:editTextHint="Test"/>
+
         </LinearLayout>
 
     </ScrollView>
