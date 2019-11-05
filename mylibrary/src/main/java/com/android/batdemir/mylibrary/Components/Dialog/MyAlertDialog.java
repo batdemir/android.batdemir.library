@@ -53,7 +53,6 @@ public class MyAlertDialog extends DialogFragment {
 
     @Override
     public void dismiss() {
-        myAlertDialog.getEditText().setText("");
         myAlertDialog = null;
         super.dismiss();
     }

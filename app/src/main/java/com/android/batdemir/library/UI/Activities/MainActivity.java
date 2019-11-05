@@ -61,7 +61,7 @@ public class MainActivity extends BaseActivity implements
         binding.btnDialogEditText.setOnClickListener(v -> {
             MyAlertDialog myAlertDialog = MyAlertDialog.getInstance("EditText", MyAlertDialog.DialogStyle.INPUT);
             myAlertDialog.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-            myAlertDialog.show(getSupportFragmentManager(), "editText");
+            myAlertDialog.show(getSupportFragmentManager(), editText);
 
         });
 
@@ -92,12 +92,16 @@ public class MainActivity extends BaseActivity implements
 
     String editor = "editor";
     String editor2 = "editor2";
+    String editText = "editText";
 
     @Override
     public void dialogOk(MyAlertDialog myAlertDialog) {
         super.dialogOk(myAlertDialog);
         if (Objects.equals(myAlertDialog.getTag(), editor)) {
             MyAlertDialog.getInstance(String.valueOf(binding.myEditText.isValid(false)), MyAlertDialog.DialogStyle.INFO).show(getSupportFragmentManager(), editor2);
+        } else if (Objects.equals(myAlertDialog.getTag(), editText)) {
+            String editTextValue = myAlertDialog.getEditText().getText().toString();
+            MyAlertDialog.getInstance(editTextValue, MyAlertDialog.DialogStyle.INFO).show(getSupportFragmentManager(), "editTextIn");
         }
     }
 
