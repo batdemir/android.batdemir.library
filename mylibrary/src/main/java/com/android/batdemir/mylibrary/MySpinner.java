@@ -107,6 +107,10 @@ public class MySpinner extends RelativeLayout {
         spinner.setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance(spinner).cast(sourceModel, id, description)));
     }
 
+    public void fillSpinner(List<?> sourceModel, Field id, Field description, Integer textAppearance) {
+        spinner.setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance(spinner).cast(sourceModel, id, description), textAppearance));
+    }
+
     public boolean isValid(boolean isControlFirstItem) {
         if (isControlFirstItem)
             return spinner.getAdapter() != null && spinner.getSelectedItemPosition() != 0;

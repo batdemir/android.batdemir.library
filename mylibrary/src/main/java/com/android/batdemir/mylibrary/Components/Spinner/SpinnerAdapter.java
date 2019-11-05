@@ -18,11 +18,19 @@ public class SpinnerAdapter extends ArrayAdapter<SpinnerModel> {
 
     private Context context;
     private List<SpinnerModel> models;
+    private Integer textAppearance;
 
     public SpinnerAdapter(Context context, List<SpinnerModel> models) {
         super(context, R.layout.view_spinner_item);
         this.context = context;
         this.models = models;
+    }
+
+    public SpinnerAdapter(Context context, List<SpinnerModel> models, Integer textAppearance) {
+        super(context, R.layout.view_spinner_item);
+        this.context = context;
+        this.models = models;
+        this.textAppearance = textAppearance;
     }
 
     public List<SpinnerModel> getModels() {
@@ -45,6 +53,7 @@ public class SpinnerAdapter extends ArrayAdapter<SpinnerModel> {
 
         SpinnerViewHolder(View v) {
             this.textView = v.findViewById(R.id.spinnerItem);
+            textView.setTextAppearance(textAppearance != null ? textAppearance : R.style.ValueTextAppearance);
         }
 
         private void setData(SpinnerModel spinnerModel, boolean isDropDown) {
