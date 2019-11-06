@@ -90,6 +90,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@drawable/gradient_box"
+                            android:gravity="center"
                             android:text="@string/cancel"
                             android:textAppearance="@style/TitleTextAppearance"
                             android:textColor="@android:color/white" />
@@ -101,6 +102,7 @@
                             android:layout_weight="1"
                             android:background="@drawable/gradient_box"
                             android:backgroundTint="@color/alert_dialog_success"
+                            android:gravity="center"
                             android:text="@string/ok"
                             android:textAppearance="@style/TitleTextAppearance"
                             android:textColor="@android:color/white" />

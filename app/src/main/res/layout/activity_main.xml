@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -13,7 +12,7 @@
         <LinearLayout
             android:id="@+id/linearProps"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <Button
@@ -21,28 +20,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Go Next Page"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:id="@+id/btnDialogDefault"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="DialogDefault"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:id="@+id/btnDialogEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="DialogEditText"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:id="@+id/btnDialogAction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="DialogAction"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
 
             <com.android.batdemir.mylibrary.MySpinner
                 android:id="@+id/mySpinner"
@@ -56,7 +59,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="ValidSpinner"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
 
             <com.android.batdemir.mylibrary.MyEditText
                 android:id="@+id/myEditText"
@@ -69,25 +73,28 @@
                 android:id="@+id/btnDialogWarning"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="warningClick"
                 android:text="DialogWarning"
                 android:textAllCaps="false"
-                android:onClick="warningClick"/>
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:id="@+id/btnDialogSuccess"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="successClick"
                 android:text="DialogSuccess"
                 android:textAllCaps="false"
-                android:onClick="successClick"/>
+                tools:ignore="HardcodedText" />
 
             <Button
                 android:id="@+id/btnDialogFailed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="failedClick"
                 android:text="DialogFailed"
                 android:textAllCaps="false"
-                android:onClick="failedClick"/>
+                tools:ignore="HardcodedText" />
 
         </LinearLayout>
 

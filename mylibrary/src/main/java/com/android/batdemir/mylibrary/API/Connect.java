@@ -14,6 +14,7 @@ public class Connect {
     private String noConnectionMessage = "Lütfen, Internet Bağlantınızı Kontrol Ediniz.";
 
     public Connect() {
+        //Not Implemented
     }
 
     public void setNoConnectionMessage(String noConnectionMessage) {

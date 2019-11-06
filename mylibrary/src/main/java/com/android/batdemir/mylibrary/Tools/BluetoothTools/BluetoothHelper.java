@@ -46,7 +46,7 @@ public class BluetoothHelper {
                 method.invoke(device, (Object[]) null);
             }
         } catch (Exception e) {
-            Log.e(BluetoothHelper.class.getSimpleName(),e.getMessage());
+            Log.e(BluetoothHelper.class.getSimpleName(), e.getMessage());
         }
     }
 }

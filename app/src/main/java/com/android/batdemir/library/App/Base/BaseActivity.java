@@ -10,6 +10,8 @@ import com.android.batdemir.library.R;
 import com.android.batdemir.mylibrary.Components.Dialog.MyAlertDialog;
 import com.android.batdemir.mylibrary.Components.Dialog.MyAlertDialogListener;
 
+import java.util.Objects;
+
 public abstract class BaseActivity extends AppCompatActivity implements
         BaseActions,
         MyAlertDialogListener {
@@ -63,7 +65,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
 
     @Override
     public void dialogOk(MyAlertDialog myAlertDialog) {
-        if (myAlertDialog.getTag().equals(getString(R.string.alert_dialog_key_exit))) {
+        if (Objects.equals(myAlertDialog.getTag(), getString(R.string.alert_dialog_key_exit))) {
             finishAffinity();
             System.exit(0);
         }
@@ -71,7 +73,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
 
     @Override
     public void dialogCancel(MyAlertDialog myAlertDialog) {
-        if (myAlertDialog.getTag().equals(getString(R.string.alert_dialog_key_exit))) {
+        if (Objects.equals(myAlertDialog.getTag(), getString(R.string.alert_dialog_key_exit))) {
             myAlertDialog.dismiss();
         }
     }
@@ -88,7 +90,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
         this.isFirstActivity = isFirstActivity;
         setTheme(R.style.MenuTheme);
         getSupportActionBar();
-        getSupportActionBar().setTitle(title);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(title);
         getSupportActionBar().setElevation(elevation);
         getSupportActionBar().setDisplayHomeAsUpEnabled(showHomeButton);
     }

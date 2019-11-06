@@ -27,15 +27,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    tools:text="Robert Lewandowski" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtEditNationality"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="textEnd"
-                    tools:text="Poland" />
+                    android:textAlignment="textEnd" />
 
             </LinearLayout>
 
@@ -47,8 +45,7 @@
                 <TextView
                     android:id="@+id/txtEditClub"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Bayern Munchen" />
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -60,22 +57,19 @@
                 <TextView
                     android:id="@+id/txtAge"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Age: " />
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/txtEditAge"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="26" />
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/txtEditating"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="textEnd"
-                    android:textSize="20sp"
-                    tools:text="90" />
+                    android:textSize="20sp" />
 
             </LinearLayout>
 

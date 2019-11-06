@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 
 import com.android.batdemir.mylibrary.R;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 public class SpinnerAdapter extends ArrayAdapter<SpinnerModel> {
@@ -64,19 +66,25 @@ public class SpinnerAdapter extends ArrayAdapter<SpinnerModel> {
         }
     }
 
-    @NonNull
+    @NotNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        convertView = LayoutInflater.from(context).inflate(R.layout.view_spinner_item, parent, false);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.view_spinner_item, parent, false);
+        }
         new SpinnerViewHolder(convertView).setData(models.get(position), false);
         return convertView;
     }
 
     @Override
     public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        convertView = LayoutInflater.from(context).inflate(R.layout.view_spinner_item, parent, false);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.view_spinner_item, parent, false);
+        }
         convertView.setPadding(0, 8, 0, 8);
         new SpinnerViewHolder(convertView).setData(models.get(position), true);
         return convertView;
     }
+
+
 }

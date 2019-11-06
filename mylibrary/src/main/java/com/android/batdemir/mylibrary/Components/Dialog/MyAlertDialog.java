@@ -32,6 +32,7 @@ public class MyAlertDialog extends DialogFragment {
 
     private static final String KEY_MESSAGE = "KEY_MESSAGE";
     private static final String KEY_STYLE = "KEY_STYLE";
+
     private ComponentAlertDialogBinding binding;
     private String message;
     private DialogStyle style;

@@ -21,9 +21,9 @@ public class LoginActivity extends AppCompatActivity implements
     private Context context;
     private ActivityLoginBinding binding;
 
-    final static String DENEME = "DENEME";
-    final static String DENEME_2 = "DENEME_2";
-    final static String DENEME_3 = "DENEME_3";
+    final String DENEME = "DENEME";
+    final String DENEME_2 = "DENEME_2";
+    final String DENEME_3 = "DENEME_3";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

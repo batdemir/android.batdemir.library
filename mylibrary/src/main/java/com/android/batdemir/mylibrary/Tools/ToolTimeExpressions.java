@@ -23,8 +23,7 @@ public class ToolTimeExpressions {
     }
 
     @SuppressLint("SimpleDateFormat")
-    public Date setStringToDate(@NonNull String stringDate,
-                                @NonNull GlobalVariable.DateFormat outputFormat) {
+    public Date setStringToDate(@NonNull String stringDate, @NonNull GlobalVariable.DateFormat outputFormat) {
         Date date = null;
         try {
             SimpleDateFormat sdf = new SimpleDateFormat(outputFormat.toString());
@@ -36,8 +35,7 @@ public class ToolTimeExpressions {
     }
 
     @SuppressLint("SimpleDateFormat")
-    public String setDateToString(@NonNull Date date,
-                                  @NonNull GlobalVariable.DateFormat outputFormat) {
+    public String setDateToString(@NonNull Date date, @NonNull GlobalVariable.DateFormat outputFormat) {
         String result = "";
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat(outputFormat.toString());
@@ -49,9 +47,7 @@ public class ToolTimeExpressions {
     }
 
     @SuppressLint("SimpleDateFormat")
-    public String setDateFormat(@NonNull String stringDate,
-                                @NonNull GlobalVariable.DateFormat inputFormat,
-                                @NonNull GlobalVariable.DateFormat outputFormat) {
+    public String setDateFormat(@NonNull String stringDate, @NonNull GlobalVariable.DateFormat inputFormat, @NonNull GlobalVariable.DateFormat outputFormat) {
         String result = "";
         try {
             Date date = setStringToDate(stringDate, inputFormat);

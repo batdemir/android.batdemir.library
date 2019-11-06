@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/rootItemEvent"
@@ -8,8 +9,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:cardCornerRadius="4dp"
-        app:cardUseCompatPadding="true"
-        app:cardPreventCornerOverlap="true">
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -17,13 +18,14 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:padding="8dp"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:id="@+id/imgEditEvent"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:contentDescription="eventImage" />
+                android:contentDescription="@string/todo" />
 
             <TextView
                 android:id="@+id/txtEditEvent"

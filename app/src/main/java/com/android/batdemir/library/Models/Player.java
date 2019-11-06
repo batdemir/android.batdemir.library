@@ -2,60 +2,60 @@ package com.android.batdemir.library.Models;
 
 public class Player {
 
-    private String Name;
-    private String Nationality;
-    private String Club;
-    private Integer Rating;
-    private Integer Age;
+    private String name;
+    private String nationality;
+    private String club;
+    private Integer rating;
+    private Integer age;
 
     public Player() {
     }
 
     public Player(String name, String nationality, String club, Integer rating, Integer age) {
-        Name = name;
-        Nationality = nationality;
-        Club = club;
-        Rating = rating;
-        Age = age;
+        this.name = name;
+        this.nationality = nationality;
+        this.club = club;
+        this.rating = rating;
+        this.age = age;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getNationality() {
-        return Nationality;
+        return nationality;
     }
 
     public void setNationality(String nationality) {
-        Nationality = nationality;
+        this.nationality = nationality;
     }
 
     public String getClub() {
-        return Club;
+        return club;
     }
 
     public void setClub(String club) {
-        Club = club;
+        this.club = club;
     }
 
     public Integer getRating() {
-        return Rating;
+        return rating;
     }
 
     public void setRating(Integer rating) {
-        Rating = rating;
+        this.rating = rating;
     }
 
     public Integer getAge() {
-        return Age;
+        return age;
     }
 
     public void setAge(Integer age) {
-        Age = age;
+        this.age = age;
     }
 }

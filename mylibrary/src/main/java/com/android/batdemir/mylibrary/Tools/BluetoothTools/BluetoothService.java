@@ -213,7 +213,7 @@ public class BluetoothService {
                 else
                     tmp = mAdapter.listenUsingRfcommWithServiceRecord(NAME_SECURE, UUID_OTHER_DEVICE);
             } catch (IOException e) {
-                Log.e(BluetoothService.class.getSimpleName(),e.getMessage());
+                Log.e(BluetoothService.class.getSimpleName(), e.getMessage());
             }
             mmServerSocket = tmp;
         }
@@ -249,7 +249,7 @@ public class BluetoothService {
                                 try {
                                     socket.close();
                                 } catch (IOException e) {
-                                    Log.e(BluetoothService.class.getSimpleName(),e.getMessage());
+                                    Log.e(BluetoothService.class.getSimpleName(), e.getMessage());
                                 }
                                 break;
                             default:
@@ -266,7 +266,7 @@ public class BluetoothService {
                 mmServerSocket.close();
                 mmServerSocket = null;
             } catch (IOException e) {
-                Log.e(BluetoothService.class.getSimpleName(),e.getMessage());
+                Log.e(BluetoothService.class.getSimpleName(), e.getMessage());
             }
         }
 
@@ -294,7 +294,7 @@ public class BluetoothService {
                 else
                     tmp = device.createRfcommSocketToServiceRecord(UUID_OTHER_DEVICE);
             } catch (IOException e) {
-                Log.e(BluetoothService.class.getSimpleName(),e.getMessage());
+                Log.e(BluetoothService.class.getSimpleName(), e.getMessage());
             }
             mmSocket = tmp;
         }
@@ -314,7 +314,7 @@ public class BluetoothService {
                 try {
                     mmSocket.close();
                 } catch (IOException e2) {
-                    Log.e(BluetoothService.class.getSimpleName(),e2.getMessage());
+                    Log.e(BluetoothService.class.getSimpleName(), e2.getMessage());
                 }
                 connectionFailed();
                 return;
@@ -333,7 +333,7 @@ public class BluetoothService {
             try {
                 mmSocket.close();
             } catch (IOException e) {
-                Log.e(BluetoothService.class.getSimpleName(),e.getMessage());
+                Log.e(BluetoothService.class.getSimpleName(), e.getMessage());
             }
         }
     }
@@ -355,7 +355,7 @@ public class BluetoothService {
                 tmpIn = socket.getInputStream();
                 tmpOut = socket.getOutputStream();
             } catch (IOException e) {
-                Log.e(BluetoothService.class.getSimpleName(),e.getMessage());
+                Log.e(BluetoothService.class.getSimpleName(), e.getMessage());
             }
 
             mmInStream = tmpIn;
@@ -399,7 +399,7 @@ public class BluetoothService {
                 mmOutStream.write(buffer);
                 mHandler.obtainMessage(BluetoothState.MESSAGE_WRITE, -1, -1, buffer).sendToTarget();
             } catch (IOException e) {
-                Log.e(BluetoothService.class.getSimpleName(),e.getMessage());
+                Log.e(BluetoothService.class.getSimpleName(), e.getMessage());
             }
         }
 
@@ -407,7 +407,7 @@ public class BluetoothService {
             try {
                 mmSocket.close();
             } catch (IOException e) {
-                Log.e(BluetoothService.class.getSimpleName(),e.getMessage());
+                Log.e(BluetoothService.class.getSimpleName(), e.getMessage());
             }
         }
     }
