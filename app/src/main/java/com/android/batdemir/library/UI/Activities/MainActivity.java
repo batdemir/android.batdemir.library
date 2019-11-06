@@ -113,4 +113,15 @@ public class MainActivity extends BaseActivity implements
         }
     }
 
+    public void warningClick(View view) {
+        MyAlertDialog.getInstance("Test", MyAlertDialog.DialogStyle.WARNING).show(getSupportFragmentManager(),"warning");
+    }
+
+    public void successClick(View view) {
+        MyAlertDialog.getInstance("Test", MyAlertDialog.DialogStyle.SUCCESS).show(getSupportFragmentManager(),"success");
+    }
+
+    public void failedClick(View view) {
+        MyAlertDialog.getInstance("Test", MyAlertDialog.DialogStyle.FAILED).show(getSupportFragmentManager(),"failed");
+    }
 }

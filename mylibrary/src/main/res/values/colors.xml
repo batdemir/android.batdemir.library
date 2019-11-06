@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="alert_dialog_success">#03C9B8</color>
+    <color name="alert_dialog_failed">#FF0A00</color>
+    <color name="alert_dialog_warning">#FF9D00</color>
+    <color name="alert_dialog_info">#4E55EB</color>
     <color name="alert_dialog_button_colors">#50DDDDDD</color>
 
     <color name="divider">#000000</color>

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MyLibrary</string>
+    <string name="todo">TODO</string>
+    <string name="cancel">İptal</string>
+    <string name="ok">Tamam</string>
+    <string name="information">Bilgi</string>
+    <string name="warning">Uyarı</string>
+    <string name="success">Başarılı</string>
+    <string name="failed">Başarısız</string>
 </resources>

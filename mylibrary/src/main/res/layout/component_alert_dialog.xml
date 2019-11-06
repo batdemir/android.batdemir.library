@@ -1,44 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <ScrollView
         android:id="@+id/rootAlertDialog"
-        style="@style/alert_dialog_root">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
-            style="@style/alert_dialog_card_view">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardPreventCornerOverlap="true">
 
             <LinearLayout
-                android:id="@+id/linearInner"
-                style="@style/alert_dialog_inner">
+                android:id="@+id/linear"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minWidth="320dp"
+                android:orientation="vertical">
 
-                <ImageView
-                    style="@style/alert_dialog_image_view"
-                    android:src="@drawable/ic_information_medium" />
-
-                <TextView
-                    android:id="@+id/txtEditMessage"
-                    style="@style/alert_dialog_text_view"
-                    android:text="Test" />
-
-                <EditText
-                    android:id="@+id/editText"
-                    style="@style/alert_dialog_edit_text"/>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgDialog"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/alert_dialog_success"
+                    android:contentDescription="@string/todo"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:src="@drawable/ic_dialog_success" />
 
                 <LinearLayout
-                    android:id="@+id/linearButtons"
-                    style="@style/alert_dialog_linear_buttons">
+                    android:id="@+id/linearSub"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
-                    <ImageButton
-                        android:id="@+id/btnCancel"
-                        style="@style/alert_dialog_buttons"
-                        android:src="@drawable/ic_cancel_mini" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtEditTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/top"
+                        android:layout_marginBottom="@dimen/bottom"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="center"
+                        android:text="@string/todo"
+                        android:textAppearance="@style/TitleTextAppearance" />
 
-                    <ImageButton
-                        android:id="@+id/btnOkey"
-                        style="@style/alert_dialog_buttons"
-                        android:src="@drawable/ic_okey_mini" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtEditMessage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/top"
+                        android:layout_marginBottom="@dimen/bottom"
+                        android:gravity="center"
+                        android:text="@string/todo"
+                        android:textAppearance="@style/ValueTextAppearance" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/editText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/top"
+                        android:layout_marginBottom="@dimen/top"
+                        android:gravity="center"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxLength="50"
+                        android:maxLines="1"
+                        android:minLines="1"
+                        android:singleLine="true"
+                        android:textAppearance="@style/ValueTextAppearance"
+                        tools:ignore="Autofill,LabelFor" />
+
+                    <LinearLayout
+                        android:id="@+id/linearButtons"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="@dimen/top"
+                        android:layout_marginBottom="@dimen/bottom"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnCancel"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/gradient_box"
+                            android:text="@string/cancel"
+                            android:textAppearance="@style/TitleTextAppearance"
+                            android:textColor="@android:color/white" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnOk"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/gradient_box"
+                            android:backgroundTint="@color/alert_dialog_success"
+                            android:text="@string/ok"
+                            android:textAppearance="@style/TitleTextAppearance"
+                            android:textColor="@android:color/white" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

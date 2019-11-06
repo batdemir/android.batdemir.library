@@ -63,7 +63,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                app:editTextHint="Test"/>
+                app:editTextHint="Test" />
+
+            <Button
+                android:id="@+id/btnDialogWarning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DialogWarning"
+                android:textAllCaps="false"
+                android:onClick="warningClick"/>
+
+            <Button
+                android:id="@+id/btnDialogSuccess"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DialogSuccess"
+                android:textAllCaps="false"
+                android:onClick="successClick"/>
+
+            <Button
+                android:id="@+id/btnDialogFailed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DialogFailed"
+                android:textAllCaps="false"
+                android:onClick="failedClick"/>
 
         </LinearLayout>
 

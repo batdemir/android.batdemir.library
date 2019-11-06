@@ -1,13 +1,18 @@
 package com.android.batdemir.mylibrary.Components.Dialog;
 
 import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,8 +21,6 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.batdemir.mylibrary.R;
-import com.android.batdemir.mylibrary.Tools.ButtonTools.OnTouchEvent;
-import com.android.batdemir.mylibrary.Tools.Tool;
 import com.android.batdemir.mylibrary.databinding.ComponentAlertDialogBinding;
 
 import java.util.Objects;
@@ -29,10 +32,31 @@ public class MyAlertDialog extends DialogFragment {
     private static MyAlertDialogCreator myAlertDialogCreator = null;
 
     private static final String KEY_MESSAGE = "KEY_MESSAGE";
+    private static final String KEY_STYLE = "KEY_STYLE";
     private ComponentAlertDialogBinding binding;
     private String message;
+    private DialogStyle style;
 
     protected MyAlertDialog() {
+    }
+
+    public static synchronized MyAlertDialog getInstance(String message, DialogStyle dialogStyle) {
+        if (myAlertDialog == null) {
+            if (myAlertDialogCreator == null) {
+                myAlertDialog = new MyAlertDialog();
+            } else {
+                myAlertDialog = myAlertDialogCreator.create();
+            }
+        }
+        Bundle bundle = new Bundle();
+        bundle.putString(KEY_MESSAGE, message);
+        bundle.putString(KEY_STYLE, dialogStyle.name());
+        myAlertDialog.setArguments(bundle);
+        return myAlertDialog;
+    }
+
+    public static void setMyAlertDialogCreator(MyAlertDialogCreator myAlertDialogCreator) {
+        MyAlertDialog.myAlertDialogCreator = myAlertDialogCreator;
     }
 
     @Override
@@ -44,7 +68,6 @@ public class MyAlertDialog extends DialogFragment {
         return binding.getRoot();
     }
 
-    @SuppressLint("StaticFieldLeak")
     @Override
     public void show(@NonNull FragmentManager manager, @Nullable String tag) {
         if (!myAlertDialog.isAdded())
@@ -57,70 +80,18 @@ public class MyAlertDialog extends DialogFragment {
         super.dismiss();
     }
 
-    public static synchronized MyAlertDialog getInstance(String message, DialogStyle dialogStyle) {
-        if (myAlertDialog == null) {
-            if (myAlertDialogCreator == null) {
-                myAlertDialog = new MyAlertDialog();
-            } else {
-                myAlertDialog = myAlertDialogCreator.create();
-            }
-        }
-        switch (dialogStyle) {
-            case INPUT:
-                myAlertDialog.setShowCancelButton(true);
-                myAlertDialog.setShowEditText(true);
-                break;
-            case ACTION:
-                myAlertDialog.setShowCancelButton(true);
-                myAlertDialog.setShowEditText(false);
-                break;
-            case INFO:
-            default:
-                myAlertDialog.setShowCancelButton(false);
-                myAlertDialog.setShowEditText(false);
-                break;
-        }
-        Bundle bundle = new Bundle();
-        bundle.putString(KEY_MESSAGE, message);
-        myAlertDialog.setArguments(bundle);
-        return myAlertDialog;
-    }
-
-    public static void setMyAlertDialogCreator(MyAlertDialogCreator myAlertDialogCreator) {
-        MyAlertDialog.myAlertDialogCreator = myAlertDialogCreator;
-    }
+    //Initialize Methods
 
     private void getObjectReferences() {
         assert getArguments() != null;
         message = getArguments().getString(KEY_MESSAGE);
-        new Tool(getContext()).animDialog(binding.cardView);
+        style = DialogStyle.valueOf(getArguments().getString(KEY_STYLE));
+        setComponentStyle();
+        setComponentAnim();
     }
 
     private void loadData() {
         myAlertDialog.setCancelable(false);
-
-        if (myAlertDialog.isShowEditText()) {
-            binding.editText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            binding.editText.setVisibility(View.VISIBLE);
-            binding.txtEditMessage.setText(message);
-        } else {
-            String newLine = "\n";
-            binding.editText.setLayoutParams(new LinearLayout.LayoutParams(0, 0));
-            binding.editText.setVisibility(View.INVISIBLE);
-            binding.txtEditMessage.setText(String.format("%s%s", message, newLine));
-        }
-
-        if (myAlertDialog.isShowCancelButton()) {
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
-            layoutParams.setMargins(8, 0, 8, 0);
-            binding.btnCancel.setPadding(8, 8, 8, 8);
-            binding.btnCancel.setLayoutParams(layoutParams);
-        } else {
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 0);
-            layoutParams.setMargins(0, 0, 0, 0);
-            binding.btnCancel.setPadding(0, 0, 0, 0);
-            binding.btnCancel.setLayoutParams(layoutParams);
-        }
 
         if (myAlertDialog.getInputType() != -1) {
             binding.editText.setInputType(myAlertDialog.getInputType());
@@ -128,9 +99,6 @@ public class MyAlertDialog extends DialogFragment {
     }
 
     private void setListeners() {
-        binding.btnOkey.setOnTouchListener(new OnTouchEvent(binding.btnOkey));
-        binding.btnCancel.setOnTouchListener(new OnTouchEvent(binding.btnCancel));
-
         binding.btnCancel.setOnClickListener(v -> {
             MyAlertDialog result = myAlertDialog;
             myAlertDialog.dismiss();
@@ -138,7 +106,7 @@ public class MyAlertDialog extends DialogFragment {
             Objects.requireNonNull(clickCancel).dialogCancel(result);
         });
 
-        binding.btnOkey.setOnClickListener(v -> {
+        binding.btnOk.setOnClickListener(v -> {
             MyAlertDialog result = myAlertDialog;
             myAlertDialog.dismiss();
             MyAlertDialogListener clickOk = (MyAlertDialogListener) getActivity();
@@ -146,30 +114,112 @@ public class MyAlertDialog extends DialogFragment {
         });
     }
 
-    //Component Set Props
+    //Component Style
 
-    private boolean showCancelButton = false;
-    private boolean showEditText = false;
+    private void setComponentStyle() {
+        myAlertDialog.setImageDialog(style);
+        myAlertDialog.setShowCancelButton(style);
+        myAlertDialog.setShowEditText(style);
+    }
+
+    private void setComponentAnim() {
+        try {
+            Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.zoom_in);
+            myAlertDialog.binding.cardView.startAnimation(animation);
+        } catch (Exception e) {
+            Log.e(MyAlertDialog.class.getSimpleName(), e.getMessage());
+        }
+    }
+
+    private void setImageDialog(DialogStyle style) {
+        switch (style) {
+            case INPUT:
+            case ACTION:
+            case INFO:
+                myAlertDialog.binding.imgDialog.setBackgroundColor(getResources().getColor(R.color.alert_dialog_info, null));
+                myAlertDialog.binding.imgDialog.setImageResource(R.drawable.ic_dialog_info);
+                myAlertDialog.binding.txtEditTitle.setText(getString(R.string.information));
+                myAlertDialog.binding.txtEditTitle.setTextColor(getResources().getColor(R.color.alert_dialog_info, null));
+                myAlertDialog.binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.alert_dialog_info, null)));
+                break;
+            case WARNING:
+                myAlertDialog.binding.imgDialog.setBackgroundColor(getResources().getColor(R.color.alert_dialog_warning, null));
+                myAlertDialog.binding.imgDialog.setImageResource(R.drawable.ic_dialog_warning);
+                myAlertDialog.binding.txtEditTitle.setText(getString(R.string.warning));
+                myAlertDialog.binding.txtEditTitle.setTextColor(getResources().getColor(R.color.alert_dialog_warning, null));
+                myAlertDialog.binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.alert_dialog_warning, null)));
+                break;
+            case SUCCESS:
+                myAlertDialog.binding.imgDialog.setBackgroundColor(getResources().getColor(R.color.alert_dialog_success, null));
+                myAlertDialog.binding.imgDialog.setImageResource(R.drawable.ic_dialog_success);
+                myAlertDialog.binding.txtEditTitle.setText(getString(R.string.success));
+                myAlertDialog.binding.txtEditTitle.setTextColor(getResources().getColor(R.color.alert_dialog_success, null));
+                myAlertDialog.binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.alert_dialog_success, null)));
+                break;
+            case FAILED:
+                myAlertDialog.binding.imgDialog.setBackgroundColor(getResources().getColor(R.color.alert_dialog_failed, null));
+                myAlertDialog.binding.imgDialog.setImageResource(R.drawable.ic_dialog_failed);
+                myAlertDialog.binding.txtEditTitle.setText(getString(R.string.failed));
+                myAlertDialog.binding.txtEditTitle.setTextColor(getResources().getColor(R.color.alert_dialog_failed, null));
+                myAlertDialog.binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.alert_dialog_failed, null)));
+                break;
+        }
+    }
+
+    private void setShowEditText(DialogStyle style) {
+        switch (style) {
+            case INPUT:
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                layoutParams.setMargins(0, 8, 0, 8);
+                binding.editText.setLayoutParams(layoutParams);
+                binding.editText.setVisibility(View.VISIBLE);
+                binding.txtEditMessage.setText(message);
+                break;
+            case ACTION:
+            case INFO:
+            case FAILED:
+            case SUCCESS:
+            case WARNING:
+            default:
+                String newLine = "\n";
+                LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
+                layoutParams2.setMargins(0, 8, 0, 8);
+                binding.editText.setLayoutParams(layoutParams2);
+                binding.editText.setVisibility(View.INVISIBLE);
+                binding.txtEditMessage.setText(String.format("%s%s", message, newLine));
+                break;
+        }
+    }
+
+    private void setShowCancelButton(DialogStyle style) {
+        switch (style) {
+            case INPUT:
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+                layoutParams.setMargins(8, 8, 8, 8);
+                binding.btnCancel.setLayoutParams(layoutParams);
+                break;
+            case ACTION:
+            case INFO:
+            case FAILED:
+            case SUCCESS:
+            case WARNING:
+            default:
+                LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 0);
+                layoutParams2.setMargins(0, 0, 0, 0);
+                binding.btnCancel.setLayoutParams(layoutParams2);
+                break;
+        }
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+        layoutParams.setMargins(8, 8, 8, 8);
+        binding.btnOk.setLayoutParams(layoutParams);
+    }
+
+    //Component EditTextType
+
     private int inputType = InputType.TYPE_CLASS_TEXT;
-
-    private boolean isShowCancelButton() {
-        return showCancelButton;
-    }
-
-    private boolean isShowEditText() {
-        return showEditText;
-    }
 
     private int getInputType() {
         return inputType;
-    }
-
-    public void setShowCancelButton(boolean showCancelButton) {
-        this.showCancelButton = showCancelButton;
-    }
-
-    public void setShowEditText(boolean showEditText) {
-        this.showEditText = showEditText;
     }
 
     public void setInputType(int inputType) {
@@ -186,9 +236,12 @@ public class MyAlertDialog extends DialogFragment {
         return binding.editText;
     }
 
-    //Component Props
+    //Component Properties
 
     public enum DialogStyle {
+        WARNING,
+        FAILED,
+        SUCCESS,
         INPUT,
         ACTION,
         INFO;
