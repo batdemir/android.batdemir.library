@@ -23,7 +23,7 @@ public class Connect {
 
     public void connect(Context context, Call call, String operationType) {
         if (!ToolConnection.isConnected(context)) {
-            MyAlertDialog.getInstance(noConnectionMessage, MyAlertDialog.DialogStyle.INFO).show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
+            MyAlertDialog.getInstance(noConnectionMessage, MyAlertDialog.DialogStyle.WARNING).show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
             return;
         }
         new ConnectService(context, operationType).execute(call);
