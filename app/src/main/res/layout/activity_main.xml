@@ -52,7 +52,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                app:spinnerLabel="Test" />
+                app:spinnerLabel="Test"
+                app:spinnerLabelTextAppearance="@style/deneme" />
 
             <Button
                 android:id="@+id/btnValidSpinner"
@@ -67,7 +68,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                app:editTextHint="Test" />
+                app:editTextHint="Test"
+                app:maxCharCount="10"
+                app:editTextHintTextAppearance="@style/deneme"
+                app:editTextSubValueTextAppearance="@style/deneme3"
+                app:editTextValueTextAppearance="@style/deneme2" />
 
             <Button
                 android:id="@+id/btnDialogWarning"

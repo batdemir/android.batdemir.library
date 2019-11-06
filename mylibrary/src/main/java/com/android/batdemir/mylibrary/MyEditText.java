@@ -88,7 +88,7 @@ public class MyEditText extends RelativeLayout {
             }
 
             if (typedArray.hasValue(editTextHintTextAppearance)) {
-                setHintTextAppearance(typedArray.getInt(editTextHintTextAppearance, R.style.TitleTextAppearance));
+                setHintTextAppearance(typedArray.getResourceId(editTextHintTextAppearance, R.style.TitleTextAppearance));
             }
 
             if (typedArray.hasValue(editTextValue)) {
@@ -96,11 +96,11 @@ public class MyEditText extends RelativeLayout {
             }
 
             if (typedArray.hasValue(editTextValueTextAppearance)) {
-                setEditTextValueTextAppearance(typedArray.getInt(editTextValueTextAppearance, R.style.ValueTextAppearance));
+                setEditTextValueTextAppearance(typedArray.getResourceId(editTextValueTextAppearance, R.style.ValueTextAppearance));
             }
 
             if (typedArray.hasValue(editTextSubValueTextAppearance)) {
-                setEditTextSubValueTextAppearance(typedArray.getInt(editTextSubValueTextAppearance, R.style.SubValueTextAppearance));
+                setEditTextSubValueTextAppearance(typedArray.getResourceId(editTextSubValueTextAppearance, R.style.SubValueTextAppearance));
             }
 
             if (typedArray.hasValue(maxCharCount)) {

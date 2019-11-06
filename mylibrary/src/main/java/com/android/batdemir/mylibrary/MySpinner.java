@@ -71,7 +71,7 @@ public class MySpinner extends RelativeLayout {
             }
 
             if (typedArray.hasValue(spinnerLabelTextAppearance)) {
-                setLabelTextAppearance(typedArray.getInt(spinnerLabelTextAppearance, R.style.TitleTextAppearance));
+                setLabelTextAppearance(typedArray.getResourceId(spinnerLabelTextAppearance, R.style.TitleTextAppearance));
             }
 
         } catch (Exception e) {

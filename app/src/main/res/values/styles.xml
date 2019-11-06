@@ -85,4 +85,21 @@
         <item name="android:maxLength">50</item>
     </style>
 
+    <style name="deneme">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@android:color/holo_red_light</item>
+    </style>
+
+    <style name="deneme2">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">48sp</item>
+        <item name="android:textColor">@android:color/holo_orange_light</item>
+    </style>
+
+    <style name="deneme3">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@android:color/holo_green_light</item>
+    </style>
 </resources>
