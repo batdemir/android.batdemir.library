@@ -12,7 +12,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -194,11 +193,11 @@ public class MyAlertDialog extends DialogFragment {
     private void setShowCancelButton(DialogStyle style) {
         switch (style) {
             case INPUT:
+            case ACTION:
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
                 layoutParams.setMargins(8, 8, 8, 8);
                 binding.btnCancel.setLayoutParams(layoutParams);
                 break;
-            case ACTION:
             case INFO:
             case FAILED:
             case SUCCESS:

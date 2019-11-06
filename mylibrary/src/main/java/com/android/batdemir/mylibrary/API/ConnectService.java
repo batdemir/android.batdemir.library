@@ -82,11 +82,11 @@ public class ConnectService extends AsyncTask<Call, Void, Response> {
         } catch (Exception e) {
             cancel(true);
             if (e.getClass().equals(ConnectException.class)) {
-                MyAlertDialog.getInstance(connectionFailMessage + "\n" + e.getMessage(), MyAlertDialog.DialogStyle.INFO).show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
+                MyAlertDialog.getInstance(connectionFailMessage + "\n" + e.getMessage(), MyAlertDialog.DialogStyle.FAILED).show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
             } else if (e.getClass().equals(SocketTimeoutException.class) || e.getClass().equals(IOException.class)) {
-                MyAlertDialog.getInstance(connectionTimeOutMessage + "\n" + e.getMessage(), MyAlertDialog.DialogStyle.INFO).show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
+                MyAlertDialog.getInstance(connectionTimeOutMessage + "\n" + e.getMessage(), MyAlertDialog.DialogStyle.FAILED).show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
             } else {
-                MyAlertDialog.getInstance(e.getMessage(), MyAlertDialog.DialogStyle.INFO).show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
+                MyAlertDialog.getInstance(e.getMessage(), MyAlertDialog.DialogStyle.FAILED).show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
             }
             if (connectServiceErrorListener != null)
                 connectServiceErrorListener.onException(operationType, e.getMessage());
