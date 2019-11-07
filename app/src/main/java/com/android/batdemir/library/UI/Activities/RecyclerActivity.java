@@ -55,8 +55,8 @@ public class RecyclerActivity extends BaseActivity implements
         binding.btnPreviousPage.setOnClickListener(v -> new Tool(context).move(MainActivity.class, false, false, null));
 
         binding.btnConnectService.setOnClickListener(v -> {
-            RetrofitClient.setBaseUrl("http://192.168.1.30/api/");
-            new Connect().connect(context, RetrofitClient.getInstance().create(CallTest.class).callTest("2019", "ss", false), "Test");
+            RetrofitClient.setBaseUrl("https://api.github.com");
+            new Connect().connect(context, RetrofitClient.getInstance().create(CallTest.class).callTest(), "Test");
         });
     }
 
@@ -135,16 +135,19 @@ public class RecyclerActivity extends BaseActivity implements
 
     @Override
     public void dialogCancel(MyAlertDialog myAlertDialog) {
+        Log.d("TAG", myAlertDialog.getTag());
+        Log.d("EdiText", myAlertDialog.getEditText().getText().toString());
+        Log.d("TextView", myAlertDialog.getMessage());
     }
 
     @Override
     public void onSuccess(String operationType, Response response) {
-        MyAlertDialog.getInstance("onSuccess", MyAlertDialog.DialogStyle.ACTION).show(getSupportFragmentManager(), "success");
+        MyAlertDialog.getInstance("onSuccess\n" + response.body().toString(), MyAlertDialog.DialogStyle.WARNING).show(getSupportFragmentManager(), "success");
     }
 
     @Override
     public void onFailure(String operationType, Response response) {
-        MyAlertDialog.getInstance("onFailure", MyAlertDialog.DialogStyle.ACTION).show(getSupportFragmentManager(), "failure");
+        MyAlertDialog.getInstance("onFailure\n", MyAlertDialog.DialogStyle.ACTION).show(getSupportFragmentManager(), "failure");
     }
 
     @Override

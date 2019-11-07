@@ -125,7 +125,7 @@ public class MyAlertDialog extends DialogFragment {
     private void setComponentAnim() {
         try {
             Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.zoom_in);
-            myAlertDialog.binding.cardView.startAnimation(animation);
+            myAlertDialog.binding.rootDialog.startAnimation(animation);
         } catch (Exception e) {
             Log.e(MyAlertDialog.class.getSimpleName(), e.getMessage());
         }
@@ -182,8 +182,8 @@ public class MyAlertDialog extends DialogFragment {
             case WARNING:
             default:
                 String newLine = "\n";
-                LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
-                layoutParams2.setMargins(0, 8, 0, 8);
+                LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(0, 0);
+                layoutParams2.setMargins(0, 0, 0, 0);
                 binding.editText.setLayoutParams(layoutParams2);
                 binding.editText.setVisibility(View.INVISIBLE);
                 binding.txtEditMessage.setText(String.format("%s%s", message, newLine));
