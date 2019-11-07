@@ -20,6 +20,7 @@ import com.android.batdemir.mylibrary.Tools.Tool;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends BaseActivity implements
@@ -37,7 +38,7 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void loadData() {
-        ArrayList<SpinnerModel> list = new ArrayList<>();
+        List<SpinnerModel> list = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             SpinnerModel spinnerModel = new SpinnerModel(i, "test" + i, null);
             list.add(spinnerModel);

@@ -14,6 +14,7 @@ import com.android.batdemir.library.databinding.ActivityMenuBinding;
 import com.android.batdemir.mylibrary.Tools.Tool;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MenuActivity extends BaseActivity implements
         AdapterEvents.EventClickListener {
@@ -39,7 +40,7 @@ public class MenuActivity extends BaseActivity implements
     }
 
     private void setupRecyclerView() {
-        ArrayList<Event> events = new ArrayList<>();
+        List<Event> events = new ArrayList<>();
         events.add(new Event("Define\nGroup", R.drawable.ic_group, null));
         events.add(new Event("Define\nTask", R.drawable.ic_task, null));
         events.add(new Event("To-do\nList", R.drawable.ic_clipboard, null));

@@ -26,6 +26,7 @@ import com.android.batdemir.mylibrary.Tools.SwipeTools.SwipeControllerActions;
 import com.android.batdemir.mylibrary.Tools.Tool;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Response;
 
@@ -61,7 +62,7 @@ public class RecyclerActivity extends BaseActivity implements
     }
 
     private void setupRecyclerView() {
-        ArrayList<Player> players = new ArrayList<>();
+        List<Player> players = new ArrayList<>();
         String name = "Batuhan";
         String nationality = "Turkey";
         String club = "BatSport";
