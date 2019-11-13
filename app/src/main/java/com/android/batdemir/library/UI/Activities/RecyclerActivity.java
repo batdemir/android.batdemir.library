@@ -53,7 +53,7 @@ public class RecyclerActivity extends BaseActivity implements
 
     @Override
     public void setListeners() {
-        binding.btnPreviousPage.setOnClickListener(v -> new Tool(context).move(MainActivity.class, false, false, null));
+        binding.btnPreviousPage.setOnClickListener(v -> Tool.getInstance(context).move(MainActivity.class, false, false, null));
 
         binding.btnConnectService.setOnClickListener(v -> {
             RetrofitClient.setBaseUrl("https://api.github.com");

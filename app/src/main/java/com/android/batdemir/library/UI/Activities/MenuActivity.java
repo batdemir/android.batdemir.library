@@ -55,6 +55,6 @@ public class MenuActivity extends BaseActivity implements
     public void eventClick(Event event) {
         if (event.getTo() == null)
             Toast.makeText(context, "Not Implemented", Toast.LENGTH_SHORT).show();
-        new Tool(context).move(event.getTo(), true, true, null);
+        Tool.getInstance(context).move(event.getTo(), true, true, null);
     }
 }

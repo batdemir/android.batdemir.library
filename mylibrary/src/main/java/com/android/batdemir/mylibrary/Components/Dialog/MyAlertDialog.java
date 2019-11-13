@@ -174,6 +174,11 @@ public class MyAlertDialog extends DialogFragment {
                 binding.editText.setLayoutParams(layoutParams);
                 binding.editText.setVisibility(View.VISIBLE);
                 binding.txtEditMessage.setText(message);
+                binding.txtEditMessage.post(() -> {
+                    if (binding.txtEditMessage.getLineCount() > 2) {
+                        binding.txtEditMessage.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+                    }
+                });
                 break;
             case ACTION:
             case INFO:
@@ -187,6 +192,11 @@ public class MyAlertDialog extends DialogFragment {
                 binding.editText.setLayoutParams(layoutParams2);
                 binding.editText.setVisibility(View.INVISIBLE);
                 binding.txtEditMessage.setText(String.format("%s%s", message, newLine));
+                binding.txtEditMessage.post(() -> {
+                    if (binding.txtEditMessage.getLineCount() > 3) {
+                        binding.txtEditMessage.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+                    }
+                });
                 break;
         }
     }

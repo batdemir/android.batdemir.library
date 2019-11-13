@@ -55,7 +55,7 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void setListeners() {
-        binding.btnNextPage.setOnClickListener(v -> new Tool(context).move(RecyclerActivity.class, true, false, null));
+        binding.btnNextPage.setOnClickListener(v -> Tool.getInstance(context).move(RecyclerActivity.class, true, false, null));
 
         binding.btnDialogDefault.setOnClickListener(v -> MyAlertDialog.getInstance("Default", MyAlertDialog.DialogStyle.INFO).show(getSupportFragmentManager(), "default"));
 
@@ -115,14 +115,14 @@ public class MainActivity extends BaseActivity implements
     }
 
     public void warningClick(View view) {
-        MyAlertDialog.getInstance("Test", MyAlertDialog.DialogStyle.WARNING).show(getSupportFragmentManager(),"warning");
+        MyAlertDialog.getInstance("Test", MyAlertDialog.DialogStyle.WARNING).show(getSupportFragmentManager(), "warning");
     }
 
     public void successClick(View view) {
-        MyAlertDialog.getInstance("Test", MyAlertDialog.DialogStyle.SUCCESS).show(getSupportFragmentManager(),"success");
+        MyAlertDialog.getInstance("Test", MyAlertDialog.DialogStyle.SUCCESS).show(getSupportFragmentManager(), "success");
     }
 
     public void failedClick(View view) {
-        MyAlertDialog.getInstance("Test", MyAlertDialog.DialogStyle.FAILED).show(getSupportFragmentManager(),"failed");
+        MyAlertDialog.getInstance("Test", MyAlertDialog.DialogStyle.FAILED).show(getSupportFragmentManager(), "failed");
     }
 }

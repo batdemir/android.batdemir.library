@@ -1,5 +1,6 @@
 package com.android.batdemir.mylibrary.Tools;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -13,11 +14,22 @@ import androidx.cardview.widget.CardView;
 
 import com.android.batdemir.mylibrary.R;
 
+@SuppressLint("StaticFieldLeak")
 public class Tool {
 
+    private static Tool ourInstance = null;
     private Context context;
 
-    public Tool(Context context) {
+    private Tool() {
+    }
+
+    public static Tool getInstance(Context context) {
+        if (ourInstance == null) ourInstance = new Tool();
+        ourInstance.setContext(context);
+        return ourInstance;
+    }
+
+    private void setContext(Context context) {
         this.context = context;
     }
 

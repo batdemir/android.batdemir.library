@@ -21,6 +21,6 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         context = this;
         binding = DataBindingUtil.setContentView((Activity) context, R.layout.activity_sign_up);
-        binding.btnLogin.setOnClickListener(v -> new Tool(context).move(LoginActivity.class, false, false, null));
+        binding.btnLogin.setOnClickListener(v -> Tool.getInstance(context).move(LoginActivity.class, false, false, null));
     }
 }

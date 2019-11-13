@@ -12,37 +12,41 @@ import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.List;
 
-@SuppressLint("MissingPermission")
+@SuppressLint({"MissingPermission", "StaticFieldLeak"})
 public class ToolConnection {
 
     private static ToolConnection ourInstance = null;
+    private Context context;
 
     private ToolConnection() {
     }
 
-    public static ToolConnection getInstance() {
-        if (ourInstance == null) {
-            ourInstance = new ToolConnection();
-        }
+    public static ToolConnection getInstance(Context context) {
+        if (ourInstance == null) ourInstance = new ToolConnection();
+        ourInstance.setContext(context);
         return ourInstance;
     }
 
-    public static NetworkInfo getNetworkInfo(Context context) {
+    private void setContext(Context context) {
+        this.context = context;
+    }
+
+    private NetworkInfo getNetworkInfo() {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo();
     }
 
-    public static boolean isConnected(Context context) {
-        NetworkInfo info = getNetworkInfo(context);
+    public boolean isConnected() {
+        NetworkInfo info = getNetworkInfo();
         return (info != null && info.isConnected());
     }
 
-    public static boolean isConnectedWifi(Context context) {
-        NetworkInfo info = getNetworkInfo(context);
+    public boolean isConnectedWifi() {
+        NetworkInfo info = getNetworkInfo();
         return (info != null && info.isConnected() && info.getType() == ConnectivityManager.TYPE_WIFI);
     }
 
-    public static boolean isConnectedMobile(Context context) {
+    public boolean isConnectedMobile() {
         boolean haveConnected = false;
 
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -56,12 +60,12 @@ public class ToolConnection {
         return haveConnected;
     }
 
-    public static boolean isConnectedFast(Context context) {
-        NetworkInfo info = getNetworkInfo(context);
+    public boolean isConnectedFast() {
+        NetworkInfo info = getNetworkInfo();
         return (info != null && info.isConnected() && isConnectionFast(info.getType(), info.getSubtype()));
     }
 
-    public static boolean isConnectionFast(int type, int subType) {
+    private boolean isConnectionFast(int type, int subType) {
         if (type == ConnectivityManager.TYPE_WIFI) {
             return false;
         } else if (type == ConnectivityManager.TYPE_MOBILE) {
@@ -110,7 +114,7 @@ public class ToolConnection {
         }
     }
 
-    public static String getMACAddress(String interfaceName) {
+    public String getMACAddress(String interfaceName) {
         try {
             List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
             for (NetworkInterface intf : interfaces) {
@@ -130,7 +134,7 @@ public class ToolConnection {
         return "";
     }
 
-    public static String getIPAddress(boolean useIPv4) {
+    public String getIPAddress(boolean useIPv4) {
         try {
             List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
             for (NetworkInterface intf : interfaces) {

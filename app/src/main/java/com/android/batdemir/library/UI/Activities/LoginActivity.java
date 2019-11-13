@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity implements
         context = this;
         binding = DataBindingUtil.setContentView((Activity) context, R.layout.activity_login);
         binding.btnLogin.setOnClickListener(v -> MyAlertDialog.getInstance(DENEME, MyAlertDialog.DialogStyle.ACTION).show(getSupportFragmentManager(), DENEME));
-        binding.btnSignUp.setOnClickListener(v -> new Tool(context).move(SignUpActivity.class, true, false, null));
+        binding.btnSignUp.setOnClickListener(v -> Tool.getInstance(context).move(SignUpActivity.class, true, false, null));
     }
 
     @Override

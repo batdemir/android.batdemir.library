@@ -22,7 +22,7 @@ public class Connect {
     }
 
     public void connect(Context context, Call call, String operationType) {
-        if (!ToolConnection.isConnected(context)) {
+        if (!ToolConnection.getInstance(context).isConnected()) {
             MyAlertDialog.getInstance(noConnectionMessage, MyAlertDialog.DialogStyle.WARNING).show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
             return;
         }
