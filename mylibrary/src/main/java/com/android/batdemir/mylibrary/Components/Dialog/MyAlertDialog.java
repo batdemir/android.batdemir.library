@@ -30,14 +30,32 @@ public class MyAlertDialog extends DialogFragment {
     private static MyAlertDialog myAlertDialog = null;
     private static MyAlertDialogCreator myAlertDialogCreator = null;
 
+    private static final String KEY_TITLE = "KEY_TITLE";
     private static final String KEY_MESSAGE = "KEY_MESSAGE";
     private static final String KEY_STYLE = "KEY_STYLE";
 
     private ComponentAlertDialogBinding binding;
+    private String title;
     private String message;
     private DialogStyle style;
 
     protected MyAlertDialog() {
+    }
+
+    public static synchronized MyAlertDialog getInstance(String title, String message, DialogStyle dialogStyle) {
+        if (myAlertDialog == null) {
+            if (myAlertDialogCreator == null) {
+                myAlertDialog = new MyAlertDialog();
+            } else {
+                myAlertDialog = myAlertDialogCreator.create();
+            }
+        }
+        Bundle bundle = new Bundle();
+        bundle.putString(KEY_TITLE, title);
+        bundle.putString(KEY_MESSAGE, message);
+        bundle.putString(KEY_STYLE, dialogStyle.name());
+        myAlertDialog.setArguments(bundle);
+        return myAlertDialog;
     }
 
     public static synchronized MyAlertDialog getInstance(String message, DialogStyle dialogStyle) {
@@ -84,6 +102,7 @@ public class MyAlertDialog extends DialogFragment {
 
     private void getObjectReferences() {
         assert getArguments() != null;
+        title = getArguments().getString(KEY_TITLE);
         message = getArguments().getString(KEY_MESSAGE);
         style = DialogStyle.valueOf(getArguments().getString(KEY_STYLE));
         setComponentStyle();
@@ -118,14 +137,16 @@ public class MyAlertDialog extends DialogFragment {
 
     private void setComponentStyle() {
         myAlertDialog.setImageDialog(style);
-        myAlertDialog.setShowCancelButton(style);
+        myAlertDialog.setShowTitle(style);
+        myAlertDialog.setShowMessage();
         myAlertDialog.setShowEditText(style);
+        myAlertDialog.setShowCancelButton(style);
     }
 
     private void setComponentAnim() {
         try {
             Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.zoom_in);
-            myAlertDialog.binding.rootDialog.startAnimation(animation);
+            binding.rootDialog.startAnimation(animation);
         } catch (Exception e) {
             Log.e(MyAlertDialog.class.getSimpleName(), e.getMessage());
         }
@@ -136,49 +157,73 @@ public class MyAlertDialog extends DialogFragment {
             case INPUT:
             case ACTION:
             case INFO:
-                myAlertDialog.binding.imgDialog.setBackgroundColor(getResources().getColor(R.color.alert_dialog_info, null));
-                myAlertDialog.binding.imgDialog.setImageResource(R.drawable.ic_dialog_info);
-                myAlertDialog.binding.txtEditTitle.setText(getString(R.string.information));
-                myAlertDialog.binding.txtEditTitle.setTextColor(getResources().getColor(R.color.alert_dialog_info, null));
-                myAlertDialog.binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.alert_dialog_info, null)));
+                binding.imgDialog.setBackgroundColor(getResources().getColor(R.color.alert_dialog_info, null));
+                binding.imgDialog.setImageResource(R.drawable.ic_dialog_info);
+                binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.alert_dialog_info, null)));
                 break;
             case WARNING:
-                myAlertDialog.binding.imgDialog.setBackgroundColor(getResources().getColor(R.color.alert_dialog_warning, null));
-                myAlertDialog.binding.imgDialog.setImageResource(R.drawable.ic_dialog_warning);
-                myAlertDialog.binding.txtEditTitle.setText(getString(R.string.warning));
-                myAlertDialog.binding.txtEditTitle.setTextColor(getResources().getColor(R.color.alert_dialog_warning, null));
-                myAlertDialog.binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.alert_dialog_warning, null)));
+                binding.imgDialog.setBackgroundColor(getResources().getColor(R.color.alert_dialog_warning, null));
+                binding.imgDialog.setImageResource(R.drawable.ic_dialog_warning);
+                binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.alert_dialog_warning, null)));
                 break;
             case SUCCESS:
-                myAlertDialog.binding.imgDialog.setBackgroundColor(getResources().getColor(R.color.alert_dialog_success, null));
-                myAlertDialog.binding.imgDialog.setImageResource(R.drawable.ic_dialog_success);
-                myAlertDialog.binding.txtEditTitle.setText(getString(R.string.success));
-                myAlertDialog.binding.txtEditTitle.setTextColor(getResources().getColor(R.color.alert_dialog_success, null));
-                myAlertDialog.binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.alert_dialog_success, null)));
+                binding.imgDialog.setBackgroundColor(getResources().getColor(R.color.alert_dialog_success, null));
+                binding.imgDialog.setImageResource(R.drawable.ic_dialog_success);
+                binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.alert_dialog_success, null)));
                 break;
             case FAILED:
-                myAlertDialog.binding.imgDialog.setBackgroundColor(getResources().getColor(R.color.alert_dialog_failed, null));
-                myAlertDialog.binding.imgDialog.setImageResource(R.drawable.ic_dialog_failed);
-                myAlertDialog.binding.txtEditTitle.setText(getString(R.string.failed));
-                myAlertDialog.binding.txtEditTitle.setTextColor(getResources().getColor(R.color.alert_dialog_failed, null));
-                myAlertDialog.binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.alert_dialog_failed, null)));
+                binding.imgDialog.setBackgroundColor(getResources().getColor(R.color.alert_dialog_failed, null));
+                binding.imgDialog.setImageResource(R.drawable.ic_dialog_failed);
+                binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.alert_dialog_failed, null)));
                 break;
         }
+    }
+
+    private void setShowTitle(DialogStyle style) {
+        switch (style) {
+            case INPUT:
+            case ACTION:
+            case INFO:
+                binding.txtEditTitle.setText(title == null ? getString(R.string.information) : title);
+                binding.txtEditTitle.setTextColor(getResources().getColor(R.color.alert_dialog_info, null));
+                break;
+            case WARNING:
+                binding.txtEditTitle.setText(title == null ? getString(R.string.warning) : title);
+                binding.txtEditTitle.setTextColor(getResources().getColor(R.color.alert_dialog_warning, null));
+                break;
+            case SUCCESS:
+                binding.txtEditTitle.setText(title == null ? getString(R.string.success) : title);
+                binding.txtEditTitle.setTextColor(getResources().getColor(R.color.alert_dialog_success, null));
+                break;
+            case FAILED:
+                binding.txtEditTitle.setText(title == null ? getString(R.string.failed) : title);
+                binding.txtEditTitle.setTextColor(getResources().getColor(R.color.alert_dialog_failed, null));
+                break;
+        }
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(8, 8, 8, 8);
+        binding.txtEditTitle.setLayoutParams(layoutParams);
+    }
+
+    private void setShowMessage() {
+        binding.txtEditMessage.setText(message);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        layoutParams.setMargins(8, 8, 8, 8);
+        binding.txtEditMessage.setLayoutParams(layoutParams);
+        binding.txtEditMessage.post(() -> {
+            if (binding.txtEditMessage.getLineCount() > 3) {
+                binding.txtEditMessage.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+            }
+        });
     }
 
     private void setShowEditText(DialogStyle style) {
         switch (style) {
             case INPUT:
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                layoutParams.setMargins(0, 8, 0, 8);
+                layoutParams.setMargins(0, 0, 0, 0);
                 binding.editText.setLayoutParams(layoutParams);
                 binding.editText.setVisibility(View.VISIBLE);
-                binding.txtEditMessage.setText(message);
-                binding.txtEditMessage.post(() -> {
-                    if (binding.txtEditMessage.getLineCount() > 2) {
-                        binding.txtEditMessage.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
-                    }
-                });
                 break;
             case ACTION:
             case INFO:
@@ -186,17 +231,10 @@ public class MyAlertDialog extends DialogFragment {
             case SUCCESS:
             case WARNING:
             default:
-                String newLine = "\n";
                 LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(0, 0);
-                layoutParams2.setMargins(0, 0, 0, 0);
+                layoutParams2.setMargins(8, 8, 8, 8);
                 binding.editText.setLayoutParams(layoutParams2);
                 binding.editText.setVisibility(View.INVISIBLE);
-                binding.txtEditMessage.setText(String.format("%s%s", message, newLine));
-                binding.txtEditMessage.post(() -> {
-                    if (binding.txtEditMessage.getLineCount() > 3) {
-                        binding.txtEditMessage.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
-                    }
-                });
                 break;
         }
     }
