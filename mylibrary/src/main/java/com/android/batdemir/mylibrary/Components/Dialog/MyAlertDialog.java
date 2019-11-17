@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.batdemir.mylibrary.R;
 import com.android.batdemir.mylibrary.databinding.ComponentAlertDialogBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Objects;
 
@@ -127,7 +128,10 @@ public class MyAlertDialog extends DialogFragment {
 
         binding.btnOk.setOnClickListener(v -> {
             MyAlertDialog result = myAlertDialog;
-            myAlertDialog.dismiss();
+            if (style == DialogStyle.INPUT && result.getEditText().getText().toString().isEmpty())
+                Snackbar.make(binding.rootDialog, getString(R.string.lutfen_deger_giriniz), Snackbar.LENGTH_SHORT).show();
+            else
+                myAlertDialog.dismiss();
             MyAlertDialogListener clickOk = (MyAlertDialogListener) getActivity();
             Objects.requireNonNull(clickOk).dialogOk(result);
         });
