@@ -2,6 +2,7 @@ package com.android.batdemir.mylibrary.Components.Dialog;
 
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -30,20 +31,31 @@ public class MyAlertDialog extends DialogFragment {
 
     private static MyAlertDialog myAlertDialog = null;
     private static MyAlertDialogCreator myAlertDialogCreator = null;
+    private static Builder builder = new Builder();
 
-    private static final String KEY_TITLE = "KEY_TITLE";
+    private static final String KEY_TITLE_TEXT = "KEY_TITLE_TEXT";
+    private static final String KEY_OK_TEXT = "KEY_OK_TEXT";
+    private static final String KEY_CANCEL_TEXT = "KEY_CANCEL_TEXT";
     private static final String KEY_MESSAGE = "KEY_MESSAGE";
     private static final String KEY_STYLE = "KEY_STYLE";
 
     private ComponentAlertDialogBinding binding;
     private String title;
+    private String okText;
+    private String cancelText;
     private String message;
     private DialogStyle style;
 
     protected MyAlertDialog() {
     }
 
-    public static synchronized MyAlertDialog getInstance(String title, String message, DialogStyle dialogStyle) {
+    /**
+     * Info Style
+     * Has not input view
+     * Has not cancel button
+     * Settable Message
+     */
+    public static synchronized MyAlertDialog getInstance(String message) {
         if (myAlertDialog == null) {
             if (myAlertDialogCreator == null) {
                 myAlertDialog = new MyAlertDialog();
@@ -52,13 +64,39 @@ public class MyAlertDialog extends DialogFragment {
             }
         }
         Bundle bundle = new Bundle();
-        bundle.putString(KEY_TITLE, title);
         bundle.putString(KEY_MESSAGE, message);
-        bundle.putString(KEY_STYLE, dialogStyle.name());
+        bundle.putString(KEY_STYLE, DialogStyle.INFO.name());
         myAlertDialog.setArguments(bundle);
         return myAlertDialog;
     }
 
+    /**
+     * Info Style
+     * Has not input view
+     * Has not cancel button
+     * Settable Message
+     * Settable Ok Button Text
+     */
+    public static synchronized MyAlertDialog getInstance(String message, String okText) {
+        if (myAlertDialog == null) {
+            if (myAlertDialogCreator == null) {
+                myAlertDialog = new MyAlertDialog();
+            } else {
+                myAlertDialog = myAlertDialogCreator.create();
+            }
+        }
+        Bundle bundle = new Bundle();
+        bundle.putString(KEY_MESSAGE, message);
+        bundle.putString(KEY_OK_TEXT, okText);
+        bundle.putString(KEY_STYLE, DialogStyle.INFO.name());
+        myAlertDialog.setArguments(bundle);
+        return myAlertDialog;
+    }
+
+    /**
+     * Settable Message
+     * Settable Dialog Style
+     */
     public static synchronized MyAlertDialog getInstance(String message, DialogStyle dialogStyle) {
         if (myAlertDialog == null) {
             if (myAlertDialogCreator == null) {
@@ -74,17 +112,112 @@ public class MyAlertDialog extends DialogFragment {
         return myAlertDialog;
     }
 
+    /**
+     * Settable Message
+     * Settable Dialog Style
+     * Settable Ok Button Text
+     * Settable Cancel Button Text
+     */
+    public static synchronized MyAlertDialog getInstance(String message, String okText, String cancelText, DialogStyle dialogStyle) {
+        if (myAlertDialog == null) {
+            if (myAlertDialogCreator == null) {
+                myAlertDialog = new MyAlertDialog();
+            } else {
+                myAlertDialog = myAlertDialogCreator.create();
+            }
+        }
+        Bundle bundle = new Bundle();
+        bundle.putString(KEY_MESSAGE, message);
+        bundle.putString(KEY_OK_TEXT, okText);
+        bundle.putString(KEY_CANCEL_TEXT, cancelText);
+        bundle.putString(KEY_STYLE, dialogStyle.name());
+        myAlertDialog.setArguments(bundle);
+        return myAlertDialog;
+    }
+
+    /**
+     * Settable Title Text
+     * Settable Message
+     * Settable Dialog Style
+     */
+    public static synchronized MyAlertDialog getInstance(String title, String message, DialogStyle dialogStyle) {
+        if (myAlertDialog == null) {
+            if (myAlertDialogCreator == null) {
+                myAlertDialog = new MyAlertDialog();
+            } else {
+                myAlertDialog = myAlertDialogCreator.create();
+            }
+        }
+        Bundle bundle = new Bundle();
+        bundle.putString(KEY_TITLE_TEXT, title);
+        bundle.putString(KEY_MESSAGE, message);
+        bundle.putString(KEY_STYLE, dialogStyle.name());
+        myAlertDialog.setArguments(bundle);
+        return myAlertDialog;
+    }
+
+    /**
+     * Settable Title Text
+     * Settable Message
+     * Settable Dialog Style
+     * Settable Ok Button Text
+     * Settable Cancel Button Text
+     */
+    public static synchronized MyAlertDialog getInstance(String title, String message, String okText, String cancelText, DialogStyle dialogStyle) {
+        if (myAlertDialog == null) {
+            if (myAlertDialogCreator == null) {
+                myAlertDialog = new MyAlertDialog();
+            } else {
+                myAlertDialog = myAlertDialogCreator.create();
+            }
+        }
+        Bundle bundle = new Bundle();
+        bundle.putString(KEY_TITLE_TEXT, title);
+        bundle.putString(KEY_MESSAGE, message);
+        bundle.putString(KEY_OK_TEXT, okText);
+        bundle.putString(KEY_CANCEL_TEXT, cancelText);
+        bundle.putString(KEY_STYLE, dialogStyle.name());
+        myAlertDialog.setArguments(bundle);
+        return myAlertDialog;
+    }
+
     public static void setMyAlertDialogCreator(MyAlertDialogCreator myAlertDialogCreator) {
         MyAlertDialog.myAlertDialogCreator = myAlertDialogCreator;
+    }
+
+    public static void setBuilder(Builder builder) {
+        MyAlertDialog.builder = builder;
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.component_alert_dialog, container, false);
-        getObjectReferences();
-        loadData();
-        setListeners();
         return binding.getRoot();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        new Thread() {
+            @Override
+            public void run() {
+                Objects.requireNonNull(getActivity()).runOnUiThread(() -> getObjectReferences());
+            }
+        }.start();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        new Thread() {
+            @Override
+            public void run() {
+                Objects.requireNonNull(getActivity()).runOnUiThread(() -> {
+                    loadData();
+                    setListeners();
+                });
+            }
+        }.start();
     }
 
     @Override
@@ -103,7 +236,9 @@ public class MyAlertDialog extends DialogFragment {
 
     private void getObjectReferences() {
         assert getArguments() != null;
-        title = getArguments().getString(KEY_TITLE);
+        title = getArguments().getString(KEY_TITLE_TEXT);
+        okText = getArguments().getString(KEY_OK_TEXT);
+        cancelText = getArguments().getString(KEY_CANCEL_TEXT);
         message = getArguments().getString(KEY_MESSAGE);
         style = DialogStyle.valueOf(getArguments().getString(KEY_STYLE));
         setComponentStyle();
@@ -129,7 +264,7 @@ public class MyAlertDialog extends DialogFragment {
         binding.btnOk.setOnClickListener(v -> {
             MyAlertDialog result = myAlertDialog;
             if (style == DialogStyle.INPUT && result.getEditText().getText().toString().isEmpty())
-                Snackbar.make(binding.rootDialog, getString(R.string.lutfen_deger_giriniz), Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(binding.rootDialog, builder.inputEmptyMessage, Snackbar.LENGTH_SHORT).show();
             else
                 myAlertDialog.dismiss();
             MyAlertDialogListener clickOk = (MyAlertDialogListener) getActivity();
@@ -161,24 +296,24 @@ public class MyAlertDialog extends DialogFragment {
             case INPUT:
             case ACTION:
             case INFO:
-                binding.imgDialog.setBackgroundColor(getResources().getColor(R.color.alert_dialog_info, null));
+                binding.imgDialog.setBackgroundColor(builder.informationTitleColor);
                 binding.imgDialog.setImageResource(R.drawable.ic_dialog_info);
-                binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.alert_dialog_info, null)));
+                binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(builder.informationTitleColor));
                 break;
             case WARNING:
-                binding.imgDialog.setBackgroundColor(getResources().getColor(R.color.alert_dialog_warning, null));
+                binding.imgDialog.setBackgroundColor(builder.warningTitleColor);
                 binding.imgDialog.setImageResource(R.drawable.ic_dialog_warning);
-                binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.alert_dialog_warning, null)));
+                binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(builder.warningTitleColor));
                 break;
             case SUCCESS:
-                binding.imgDialog.setBackgroundColor(getResources().getColor(R.color.alert_dialog_success, null));
+                binding.imgDialog.setBackgroundColor(builder.successTitleColor);
                 binding.imgDialog.setImageResource(R.drawable.ic_dialog_success);
-                binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.alert_dialog_success, null)));
+                binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(builder.successTitleColor));
                 break;
             case FAILED:
-                binding.imgDialog.setBackgroundColor(getResources().getColor(R.color.alert_dialog_failed, null));
+                binding.imgDialog.setBackgroundColor(builder.failedTitleColor);
                 binding.imgDialog.setImageResource(R.drawable.ic_dialog_failed);
-                binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.alert_dialog_failed, null)));
+                binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(builder.failedTitleColor));
                 break;
         }
     }
@@ -188,20 +323,20 @@ public class MyAlertDialog extends DialogFragment {
             case INPUT:
             case ACTION:
             case INFO:
-                binding.txtEditTitle.setText(title == null ? getString(R.string.information) : title);
-                binding.txtEditTitle.setTextColor(getResources().getColor(R.color.alert_dialog_info, null));
+                binding.txtEditTitle.setText(title == null ? builder.informationTitle : title);
+                binding.txtEditTitle.setTextColor(builder.informationTitleColor);
                 break;
             case WARNING:
-                binding.txtEditTitle.setText(title == null ? getString(R.string.warning) : title);
-                binding.txtEditTitle.setTextColor(getResources().getColor(R.color.alert_dialog_warning, null));
+                binding.txtEditTitle.setText(title == null ? builder.warningTitle : title);
+                binding.txtEditTitle.setTextColor(builder.warningTitleColor);
                 break;
             case SUCCESS:
-                binding.txtEditTitle.setText(title == null ? getString(R.string.success) : title);
-                binding.txtEditTitle.setTextColor(getResources().getColor(R.color.alert_dialog_success, null));
+                binding.txtEditTitle.setText(title == null ? builder.successTitle : title);
+                binding.txtEditTitle.setTextColor(builder.successTitleColor);
                 break;
             case FAILED:
-                binding.txtEditTitle.setText(title == null ? getString(R.string.failed) : title);
-                binding.txtEditTitle.setTextColor(getResources().getColor(R.color.alert_dialog_failed, null));
+                binding.txtEditTitle.setText(title == null ? builder.failedTitle : title);
+                binding.txtEditTitle.setTextColor(builder.failedTitleColor);
                 break;
         }
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -250,6 +385,7 @@ public class MyAlertDialog extends DialogFragment {
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
                 layoutParams.setMargins(8, 8, 8, 8);
                 binding.btnCancel.setLayoutParams(layoutParams);
+                binding.btnCancel.setText(cancelText == null ? builder.cancelButtonText : cancelText);
                 break;
             case INFO:
             case FAILED:
@@ -264,6 +400,7 @@ public class MyAlertDialog extends DialogFragment {
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
         layoutParams.setMargins(8, 8, 8, 8);
         binding.btnOk.setLayoutParams(layoutParams);
+        binding.btnOk.setText(okText == null ? builder.okButtonText : okText);
     }
 
     //Component EditTextType
@@ -301,5 +438,80 @@ public class MyAlertDialog extends DialogFragment {
 
     public interface MyAlertDialogCreator {
         MyAlertDialog create();
+    }
+
+    //Builder
+
+    public static class Builder {
+        private String informationTitle = "Bilgi";
+        private int informationTitleColor = Color.parseColor("#4E55EB");
+        private String warningTitle = "Uyarı";
+        private int warningTitleColor = Color.parseColor("#FF9D00");
+        private String successTitle = "Başarılı";
+        private int successTitleColor = Color.parseColor("#03C9B8");
+        private String failedTitle = "Başarısız";
+        private int failedTitleColor = Color.parseColor("#FF0A00");
+        private String inputEmptyMessage = "Lütfen Değer Giriniz.";
+        private String cancelButtonText = "İptal";
+        private String okButtonText = "Tamam";
+
+        public Builder build() {
+            return this;
+        }
+
+        public Builder setInformationTitle(String informationTitle) {
+            this.informationTitle = informationTitle;
+            return this;
+        }
+
+        public Builder setInformationTitleColor(int informationTitleColor) {
+            this.informationTitleColor = informationTitleColor;
+            return this;
+        }
+
+        public Builder setWarningTitle(String warningTitle) {
+            this.warningTitle = warningTitle;
+            return this;
+        }
+
+        public Builder setWarningTitleColor(int warningTitleColor) {
+            this.warningTitleColor = warningTitleColor;
+            return this;
+        }
+
+        public Builder setSuccessTitle(String successTitle) {
+            this.successTitle = successTitle;
+            return this;
+        }
+
+        public Builder setSuccessTitleColor(int successTitleColor) {
+            this.successTitleColor = successTitleColor;
+            return this;
+        }
+
+        public Builder setFailedTitle(String failedTitle) {
+            this.failedTitle = failedTitle;
+            return this;
+        }
+
+        public Builder setFailedTitleColor(int failedTitleColor) {
+            this.failedTitleColor = failedTitleColor;
+            return this;
+        }
+
+        public Builder setInputEmptyMessage(String inputEmptyMessage) {
+            this.inputEmptyMessage = inputEmptyMessage;
+            return this;
+        }
+
+        public Builder setCancelButtonText(String cancelButtonText) {
+            this.cancelButtonText = cancelButtonText;
+            return this;
+        }
+
+        public Builder setOkButtonText(String okButtonText) {
+            this.okButtonText = okButtonText;
+            return this;
+        }
     }
 }

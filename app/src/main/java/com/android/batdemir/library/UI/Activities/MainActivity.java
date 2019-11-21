@@ -1,6 +1,7 @@
 package com.android.batdemir.library.UI.Activities;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.text.Html;
 import android.text.InputType;
@@ -69,7 +70,7 @@ public class MainActivity extends BaseActivity implements
 
         });
 
-        binding.btnDialogAction.setOnClickListener(v -> MyAlertDialog.getInstance("Action", MyAlertDialog.DialogStyle.ACTION).show(getSupportFragmentManager(), "action"));
+        binding.btnDialogAction.setOnClickListener(v -> MyAlertDialog.getInstance("Action", "ÇIK", "OK", MyAlertDialog.DialogStyle.ACTION).show(getSupportFragmentManager(), "action"));
 
         binding.btnValidSpinner.setOnClickListener(v -> MyAlertDialog.getInstance(String.valueOf(binding.mySpinner.isValid(true)), MyAlertDialog.DialogStyle.INFO).show(getSupportFragmentManager(), "valid"));
 

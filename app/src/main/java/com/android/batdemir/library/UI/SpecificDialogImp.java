@@ -16,6 +16,10 @@ public class SpecificDialogImp implements MyAlertDialog.MyAlertDialogCreator {
 
     public static class SpecificDialog extends MyAlertDialog {
 
+        public SpecificDialog() {
+            super();
+        }
+
         @Override
         public void show(@NonNull FragmentManager manager, @Nullable String tag) {
             super.show(manager, tag);

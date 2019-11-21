@@ -15,6 +15,13 @@ public class MyApplication extends Application {
         super.onCreate();
         MyAlertDialog.setMyAlertDialogCreator(new SpecificDialogImp());
         MyAlertDialog.getInstance("", MyAlertDialog.DialogStyle.INFO);
+        MyAlertDialog.setBuilder(new MyAlertDialog.Builder()
+                .setInformationTitle("testInformation")
+                .setInformationTitleColor(getColor(android.R.color.holo_green_dark))
+                .setWarningTitle("testWarning")
+                .setWarningTitleColor(getColor(android.R.color.holo_red_dark))
+                .setInputEmptyMessage("youCannotBePassEmpty")
+        );
         Log.d(TAG, "Created");
     }
 
