@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.android.batdemir.library.databinding.ActivityBottomNavigationBinding;
+import com.android.batdemir.mylibrary.Tools.Tool;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -26,6 +27,8 @@ public class BottomNavigationActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        binding.fab.setOnClickListener(v -> Tool.getInstance(context).move(TabbedActivity.class, true, false, null));
     }
 
 }
