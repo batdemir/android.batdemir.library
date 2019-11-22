@@ -5,7 +5,7 @@
     <ScrollView
         android:id="@+id/rootLogin"
         style="@style/root"
-        tools:context=".UI.Activities.LoginActivity">
+        tools:context=".ui.activities.LoginActivity">
 
         <RelativeLayout
             android:id="@+id/relativeSub"

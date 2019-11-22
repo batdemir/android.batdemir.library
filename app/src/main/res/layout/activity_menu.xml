@@ -7,7 +7,7 @@
         android:id="@+id/rootMenu"
         style="@style/root"
         android:orientation="vertical"
-        tools:context=".UI.Activities.MenuActivity">
+        tools:context=".ui.activities.MenuActivity">
 
         <RelativeLayout
             android:id="@+id/relativeUserInfo"

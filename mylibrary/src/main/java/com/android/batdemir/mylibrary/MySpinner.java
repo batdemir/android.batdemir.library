@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.android.batdemir.mylibrary.Components.Spinner.SpinnerAdapter;
-import com.android.batdemir.mylibrary.Components.Spinner.SpinnerHelper;
+import com.android.batdemir.mylibrary.components.spinner.SpinnerAdapter;
+import com.android.batdemir.mylibrary.components.spinner.SpinnerHelper;
 
 import java.lang.reflect.Field;
 import java.util.List;
