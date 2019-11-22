@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.circularreveal.CircularRevealRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="false"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
+        android:minHeight="18sp"
         android:textAppearance="@style/TitleTextAppearance" />
 
     <androidx.appcompat.widget.AppCompatSpinner
@@ -18,18 +18,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/label"
+        android:layout_alignParentBottom="false"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
+        android:minHeight="18sp"
         android:spinnerMode="dialog" />
 
-    <LinearLayout
+    <com.google.android.material.circularreveal.CircularRevealLinearLayout
+        android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@id/spinner"
+        android:layout_alignParentBottom="false"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:background="@color/divider" />
+        android:background="@android:color/black" />
 
-</RelativeLayout>
+</com.google.android.material.circularreveal.CircularRevealRelativeLayout>

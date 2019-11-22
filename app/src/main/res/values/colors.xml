@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#212121</color>
-    <color name="colorPrimaryDark">#000000</color>
-    <color name="colorPrimaryLight">#484848</color>
-    <color name="colorAccent">#d50000</color>
+    <color name="myPrimary">#212121</color>
+    <color name="myPrimaryDark">#000000</color>
+    <color name="myPrimaryLight">#484848</color>
+    <color name="myAccent">#d50000</color>
 
-    <color name="colorSecondary">#d50000</color>
-    <color name="colorSecondaryDark">#9b0000</color>
-    <color name="colorSecondaryLight">#ff5131</color>
+    <color name="mySecondary">#d50000</color>
+    <color name="mySecondaryDark">#9b0000</color>
+    <color name="mySecondaryLight">#ff5131</color>
 
     <color name="white">#fff</color>
     <color name="black">#000</color>
     <color name="grey">#bdbdbd</color>
+
+
+    <!-- DARK THEME COLOR PALLET -->
+    <color name="darkPrimary">#BB86FC</color>
+    <color name="darkPrimaryVariant">#3700B3</color>
+    <color name="darkSecondary">#03DAC6</color>
+    <color name="darkBackground">#121212</color>
+    <color name="darkSurface">#121212</color>
+    <color name="darkError">#CF6679</color>
+    <color name="darkOnPrimary">#000000</color>
+    <color name="darkOnSecondary">#000000</color>
+    <color name="darkOnBackground">#FFFFFF</color>
+    <color name="darkOnSurface">#FFFFFF</color>
+    <color name="darkOnError">#000000</color>
+
+    <!-- LIGHT THEME COLOR PALLET -->
 </resources>

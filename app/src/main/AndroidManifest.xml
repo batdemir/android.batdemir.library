@@ -3,11 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.android.batdemir.library">
 
-    <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality.
-    -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
@@ -23,68 +18,70 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/AppThemeActionBar"
         android:usesCleartextTraffic="true"
-        tools:ignore="GoogleAppIndexingWarning,InnerclassSeparator">
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning,InnerclassSeparator">
 
-        <!--
-             The API key for Google Maps-based APIs is defined as a string resource.
-             (See the file "res/values/google_maps_api.xml").
-             Note that the API key is linked to the encryption key used to sign the APK.
-             You need a different API key for each encryption key, including the release key that is used to
-             sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/.
-        -->
+        <!-- APP -->
+        <activity
+            android:name=".ui.ui_app.activities.LoginActivity"
+            android:screenOrientation="sensorPortrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.ui_app.activities.SignUpActivity"
+            android:screenOrientation="sensorPortrait" />
+
+        <activity
+            android:name=".ui.ui_app.activities.MenuActivity"
+            android:screenOrientation="sensorPortrait" />
+
+        <!-- TEST -->
+
+        <activity
+            android:name=".ui.ui_test.activities.MainActivity"
+            android:screenOrientation="sensor">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.ui_test.activities.RecyclerActivity"
+            android:screenOrientation="sensor" />
+
+        <!-- DEFAULT -->
+
+        <activity
+            android:name=".ui.ui_default.activities.ScrollingActivity"
+            android:screenOrientation="sensor">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.ui_default.activities.MapsActivity"
+            android:screenOrientation="sensor" />
+
+        <activity
+            android:name=".ui.ui_default.activities.TabbedActivity"
+            android:screenOrientation="sensor" />
+
+        <activity
+            android:name=".ui.ui_default.activities.BottomNavigationActivity"
+            android:screenOrientation="sensor" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name=".ui.activities.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
-        <activity
-            android:name=".ui.activities.TabbedActivity"
-            android:label="@string/title_activity_tabbed"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ui.activities.BottomNavigationActivity"
-            android:label="@string/title_activity_bottom_navigation"
-            android:theme="@style/MenuTheme" />
-        <activity
-            android:name=".ui.activities.ScrollingActivity"
-            android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ui.activities.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName=".ui.activities.MenuActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.android.batdemir.library.ui.activities.MenuActivity" />
-        </activity>
-        <activity
-            android:name=".ui.activities.MenuActivity"
-            android:screenOrientation="sensorPortrait" />
-        <activity
-            android:name=".ui.activities.SignUpActivity"
-            android:screenOrientation="sensorPortrait" />
-        <activity
-            android:name=".ui.activities.LoginActivity"
-            android:screenOrientation="sensorPortrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".ui.activities.RecyclerActivity" />
-        <activity android:name=".ui.activities.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

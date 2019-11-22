@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.circularreveal.cardview.CircularRevealCardView
         android:id="@+id/rootDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardPreventCornerOverlap="true">
 
-        <LinearLayout
+        <com.google.android.material.circularreveal.CircularRevealLinearLayout
             android:id="@+id/linear"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -26,19 +26,19 @@
                 android:paddingBottom="16dp"
                 android:src="@drawable/ic_dialog_success" />
 
-            <ScrollView
+            <androidx.core.widget.NestedScrollView
                 android:id="@+id/scrollView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <LinearLayout
+                <com.google.android.material.circularreveal.CircularRevealLinearLayout
                     android:id="@+id/linearSub"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="8dp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/txtEditTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
                         android:text="@string/todo"
                         android:textAppearance="@style/TitleTextAppearance" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/txtEditMessage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
                         android:textAppearance="@style/ValueTextAppearance"
                         tools:ignore="Autofill,LabelFor" />
 
-                    <LinearLayout
+                    <com.google.android.material.circularreveal.CircularRevealLinearLayout
                         android:id="@+id/linearButtons"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -84,37 +84,33 @@
                         android:layout_marginBottom="@dimen/bottom"
                         android:orientation="horizontal">
 
-                        <androidx.appcompat.widget.AppCompatButton
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnCancel"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:background="@drawable/gradient_box"
                             android:gravity="center"
                             android:text="@string/cancel"
-                            android:textAppearance="@style/TitleTextAppearance"
-                            android:textColor="@android:color/white" />
+                            android:textAppearance="@style/TitleTextAppearance" />
 
-                        <androidx.appcompat.widget.AppCompatButton
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnOk"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:background="@drawable/gradient_box"
-                            android:backgroundTint="@color/alert_dialog_success"
                             android:gravity="center"
                             android:text="@string/ok"
                             android:textAppearance="@style/TitleTextAppearance"
                             android:textColor="@android:color/white" />
 
-                    </LinearLayout>
+                    </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
-                </LinearLayout>
+                </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
-            </ScrollView>
+            </androidx.core.widget.NestedScrollView>
 
-        </LinearLayout>
+        </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 
 </layout>

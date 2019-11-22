@@ -23,13 +23,13 @@ public class SpinnerAdapter extends ArrayAdapter<SpinnerModel> {
     private Integer textAppearance;
 
     public SpinnerAdapter(Context context, List<SpinnerModel> models) {
-        super(context, R.layout.view_spinner_item);
+        super(context, R.layout.item_spinner);
         this.context = context;
         this.models = models;
     }
 
     public SpinnerAdapter(Context context, List<SpinnerModel> models, Integer textAppearance) {
-        super(context, R.layout.view_spinner_item);
+        super(context, R.layout.item_spinner);
         this.context = context;
         this.models = models;
         this.textAppearance = textAppearance;
@@ -70,7 +70,7 @@ public class SpinnerAdapter extends ArrayAdapter<SpinnerModel> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.view_spinner_item, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_spinner, parent, false);
         }
         new SpinnerViewHolder(convertView).setData(models.get(position), false);
         return convertView;
@@ -79,7 +79,7 @@ public class SpinnerAdapter extends ArrayAdapter<SpinnerModel> {
     @Override
     public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.view_spinner_item, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_spinner, parent, false);
         }
         convertView.setPadding(0, 8, 0, 8);
         new SpinnerViewHolder(convertView).setData(models.get(position), true);

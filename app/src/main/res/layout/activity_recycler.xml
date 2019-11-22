@@ -2,14 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <com.google.android.material.circularreveal.CircularRevealLinearLayout
         android:id="@+id/rootRecyclerListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".RecyclerListViewActivity">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnPreviousPage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
             android:textAllCaps="false"
             tools:ignore="HardcodedText" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnConnectService"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,8 +29,8 @@
             android:id="@+id/recyclerListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/recycler_view_item" />
+            tools:listitem="@layout/item_player" />
 
-    </LinearLayout>
+    </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
 </layout>

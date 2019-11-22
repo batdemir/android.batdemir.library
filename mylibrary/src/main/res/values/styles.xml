@@ -4,20 +4,14 @@
     <!--STYLE TEXT APPEARANCE-->
 
     <style name="TitleTextAppearance" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@android:color/black</item>
         <item name="android:fontFamily">@font/roboto</item>
     </style>
 
     <style name="ValueTextAppearance" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@android:color/black</item>
         <item name="android:fontFamily">@font/roboto</item>
     </style>
 
     <style name="SubValueTextAppearance" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@android:color/black</item>
         <item name="android:fontFamily">@font/roboto</item>
     </style>
 

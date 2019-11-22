@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.circularreveal.CircularRevealRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="false"
         android:layout_centerHorizontal="true"
         android:textAppearance="@style/TitleTextAppearance">
 
@@ -15,43 +16,45 @@
             android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/edit_text_value_color"
             android:imeOptions="actionDone"
             android:singleLine="true"
             android:textAppearance="@style/ValueTextAppearance" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/txtEditCharCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/inputLayout"
         android:layout_alignTop="@id/txtSlash"
         android:layout_alignBottom="@id/txtSlash"
+        android:layout_alignParentStart="false"
         android:layout_toStartOf="@id/txtSlash"
         android:text="0"
         android:textAppearance="@style/SubValueTextAppearance" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/txtSlash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/txtEditMaxCharCount"
         android:layout_alignBottom="@id/txtEditMaxCharCount"
+        android:layout_alignParentStart="false"
         android:layout_toStartOf="@id/txtEditMaxCharCount"
         android:text="/"
         android:textAppearance="@style/SubValueTextAppearance" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/txtEditMaxCharCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/inputLayout"
+        android:layout_alignParentStart="false"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="4dp"
+        android:layout_alignParentBottom="false"
         android:text="0"
         android:textAppearance="@style/SubValueTextAppearance" />
 
 
-</RelativeLayout>
+</com.google.android.material.circularreveal.CircularRevealRelativeLayout>

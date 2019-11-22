@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <com.google.android.material.circularreveal.CircularRevealLinearLayout
         android:id="@+id/rootMenu"
-        style="@style/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.activities.MenuActivity">
+        tools:context=".ui.ui_app.activities.MenuActivity">
 
-        <RelativeLayout
+        <com.google.android.material.circularreveal.CircularRevealRelativeLayout
             android:id="@+id/relativeUserInfo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background_menu">
+            android:layout_height="wrap_content">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgEditUser"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -34,58 +34,67 @@
 
                 <TableRow>
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/txtActiveTodoCount"
-                        style="@style/menu_title_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="@string/active_in_week" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/menu_title_text_view"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="@string/dot" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/txtEditActiveTodoCount"
-                        style="@style/menu_value_text_view" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
                 </TableRow>
 
                 <TableRow>
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/txtExpiredTodoCount"
-                        style="@style/menu_title_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="@string/expired_in_week" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/menu_title_text_view"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="@string/dot" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/txtEditExpiredTodoCount"
-                        style="@style/menu_value_text_view" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
                 </TableRow>
 
                 <TableRow>
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/txtUpComingTodo"
-                        style="@style/menu_title_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="@string/up_coming" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/menu_title_text_view"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="@string/dot" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/txtEditImmediateTodo"
-                        style="@style/menu_value_text_view" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
                 </TableRow>
 
             </TableLayout>
 
-        </RelativeLayout>
+        </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerEvents"
@@ -97,6 +106,6 @@
             app:spanCount="2"
             tools:listitem="@layout/item_event" />
 
-    </LinearLayout>
+    </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
 </layout>

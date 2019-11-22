@@ -2,30 +2,56 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/rootLogin"
-        style="@style/root"
-        tools:context=".ui.activities.LoginActivity">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.ui_app.activities.LoginActivity">
 
-        <RelativeLayout
+        <com.google.android.material.circularreveal.CircularRevealRelativeLayout
             android:id="@+id/relativeSub"
-            style="@style/sub">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnSignUp"
-                style="@style/login_button"
-                android:layout_below="@id/btnLogin"
-                android:backgroundTint="@color/colorSecondaryDark"
-                android:text="@string/sign_up" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/circularImageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/ic_launcher" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnLogin"
-                style="@style/login_button"
-                android:layout_below="@+id/checkBoxRememberMe"
-                android:backgroundTint="@color/colorSecondary"
-                android:text="@string/log_in" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputLayoutUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/circularImageView"
+                android:hint="@string/username">
 
-            <androidx.appcompat.widget.AppCompatCheckBox
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textVisiblePassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputLayoutPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/inputLayoutUsername"
+                android:hint="@string/password">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/checkBoxRememberMe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -34,14 +60,7 @@
                 android:text="@string/remember_me"
                 android:textColor="@color/white" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/circularImageView"
-                style="@style/login_imageView"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:src="@mipmap/ic_launcher" />
-
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/forgot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,34 +70,22 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputLayoutPassword"
-                style="@style/login_inputLayout"
-                android:layout_below="@id/inputLayoutUsername"
-                android:hint="@string/password">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btnLogin"
+                android:text="@string/sign_up" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextPassword"
-                    style="@style/login_editText"
-                    android:inputType="textPassword" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/checkBoxRememberMe"
+                android:text="@string/log_in" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputLayoutUsername"
-                style="@style/login_inputLayout"
-                android:layout_below="@id/circularImageView"
-                android:hint="@string/username">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextUsername"
-                    style="@style/login_editText"
-                    android:inputType="textVisiblePassword" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </RelativeLayout>
-
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </layout>
