@@ -28,7 +28,6 @@ import java.util.Objects;
 
 @SuppressLint("ClickableViewAccessibility")
 public class MyAlertDialog extends DialogFragment {
-
     private static MyAlertDialog myAlertDialog = null;
     private static MyAlertDialogCreator myAlertDialogCreator = null;
     private static Builder builder = new Builder();
@@ -38,6 +37,8 @@ public class MyAlertDialog extends DialogFragment {
     private static final String KEY_CANCEL_TEXT = "KEY_CANCEL_TEXT";
     private static final String KEY_MESSAGE = "KEY_MESSAGE";
     private static final String KEY_STYLE = "KEY_STYLE";
+
+    private int inputType = InputType.TYPE_CLASS_TEXT;
 
     private ComponentAlertDialogBinding binding;
     private String title;
@@ -315,6 +316,8 @@ public class MyAlertDialog extends DialogFragment {
                 binding.imgDialog.setImageResource(R.drawable.ic_dialog_failed);
                 binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(builder.failedTitleColor));
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + style);
         }
     }
 
@@ -338,6 +341,8 @@ public class MyAlertDialog extends DialogFragment {
                 binding.txtEditTitle.setText(title == null ? builder.failedTitle : title);
                 binding.txtEditTitle.setTextColor(builder.failedTitleColor);
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + style);
         }
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(8, 8, 8, 8);
@@ -404,8 +409,6 @@ public class MyAlertDialog extends DialogFragment {
     }
 
     //Component EditTextType
-
-    private int inputType = InputType.TYPE_CLASS_TEXT;
 
     private int getInputType() {
         return inputType;

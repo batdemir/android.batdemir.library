@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.batdemir.library.R;
 import com.android.batdemir.mylibrary.components.dialog.MyAlertDialog;
 import com.android.batdemir.mylibrary.components.dialog.MyAlertDialogListener;
-import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.Objects;
 

@@ -51,9 +51,9 @@ public class SpinnerAdapter extends ArrayAdapter<SpinnerModel> {
     }
 
     private class SpinnerViewHolder {
-        TextView textView;
+        private TextView textView;
 
-        SpinnerViewHolder(View v) {
+        private SpinnerViewHolder(View v) {
             this.textView = v.findViewById(R.id.spinnerItem);
             textView.setTextAppearance(textAppearance != null ? textAppearance : R.style.ValueTextAppearance);
         }
