@@ -6,7 +6,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:fontFamily">@font/roboto</item>
-        <item name="android:configChanges">keyboardHidden|orientation|screenSize</item>
+        <item name="android:configChanges">keyboardHidden|orientation|screenSize|uiMode</item>
         <item name="android:windowSoftInputMode">stateAlwaysHidden</item>
 
         <item name="colorPrimary">@color/darkPrimary</item>
@@ -25,7 +25,7 @@
     <style name="AppThemeActionBar" parent="Theme.MaterialComponents.DayNight">
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/roboto</item>
-        <item name="android:configChanges">keyboardHidden|orientation|screenSize</item>
+        <item name="android:configChanges">keyboardHidden|orientation|screenSize|uiMode</item>
         <item name="android:windowSoftInputMode">stateAlwaysHidden</item>
 
         <item name="colorPrimary">@color/darkPrimary</item>
