@@ -7,10 +7,15 @@ import androidx.lifecycle.ViewModel;
 
 public class PageViewModel extends ViewModel {
 
-    private MutableLiveData<Integer> mIndex = new MutableLiveData<>();
-    private LiveData<String> mText = Transformations.map(mIndex, input -> "Hello world from section: " + input);
+    private MutableLiveData<Integer> mIndex;
+    private LiveData<String> mText;
 
-    void setIndex(int index) {
+    public PageViewModel() {
+        mIndex = new MutableLiveData<>();
+        mText = Transformations.map(mIndex, input -> "Hello world from section: " + input);
+    }
+
+    public void setIndex(int index) {
         mIndex.setValue(index);
     }
 

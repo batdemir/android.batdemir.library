@@ -181,12 +181,12 @@ public class MyEditText extends RelativeLayout {
 
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+            //Nothing
         }
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+            //Nothing
         }
 
         @Override

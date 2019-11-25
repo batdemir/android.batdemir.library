@@ -26,10 +26,10 @@ public class AdapterEvents extends RecyclerView.Adapter {
         this.models = models;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        Event model;
+    private class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private Event model;
 
-        MyViewHolder(ItemEventBinding binding) {
+        private MyViewHolder(ItemEventBinding binding) {
             super(binding.getRoot());
             binding.getRoot().setOnClickListener(this);
         }

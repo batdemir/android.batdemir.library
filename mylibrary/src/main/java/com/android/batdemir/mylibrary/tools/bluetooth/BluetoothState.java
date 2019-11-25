@@ -1,10 +1,6 @@
 package com.android.batdemir.mylibrary.tools.bluetooth;
 
 public class BluetoothState {
-
-    private BluetoothState() {
-    }
-
     // Constants that indicate the current connection state
     public static final int STATE_NONE = 0;        // we're doing nothing
     public static final int STATE_LISTEN = 1;        // now listening for incoming connections
@@ -33,4 +29,7 @@ public class BluetoothState {
 
     // Return Intent extra
     public static final String EXTRA_DEVICE_ADDRESS = "device_address";
+
+    private BluetoothState() {
+    }
 }
