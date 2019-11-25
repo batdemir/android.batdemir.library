@@ -10,10 +10,10 @@
         tools:context=".RecyclerListViewActivity">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnPreviousPage"
+            android:id="@+id/btnNextPage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Go Previous Page"
+            android:text="Go Next Page"
             android:textAllCaps="false"
             tools:ignore="HardcodedText" />
 

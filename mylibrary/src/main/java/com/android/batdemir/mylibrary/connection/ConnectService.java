@@ -1,4 +1,4 @@
-package com.android.batdemir.mylibrary.api;
+package com.android.batdemir.mylibrary.connection;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;

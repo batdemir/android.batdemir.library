@@ -1,7 +1,6 @@
 package com.android.batdemir.mylibrary;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.text.Editable;
 import android.text.InputType;
@@ -198,17 +197,11 @@ public class MyEditText extends RelativeLayout {
             txtEditCharCount.setText(String.valueOf(str.length()));
 
             if (str.length() > Integer.parseInt(txtEditMaxCharCount.getText().toString())) {
-                editText.setBackgroundTintList(ColorStateList.valueOf(getContext().getColor(R.color.edit_text_warning_color)));
-                editText.setError("Girilen Değer " + txtEditMaxCharCount.getText().toString() + " Karakterden Daha Fazla Olamaz.");
-                txtEditCharCount.setTextColor(getContext().getColor(R.color.edit_text_warning_color));
-                txtEditMaxCharCount.setTextColor(getContext().getColor(R.color.edit_text_warning_color));
-                txtSlash.setTextColor(getContext().getColor(R.color.edit_text_warning_color));
+                editText.setBackgroundTintList(getResources().getColorStateList(R.color.design_default_color_error, getContext().getTheme()));
+                editText.setError(String.format("%s Karakterden Daha Fazla Olamaz.", txtEditMaxCharCount.getText().toString()));
             } else {
-                editText.setBackgroundTintList(ColorStateList.valueOf(getContext().getColor(R.color.edit_text_value_color)));
+                editText.setBackgroundTintList(null);
                 editText.setError(null);
-                txtEditCharCount.setTextColor(getContext().getColor(R.color.edit_text_value_color));
-                txtEditMaxCharCount.setTextColor(getContext().getColor(R.color.edit_text_value_color));
-                txtSlash.setTextColor(getContext().getColor(R.color.edit_text_value_color));
             }
         }
     }

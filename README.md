@@ -59,7 +59,6 @@
 *If user has not any network connection, it does auto exception dialog for you
 *And it does auto async and showing progress bar for you
 
-
 ## License
     Copyright (c) 2019 Batuhan Demir
 

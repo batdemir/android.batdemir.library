@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">android.batdemir.library</string>
     <string name="alert_dialog_key_exit">Uygulamadan Çıkmak İstediğinize Emin Misiniz ?</string>
 
@@ -143,4 +143,5 @@
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_testing">TestingActivity</string>
 </resources>

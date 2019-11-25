@@ -1,3 +1,5 @@
 <resources>
-    <dimen name="root_padding">16dp</dimen>
+    <dimen name="root_padding">16sp</dimen>
+    <dimen name="marginTop">8sp</dimen>
+    <dimen name="marginBottom">8sp</dimen>
 </resources>

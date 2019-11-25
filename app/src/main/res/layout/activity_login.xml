@@ -6,85 +6,88 @@
         android:id="@+id/rootLogin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="@dimen/root_padding"
         tools:context=".ui.ui_app.activities.LoginActivity">
 
-        <com.google.android.material.circularreveal.CircularRevealRelativeLayout
-            android:id="@+id/relativeSub"
+        <com.google.android.material.circularreveal.CircularRevealLinearLayout
+            android:id="@+id/linearSub"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/circularImageView"
+                android:id="@+id/imgLogo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
                 android:src="@mipmap/ic_launcher" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputLayoutUsername"
+            <com.google.android.material.circularreveal.CircularRevealLinearLayout
+                android:id="@+id/linearInputArea"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/circularImageView"
-                android:hint="@string/username">
+                android:layout_marginTop="@dimen/marginTop"
+                android:layout_marginBottom="@dimen/marginBottom"
+                android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextUsername"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputLayoutUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textVisiblePassword" />
+                    android:hint="@string/username">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextUsername"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textVisiblePassword" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputLayoutPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/inputLayoutUsername"
-                android:hint="@string/password">
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextPassword"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputLayoutPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword" />
+                    android:hint="@string/password">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
             <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/checkBoxRememberMe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/inputLayoutPassword"
                 android:checked="true"
-                android:text="@string/remember_me"
-                android:textColor="@color/white" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/forgot"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/btnSignUp"
-                android:text="@string/forgot_your_password"
-                android:textAlignment="textEnd"
-                android:textAllCaps="false"
-                android:textColor="@color/white" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSignUp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/btnLogin"
-                android:text="@string/sign_up" />
+                android:text="@string/remember_me" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/checkBoxRememberMe"
                 android:text="@string/log_in" />
 
-        </com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_up" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/forgot"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="@string/forgot_your_password" />
+
+        </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 

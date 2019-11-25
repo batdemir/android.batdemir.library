@@ -186,7 +186,7 @@ public class BluetoothService {
         // The local server socket
         private BluetoothServerSocket mmServerSocket;
         private String mSocketType;
-        boolean isRunning = true;
+        private boolean isRunning = true;
 
         public AcceptThread(boolean isAndroid) {
             BluetoothServerSocket tmp = null;

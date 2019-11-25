@@ -10,10 +10,10 @@
         app:cardPreventCornerOverlap="true">
 
         <com.google.android.material.circularreveal.CircularRevealLinearLayout
-            android:id="@+id/linear"
+            android:id="@+id/linearSub"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:minWidth="320dp"
+            android:minWidth="@dimen/dialogMinWidth"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -21,9 +21,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/alert_dialog_success"
-                android:contentDescription="@string/todo"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
+                android:paddingTop="@dimen/imagePaddingTop"
+                android:paddingBottom="@dimen/imagePaddingBottom"
                 android:src="@drawable/ic_dialog_success" />
 
             <androidx.core.widget.NestedScrollView
@@ -32,18 +31,15 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.circularreveal.CircularRevealLinearLayout
-                    android:id="@+id/linearSub"
+                    android:id="@+id/linearInputArea"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="8dp">
+                    android:orientation="vertical">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/txtEditTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/top"
-                        android:layout_marginBottom="@dimen/bottom"
                         android:fontFamily="@font/roboto_bold"
                         android:gravity="center"
                         android:text="@string/todo"
@@ -53,18 +49,15 @@
                         android:id="@+id/txtEditMessage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/top"
-                        android:layout_marginBottom="@dimen/bottom"
+                        android:fontFamily="@font/roboto"
                         android:gravity="center"
-                        android:text=""
                         android:textAppearance="@style/ValueTextAppearance" />
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/editText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/top"
-                        android:layout_marginBottom="@dimen/top"
+                        android:fontFamily="@font/roboto"
                         android:gravity="center"
                         android:imeOptions="actionDone"
                         android:inputType="text"
@@ -79,9 +72,7 @@
                     <com.google.android.material.circularreveal.CircularRevealLinearLayout
                         android:id="@+id/linearButtons"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="@dimen/top"
-                        android:layout_marginBottom="@dimen/bottom"
+                        android:layout_height="@dimen/buttonMinHeight"
                         android:orientation="horizontal">
 
                         <com.google.android.material.button.MaterialButton
@@ -89,16 +80,15 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:gravity="center"
                             android:text="@string/cancel"
-                            android:textAppearance="@style/TitleTextAppearance" />
+                            android:textAppearance="@style/TitleTextAppearance"
+                            android:textColor="@android:color/white" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnOk"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:gravity="center"
                             android:text="@string/ok"
                             android:textAppearance="@style/TitleTextAppearance"
                             android:textColor="@android:color/white" />

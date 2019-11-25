@@ -69,22 +69,23 @@ public class SpinnerAdapter extends ArrayAdapter<SpinnerModel> {
     @NotNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_spinner, parent, false);
+        View root = convertView;
+        if (root == null) {
+            root = LayoutInflater.from(context).inflate(R.layout.item_spinner, parent, false);
         }
-        new SpinnerViewHolder(convertView).setData(models.get(position), false);
-        return convertView;
+        new SpinnerViewHolder(root).setData(models.get(position), false);
+        return root;
     }
 
     @Override
     public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_spinner, parent, false);
+        View root = convertView;
+        if (root == null) {
+            root = LayoutInflater.from(context).inflate(R.layout.item_spinner, parent, false);
         }
-        convertView.setPadding(0, 8, 0, 8);
-        new SpinnerViewHolder(convertView).setData(models.get(position), true);
-        return convertView;
+        root.setPadding(0, 8, 0, 8);
+        new SpinnerViewHolder(root).setData(models.get(position), true);
+        return root;
     }
-
 
 }

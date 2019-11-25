@@ -3,6 +3,6 @@
     android:id="@+id/spinnerItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/top"
-    android:paddingBottom="@dimen/bottom"
+    android:paddingTop="@dimen/paddingTop"
+    android:paddingBottom="@dimen/paddingBottom"
     android:textAppearance="@style/ValueTextAppearance" />

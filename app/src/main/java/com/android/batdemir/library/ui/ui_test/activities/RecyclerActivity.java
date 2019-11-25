@@ -17,10 +17,10 @@ import com.android.batdemir.library.api.CallTest;
 import com.android.batdemir.library.models.Player;
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ActivityRecyclerBinding;
-import com.android.batdemir.mylibrary.api.Connect;
-import com.android.batdemir.mylibrary.api.ConnectServiceErrorListener;
-import com.android.batdemir.mylibrary.api.ConnectServiceListener;
-import com.android.batdemir.mylibrary.api.RetrofitClient;
+import com.android.batdemir.mylibrary.connection.Connect;
+import com.android.batdemir.mylibrary.connection.ConnectServiceErrorListener;
+import com.android.batdemir.mylibrary.connection.ConnectServiceListener;
+import com.android.batdemir.mylibrary.connection.RetrofitClient;
 import com.android.batdemir.mylibrary.components.dialog.MyAlertDialog;
 import com.android.batdemir.mylibrary.tools.swipe.SwipeController;
 import com.android.batdemir.mylibrary.tools.swipe.SwipeControllerActions;
@@ -58,7 +58,7 @@ public class RecyclerActivity extends BaseActivity implements
 
     @Override
     public void setListeners() {
-        binding.btnPreviousPage.setOnClickListener(v -> finish());
+        binding.btnNextPage.setOnClickListener(v -> finish());
 
         binding.btnConnectService.setOnClickListener(v -> {
             RetrofitClient.setBaseUrl("https://api.github.com");
@@ -108,13 +108,10 @@ public class RecyclerActivity extends BaseActivity implements
                 str += "\tItem Name: " + player.getName();
                 str += "\tItem Age: " + player.getAge().toString();
                 str += "\tItem Rating: " + player.getRating().toString();
-                super.onLeftSwiped(position, binding.rootRecyclerListView, str, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        adapterRecyclerView.getModels().add(position, player);
-                        binding.recyclerListView.setAdapter(new AdapterRecyclerView(context, adapterRecyclerView.getModels()));
-                        binding.recyclerListView.smoothScrollToPosition(position);
-                    }
+                super.onLeftSwiped(position, binding.rootRecyclerListView, str, v -> {
+                    adapterRecyclerView.getModels().add(position, player);
+                    binding.recyclerListView.setAdapter(new AdapterRecyclerView(context, adapterRecyclerView.getModels()));
+                    binding.recyclerListView.smoothScrollToPosition(position);
                 });
             }
         });
@@ -129,13 +126,10 @@ public class RecyclerActivity extends BaseActivity implements
                 str += "\tItem Name: " + player.getName();
                 str += "\tItem Age: " + player.getAge().toString();
                 str += "\tItem Rating: " + player.getRating().toString();
-                super.onRightSwiped(position, binding.rootRecyclerListView, str, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        adapterRecyclerView.getModels().remove(player);
-                        binding.recyclerListView.setAdapter(new AdapterRecyclerView(context, adapterRecyclerView.getModels()));
-                        binding.recyclerListView.smoothScrollToPosition(position);
-                    }
+                super.onRightSwiped(position, binding.rootRecyclerListView, str, v -> {
+                    adapterRecyclerView.getModels().remove(player);
+                    binding.recyclerListView.setAdapter(new AdapterRecyclerView(context, adapterRecyclerView.getModels()));
+                    binding.recyclerListView.smoothScrollToPosition(position);
                 });
             }
         });

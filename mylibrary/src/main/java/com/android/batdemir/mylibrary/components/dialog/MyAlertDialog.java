@@ -28,6 +28,7 @@ import java.util.Objects;
 
 @SuppressLint("ClickableViewAccessibility")
 public class MyAlertDialog extends DialogFragment {
+
     private static MyAlertDialog myAlertDialog = null;
     private static MyAlertDialogCreator myAlertDialogCreator = null;
     private static Builder builder = new Builder();
@@ -39,6 +40,8 @@ public class MyAlertDialog extends DialogFragment {
     private static final String KEY_STYLE = "KEY_STYLE";
 
     private int inputType = InputType.TYPE_CLASS_TEXT;
+
+    private int margin = 16;
 
     private ComponentAlertDialogBinding binding;
     private String title;
@@ -345,14 +348,14 @@ public class MyAlertDialog extends DialogFragment {
                 throw new IllegalStateException("Unexpected value: " + style);
         }
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(8, 8, 8, 8);
+        layoutParams.setMargins(margin, margin, margin, margin);
         binding.txtEditTitle.setLayoutParams(layoutParams);
     }
 
     private void setShowMessage() {
         binding.txtEditMessage.setText(message);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        layoutParams.setMargins(8, 8, 8, 8);
+        layoutParams.setMargins(margin, margin, margin, margin);
         binding.txtEditMessage.setLayoutParams(layoutParams);
         binding.txtEditMessage.post(() -> {
             if (binding.txtEditMessage.getLineCount() > 3) {
@@ -365,7 +368,7 @@ public class MyAlertDialog extends DialogFragment {
         switch (style) {
             case INPUT:
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                layoutParams.setMargins(0, 0, 0, 0);
+                layoutParams.setMargins(margin, margin, margin, margin);
                 binding.editText.setLayoutParams(layoutParams);
                 binding.editText.setVisibility(View.VISIBLE);
                 break;
@@ -376,7 +379,7 @@ public class MyAlertDialog extends DialogFragment {
             case WARNING:
             default:
                 LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(0, 0);
-                layoutParams2.setMargins(8, 8, 8, 8);
+                layoutParams2.setMargins(0, 0, 0, 0);
                 binding.editText.setLayoutParams(layoutParams2);
                 binding.editText.setVisibility(View.INVISIBLE);
                 break;
@@ -388,7 +391,7 @@ public class MyAlertDialog extends DialogFragment {
             case INPUT:
             case ACTION:
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
-                layoutParams.setMargins(8, 8, 8, 8);
+                layoutParams.setMargins(margin, margin, margin, margin);
                 binding.btnCancel.setLayoutParams(layoutParams);
                 binding.btnCancel.setText(cancelText == null ? builder.cancelButtonText : cancelText);
                 break;
@@ -403,7 +406,7 @@ public class MyAlertDialog extends DialogFragment {
                 break;
         }
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
-        layoutParams.setMargins(8, 8, 8, 8);
+        layoutParams.setMargins(margin, margin, margin, margin);
         binding.btnOk.setLayoutParams(layoutParams);
         binding.btnOk.setText(okText == null ? builder.okButtonText : okText);
     }

@@ -1,4 +1,4 @@
-package com.android.batdemir.mylibrary.api;
+package com.android.batdemir.mylibrary.connection;
 
 import android.content.Context;
 
@@ -12,10 +12,6 @@ import retrofit2.Call;
 public class Connect {
 
     private String noConnectionMessage = "Lütfen, Internet Bağlantınızı Kontrol Ediniz.";
-
-    public Connect() {
-        //Not Implemented
-    }
 
     public void setNoConnectionMessage(String noConnectionMessage) {
         this.noConnectionMessage = noConnectionMessage;
