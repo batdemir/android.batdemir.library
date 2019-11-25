@@ -6,16 +6,16 @@
 
 ## Tool
 ### void move(...)
-*  This method is used for change effectiveness.
-*  Activitiy means that you can use it for which activity you want to go to.
-*  Direction means if the direction is right, animation is from right to left, and animation is from right to left.
-*  IsStack means whether the current activity can be destroyed.
-*  Bundle means that you can use this example if you want to pass data to other activities.
+*This method is used for change effectiveness.
+*Activitiy means that you can use it for which activity you want to go to.
+*Direction means if the direction is right, animation is from right to left, and animation is from right to left.
+*IsStack means whether the current activity can be destroyed.
+*Bundle means that you can use this example if you want to pass data to other activities.
 ### void anim(...)
 ### void animDialog(...)
 
 ## ToolConnection
-*  This methods all about application network connection.
+*This methods all about application network connection.
 ### NetworkInfo getNetworkInfo(...)
 ### boolean isConnected(...)
 ### boolean isConnectedWifi(...)
@@ -26,7 +26,7 @@
 ### String getIPAddress(...)
 
 ## ToolSharedPreferences
-*  This methods all about application registery. Easy use to one row.
+*This methods all about application registery. Easy use to one row.
 ### getInteger(...)/setInteger(...)
 ### getString(...)/setString(...)
 ### getBoolean(...)/setBoolean(...)
@@ -34,13 +34,13 @@
 ### getFloat(...)/setFloat(...)
 
 ## ToolTimeEexpressions
-*  This methods all about casting date methods.
-#### setStringToDate(...)
-#### setDateToString(...)
-#### setDateFormat(...)
+*This methods all about casting date methods.
+### setStringToDate(...)
+### setDateToString(...)
+### setDateFormat(...)
 
 ## MyAlertDialog
-*  This component default settings
+*This component default settings
 ### setComponentProperty(...)
 ### setIsCancelable(...)
 ### setShowCancelButton(...)
@@ -49,15 +49,15 @@
 ### setEditTextInputType(...)
 
 ## RetrofitClient
-*  This class using for service connections basic setting
+*This class using for service connections basic setting
 ### setBaseUrl(...)
 ### setSll(...)
 
 ## Connect
-*  If extends this class, it does auto connect service and getting datas for you
-*  If connection gone wrong or some exception, it does auto exception dialog for you
-*  If user has not any network connection, it does auto exception dialog for you
-*  And it does auto async and showing progress bar for you
+*If extends this class, it does auto connect service and getting datas for you
+*If connection gone wrong or some exception, it does auto exception dialog for you
+*If user has not any network connection, it does auto exception dialog for you
+*And it does auto async and showing progress bar for you
 
 
 ## License
