@@ -170,7 +170,7 @@ public class BluetoothSPP {
             return -1;
     }
 
-    private void startService(boolean isAndroid) {
+    public void startService(boolean isAndroid) {
         if (mChatService != null && mChatService.getState() == BluetoothState.STATE_NONE) {
             isServiceRunning = true;
             mChatService.start(isAndroid);
