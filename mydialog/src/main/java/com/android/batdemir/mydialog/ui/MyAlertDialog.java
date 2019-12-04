@@ -66,10 +66,8 @@ public class MyAlertDialog extends BaseDialogFragment {
     }
 
     /**
-     * Info Style
-     * Has not input view
-     * Has not cancel button
-     * Settable Message
+     * @implNote Info Style
+     * @param message Showing message
      */
     public static synchronized MyAlertDialog getInstance(String message) {
         Bundle bundle = new Bundle();
@@ -79,11 +77,9 @@ public class MyAlertDialog extends BaseDialogFragment {
     }
 
     /**
-     * Info Style
-     * Has not input view
-     * Has not cancel button
-     * Settable Message
-     * Settable Ok Button Text
+     * @implNote Info Style
+     * @param message Showing message text
+     * @param okText Showing ok button text
      */
     public static synchronized MyAlertDialog getInstance(String message, String okText) {
         Bundle bundle = new Bundle();
@@ -94,8 +90,8 @@ public class MyAlertDialog extends BaseDialogFragment {
     }
 
     /**
-     * Settable Message
-     * Settable Dialog Style
+     * @param message Showing message text
+     * @param dialogStyle Showing dialog style
      */
     public static synchronized MyAlertDialog getInstance(String message, DialogStyle dialogStyle) {
         Bundle bundle = new Bundle();
@@ -105,10 +101,11 @@ public class MyAlertDialog extends BaseDialogFragment {
     }
 
     /**
-     * Settable Message
-     * Settable Dialog Style
-     * Settable Ok Button Text
-     * Settable Cancel Button Text
+     * @implNote Only working Action or Input Style
+     * @param message Showing message text
+     * @param okText Showing ok button text, override default ok name
+     * @param cancelText Showing cancel button text, override default cancel name
+     * @param dialogStyle Showing dialog style
      */
     public static synchronized MyAlertDialog getInstance(String message, String okText, String cancelText, DialogStyle dialogStyle) {
         Bundle bundle = new Bundle();
@@ -120,9 +117,9 @@ public class MyAlertDialog extends BaseDialogFragment {
     }
 
     /**
-     * Settable Title Text
-     * Settable Message
-     * Settable Dialog Style
+     * @param title Showing title text, override default title name
+     * @param message Showing message text
+     * @param dialogStyle Showing dialog style
      */
     public static synchronized MyAlertDialog getInstance(String title, String message, DialogStyle dialogStyle) {
         Bundle bundle = new Bundle();
@@ -133,11 +130,12 @@ public class MyAlertDialog extends BaseDialogFragment {
     }
 
     /**
-     * Settable Title Text
-     * Settable Message
-     * Settable Dialog Style
-     * Settable Ok Button Text
-     * Settable Cancel Button Text
+     * @implNote Only working Action or Input Style
+     * @param title Showing title text, override default title name
+     * @param message Showing message text
+     * @param okText Showing ok button text, override default ok name
+     * @param cancelText Showing cancel button text, override default cancel name
+     * @param dialogStyle Showing dialog style
      */
     public static synchronized MyAlertDialog getInstance(String title, String message, String okText, String cancelText, DialogStyle dialogStyle) {
         Bundle bundle = new Bundle();
@@ -233,7 +231,6 @@ public class MyAlertDialog extends BaseDialogFragment {
             }
         });
     }
-
 
     //Component Style
 

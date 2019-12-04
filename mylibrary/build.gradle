@@ -58,6 +58,6 @@ dependencies {
     implementation 'org.jetbrains:annotations:15.0'
 
     //Google API
-    implementation 'com.googlecode.libphonenumber:libphonenumber:8.10.23'
+    implementation 'com.googlecode.libphonenumber:libphonenumber:8.11.0'
     implementation project(path: ':mydialog')
 }
