@@ -9,14 +9,16 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
+import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
-import com.android.batdemir.library.ui.base.BaseActivity;
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ActivityMainBinding;
-import com.android.batdemir.mylibrary.components.dialog.MyAlertDialog;
+import com.android.batdemir.library.ui.base.BaseActivity;
+import com.android.batdemir.mydialog.listeners.MyAlertDialogEditTextListener;
+import com.android.batdemir.mydialog.ui.MyAlertDialog;
 import com.android.batdemir.mylibrary.components.spinner.SpinnerHelper;
 import com.android.batdemir.mylibrary.components.spinner.SpinnerModel;
 import com.android.batdemir.mylibrary.tools.Tool;
@@ -26,14 +28,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements MyAlertDialogEditTextListener {
 
     private ActivityMainBinding binding;
     private Context context;
 
-    private String editor = "editor";
-    private String editor2 = "editor2";
-    private String editText = "editText";
+    private String tagEditor = "editor";
+    private String tagEditor2 = "editor2";
+    private String tagEditText = "editText";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,7 +65,7 @@ public class MainActivity extends BaseActivity {
 
         binding.myEditText.getEditText().setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                MyAlertDialog.getInstance(String.valueOf(binding.myEditText.isValid(true)), MyAlertDialog.DialogStyle.INFO).show(getSupportFragmentManager(), editor);
+                MyAlertDialog.getInstance(String.valueOf(binding.myEditText.isValid(true)), MyAlertDialog.DialogStyle.INFO).show(getSupportFragmentManager(), tagEditor);
                 return true;
             }
             return false;
@@ -86,7 +88,7 @@ public class MainActivity extends BaseActivity {
         binding.btnDialogEditText.setOnClickListener(v -> {
             MyAlertDialog myAlertDialog = MyAlertDialog.getInstance("TEST", "EditText", MyAlertDialog.DialogStyle.INPUT);
             myAlertDialog.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-            myAlertDialog.show(getSupportFragmentManager(), editText);
+            myAlertDialog.show(getSupportFragmentManager(), tagEditText);
 
         });
 
@@ -102,19 +104,16 @@ public class MainActivity extends BaseActivity {
     @Override
     public void dialogOk(MyAlertDialog myAlertDialog) {
         super.dialogOk(myAlertDialog);
-        if (Objects.equals(myAlertDialog.getTag(), editor)) {
-            MyAlertDialog.getInstance(String.valueOf(binding.myEditText.isValid(false)), MyAlertDialog.DialogStyle.INFO).show(getSupportFragmentManager(), editor2);
-        } else if (Objects.equals(myAlertDialog.getTag(), editText)) {
-            String editTextValue = myAlertDialog.getEditText().getText().toString();
-            MyAlertDialog.getInstance(editTextValue, MyAlertDialog.DialogStyle.INFO).show(getSupportFragmentManager(), "editTextIn");
+        if (Objects.equals(myAlertDialog.getTag(), tagEditor)) {
+            MyAlertDialog.getInstance(String.valueOf(binding.myEditText.isValid(false)), MyAlertDialog.DialogStyle.INFO).show(getSupportFragmentManager(), tagEditor2);
         }
     }
 
     @Override
     public void dialogCancel(MyAlertDialog myAlertDialog) {
         super.dialogCancel(myAlertDialog);
-        if (Objects.equals(myAlertDialog.getTag(), editor)) {
-            MyAlertDialog.getInstance(String.valueOf(binding.myEditText.isValid(false)), MyAlertDialog.DialogStyle.INFO).show(getSupportFragmentManager(), editor2);
+        if (Objects.equals(myAlertDialog.getTag(), tagEditor)) {
+            MyAlertDialog.getInstance(String.valueOf(binding.myEditText.isValid(false)), MyAlertDialog.DialogStyle.INFO).show(getSupportFragmentManager(), tagEditor2);
         }
     }
 
@@ -134,5 +133,20 @@ public class MainActivity extends BaseActivity {
     private void setItemSpinner() {
         SpinnerModel spinnerModel = new SpinnerModel(2, "test2", null);
         SpinnerHelper.getInstance(binding.mySpinner.getSpinner()).setSelectedItemByModel(new Gson().toJson(spinnerModel));
+    }
+
+    @Override
+    public void dialogOkEditText(MyAlertDialog myAlertDialog, EditText editText) {
+        if (Objects.equals(myAlertDialog.getTag(), tagEditText)) {
+            String editTextValue = editText.getText().toString();
+            MyAlertDialog.getInstance(editTextValue, MyAlertDialog.DialogStyle.INFO).show(getSupportFragmentManager(), "editTextIn");
+        }
+    }
+
+    @Override
+    public void dialogCancelEditText(MyAlertDialog myAlertDialog, EditText editText) {
+        if (Objects.equals(myAlertDialog.getTag(), tagEditText)) {
+            Log.v(editText.toString(), editText.getText().toString());
+        }
     }
 }

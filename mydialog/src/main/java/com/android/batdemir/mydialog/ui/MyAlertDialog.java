@@ -1,6 +1,5 @@
-package com.android.batdemir.mylibrary.components.dialog;
+package com.android.batdemir.mydialog.ui;
 
-import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,23 +10,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.DialogFragment;
+import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.FragmentManager;
 
-import com.android.batdemir.mylibrary.R;
-import com.android.batdemir.mylibrary.databinding.ComponentAlertDialogBinding;
-import com.google.android.material.snackbar.Snackbar;
+import com.android.batdemir.mydialog.R;
+import com.android.batdemir.mydialog.databinding.FragmentMyDialogBinding;
+import com.android.batdemir.mydialog.listeners.MyAlertDialogButtonListener;
+import com.android.batdemir.mydialog.listeners.MyAlertDialogCreator;
+import com.android.batdemir.mydialog.listeners.MyAlertDialogEditTextListener;
+import com.android.batdemir.mydialog.ui.base.BaseDialogFragment;
 
 import java.util.Objects;
 
-@SuppressLint("ClickableViewAccessibility")
-public class MyAlertDialog extends DialogFragment {
+public class MyAlertDialog extends BaseDialogFragment {
 
     private static MyAlertDialog myAlertDialog = null;
     private static MyAlertDialogCreator myAlertDialogCreator = null;
@@ -41,9 +41,7 @@ public class MyAlertDialog extends DialogFragment {
 
     private int inputType = InputType.TYPE_CLASS_TEXT;
 
-    private int margin = 16;
-
-    private ComponentAlertDialogBinding binding;
+    private FragmentMyDialogBinding binding;
     private String title;
     private String okText;
     private String cancelText;
@@ -194,43 +192,6 @@ public class MyAlertDialog extends DialogFragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_DeviceDefault_Dialog_NoActionBar_MinWidth);
-    }
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.component_alert_dialog, container, false);
-        return binding.getRoot();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        new Thread() {
-            @Override
-            public void run() {
-                Objects.requireNonNull(getActivity()).runOnUiThread(() -> getObjectReferences());
-            }
-        }.start();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        new Thread() {
-            @Override
-            public void run() {
-                Objects.requireNonNull(getActivity()).runOnUiThread(() -> {
-                    loadData();
-                    setListeners();
-                });
-            }
-        }.start();
-    }
-
-    @Override
     public void show(@NonNull FragmentManager manager, @Nullable String tag) {
         if (!myAlertDialog.isAdded())
             super.show(manager, tag);
@@ -244,41 +205,78 @@ public class MyAlertDialog extends DialogFragment {
 
     //Initialize Methods
 
-    private void getObjectReferences() {
-        assert getArguments() != null;
+    @Override
+    public void getObjectReferences() {
+        if (getArguments() == null)
+            return;
         title = getArguments().getString(KEY_TITLE_TEXT);
         okText = getArguments().getString(KEY_OK_TEXT);
         cancelText = getArguments().getString(KEY_CANCEL_TEXT);
         message = getArguments().getString(KEY_MESSAGE);
         style = DialogStyle.valueOf(getArguments().getString(KEY_STYLE));
+    }
+
+    @Override
+    public ViewDataBinding setBinding(LayoutInflater layoutInflater, ViewGroup container) {
+        binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.fragment_my_dialog, container, false);
+        return binding;
+    }
+
+    @Override
+    public void loadData() {
+        myAlertDialog.setCancelable(false);
         setComponentStyle();
         setComponentAnim();
     }
 
-    private void loadData() {
-        myAlertDialog.setCancelable(false);
+    @Override
+    public void setListeners() {
+        binding.editText.setOnEditorActionListener((v, actionId, event) -> {
+            editTextListenerProcess(myAlertDialog);
+            return false;
+        });
 
-        if (myAlertDialog.getInputType() != -1) {
-            binding.editText.setInputType(myAlertDialog.getInputType());
-        }
-    }
+        binding.editText.setOnKeyListener((v, keyCode, event) -> {
+            editTextListenerProcess(myAlertDialog);
+            return false;
+        });
 
-    private void setListeners() {
         binding.btnCancel.setOnClickListener(v -> {
             MyAlertDialog result = myAlertDialog;
-            myAlertDialog.dismiss();
-            MyAlertDialogListener clickCancel = (MyAlertDialogListener) getActivity();
-            Objects.requireNonNull(clickCancel).dialogCancel(result);
+            if (style == DialogStyle.INPUT) {
+                myAlertDialog.dismiss();
+                MyAlertDialogEditTextListener editTextListener = (MyAlertDialogEditTextListener) getActivity();
+                Objects.requireNonNull(editTextListener).dialogCancelEditText(result, result.binding.editText);
+            } else {
+                myAlertDialog.dismiss();
+                MyAlertDialogButtonListener buttonListener = (MyAlertDialogButtonListener) getActivity();
+                Objects.requireNonNull(buttonListener).dialogCancel(result);
+            }
         });
 
         binding.btnOk.setOnClickListener(v -> {
             MyAlertDialog result = myAlertDialog;
-            if (style == DialogStyle.INPUT && result.getEditText().getText().toString().isEmpty())
-                Snackbar.make(binding.rootDialog, builder.inputEmptyMessage, Snackbar.LENGTH_SHORT).show();
-            else
+            if (style == DialogStyle.INPUT) {
+                editTextListenerProcess(myAlertDialog);
+            } else {
                 myAlertDialog.dismiss();
-            MyAlertDialogListener clickOk = (MyAlertDialogListener) getActivity();
-            Objects.requireNonNull(clickOk).dialogOk(result);
+                MyAlertDialogButtonListener buttonListener = (MyAlertDialogButtonListener) getActivity();
+                Objects.requireNonNull(buttonListener).dialogOk(result);
+            }
+        });
+    }
+
+    //Functions
+
+    private void editTextListenerProcess(MyAlertDialog result) {
+        result.binding.editText.post(() -> {
+            if (Objects.requireNonNull(result.binding.editText.getText()).toString().isEmpty()) {
+                result.binding.editText.setError(builder.inputEmptyMessage);
+            } else {
+                myAlertDialog.dismiss();
+                MyAlertDialogEditTextListener editTextListener = (MyAlertDialogEditTextListener) getActivity();
+                Objects.requireNonNull(editTextListener).dialogOkEditText(result, result.binding.editText);
+            }
         });
     }
 
@@ -295,7 +293,7 @@ public class MyAlertDialog extends DialogFragment {
     private void setComponentAnim() {
         try {
             Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.zoom_in);
-            binding.rootDialog.startAnimation(animation);
+            binding.rootMyDialog.startAnimation(animation);
         } catch (Exception e) {
             Log.e(MyAlertDialog.class.getSimpleName(), e.getMessage());
         }
@@ -353,19 +351,13 @@ public class MyAlertDialog extends DialogFragment {
             default:
                 throw new IllegalStateException("Unexpected value: " + style);
         }
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(margin, margin, margin, margin);
-        binding.txtEditTitle.setLayoutParams(layoutParams);
     }
 
     private void setShowMessage() {
         binding.txtEditMessage.setText(message);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        layoutParams.setMargins(margin, margin, margin, margin);
-        binding.txtEditMessage.setLayoutParams(layoutParams);
         binding.txtEditMessage.post(() -> {
             if (binding.txtEditMessage.getLineCount() > 3) {
-                binding.txtEditMessage.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+                binding.txtEditMessage.setGravity(View.TEXT_ALIGNMENT_TEXT_START);
             }
         });
     }
@@ -373,10 +365,10 @@ public class MyAlertDialog extends DialogFragment {
     private void setShowEditText(DialogStyle style) {
         switch (style) {
             case INPUT:
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                layoutParams.setMargins(margin, margin, margin, margin);
-                binding.editText.setLayoutParams(layoutParams);
                 binding.editText.setVisibility(View.VISIBLE);
+                binding.editText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                binding.editText.requestFocus();
+                binding.editText.setInputType(inputType != -1 ? getInputType() : inputType);
                 break;
             case ACTION:
             case INFO:
@@ -384,10 +376,9 @@ public class MyAlertDialog extends DialogFragment {
             case SUCCESS:
             case WARNING:
             default:
-                LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(0, 0);
-                layoutParams2.setMargins(0, 0, 0, 0);
-                binding.editText.setLayoutParams(layoutParams2);
                 binding.editText.setVisibility(View.INVISIBLE);
+                binding.editText.setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+                binding.editText.clearFocus();
                 break;
         }
     }
@@ -396,9 +387,6 @@ public class MyAlertDialog extends DialogFragment {
         switch (style) {
             case INPUT:
             case ACTION:
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
-                layoutParams.setMargins(margin, margin, margin, margin);
-                binding.btnCancel.setLayoutParams(layoutParams);
                 binding.btnCancel.setText(cancelText == null ? builder.cancelButtonText : cancelText);
                 break;
             case INFO:
@@ -406,14 +394,14 @@ public class MyAlertDialog extends DialogFragment {
             case SUCCESS:
             case WARNING:
             default:
-                LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 0);
-                layoutParams2.setMargins(0, 0, 0, 0);
-                binding.btnCancel.setLayoutParams(layoutParams2);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+                params.setMargins(0, 0, 0, 0);
+                binding.btnCancel.setLayoutParams(params);
+                LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+                params1.setMargins(0, 0, 0, 0);
+                binding.btnOk.setLayoutParams(params1);
                 break;
         }
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
-        layoutParams.setMargins(margin, margin, margin, margin);
-        binding.btnOk.setLayoutParams(layoutParams);
         binding.btnOk.setText(okText == null ? builder.okButtonText : okText);
     }
 
@@ -427,16 +415,6 @@ public class MyAlertDialog extends DialogFragment {
         this.inputType = inputType;
     }
 
-    //Component Get Props
-
-    public String getMessage() {
-        return message;
-    }
-
-    public EditText getEditText() {
-        return binding.editText;
-    }
-
     //Component Properties
 
     public enum DialogStyle {
@@ -445,11 +423,7 @@ public class MyAlertDialog extends DialogFragment {
         SUCCESS,
         INPUT,
         ACTION,
-        INFO;
-    }
-
-    public interface MyAlertDialogCreator {
-        MyAlertDialog create();
+        INFO
     }
 
     //Builder
