@@ -1,0 +1,73 @@
+<resources>
+    <string name="library_name">myScanner</string>
+
+    <string name="data_wedge_default_action">com.symbol.datawedge.api.ACTION</string>
+    <string name="data_wedge_default_category">android.intent.category.DEFAULT</string>
+    <string name="data_wedge_default_data_string">com.symbol.datawedge.data_string</string>
+
+    <string name="data_wedge_profile_name">PROFILE_NAME</string>
+    <string name="data_wedge_profile_name_value">batdemir</string>
+    <string name="data_wedge_profile_enabled">PROFILE_ENABLED</string>
+    <string name="data_wedge_profile_enabled_value">true</string>
+    <string name="data_wedge_profile_config_mode">CONFIG_MODE</string>
+    <string name="data_wedge_profile_config_mode_value">CREATE_IF_NOT_EXIST</string>
+    <string name="data_wedge_plugin_name">PLUGIN_NAME</string>
+    <string name="data_wedge_plugin_name_value">BARCODE</string>
+
+    <string name="data_wedge_reset_config">RESET_CONFIG</string>
+    <string name="data_wedge_reset_config_value">true</string>
+    <string name="data_wedge_scanner_selection">scanner_selection</string>
+    <string name="data_wedge_scanner_selection_value">auto</string>
+    <string name="data_wedge_scanner_input_enabled">scanner_input_enabled</string>
+    <string name="data_wedge_scanner_input_enabled_value">true</string>
+    <string name="data_wedge_scanner_set_config">SET_CONFIG</string>
+
+    <string name="data_wedge_status">com.symbol.datawedge.api.ENABLE_DATAWEDGE</string>
+    <string name="data_wedge_status_enable">true</string>
+    <string name="data_wedge_status_disable">false</string>
+
+    <string name="data_wedge_simulscan_input_enabled">simulscan_input_enabled</string>
+    <string name="data_wedge_simulscan_input_enabled_enable">true</string>
+    <string name="data_wedge_simulscan_input_enabled_disable">false</string>
+
+    <string name="data_wedge_voice_output_enabled">voice_output_enabled</string>
+    <string name="data_wedge_voice_output_enabled_enable">true</string>
+    <string name="data_wedge_voice_output_enabled_disable">false</string>
+
+    <string name="data_wedge_ip_output_enabled">ip_output_enabled</string>
+    <string name="data_wedge_ip_output_enabled_enable">true</string>
+    <string name="data_wedge_ip_output_enabled_disable">false</string>
+
+    <string name="data_wedge_keystroke_output_enabled">keystroke_output_enabled</string>
+    <string name="data_wedge_keystroke_output_enabled_enable">true</string>
+    <string name="data_wedge_keystroke_output_enabled_disable">false</string>
+
+    <string name="data_wedge_intent_output_enabled">intent_output_enabled</string>
+    <string name="data_wedge_intent_output_enabled_enable">true</string>
+    <string name="data_wedge_intent_output_enabled_disable">false</string>
+    <string name="data_wedge_intent_action">intent_action</string>
+    <string name="data_wedge_intent_action_value">batdemir</string>
+    <string name="data_wedge_intent_category">intent_category</string>
+    <string name="data_wedge_intent_category_value">android.intent.category.DEFAULT</string>
+    <string name="data_wedge_intent_delivery">intent_delivery</string>
+    <string name="data_wedge_intent_delivery_start_activity">0</string>
+    <string name="data_wedge_intent_delivery_start_service">1</string>
+    <string name="data_wedge_intent_delivery_broadcast">2</string>
+
+    <string name="data_wedge_scanner_input_plugin">com.symbol.datawedge.api.SCANNER_INPUT_PLUGIN</string>
+    <string name="data_wedge_scanner_input_plugin_enable">ENABLE_PLUGIN</string>
+    <string name="data_wedge_scanner_input_plugin_disable">DISABLE_PLUGIN</string>
+    <string name="data_wedge_scanner_input_plugin_suspend">SUSPEND_PLUGIN</string>
+    <string name="data_wedge_scanner_input_plugin_RESUME">RESUME_PLUGIN</string>
+
+    <string name="data_wedge_scanner_soft_scanner_trigger">com.symbol.datawedge.api.SOFT_SCAN_TRIGGER</string>
+    <string name="data_wedge_scanner_soft_scanner_trigger_start">START_SCANNING</string>
+    <string name="data_wedge_scanner_soft_scanner_trigger_stop">STOP_SCANNING</string>
+    <string name="data_wedge_scanner_soft_scanner_trigger_toggle">TOGGLE_SCANNING</string>
+
+    <string name="data_wedge_scanner_soft_rfid_trigger">com.symbol.datawedge.api.SOFT_RFID_TRIGGER</string>
+    <string name="data_wedge_scanner_soft_rfid_trigger_start">START_SCANNING</string>
+    <string name="data_wedge_scanner_soft_rfid_trigger_stop">STOP_SCANNING</string>
+    <string name="data_wedge_scanner_soft_rfid_trigger_toggle">TOGGLE_SCANNING</string>
+
+</resources>
