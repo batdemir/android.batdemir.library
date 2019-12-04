@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.android.batdemir.mylibrary.components.dialog.MyAlertDialog;
+import com.android.batdemir.mydialog.ui.MyAlertDialog;
 import com.android.batdemir.mylibrary.tools.ToolConnection;
 
 import retrofit2.Call;

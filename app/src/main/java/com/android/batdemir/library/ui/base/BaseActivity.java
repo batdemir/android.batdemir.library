@@ -5,40 +5,30 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.batdemir.library.R;
-import com.android.batdemir.mylibrary.components.dialog.MyAlertDialog;
-import com.android.batdemir.mylibrary.components.dialog.MyAlertDialogListener;
+import com.android.batdemir.mydialog.listeners.MyAlertDialogButtonListener;
+import com.android.batdemir.mydialog.ui.MyAlertDialog;
 
 import java.util.Objects;
 
 public abstract class BaseActivity extends AppCompatActivity implements
         BaseActions,
-        MyAlertDialogListener {
+        MyAlertDialogButtonListener {
 
     private boolean isFirstActivity;
 
     @Override
     protected void onStart() {
         super.onStart();
-        new Thread() {
-            @Override
-            public void run() {
-                runOnUiThread(() -> getObjectReferences());
-            }
-        }.start();
+        runOnUiThread(this::getObjectReferences);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        new Thread() {
-            @Override
-            public void run() {
-                runOnUiThread(() -> {
-                    loadData();
-                    setListeners();
-                });
-            }
-        }.start();
+        runOnUiThread(() -> {
+            loadData();
+            setListeners();
+        });
     }
 
     @Override

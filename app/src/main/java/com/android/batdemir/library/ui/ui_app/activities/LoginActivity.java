@@ -1,10 +1,10 @@
 package com.android.batdemir.library.ui.ui_app.activities;
 
-import androidx.databinding.DataBindingUtil;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+
+import androidx.databinding.DataBindingUtil;
 
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ActivityLoginBinding;
@@ -38,6 +38,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     public void setListeners() {
         binding.btnLogin.setOnClickListener(v -> Tool.getInstance(context).move(MenuActivity.class, true, false, null));
+
         binding.btnSignUp.setOnClickListener(v -> Tool.getInstance(context).move(SignUpActivity.class, true, true, null));
     }
 }

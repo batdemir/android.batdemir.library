@@ -10,25 +10,15 @@ public abstract class BaseDialogFragment extends DialogFragment implements
     @Override
     public void onStart() {
         super.onStart();
-        new Thread() {
-            @Override
-            public void run() {
-                Objects.requireNonNull(getActivity()).runOnUiThread(() -> getObjectReferences());
-            }
-        }.start();
+        Objects.requireNonNull(getActivity()).runOnUiThread(this::getObjectReferences);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        new Thread() {
-            @Override
-            public void run() {
-                Objects.requireNonNull(getActivity()).runOnUiThread(() -> {
-                    loadData();
-                    setListeners();
-                });
-            }
-        }.start();
+        Objects.requireNonNull(getActivity()).runOnUiThread(() -> {
+            loadData();
+            setListeners();
+        });
     }
 }

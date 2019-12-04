@@ -21,6 +21,19 @@
         android:theme="@style/AppThemeActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,InnerclassSeparator">
+        <!-- TEST -->
+        <activity
+            android:name=".ui.ui_test.activities.MainActivity"
+            android:screenOrientation="sensor">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.ui_test.activities.RecyclerActivity"
+            android:screenOrientation="sensor" />
         <!-- APP -->
         <activity
             android:name=".ui.ui_app.activities.LoginActivity"
@@ -37,19 +50,6 @@
         <activity
             android:name=".ui.ui_app.activities.MenuActivity"
             android:screenOrientation="sensorPortrait" />
-        <!-- TEST -->
-        <activity
-            android:name=".ui.ui_test.activities.MainActivity"
-            android:screenOrientation="sensor">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.ui_test.activities.RecyclerActivity"
-            android:screenOrientation="sensor" />
         <!-- DEFAULT -->
         <activity
             android:name=".ui.ui_default.activities.ScrollingActivity"

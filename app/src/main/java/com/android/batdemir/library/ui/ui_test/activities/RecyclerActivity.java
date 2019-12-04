@@ -17,11 +17,11 @@ import com.android.batdemir.library.api.CallTest;
 import com.android.batdemir.library.models.Player;
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ActivityRecyclerBinding;
+import com.android.batdemir.mydialog.ui.MyAlertDialog;
 import com.android.batdemir.mylibrary.connection.Connect;
 import com.android.batdemir.mylibrary.connection.ConnectServiceErrorListener;
 import com.android.batdemir.mylibrary.connection.ConnectServiceListener;
 import com.android.batdemir.mylibrary.connection.RetrofitClient;
-import com.android.batdemir.mylibrary.components.dialog.MyAlertDialog;
 import com.android.batdemir.mylibrary.tools.swipe.SwipeController;
 import com.android.batdemir.mylibrary.tools.swipe.SwipeControllerActions;
 

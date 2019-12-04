@@ -8,7 +8,7 @@ import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.android.batdemir.mylibrary.components.dialog.MyAlertDialog;
+import com.android.batdemir.mydialog.ui.MyAlertDialog;
 
 import java.io.IOException;
 import java.net.ConnectException;

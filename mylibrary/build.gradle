@@ -59,4 +59,5 @@ dependencies {
 
     //Google API
     implementation 'com.googlecode.libphonenumber:libphonenumber:8.10.23'
+    implementation project(path: ':mydialog')
 }
