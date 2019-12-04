@@ -51,19 +51,26 @@
                         android:gravity="center"
                         android:textColor="@android:color/black" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editText"
-                        style="@style/Widget.AppCompat.EditText"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:imeOptions="actionDone"
-                        android:inputType="text"
-                        android:lines="1"
-                        android:maxLength="50"
-                        android:minLines="1"
-                        android:singleLine="true"
-                        android:textColor="@android:color/black" />
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
+                            android:lines="1"
+                            android:maxLength="50"
+                            android:minLines="1"
+                            android:singleLine="true"
+                            android:textColor="@android:color/black" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
