@@ -1,4 +1,4 @@
 <resources>
-    <string name="library_name">mydialog</string>
+    <string name="library_name">myDialog</string>
     <string name="todo">TODO</string>
 </resources>

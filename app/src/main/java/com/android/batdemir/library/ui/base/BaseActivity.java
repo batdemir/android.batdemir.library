@@ -32,12 +32,6 @@ public abstract class BaseActivity extends AppCompatActivity implements
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        finish();
-    }
-
-    @Override
     public void onBackPressed() {
         if (isFirstActivity) {
             MyAlertDialog.getInstance(getString(R.string.alert_dialog_key_exit), MyAlertDialog.DialogStyle.ACTION).show(getSupportFragmentManager(), getString(R.string.alert_dialog_key_exit));

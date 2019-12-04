@@ -31,6 +31,8 @@ public class MyAlertDialog extends BaseDialogFragment {
 
     private static MyAlertDialog myAlertDialog = null;
     private static MyAlertDialogCreator myAlertDialogCreator = null;
+    private static MyAlertDialogButtonListener myAlertDialogButtonListener = null;
+    private static MyAlertDialogEditTextListener myAlertDialogEditTextListener = null;
     private static Builder builder = new Builder();
 
     private static final String KEY_TITLE_TEXT = "KEY_TITLE_TEXT";
@@ -51,144 +53,98 @@ public class MyAlertDialog extends BaseDialogFragment {
     protected MyAlertDialog() {
     }
 
+    private static synchronized MyAlertDialog init(Bundle bundle) {
+        if (myAlertDialog == null) {
+            if (myAlertDialogCreator == null) {
+                myAlertDialog = new MyAlertDialog();
+            } else {
+                myAlertDialog = myAlertDialogCreator.create();
+            }
+        }
+        myAlertDialog.setArguments(bundle);
+        return myAlertDialog;
+    }
+
     /**
-     * Info Style
-     * Has not input view
-     * Has not cancel button
-     * Settable Message
+     * @implNote Info Style
+     * @param message Showing message
      */
     public static synchronized MyAlertDialog getInstance(String message) {
-        if (myAlertDialog == null) {
-            if (myAlertDialogCreator == null) {
-                myAlertDialog = new MyAlertDialog();
-            } else {
-                myAlertDialog = myAlertDialogCreator.create();
-            }
-        }
         Bundle bundle = new Bundle();
         bundle.putString(KEY_MESSAGE, message);
         bundle.putString(KEY_STYLE, DialogStyle.INFO.name());
-        myAlertDialog.setArguments(bundle);
-        return myAlertDialog;
+        return init(bundle);
     }
 
     /**
-     * Info Style
-     * Has not input view
-     * Has not cancel button
-     * Settable Message
-     * Settable Ok Button Text
+     * @implNote Info Style
+     * @param message Showing message text
+     * @param okText Showing ok button text
      */
     public static synchronized MyAlertDialog getInstance(String message, String okText) {
-        if (myAlertDialog == null) {
-            if (myAlertDialogCreator == null) {
-                myAlertDialog = new MyAlertDialog();
-            } else {
-                myAlertDialog = myAlertDialogCreator.create();
-            }
-        }
         Bundle bundle = new Bundle();
         bundle.putString(KEY_MESSAGE, message);
         bundle.putString(KEY_OK_TEXT, okText);
         bundle.putString(KEY_STYLE, DialogStyle.INFO.name());
-        myAlertDialog.setArguments(bundle);
-        return myAlertDialog;
+        return init(bundle);
     }
 
     /**
-     * Settable Message
-     * Settable Dialog Style
+     * @param message Showing message text
+     * @param dialogStyle Showing dialog style
      */
     public static synchronized MyAlertDialog getInstance(String message, DialogStyle dialogStyle) {
-        if (myAlertDialog == null) {
-            if (myAlertDialogCreator == null) {
-                myAlertDialog = new MyAlertDialog();
-            } else {
-                myAlertDialog = myAlertDialogCreator.create();
-            }
-        }
         Bundle bundle = new Bundle();
         bundle.putString(KEY_MESSAGE, message);
         bundle.putString(KEY_STYLE, dialogStyle.name());
-        myAlertDialog.setArguments(bundle);
-        return myAlertDialog;
+        return init(bundle);
     }
 
     /**
-     * Settable Message
-     * Settable Dialog Style
-     * Settable Ok Button Text
-     * Settable Cancel Button Text
+     * @implNote Only working Action or Input Style
+     * @param message Showing message text
+     * @param okText Showing ok button text, override default ok name
+     * @param cancelText Showing cancel button text, override default cancel name
+     * @param dialogStyle Showing dialog style
      */
     public static synchronized MyAlertDialog getInstance(String message, String okText, String cancelText, DialogStyle dialogStyle) {
-        if (myAlertDialog == null) {
-            if (myAlertDialogCreator == null) {
-                myAlertDialog = new MyAlertDialog();
-            } else {
-                myAlertDialog = myAlertDialogCreator.create();
-            }
-        }
         Bundle bundle = new Bundle();
         bundle.putString(KEY_MESSAGE, message);
         bundle.putString(KEY_OK_TEXT, okText);
         bundle.putString(KEY_CANCEL_TEXT, cancelText);
         bundle.putString(KEY_STYLE, dialogStyle.name());
-        myAlertDialog.setArguments(bundle);
-        return myAlertDialog;
+        return init(bundle);
     }
 
     /**
-     * Settable Title Text
-     * Settable Message
-     * Settable Dialog Style
+     * @param title Showing title text, override default title name
+     * @param message Showing message text
+     * @param dialogStyle Showing dialog style
      */
     public static synchronized MyAlertDialog getInstance(String title, String message, DialogStyle dialogStyle) {
-        if (myAlertDialog == null) {
-            if (myAlertDialogCreator == null) {
-                myAlertDialog = new MyAlertDialog();
-            } else {
-                myAlertDialog = myAlertDialogCreator.create();
-            }
-        }
         Bundle bundle = new Bundle();
         bundle.putString(KEY_TITLE_TEXT, title);
         bundle.putString(KEY_MESSAGE, message);
         bundle.putString(KEY_STYLE, dialogStyle.name());
-        myAlertDialog.setArguments(bundle);
-        return myAlertDialog;
+        return init(bundle);
     }
 
     /**
-     * Settable Title Text
-     * Settable Message
-     * Settable Dialog Style
-     * Settable Ok Button Text
-     * Settable Cancel Button Text
+     * @implNote Only working Action or Input Style
+     * @param title Showing title text, override default title name
+     * @param message Showing message text
+     * @param okText Showing ok button text, override default ok name
+     * @param cancelText Showing cancel button text, override default cancel name
+     * @param dialogStyle Showing dialog style
      */
     public static synchronized MyAlertDialog getInstance(String title, String message, String okText, String cancelText, DialogStyle dialogStyle) {
-        if (myAlertDialog == null) {
-            if (myAlertDialogCreator == null) {
-                myAlertDialog = new MyAlertDialog();
-            } else {
-                myAlertDialog = myAlertDialogCreator.create();
-            }
-        }
         Bundle bundle = new Bundle();
         bundle.putString(KEY_TITLE_TEXT, title);
         bundle.putString(KEY_MESSAGE, message);
         bundle.putString(KEY_OK_TEXT, okText);
         bundle.putString(KEY_CANCEL_TEXT, cancelText);
         bundle.putString(KEY_STYLE, dialogStyle.name());
-        myAlertDialog.setArguments(bundle);
-        return myAlertDialog;
-    }
-
-    public static void setMyAlertDialogCreator(MyAlertDialogCreator myAlertDialogCreator) {
-        MyAlertDialog.myAlertDialogCreator = myAlertDialogCreator;
-    }
-
-    public static void setBuilder(Builder builder) {
-        MyAlertDialog.builder = builder;
+        return init(bundle);
     }
 
     @Override
@@ -245,12 +201,10 @@ public class MyAlertDialog extends BaseDialogFragment {
             MyAlertDialog result = myAlertDialog;
             if (style == DialogStyle.INPUT) {
                 myAlertDialog.dismiss();
-                MyAlertDialogEditTextListener editTextListener = (MyAlertDialogEditTextListener) getActivity();
-                Objects.requireNonNull(editTextListener).dialogCancelEditText(result, result.binding.editText);
+                getMyAlertDialogEditTextListener(result).dialogCancelEditText(result, result.binding.editText);
             } else {
                 myAlertDialog.dismiss();
-                MyAlertDialogButtonListener buttonListener = (MyAlertDialogButtonListener) getActivity();
-                Objects.requireNonNull(buttonListener).dialogCancel(result);
+                getMyAlertDialogButtonListener(result).dialogCancel(result);
             }
         });
 
@@ -260,8 +214,7 @@ public class MyAlertDialog extends BaseDialogFragment {
                 editTextListenerProcess(myAlertDialog);
             } else {
                 myAlertDialog.dismiss();
-                MyAlertDialogButtonListener buttonListener = (MyAlertDialogButtonListener) getActivity();
-                Objects.requireNonNull(buttonListener).dialogOk(result);
+                getMyAlertDialogButtonListener(result).dialogOk(result);
             }
         });
     }
@@ -274,8 +227,7 @@ public class MyAlertDialog extends BaseDialogFragment {
                 result.binding.editText.setError(builder.inputEmptyMessage);
             } else {
                 myAlertDialog.dismiss();
-                MyAlertDialogEditTextListener editTextListener = (MyAlertDialogEditTextListener) getActivity();
-                Objects.requireNonNull(editTextListener).dialogOkEditText(result, result.binding.editText);
+                getMyAlertDialogEditTextListener(result).dialogOkEditText(result, result.binding.editText);
             }
         });
     }
@@ -365,8 +317,8 @@ public class MyAlertDialog extends BaseDialogFragment {
     private void setShowEditText(DialogStyle style) {
         switch (style) {
             case INPUT:
+                binding.inputLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 binding.editText.setVisibility(View.VISIBLE);
-                binding.editText.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 binding.editText.requestFocus();
                 binding.editText.setInputType(inputType != -1 ? getInputType() : inputType);
                 break;
@@ -376,8 +328,8 @@ public class MyAlertDialog extends BaseDialogFragment {
             case SUCCESS:
             case WARNING:
             default:
+                binding.inputLayout.setLayoutParams(new LinearLayout.LayoutParams(0, 0));
                 binding.editText.setVisibility(View.INVISIBLE);
-                binding.editText.setLayoutParams(new LinearLayout.LayoutParams(0, 0));
                 binding.editText.clearFocus();
                 break;
         }
@@ -424,6 +376,32 @@ public class MyAlertDialog extends BaseDialogFragment {
         INPUT,
         ACTION,
         INFO
+    }
+
+    //Listeners
+
+    private static MyAlertDialogButtonListener getMyAlertDialogButtonListener(MyAlertDialog result) {
+        return myAlertDialogButtonListener == null ? (MyAlertDialogButtonListener) result.getActivity() : myAlertDialogButtonListener;
+    }
+
+    public static void setMyAlertDialogButtonListener(MyAlertDialogButtonListener myAlertDialogButtonListener) {
+        MyAlertDialog.myAlertDialogButtonListener = myAlertDialogButtonListener;
+    }
+
+    private static MyAlertDialogEditTextListener getMyAlertDialogEditTextListener(MyAlertDialog result) {
+        return myAlertDialogEditTextListener == null ? (MyAlertDialogEditTextListener) result.getActivity() : myAlertDialogEditTextListener;
+    }
+
+    public static void setMyAlertDialogEditTextListener(MyAlertDialogEditTextListener myAlertDialogEditTextListener) {
+        MyAlertDialog.myAlertDialogEditTextListener = myAlertDialogEditTextListener;
+    }
+
+    public static void setMyAlertDialogCreator(MyAlertDialogCreator myAlertDialogCreator) {
+        MyAlertDialog.myAlertDialogCreator = myAlertDialogCreator;
+    }
+
+    public static void setBuilder(Builder builder) {
+        MyAlertDialog.builder = builder;
     }
 
     //Builder
