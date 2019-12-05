@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-import androidx.cardview.widget.CardView;
-
 import com.android.batdemir.mylibrary.R;
 
 @SuppressLint("StaticFieldLeak")
@@ -54,19 +52,10 @@ public class Tool {
         }
     }
 
-    public void anim(View view) {
+    public void anim(View view, int animId) {
         try {
-            Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_down);
+            Animation animation = AnimationUtils.loadAnimation(context, animId == 0 ? R.anim.slide_down : animId);
             view.startAnimation(animation);
-        } catch (Exception e) {
-            Log.e(Tool.class.getSimpleName(), e.getMessage());
-        }
-    }
-
-    public void animDialog(CardView cardView) {
-        try {
-            Animation animation = AnimationUtils.loadAnimation(context, R.anim.zoom_in);
-            cardView.startAnimation(animation);
         } catch (Exception e) {
             Log.e(Tool.class.getSimpleName(), e.getMessage());
         }

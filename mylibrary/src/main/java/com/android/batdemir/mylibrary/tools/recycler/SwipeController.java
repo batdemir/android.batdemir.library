@@ -1,4 +1,4 @@
-package com.android.batdemir.mylibrary.tools.swipe;
+package com.android.batdemir.mylibrary.tools.recycler;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

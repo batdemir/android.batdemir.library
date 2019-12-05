@@ -1,4 +1,4 @@
-package com.android.batdemir.mylibrary.components.spinner;
+package com.android.batdemir.mylibrary.tools.spinner;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
@@ -22,6 +22,13 @@ public class SpinnerHelper {
 
     private void setSpinner(Spinner spinner) {
         this.spinner = spinner;
+    }
+
+    public static SpinnerHelper getInstance() {
+        if (ourInstance == null) {
+            ourInstance = new SpinnerHelper();
+        }
+        return ourInstance;
     }
 
     public static SpinnerHelper getInstance(Spinner spinner) {

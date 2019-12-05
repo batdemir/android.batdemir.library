@@ -5,13 +5,18 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 
 import androidx.databinding.DataBindingUtil;
 
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ActivityMaterialBinding;
+import com.android.batdemir.library.models.User;
 import com.android.batdemir.library.ui.base.BaseActivity;
+import com.android.batdemir.mylibrary.tools.spinner.SpinnerAdapter;
+import com.android.batdemir.mylibrary.tools.spinner.SpinnerHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MaterialActivity extends BaseActivity {
 
@@ -44,9 +49,29 @@ public class MaterialActivity extends BaseActivity {
     }
 
     private void fillSpinners() {
-        String[] strings = new String[]{"item1", "item2", "item3", "item4"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, strings);
+        String name = "bat";
+        String pass = "demir";
+        String email = "batdemir";
+        List<User> userList = new ArrayList<>();
+        for (int i = 10; i < 30; i++) {
+            userList.add(new User(name + i, pass + i, email + i));
+        }
+        SpinnerAdapter adapter = null;
+        try {
+            adapter = new SpinnerAdapter(
+                    context,
+                    SpinnerHelper.getInstance().cast(
+                            userList,
+                            User.class.getDeclaredField("username"),
+                            User.class.getDeclaredField("password")
+                    ),
+                    SpinnerAdapter.SpinnerType.AUTO_COMPLETE_TEXT_VIEW
+            );
+        } catch (Exception e) {
+            Log.e(MaterialActivity.class.getSimpleName(), e.getMessage());
+        }
         binding.autoCompleteOutLine.setAdapter(adapter);
         binding.autoCompleteFilled.setAdapter(adapter);
+        binding.spinner.setAdapter(adapter);
     }
 }

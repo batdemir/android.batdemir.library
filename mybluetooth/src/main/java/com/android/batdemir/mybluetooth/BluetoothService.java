@@ -358,7 +358,7 @@ public class BluetoothService {
                 try {
                     int data = mmInStream.read();
                     if (data == 0x0A) {
-                        //task
+                        Log.v(BluetoothService.class.getSimpleName(), "data0x0A");
                     } else if (data == 0x0D) {
                         buffer = new byte[arrByte.size()];
                         for (int i = 0; i < arrByte.size(); i++) {
