@@ -1,9 +1,0 @@
-<resources>
-    <dimen name="dialogMinWidth">320sp</dimen>
-    <dimen name="buttonMinHeight">76sp</dimen>
-    <dimen name="imagePaddingTop">16sp</dimen>
-    <dimen name="imagePaddingBottom">16sp</dimen>
-    <dimen name="paddingTop">8sp</dimen>
-    <dimen name="paddingBottom">8sp</dimen>
-    <dimen name="margin">8sp</dimen>
-</resources>

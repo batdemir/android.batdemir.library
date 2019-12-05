@@ -1,1 +1,1 @@
-include ':app', ':mylibrary', ':myresources', ':mydialog', ':myscanner'
+include ':app', ':mylibrary', ':myresources', ':mydialog', ':myscanner', ':mybluetooth'

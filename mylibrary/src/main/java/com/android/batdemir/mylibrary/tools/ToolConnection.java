@@ -115,23 +115,20 @@ public class ToolConnection {
     }
 
     public String getMACAddress(String interfaceName) {
+        String mac = "";
         try {
             List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
-            for (NetworkInterface intf : interfaces) {
-                if (interfaceName != null && (!intf.getName().equalsIgnoreCase(interfaceName))) {
-                    continue;
+            for (NetworkInterface networkInterface : interfaces) {
+                if (interfaceName != null && (!networkInterface.getName().equalsIgnoreCase(interfaceName))) {
+                    mac = getMACFormatter(networkInterface.getHardwareAddress());
+                    break;
                 }
-                byte[] mac = intf.getHardwareAddress();
-                if (mac == null) return "";
-                StringBuilder buf = new StringBuilder();
-                for (byte aMac : mac) buf.append(String.format("%02X:", aMac));
-                if (buf.length() > 0) buf.deleteCharAt(buf.length() - 1);
-                return buf.toString();
             }
+            return mac;
         } catch (Exception e) {
             Log.e(ToolConnection.class.getSimpleName(), e.getMessage());
         }
-        return "";
+        return mac;
     }
 
     public String getIPAddress(boolean useIPv4) {
@@ -157,6 +154,18 @@ public class ToolConnection {
             Log.e(ToolConnection.class.getSimpleName(), e.getMessage());
         }
         return "";
+    }
+
+    private String getMACFormatter(byte[] mac) {
+        if (mac == null) return "";
+        StringBuilder buf = new StringBuilder();
+        try {
+            for (byte aMac : mac) buf.append(String.format("%02X:", aMac));
+            if (buf.length() > 0) buf.deleteCharAt(buf.length() - 1);
+        } catch (Exception e) {
+            Log.e(ToolConnection.class.getSimpleName(), e.getMessage());
+        }
+        return buf.toString();
     }
 
 }

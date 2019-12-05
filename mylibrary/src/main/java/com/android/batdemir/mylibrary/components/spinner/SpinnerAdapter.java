@@ -55,7 +55,7 @@ public class SpinnerAdapter extends ArrayAdapter<SpinnerModel> {
 
         private SpinnerViewHolder(View v) {
             this.textView = v.findViewById(R.id.spinnerItem);
-            textView.setTextAppearance(textAppearance != null ? textAppearance : R.style.ValueTextAppearance);
+            textView.setTextAppearance(textAppearance != null ? textAppearance : android.R.style.Widget_Material_TextView_SpinnerItem);
         }
 
         private void setData(SpinnerModel spinnerModel, boolean isDropDown) {
@@ -83,7 +83,6 @@ public class SpinnerAdapter extends ArrayAdapter<SpinnerModel> {
         if (root == null) {
             root = LayoutInflater.from(context).inflate(R.layout.item_spinner, parent, false);
         }
-        root.setPadding(0, 8, 0, 8);
         new SpinnerViewHolder(root).setData(models.get(position), true);
         return root;
     }

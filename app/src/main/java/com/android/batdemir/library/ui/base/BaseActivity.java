@@ -54,7 +54,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
     public void dialogOk(MyAlertDialog myAlertDialog) {
         if (Objects.equals(myAlertDialog.getTag(), getString(R.string.alert_dialog_key_exit))) {
             finishAffinity();
-            System.exit(0);
+            finishAndRemoveTask();
         }
     }
 

@@ -1,4 +1,4 @@
-package com.android.batdemir.mylibrary.tools.bluetooth;
+package com.android.batdemir.mybluetooth;
 
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
@@ -36,7 +36,7 @@ public class BluetoothSPP {
     private boolean isConnecting = false;
     private boolean isServiceRunning = false;
     private String keyword = "";
-    private boolean isAndroid = BluetoothState.DEVICE_ANDROID;
+    private boolean isAndroid = BluetoothUtils.DEVICE_ANDROID;
     private BluetoothConnectionListener bcl;
     private int c = 0;
 
@@ -44,30 +44,31 @@ public class BluetoothSPP {
     private final Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case BluetoothState.MESSAGE_WRITE:
+                case BluetoothUtils.MESSAGE_WRITE:
+                    Log.v(BluetoothSPP.class.getSimpleName(), "MESSAGE_WRITE");
                     break;
-                case BluetoothState.MESSAGE_READ:
+                case BluetoothUtils.MESSAGE_READ:
                     byte[] readBuf = (byte[]) msg.obj;
                     String readMessage = new String(readBuf);
                     if (readBuf != null && readBuf.length > 0 && mDataReceivedListener != null) {
                         mDataReceivedListener.onDataReceived(readBuf, readMessage);
                     }
                     break;
-                case BluetoothState.MESSAGE_DEVICE_NAME:
-                    mDeviceName = msg.getData().getString(BluetoothState.DEVICE_NAME);
-                    mDeviceAddress = msg.getData().getString(BluetoothState.DEVICE_ADDRESS);
+                case BluetoothUtils.MESSAGE_DEVICE_NAME:
+                    mDeviceName = msg.getData().getString(BluetoothUtils.DEVICE_NAME);
+                    mDeviceAddress = msg.getData().getString(BluetoothUtils.DEVICE_ADDRESS);
                     if (mBluetoothConnectionListener != null)
                         mBluetoothConnectionListener.onDeviceConnected(mDeviceName, mDeviceAddress);
                     isConnected = true;
                     break;
-                case BluetoothState.MESSAGE_TOAST:
-                    Toast.makeText(mContext, msg.getData().getString(BluetoothState.TOAST)
+                case BluetoothUtils.MESSAGE_TOAST:
+                    Toast.makeText(mContext, msg.getData().getString(BluetoothUtils.TOAST)
                             , Toast.LENGTH_SHORT).show();
                     break;
-                case BluetoothState.MESSAGE_STATE_CHANGE:
+                case BluetoothUtils.MESSAGE_STATE_CHANGE:
                     if (mBluetoothStateListener != null)
                         mBluetoothStateListener.onServiceStateChanged(msg.arg1);
-                    if (isConnected && msg.arg1 != BluetoothState.STATE_CONNECTED) {
+                    if (isConnected && msg.arg1 != BluetoothUtils.STATE_CONNECTED) {
                         if (mBluetoothConnectionListener != null)
                             mBluetoothConnectionListener.onDeviceDisconnected();
                         if (isAutoConnectionEnabled) {
@@ -79,10 +80,10 @@ public class BluetoothSPP {
                         mDeviceAddress = null;
                     }
 
-                    if (!isConnecting && msg.arg1 == BluetoothState.STATE_CONNECTING) {
+                    if (!isConnecting && msg.arg1 == BluetoothUtils.STATE_CONNECTING) {
                         isConnecting = true;
                     } else if (isConnecting) {
-                        if (msg.arg1 != BluetoothState.STATE_CONNECTED && mBluetoothConnectionListener != null) {
+                        if (msg.arg1 != BluetoothUtils.STATE_CONNECTED && mBluetoothConnectionListener != null) {
                             mBluetoothConnectionListener.onDeviceConnectionFailed();
                         }
                         isConnecting = false;
@@ -123,8 +124,9 @@ public class BluetoothSPP {
 
     public boolean isBluetoothAvailable() {
         try {
-            if (mBluetoothAdapter == null || mBluetoothAdapter.getAddress().equals(null))
+            if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
                 return false;
+            }
         } catch (NullPointerException e) {
             return false;
         }
@@ -171,7 +173,7 @@ public class BluetoothSPP {
     }
 
     public void startService(boolean isAndroid) {
-        if (mChatService != null && mChatService.getState() == BluetoothState.STATE_NONE) {
+        if (mChatService != null && mChatService.getState() == BluetoothUtils.STATE_NONE) {
             isServiceRunning = true;
             mChatService.start(isAndroid);
             BluetoothSPP.this.isAndroid = isAndroid;
@@ -202,7 +204,7 @@ public class BluetoothSPP {
     }
 
     public void connect(Intent data) {
-        String address = data.getExtras().getString(BluetoothState.EXTRA_DEVICE_ADDRESS);
+        String address = data.getExtras().getString(BluetoothUtils.EXTRA_DEVICE_ADDRESS);
         BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
         mChatService.connect(device);
     }
@@ -216,7 +218,7 @@ public class BluetoothSPP {
         if (mChatService != null) {
             isServiceRunning = false;
             mChatService.stop();
-            if (mChatService.getState() == BluetoothState.STATE_NONE) {
+            if (mChatService.getState() == BluetoothUtils.STATE_NONE) {
                 isServiceRunning = true;
                 mChatService.start(BluetoothSPP.this.isAndroid);
             }
@@ -244,7 +246,7 @@ public class BluetoothSPP {
     }
 
     public void send(byte[] data, boolean crlf) {
-        if (mChatService.getState() == BluetoothState.STATE_CONNECTED) {
+        if (mChatService.getState() == BluetoothUtils.STATE_CONNECTED) {
             if (crlf) {
                 byte[] data2 = new byte[data.length + 2];
                 System.arraycopy(data, 0, data2, 0, data.length);
@@ -259,7 +261,7 @@ public class BluetoothSPP {
 
     public void send(String data, boolean crlf) {
         String tmp = data;
-        if (mChatService.getState() == BluetoothState.STATE_CONNECTED) {
+        if (mChatService.getState() == BluetoothUtils.STATE_CONNECTED) {
             if (crlf)
                 tmp += "\r\n";
             mChatService.write(tmp.getBytes());
