@@ -346,7 +346,7 @@ public class MyAlertDialog extends BaseDialogFragment {
             case SUCCESS:
             case WARNING:
             default:
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 0);
                 params.setMargins(0, 0, 0, 0);
                 binding.btnCancel.setLayoutParams(params);
                 LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
