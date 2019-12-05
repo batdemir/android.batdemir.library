@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/mydialog/mydialog.iml" filepath="$PROJECT_DIR$/mydialog/mydialog.iml" />
       <module fileurl="file://$PROJECT_DIR$/mylibrary/mylibrary.iml" filepath="$PROJECT_DIR$/mylibrary/mylibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/myresources/myresources.iml" filepath="$PROJECT_DIR$/myresources/myresources.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myscanner/myscanner.iml" filepath="$PROJECT_DIR$/myscanner/myscanner.iml" />
     </modules>
   </component>
 </project>

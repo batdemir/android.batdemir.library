@@ -11,17 +11,18 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 
+import com.android.batdemir.library.R;
+import com.android.batdemir.library.api.CallTest;
+import com.android.batdemir.library.databinding.ActivityRecyclerBinding;
+import com.android.batdemir.library.models.Player;
 import com.android.batdemir.library.ui.base.BaseActivity;
 import com.android.batdemir.library.ui.ui_test.adapters.AdapterRecyclerView;
-import com.android.batdemir.library.api.CallTest;
-import com.android.batdemir.library.models.Player;
-import com.android.batdemir.library.R;
-import com.android.batdemir.library.databinding.ActivityRecyclerBinding;
 import com.android.batdemir.mydialog.ui.MyAlertDialog;
 import com.android.batdemir.mylibrary.connection.Connect;
 import com.android.batdemir.mylibrary.connection.ConnectServiceErrorListener;
 import com.android.batdemir.mylibrary.connection.ConnectServiceListener;
 import com.android.batdemir.mylibrary.connection.RetrofitClient;
+import com.android.batdemir.mylibrary.tools.Tool;
 import com.android.batdemir.mylibrary.tools.swipe.SwipeController;
 import com.android.batdemir.mylibrary.tools.swipe.SwipeControllerActions;
 
@@ -58,7 +59,7 @@ public class RecyclerActivity extends BaseActivity implements
 
     @Override
     public void setListeners() {
-        binding.btnNextPage.setOnClickListener(v -> finish());
+        binding.btnNextPage.setOnClickListener(v -> Tool.getInstance(context).move(BarcodeActivity.class, true, true, null));
 
         binding.btnConnectService.setOnClickListener(v -> {
             RetrofitClient.setBaseUrl("https://api.github.com");
