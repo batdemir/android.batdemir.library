@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ActivityBarcodeBinding;
 import com.android.batdemir.library.ui.base.BaseActivity;
+import com.android.batdemir.mylibrary.tools.Tool;
 import com.android.batdemir.myscanner.DataWedge;
 import com.android.batdemir.myscanner.Receiver;
 import com.android.batdemir.myscanner.ReceiverListener;
@@ -53,12 +54,12 @@ public class BarcodeActivity extends BaseActivity implements
 
     @Override
     public void loadData() {
-
+        binding.txtEditBarcode.setText("");
     }
 
     @Override
     public void setListeners() {
-
+        binding.btnNextPage.setOnClickListener(v -> Tool.getInstance(context).move(MaterialActivity.class, true, true, null));
     }
 
     @Override
