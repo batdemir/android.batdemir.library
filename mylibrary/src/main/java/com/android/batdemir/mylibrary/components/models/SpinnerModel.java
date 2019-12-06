@@ -1,4 +1,4 @@
-package com.android.batdemir.mylibrary.tools.spinner;
+package com.android.batdemir.mylibrary.components.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -46,6 +46,26 @@ public class SpinnerModel implements Serializable, Parcelable {
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    //EQUALS
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SpinnerModel)) return false;
+
+        SpinnerModel that = (SpinnerModel) o;
+
+        if (!getId().equals(that.getId())) return false;
+        return getDescription().equals(that.getDescription());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId().hashCode();
+        result = 31 * result + getDescription().hashCode();
+        return result;
     }
 
     //PARCELABLE

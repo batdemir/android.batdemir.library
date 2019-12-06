@@ -1,4 +1,4 @@
-package com.android.batdemir.mylibrary.tools.spinner;
+package com.android.batdemir.mylibrary.components.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.batdemir.mylibrary.R;
+import com.android.batdemir.mylibrary.components.models.SpinnerModel;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -135,5 +136,4 @@ public class SpinnerAdapter extends ArrayAdapter {
             textView.setText(spinnerModel.getDescription());
         }
     }
-
 }
