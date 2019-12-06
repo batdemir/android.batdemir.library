@@ -1,9 +1,11 @@
-package com.android.batdemir.mylibrary.components.spinner;
+package com.android.batdemir.mylibrary.components.helper;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
 import android.widget.Spinner;
 
+import com.android.batdemir.mylibrary.components.models.SpinnerModel;
+import com.android.batdemir.mylibrary.components.adapters.SpinnerAdapter;
 import com.google.gson.Gson;
 
 import java.lang.reflect.Field;
@@ -22,6 +24,13 @@ public class SpinnerHelper {
 
     private void setSpinner(Spinner spinner) {
         this.spinner = spinner;
+    }
+
+    public static SpinnerHelper getInstance() {
+        if (ourInstance == null) {
+            ourInstance = new SpinnerHelper();
+        }
+        return ourInstance;
     }
 
     public static SpinnerHelper getInstance(Spinner spinner) {

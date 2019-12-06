@@ -1,5 +1,6 @@
 package com.android.batdemir.library.ui.base;
 
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,6 +47,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
+            overridePendingTransition(com.android.batdemir.mylibrary.R.anim.slide_in_right, com.android.batdemir.mylibrary.R.anim.slide_out_right);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -54,14 +56,14 @@ public abstract class BaseActivity extends AppCompatActivity implements
     public void dialogOk(MyAlertDialog myAlertDialog) {
         if (Objects.equals(myAlertDialog.getTag(), getString(R.string.alert_dialog_key_exit))) {
             finishAffinity();
-            System.exit(0);
+            finishAndRemoveTask();
         }
     }
 
     @Override
     public void dialogCancel(MyAlertDialog myAlertDialog) {
         if (Objects.equals(myAlertDialog.getTag(), getString(R.string.alert_dialog_key_exit))) {
-            myAlertDialog.dismiss();
+            Log.v(BaseActivity.class.getSimpleName(), "exitCancel");
         }
     }
 

@@ -23,28 +23,6 @@
                 android:textAllCaps="false"
                 tools:ignore="HardcodedText" />
 
-            <com.android.batdemir.mylibrary.MySpinner
-                android:id="@+id/mySpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:spinnerLabel="Test" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnValidSpinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="ValidSpinner"
-                android:textAllCaps="false"
-                tools:ignore="HardcodedText" />
-
-            <com.android.batdemir.mylibrary.MyEditText
-                android:id="@+id/myEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:editTextHint="Test"
-                app:maxCharCount="10" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDialogWarning"

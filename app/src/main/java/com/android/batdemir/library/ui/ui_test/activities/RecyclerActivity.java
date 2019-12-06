@@ -23,8 +23,8 @@ import com.android.batdemir.mylibrary.connection.ConnectServiceErrorListener;
 import com.android.batdemir.mylibrary.connection.ConnectServiceListener;
 import com.android.batdemir.mylibrary.connection.RetrofitClient;
 import com.android.batdemir.mylibrary.tools.Tool;
-import com.android.batdemir.mylibrary.tools.swipe.SwipeController;
-import com.android.batdemir.mylibrary.tools.swipe.SwipeControllerActions;
+import com.android.batdemir.mylibrary.components.helper.SwipeController;
+import com.android.batdemir.mylibrary.components.listeners.SwipeControllerActions;
 
 import java.util.ArrayList;
 import java.util.List;

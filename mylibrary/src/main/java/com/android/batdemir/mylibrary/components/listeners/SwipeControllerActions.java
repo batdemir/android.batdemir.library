@@ -1,4 +1,4 @@
-package com.android.batdemir.mylibrary.tools.swipe;
+package com.android.batdemir.mylibrary.components.listeners;
 
 import android.graphics.Color;
 import android.view.View;
