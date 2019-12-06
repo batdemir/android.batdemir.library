@@ -21,7 +21,7 @@
             app:hintEnabled="true"
             tools:ignore="HardcodedText">
 
-            <AutoCompleteTextView
+            <com.google.android.material.textview.MaterialAutoCompleteTextView
                 android:id="@+id/autoCompleteOutLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
             app:hintEnabled="true"
             tools:ignore="HardcodedText">
 
-            <AutoCompleteTextView
+            <com.google.android.material.textview.MaterialAutoCompleteTextView
                 android:id="@+id/autoCompleteFilled"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

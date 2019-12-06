@@ -12,8 +12,8 @@ import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ActivityMaterialBinding;
 import com.android.batdemir.library.models.User;
 import com.android.batdemir.library.ui.base.BaseActivity;
-import com.android.batdemir.mylibrary.tools.spinner.SpinnerAdapter;
-import com.android.batdemir.mylibrary.tools.spinner.SpinnerHelper;
+import com.android.batdemir.mylibrary.components.adapters.SpinnerAdapter;
+import com.android.batdemir.mylibrary.components.helper.SpinnerHelper;
 
 import java.util.ArrayList;
 import java.util.List;

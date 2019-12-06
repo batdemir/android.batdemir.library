@@ -1,4 +1,4 @@
-package com.android.batdemir.mylibrary.tools.recycler;
+package com.android.batdemir.mylibrary.components.helper;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -9,6 +9,8 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.batdemir.mylibrary.components.listeners.SwipeControllerActions;
 
 public class SwipeController extends ItemTouchHelper.Callback {
 
