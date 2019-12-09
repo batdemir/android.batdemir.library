@@ -9,4 +9,15 @@
         <item>reply</item>
         <item>reply_all</item>
     </string-array>
+
+    <string-array name="testing">
+        <item>bat1</item>
+        <item>bat2</item>
+        <item>bat3</item>
+        <item>bat4</item>
+        <item>bat5</item>
+        <item>bat6</item>
+        <item>bat7</item>
+        <item>bat8</item>
+    </string-array>
 </resources>

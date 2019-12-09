@@ -11,6 +11,13 @@
         android:padding="16sp"
         tools:context=".ui.ui_test.activities.MaterialActivity">
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPreviousPage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PreviousPage"
+            tools:ignore="HardcodedText" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputAutoOutLine"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
@@ -21,12 +28,10 @@
             app:hintEnabled="true"
             tools:ignore="HardcodedText">
 
-            <AutoCompleteTextView
+            <com.android.batdemir.mylibrary.components.ui.MyAutoCompleteTextView
                 android:id="@+id/autoCompleteOutLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:imeOptions="actionDone"
-                android:singleLine="true"
                 tools:ignore="LabelFor" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -48,12 +53,10 @@
             app:hintEnabled="true"
             tools:ignore="HardcodedText">
 
-            <AutoCompleteTextView
+            <com.android.batdemir.mylibrary.components.ui.MyAutoCompleteTextView
                 android:id="@+id/autoCompleteFilled"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:imeOptions="actionDone"
-                android:singleLine="true"
                 tools:ignore="LabelFor" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -105,7 +108,20 @@
 
             </com.google.android.material.textfield.TextInputEditText>
 
+
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.android.batdemir.mylibrary.components.ui.MySpinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSpinnerValid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ListSelection"
+            tools:ignore="HardcodedText" />
 
     </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
