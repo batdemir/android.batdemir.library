@@ -4,20 +4,21 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.inputmethod.EditorInfo;
 
+import androidx.annotation.ArrayRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.batdemir.mylibrary.components.adapters.SpinnerAdapter;
+import com.android.batdemir.mylibrary.components.helper.SpinnerHelper;
 import com.android.batdemir.mylibrary.components.models.SpinnerModel;
 import com.google.android.material.textview.MaterialAutoCompleteTextView;
 import com.google.gson.Gson;
 
-import java.util.Objects;
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
 
 public class MyAutoCompleteTextView extends MaterialAutoCompleteTextView {
-
-    private MyAutoCompleteTextView current = null;
-    private SpinnerAdapter spinnerAdapter = null;
 
     public MyAutoCompleteTextView(@NonNull Context context) {
         super(context);
@@ -35,144 +36,144 @@ public class MyAutoCompleteTextView extends MaterialAutoCompleteTextView {
     }
 
     private void init() {
-        current = this;
-        current.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        current.setSingleLine(true);
-        spinnerAdapter = (SpinnerAdapter) current.getAdapter();
+        setImeOptions(EditorInfo.IME_ACTION_DONE);
+        setSingleLine(true);
     }
 
-    private SpinnerModel getItem() {
-        if (current.getText().toString().isEmpty()) {
-            return null;
-        } else {
-            return getItemFromAdapter();
-        }
+    private boolean getControl() {
+        if (getText().toString().isEmpty())
+            return false;
+        if (getAdapter() == null)
+            return false;
+        return getAdapter().getCount() != 0;
     }
 
-    private SpinnerModel getItemFromAdapter() {
-        if (spinnerAdapter == null)
-            return null;
-        else if (spinnerAdapter.getCount() == 0)
-            return null;
-        else
-            return getItemFromModel();
+    private boolean setControl(Object item) {
+        if (item == null)
+            return false;
+        if (getAdapter() == null)
+            return false;
+        return getAdapter().getCount() != 0;
     }
 
     private SpinnerModel getItemFromModel() {
+        SpinnerAdapter spinnerAdapter = (SpinnerAdapter) getAdapter();
         SpinnerModel selectedItem = null;
-        for (int i = 0; i < spinnerAdapter.getModels().size(); i++) {
-            if (spinnerAdapter.getModels().get(i).getDescription().equals(current.getText().toString())) {
-                selectedItem = spinnerAdapter.getModels().get(i);
-                break;
+        if (getControl()) {
+            for (int i = 0; i < spinnerAdapter.getModels().size(); i++) {
+                if (spinnerAdapter.getModels().get(i).getDescription().equals(getText().toString())) {
+                    selectedItem = spinnerAdapter.getModels().get(i);
+                    break;
+                }
             }
         }
         return selectedItem;
     }
 
-    //Model Functions
+    //Component Fill & Clear Functions
+
+    public void fill(@ArrayRes int arrayId) {
+        setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance().cast(Arrays.asList(getResources().getStringArray(arrayId)))));
+    }
+
+    @SuppressWarnings("unchecked")
+    public void fill(List<?> models) {
+        if (models.isEmpty())
+            return;
+        if (models.get(0) instanceof SpinnerModel) {
+            setAdapter(new SpinnerAdapter(getContext(), (List<SpinnerModel>) models));
+        } else if (models.get(0) instanceof String) {
+            setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance().cast((List<String>) models)));
+        }
+    }
+
+    public void fill(List<?> models, Field id, Field description) {
+        setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance().cast(models, id, description)));
+    }
+
+    public void clear() {
+        setAdapter(null);
+    }
+
+    //Component Item Functions
 
     public SpinnerModel getSelectedItem() {
-        SpinnerModel selectedItem = getItem();
-        if (selectedItem == null)
-            current.setError("Item Not Found");
-        else
-            current.setError(null);
-        return selectedItem;
+        return getItemFromModel();
     }
 
     public Object getSelectedItemId() {
-        SpinnerModel selectedItem = getItem();
-        if (selectedItem == null)
-            current.setError("Item Not Found");
-        else
-            current.setError(null);
-        return Objects.requireNonNull(selectedItem).getId();
+        if (getSelectedItem() == null)
+            return null;
+        return getSelectedItem().getId();
     }
 
     public String getSelectedItemDescription() {
-        SpinnerModel selectedItem = getItem();
-        if (selectedItem == null)
-            current.setError("Item Not Found");
-        else
-            current.setError(null);
-        return Objects.requireNonNull(selectedItem).getDescription();
+        if (getSelectedItem() == null)
+            return null;
+        return getSelectedItem().getDescription();
     }
 
     public Object getSelectedItemModel(Class<?> classType) {
-        SpinnerModel selectedItem = getItem();
-        if (selectedItem == null)
-            current.setError("Item Not Found");
-        else
-            current.setError(null);
-        return new Gson().fromJson(Objects.requireNonNull(selectedItem).getModel(), classType);
+        if (getSelectedItem() == null)
+            return null;
+        return new Gson().fromJson(getSelectedItem().getModel(), classType);
     }
 
     public boolean setSelectByItem(SpinnerModel item) {
-        if (item == null)
-            return false;
-        if (spinnerAdapter == null)
-            return false;
-        if (spinnerAdapter.getCount() == 0)
-            return false;
-
-        for (int i = 0; i < spinnerAdapter.getModels().size(); i++) {
-            if (spinnerAdapter.getModels().get(i).equals(item)) {
-                current.setText(spinnerAdapter.getModels().get(i).getDescription());
-                break;
+        SpinnerAdapter spinnerAdapter = (SpinnerAdapter) getAdapter();
+        if (setControl(item)) {
+            for (int i = 0; i < spinnerAdapter.getModels().size(); i++) {
+                if (spinnerAdapter.getModels().get(i).equals(item)) {
+                    setText(spinnerAdapter.getModels().get(i).getDescription());
+                    break;
+                }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     public boolean setSelectByItemId(Object itemId) {
-        if (itemId == null)
-            return false;
-        if (spinnerAdapter == null)
-            return false;
-        if (spinnerAdapter.getCount() == 0)
-            return false;
-
-        for (int i = 0; i < spinnerAdapter.getModels().size(); i++) {
-            if (spinnerAdapter.getModels().get(i).getId().equals(itemId)) {
-                current.setText(spinnerAdapter.getModels().get(i).getDescription());
+        SpinnerAdapter spinnerAdapter = (SpinnerAdapter) getAdapter();
+        if (setControl(itemId)) {
+            for (int i = 0; i < spinnerAdapter.getModels().size(); i++) {
+                if (spinnerAdapter.getModels().get(i).getId().equals(itemId)) {
+                    setText(spinnerAdapter.getModels().get(i).getDescription());
+                    break;
+                }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     public boolean setSelectByItemDescription(String itemDescription) {
-        if (itemDescription == null)
-            return false;
-        if (itemDescription.isEmpty())
-            return false;
-        if (spinnerAdapter == null)
-            return false;
-        if (spinnerAdapter.getCount() == 0)
-            return false;
-
-        for (int i = 0; i < spinnerAdapter.getModels().size(); i++) {
-            if (spinnerAdapter.getModels().get(i).getDescription().equals(itemDescription)) {
-                current.setText(spinnerAdapter.getModels().get(i).getDescription());
+        SpinnerAdapter spinnerAdapter = (SpinnerAdapter) getAdapter();
+        if (setControl(itemDescription)) {
+            for (int i = 0; i < spinnerAdapter.getModels().size(); i++) {
+                if (spinnerAdapter.getModels().get(i).getDescription().equals(itemDescription)) {
+                    setText(spinnerAdapter.getModels().get(i).getDescription());
+                    break;
+                }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     public boolean setSelectByItemModel(Object itemModel) {
-        if (itemModel == null)
-            return false;
-        if (spinnerAdapter == null)
-            return false;
-        if (spinnerAdapter.getCount() == 0)
-            return false;
-
-        String itemModelStr = new Gson().toJson(itemModel);
-
-        for (int i = 0; i < spinnerAdapter.getModels().size(); i++) {
-            if (spinnerAdapter.getModels().get(i).getModel().equals(itemModelStr)) {
-                current.setText(spinnerAdapter.getModels().get(i).getDescription());
+        SpinnerAdapter spinnerAdapter = (SpinnerAdapter) getAdapter();
+        if (setControl(itemModel)) {
+            String itemModelStr = new Gson().toJson(itemModel);
+            for (int i = 0; i < spinnerAdapter.getModels().size(); i++) {
+                if (spinnerAdapter.getModels().get(i).getModel().equals(itemModelStr)) {
+                    setText(spinnerAdapter.getModels().get(i).getDescription());
+                    break;
+                }
             }
+            return true;
         }
-        return true;
+        return false;
     }
+
 }

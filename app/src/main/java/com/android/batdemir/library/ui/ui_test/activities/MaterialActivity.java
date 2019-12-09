@@ -12,8 +12,8 @@ import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ActivityMaterialBinding;
 import com.android.batdemir.library.models.User;
 import com.android.batdemir.library.ui.base.BaseActivity;
-import com.android.batdemir.mylibrary.components.adapters.SpinnerAdapter;
-import com.android.batdemir.mylibrary.components.helper.SpinnerHelper;
+import com.android.batdemir.mydialog.ui.MyAlertDialog;
+import com.android.batdemir.mylibrary.tools.Tool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +44,10 @@ public class MaterialActivity extends BaseActivity {
     @SuppressLint("PrivateApi")
     @Override
     public void setListeners() {
-        binding.autoCompleteOutLine.setOnItemClickListener((parent, view, position, id) -> Log.v("outLineClickItem:", binding.autoCompleteOutLine.getAdapter().getItem(position).toString()));
-        binding.autoCompleteFilled.setOnItemClickListener((parent, view, position, id) -> Log.v("filledClickItem:", binding.autoCompleteFilled.getAdapter().getItem(position).toString()));
+        binding.btnPreviousPage.setOnClickListener(v -> Tool.getInstance(context).move(BarcodeActivity.class, false, false, null));
+        binding.btnOutLinesValid.setOnClickListener(v -> MyAlertDialog.getInstance(binding.autoCompleteOutLine.getSelectedItemDescription() == null ? "not found" : binding.autoCompleteOutLine.getSelectedItemDescription(), MyAlertDialog.DialogStyle.SUCCESS).show(getSupportFragmentManager(), ""));
+        binding.btnFilledValid.setOnClickListener(v -> MyAlertDialog.getInstance(binding.autoCompleteFilled.getSelectedItemDescription().isEmpty() ? "not found" : binding.autoCompleteFilled.getSelectedItemDescription(), MyAlertDialog.DialogStyle.SUCCESS).show(getSupportFragmentManager(), ""));
+        binding.btnSpinnerValid.setOnClickListener(v -> MyAlertDialog.getInstance(binding.spinner.getSelectedItemDescription().isEmpty() ? "not found" : binding.spinner.getSelectedItemDescription(), MyAlertDialog.DialogStyle.SUCCESS).show(getSupportFragmentManager(), ""));
     }
 
     private void fillSpinners() {
@@ -56,22 +58,16 @@ public class MaterialActivity extends BaseActivity {
         for (int i = 10; i < 30; i++) {
             userList.add(new User(name + i, pass + i, email + i));
         }
-        SpinnerAdapter adapter = null;
+        List<String> strings = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            strings.add(name + i);
+        }
         try {
-            adapter = new SpinnerAdapter(
-                    context,
-                    SpinnerHelper.getInstance().cast(
-                            userList,
-                            User.class.getDeclaredField("username"),
-                            User.class.getDeclaredField("password")
-                    ),
-                    SpinnerAdapter.SpinnerType.AUTO_COMPLETE_TEXT_VIEW
-            );
+            binding.autoCompleteOutLine.fill(userList, User.class.getDeclaredField("username"), User.class.getDeclaredField("password"));
+            binding.autoCompleteFilled.fill(strings);
+            binding.spinner.fill(R.array.testing);
         } catch (Exception e) {
             Log.e(MaterialActivity.class.getSimpleName(), e.getMessage());
         }
-        binding.autoCompleteOutLine.setAdapter(adapter);
-        binding.autoCompleteFilled.setAdapter(adapter);
-        binding.spinner.setAdapter(adapter);
     }
 }

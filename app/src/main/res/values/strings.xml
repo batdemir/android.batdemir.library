@@ -32,18 +32,6 @@
     <string name="dot">:</string>
     <string name="expired_in_week">Expired in Week</string>
     <string name="up_coming">Up Coming</string>
-    <string-array name="test">
-        <item>ArrayTest1</item>
-        <item>ArrayTest2</item>
-        <item>ArrayTest3</item>
-        <item>ArrayTest4</item>
-        <item>ArrayTest5</item>
-        <item>ArrayTest6</item>
-        <item>ArrayTest7</item>
-        <item>ArrayTest8</item>
-        <item>ArrayTest9</item>
-        <item>ArrayTest10</item>
-    </string-array>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"

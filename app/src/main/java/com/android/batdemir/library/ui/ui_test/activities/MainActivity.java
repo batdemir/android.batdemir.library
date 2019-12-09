@@ -44,7 +44,7 @@ public class MainActivity extends BaseActivity implements MyAlertDialogEditTextL
 
     @Override
     public void loadData() {
-        Log.v(MainActivity.class.getSimpleName(), "loadData");
+        checkException();
     }
 
     @SuppressLint("NewApi")
@@ -98,6 +98,13 @@ public class MainActivity extends BaseActivity implements MyAlertDialogEditTextL
     public void dialogCancelEditText(MyAlertDialog myAlertDialog, EditText editText) {
         if (Objects.equals(myAlertDialog.getTag(), tagEditText)) {
             Log.v(editText.toString(), editText.getText().toString());
+        }
+    }
+
+    private void checkException() {
+        String result = getIntent().getStringExtra("CRASH_REPORT");
+        if (result != null && !result.isEmpty()) {
+            MyAlertDialog.getInstance(result, MyAlertDialog.DialogStyle.FAILED).show(getSupportFragmentManager(), "exception");
         }
     }
 }

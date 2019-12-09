@@ -21,7 +21,6 @@
         android:theme="@style/AppThemeActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,InnerclassSeparator">
-        <activity android:name=".ui.ui_test.activities.MaterialActivity"></activity>
         <!-- TEST -->
         <activity
             android:name=".ui.ui_test.activities.MainActivity"
@@ -37,7 +36,11 @@
             android:screenOrientation="sensor" />
         <activity
             android:name=".ui.ui_test.activities.BarcodeActivity"
-            android:screenOrientation="sensor" /> <!-- APP -->
+            android:screenOrientation="sensor" />
+        <activity
+            android:name=".ui.ui_test.activities.MaterialActivity"
+            android:screenOrientation="sensor" />
+        <!-- APP -->
         <activity
             android:name=".ui.ui_app.activities.LoginActivity"
             android:screenOrientation="sensorPortrait">
