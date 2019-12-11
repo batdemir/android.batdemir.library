@@ -1,7 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-group = 'com.github.batdemirorg'
-version = bluetooth_version
 
 android {
     compileSdkVersion 28
@@ -29,15 +26,6 @@ android {
     }
 }
 
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from android.sourceSets.main.javaDirectories
-}
-
-artifacts {
-    archives sourcesJar
-}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
@@ -45,21 +33,17 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
 }
 
-if (android.productFlavors.size() > 0) {
-    android.libraryVariants.all { variant ->
-        if (variant.name.toLowerCase().contains("debug")) {
-            return
-        }
+apply plugin: 'com.novoda.bintray-release'
+publish {
+    def groupProjectID = 'android.batdemir.library'
+    def artifactProjectID = 'mybluetooth'
+    def publishVersionID = bluetooth_version
 
-        def bundleTask = tasks["bundle${variant.name.capitalize()}"]
-
-        artifacts {
-            archives(bundleTask.archivePath) {
-                classifier variant.flavorName
-                builtBy bundleTask
-                name = project.name
-            }
-        }
-    }
+    userOrg = 'batdemirorg'
+    repoName = 'batdemirlibrary'
+    groupId = groupProjectID
+    artifactId = artifactProjectID
+    publishVersion = publishVersionID
+    desc = 'Batdemir Library'
+    website = 'https://github.com/batdemirorg/android.batdemir.library'
 }
-
