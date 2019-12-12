@@ -51,7 +51,7 @@ apply plugin: 'com.novoda.bintray-release'
 publish {
     def groupProjectID = group_project_id
     def artifactProjectID = 'mylibrary'
-    def publishVersionID = library_version
+    def publishVersionID = lib_version
 
     userOrg = user_org
     repoName = repo_name

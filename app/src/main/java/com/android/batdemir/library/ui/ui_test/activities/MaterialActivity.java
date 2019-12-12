@@ -64,7 +64,9 @@ public class MaterialActivity extends BaseActivity {
         }
         try {
             binding.autoCompleteOutLine.fill(userList, User.class.getDeclaredField("username"), User.class.getDeclaredField("password"));
+            binding.autoCompleteFilled.setTextAppearance(R.style.TextAppearance_AppCompat_Large);
             binding.autoCompleteFilled.fill(strings);
+            binding.spinner.setTextAppearance(R.style.TextAppearance_AppCompat_Large);
             binding.spinner.fill(R.array.testing);
         } catch (Exception e) {
             Log.e(MaterialActivity.class.getSimpleName(), e.getMessage());

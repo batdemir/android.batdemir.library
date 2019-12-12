@@ -7,6 +7,7 @@ import android.view.inputmethod.EditorInfo;
 import androidx.annotation.ArrayRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
 
 import com.android.batdemir.mylibrary.components.adapters.SpinnerAdapter;
 import com.android.batdemir.mylibrary.components.helper.SpinnerHelper;
@@ -19,6 +20,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MyAutoCompleteTextView extends MaterialAutoCompleteTextView {
+
+    private int textAppearance;
 
     public MyAutoCompleteTextView(@NonNull Context context) {
         super(context);
@@ -72,8 +75,12 @@ public class MyAutoCompleteTextView extends MaterialAutoCompleteTextView {
 
     //Component Fill & Clear Functions
 
+    public void setTextAppearance(@StyleRes int textAppearance) {
+        this.textAppearance = textAppearance;
+    }
+
     public void fill(@ArrayRes int arrayId) {
-        setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance().cast(Arrays.asList(getResources().getStringArray(arrayId)))));
+        setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance().cast(Arrays.asList(getResources().getStringArray(arrayId))), textAppearance));
     }
 
     @SuppressWarnings("unchecked")
@@ -81,14 +88,18 @@ public class MyAutoCompleteTextView extends MaterialAutoCompleteTextView {
         if (models.isEmpty())
             return;
         if (models.get(0) instanceof SpinnerModel) {
-            setAdapter(new SpinnerAdapter(getContext(), (List<SpinnerModel>) models));
+            setAdapter(new SpinnerAdapter(getContext(), (List<SpinnerModel>) models, textAppearance));
         } else if (models.get(0) instanceof String) {
-            setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance().cast((List<String>) models)));
+            setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance().cast((List<String>) models), textAppearance));
         }
     }
 
     public void fill(List<?> models, Field id, Field description) {
-        setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance().cast(models, id, description)));
+        setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance().cast(models, id, description), textAppearance));
+    }
+
+    public void fill(SpinnerAdapter spinnerAdapter) {
+        setAdapter(spinnerAdapter);
     }
 
     public void clear() {

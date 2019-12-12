@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.util.AttributeSet;
 
 import androidx.annotation.ArrayRes;
+import androidx.annotation.StyleRes;
 import androidx.appcompat.widget.AppCompatSpinner;
 
 import com.android.batdemir.mylibrary.components.adapters.SpinnerAdapter;
@@ -17,6 +18,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MySpinner extends AppCompatSpinner {
+
+    private int textAppearance;
+
     public MySpinner(Context context) {
         super(context);
     }
@@ -71,8 +75,12 @@ public class MySpinner extends AppCompatSpinner {
 
     //Component Fill & Clear Functions
 
+    public void setTextAppearance(@StyleRes int textAppearance) {
+        this.textAppearance = textAppearance;
+    }
+
     public void fill(@ArrayRes int arrayId) {
-        setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance().cast(Arrays.asList(getResources().getStringArray(arrayId)))));
+        setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance().cast(Arrays.asList(getResources().getStringArray(arrayId))), textAppearance));
     }
 
     @SuppressWarnings("unchecked")
@@ -80,14 +88,18 @@ public class MySpinner extends AppCompatSpinner {
         if (models.isEmpty())
             return;
         if (models.get(0) instanceof SpinnerModel) {
-            setAdapter(new SpinnerAdapter(getContext(), (List<SpinnerModel>) models));
+            setAdapter(new SpinnerAdapter(getContext(), (List<SpinnerModel>) models, textAppearance));
         } else if (models.get(0) instanceof String) {
-            setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance().cast((List<String>) models)));
+            setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance().cast((List<String>) models), textAppearance));
         }
     }
 
     public void fill(List<?> models, Field id, Field description) {
-        setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance().cast(models, id, description)));
+        setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance().cast(models, id, description), textAppearance));
+    }
+
+    public void fill(SpinnerAdapter spinnerAdapter) {
+        setAdapter(spinnerAdapter);
     }
 
     public void clear() {

@@ -5,11 +5,7 @@ buildscript {
         user_org = "batdemirorg"
         repo_name = "batdemirlibrary"
         web_site = "https://github.com/batdemirorg/android.batdemir.library"
-        bluetooth_version = "0.0.3"
-        dialog_version = "0.0.2"
-        library_version = "0.0.2"
-        resources_version = "0.0.2"
-        scanner_version = "0.0.2"
+        lib_version = "0.0.6"
     }
 
     repositories {
