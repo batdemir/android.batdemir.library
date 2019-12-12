@@ -2,17 +2,17 @@
 [![API](https://img.shields.io/badge/API-23%2B-red.svg?style=flat)](https://android-arsenal.com/api?level=23)
 [![](https://jitpack.io/v/batdemirorg/android.batdemir.library.svg)](https://jitpack.io/#batdemirorg/android.batdemir.library)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/764fdb1f562044499de6efb70ee53664)](https://www.codacy.com/manual/batdemir/android.batdemir.library?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=batdemirorg/android.batdemir.library&amp;utm_campaign=Badge_Grade)
-[![Bluetooth](https://api.bintray.com/packages/batdemirorg/batdemirlibrary/mybluetooth/images/download.svg?version=0.0.2) ](https://bintray.com/batdemirorg/batdemirlibrary/mybluetooth/0.0.2/link)
-[![Resources](https://api.bintray.com/packages/batdemirorg/batdemirlibrary/myresources/images/download.svg?version=0.0.1) ](https://bintray.com/batdemirorg/batdemirlibrary/myresources/0.0.1/link)
-[![Library](https://api.bintray.com/packages/batdemirorg/batdemirlibrary/mylibrary/images/download.svg?version=0.0.1) ](https://bintray.com/batdemirorg/batdemirlibrary/mylibrary/0.0.1/link)
-[![Dialog](https://api.bintray.com/packages/batdemirorg/batdemirlibrary/mydialog/images/download.svg?version=0.0.1) ](https://bintray.com/batdemirorg/batdemirlibrary/mydialog/0.0.1/link)
-[![ZebraScanner](https://api.bintray.com/packages/batdemirorg/batdemirlibrary/myscanner/images/download.svg?version=0.0.1) ](https://bintray.com/batdemirorg/batdemirlibrary/myscanner/0.0.1/link)
+[![BintrayBluetooth](https://img.shields.io/bintray/v/batdemirorg/batdemirlibrary/mybluetooth?label=Bluetooth)](https://bintray.com/batdemirorg/batdemirlibrary/mybluetooth/0.0.2/link)
+[![BintrayResources](https://img.shields.io/bintray/v/batdemirorg/batdemirlibrary/myresources?label=Resources)](https://bintray.com/batdemirorg/batdemirlibrary/myresources/0.0.1/link)
+[![BintrayLibrary](https://img.shields.io/bintray/v/batdemirorg/batdemirlibrary/mylibrary?label=Library)](https://bintray.com/batdemirorg/batdemirlibrary/mylibrary/0.0.1/link)
+[![BintrayDialog](https://img.shields.io/bintray/v/batdemirorg/batdemirlibrary/mydialog?label=Dialog)](https://bintray.com/batdemirorg/batdemirlibrary/mydialog/0.0.1/link)
+[![BintrayZebraScanner](https://img.shields.io/bintray/v/batdemirorg/batdemirlibrary/myscanner?label=ZebraScanner)](https://bintray.com/batdemirorg/batdemirlibrary/myscanner/0.0.1/link)
 # Batdemir Library
 
 ## Tool
 ### void move(...)
 *This method is used for change effectiveness.
-*Activitiy means that you can use it for which activity you want to go to.
+*Activity means that you can use it for which activity you want to go to.
 *Direction means if the direction is right, animation is from right to left, and animation is from right to left.
 *IsStack means whether the current activity can be destroyed.
 *Bundle means that you can use this example if you want to pass data to other activities.
@@ -31,14 +31,14 @@
 ### String getIPAddress(...)
 
 ## ToolSharedPreferences
-*This methods all about application registery. Easy use to one row.
+*This methods all about application registry. Easy use to one row.
 ### getInteger(...)/setInteger(...)
 ### getString(...)/setString(...)
 ### getBoolean(...)/setBoolean(...)
 ### getLong(...)/setLong(...)
 ### getFloat(...)/setFloat(...)
 
-## ToolTimeEexpressions
+## ToolTimeExpressions
 *This methods all about casting date methods.
 ### setStringToDate(...)
 ### setDateToString(...)
@@ -59,7 +59,7 @@
 ### setSll(...)
 
 ## Connect
-*If extends this class, it does auto connect service and getting datas for you
+*If extends this class, it does auto connect service and getting data for you
 *If connection gone wrong or some exception, it does auto exception dialog for you
 *If user has not any network connection, it does auto exception dialog for you
 *And it does auto async and showing progress bar for you
