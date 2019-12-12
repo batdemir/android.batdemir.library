@@ -9,12 +9,19 @@ import java.io.Serializable;
 
 public class SpinnerModel implements Serializable, Parcelable {
 
+    public static final Parcelable.Creator<SpinnerModel> CREATOR = new Parcelable.Creator<SpinnerModel>() {
+        public SpinnerModel createFromParcel(Parcel in) {
+            return new SpinnerModel(in);
+        }
+
+        public SpinnerModel[] newArray(int size) {
+            return new SpinnerModel[size];
+        }
+    };
     @SerializedName("id")
     private Object id;
-
     @SerializedName("description")
     private String description;
-
     @SerializedName("model")
     private String model;
 
@@ -22,6 +29,12 @@ public class SpinnerModel implements Serializable, Parcelable {
         this.id = id;
         this.description = description;
         this.model = model;
+    }
+
+    private SpinnerModel(Parcel in) {
+        id = in.readValue(SpinnerModel.class.getClassLoader());
+        description = in.readString();
+        model = in.readString();
     }
 
     public Object getId() {
@@ -40,6 +53,8 @@ public class SpinnerModel implements Serializable, Parcelable {
         this.description = description;
     }
 
+    //EQUALS
+
     public String getModel() {
         return model;
     }
@@ -48,7 +63,7 @@ public class SpinnerModel implements Serializable, Parcelable {
         this.model = model;
     }
 
-    //EQUALS
+    //PARCELABLE
 
     @Override
     public boolean equals(Object o) {
@@ -68,14 +83,6 @@ public class SpinnerModel implements Serializable, Parcelable {
         return result;
     }
 
-    //PARCELABLE
-
-    private SpinnerModel(Parcel in) {
-        id = in.readValue(SpinnerModel.class.getClassLoader());
-        description = in.readString();
-        model = in.readString();
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -87,14 +94,4 @@ public class SpinnerModel implements Serializable, Parcelable {
         dest.writeString(description);
         dest.writeString(model);
     }
-
-    public static final Parcelable.Creator<SpinnerModel> CREATOR = new Parcelable.Creator<SpinnerModel>() {
-        public SpinnerModel createFromParcel(Parcel in) {
-            return new SpinnerModel(in);
-        }
-
-        public SpinnerModel[] newArray(int size) {
-            return new SpinnerModel[size];
-        }
-    };
 }
