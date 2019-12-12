@@ -5,11 +5,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.EditorInfo;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -188,12 +190,12 @@ public class MyAlertDialog extends BaseDialogFragment {
     @Override
     public void setListeners() {
         binding.editText.setOnEditorActionListener((v, actionId, event) -> {
-            editTextListenerProcess(myAlertDialog);
+            editTextListenerProcess(myAlertDialog, actionId, event);
             return false;
         });
 
         binding.editText.setOnKeyListener((v, keyCode, event) -> {
-            editTextListenerProcess(myAlertDialog);
+            editTextListenerProcess(myAlertDialog, keyCode, event);
             return false;
         });
 
@@ -211,7 +213,7 @@ public class MyAlertDialog extends BaseDialogFragment {
         binding.btnOk.setOnClickListener(v -> {
             MyAlertDialog result = myAlertDialog;
             if (style == DialogStyle.INPUT) {
-                editTextListenerProcess(myAlertDialog);
+                editTextListenerProcess(myAlertDialog, KeyEvent.KEYCODE_ENTER, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
             } else {
                 myAlertDialog.dismiss();
                 getMyAlertDialogButtonListener(result).dialogOk(result);
@@ -221,13 +223,15 @@ public class MyAlertDialog extends BaseDialogFragment {
 
     //Functions
 
-    private void editTextListenerProcess(MyAlertDialog result) {
+    private void editTextListenerProcess(MyAlertDialog result, int action, KeyEvent event) {
         result.binding.editText.post(() -> {
-            if (Objects.requireNonNull(result.binding.editText.getText()).toString().isEmpty()) {
-                result.binding.editText.setError(builder.inputEmptyMessage);
-            } else {
-                myAlertDialog.dismiss();
-                getMyAlertDialogEditTextListener(result).dialogOkEditText(result, result.binding.editText);
+            if ((event == null && action == EditorInfo.IME_ACTION_DONE) || (event != null && event.getAction() == KeyEvent.ACTION_DOWN && action == KeyEvent.KEYCODE_ENTER)) {
+                if (Objects.requireNonNull(result.binding.editText.getText()).toString().isEmpty()) {
+                    result.binding.editText.setError(builder.inputEmptyMessage);
+                } else {
+                    myAlertDialog.dismiss();
+                    getMyAlertDialogEditTextListener(result).dialogOkEditText(result, result.binding.editText);
+                }
             }
         });
     }

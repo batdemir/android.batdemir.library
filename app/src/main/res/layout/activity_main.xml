@@ -57,10 +57,18 @@
                 tools:ignore="HardcodedText" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnDialogEditText"
+                android:id="@+id/btnDialogEditTextNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="DialogEditText"
+                android:text="DialogEditTextNumber"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDialogEditTextString"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DialogEditTextString"
                 android:textAllCaps="false"
                 tools:ignore="HardcodedText" />
 
