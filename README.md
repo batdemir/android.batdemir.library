@@ -2,6 +2,11 @@
 [![API](https://img.shields.io/badge/API-23%2B-red.svg?style=flat)](https://android-arsenal.com/api?level=23)
 [![](https://jitpack.io/v/batdemirorg/android.batdemir.library.svg)](https://jitpack.io/#batdemirorg/android.batdemir.library)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/764fdb1f562044499de6efb70ee53664)](https://www.codacy.com/manual/batdemir/android.batdemir.library?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=batdemirorg/android.batdemir.library&amp;utm_campaign=Badge_Grade)
+[![Bluetooth](https://api.bintray.com/packages/batdemirorg/batdemirlibrary/mybluetooth/images/download.svg?version=0.0.2) ](https://bintray.com/batdemirorg/batdemirlibrary/mybluetooth/0.0.2/link)
+[![Resources](https://api.bintray.com/packages/batdemirorg/batdemirlibrary/myresources/images/download.svg?version=0.0.1) ](https://bintray.com/batdemirorg/batdemirlibrary/myresources/0.0.1/link)
+[![Library](https://api.bintray.com/packages/batdemirorg/batdemirlibrary/mylibrary/images/download.svg?version=0.0.1) ](https://bintray.com/batdemirorg/batdemirlibrary/mylibrary/0.0.1/link)
+[![Dialog](https://api.bintray.com/packages/batdemirorg/batdemirlibrary/mydialog/images/download.svg?version=0.0.1) ](https://bintray.com/batdemirorg/batdemirlibrary/mydialog/0.0.1/link)
+[![ZebraScanner](https://api.bintray.com/packages/batdemirorg/batdemirlibrary/myscanner/images/download.svg?version=0.0.1) ](https://bintray.com/batdemirorg/batdemirlibrary/myscanner/0.0.1/link)
 # Batdemir Library
 
 ## Tool

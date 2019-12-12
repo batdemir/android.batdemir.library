@@ -46,3 +46,18 @@ dependencies {
 
     implementation project(':mydialog')
 }
+
+apply plugin: 'com.novoda.bintray-release'
+publish {
+    def groupProjectID = group_project_id
+    def artifactProjectID = 'mylibrary'
+    def publishVersionID = library_version
+
+    userOrg = user_org
+    repoName = repo_name
+    groupId = groupProjectID
+    artifactId = artifactProjectID
+    publishVersion = publishVersionID
+    desc = 'Batdemir Library for base component and utils'
+    website = web_site
+}

@@ -35,15 +35,15 @@ dependencies {
 
 apply plugin: 'com.novoda.bintray-release'
 publish {
-    def groupProjectID = 'android.batdemir.library'
+    def groupProjectID = group_project_id
     def artifactProjectID = 'mybluetooth'
     def publishVersionID = bluetooth_version
 
-    userOrg = 'batdemirorg'
-    repoName = 'batdemirlibrary'
+    userOrg = user_org
+    repoName = repo_name
     groupId = groupProjectID
     artifactId = artifactProjectID
     publishVersion = publishVersionID
-    desc = 'Batdemir Library'
-    website = 'https://github.com/batdemirorg/android.batdemir.library'
+    desc = 'Batdemir Library for bluetooth connection'
+    website = web_site
 }

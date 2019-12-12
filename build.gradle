@@ -1,7 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
-        bluetooth_version = "0.0.1"
+        group_project_id ="android.batdemir.library"
+        user_org = "batdemirorg"
+        repo_name = "batdemirlibrary"
+        web_site = "https://github.com/batdemirorg/android.batdemir.library"
+        bluetooth_version = "0.0.2"
         dialog_version = "0.0.1"
         library_version = "0.0.1"
         resources_version = "0.0.1"
