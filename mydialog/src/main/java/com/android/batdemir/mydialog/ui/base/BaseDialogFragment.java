@@ -27,7 +27,6 @@ public abstract class BaseDialogFragment extends DialogFragment implements
         return setBinding(inflater, container).getRoot();
     }
 
-
     @Override
     public void onStart() {
         super.onStart();

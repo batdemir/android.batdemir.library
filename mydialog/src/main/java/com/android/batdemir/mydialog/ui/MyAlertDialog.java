@@ -1,8 +1,8 @@
 package com.android.batdemir.mydialog.ui;
 
-import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -188,19 +188,20 @@ public class MyAlertDialog extends BaseDialogFragment {
         setComponentAnim();
     }
 
-    @SuppressLint("NewApi")
     @Override
     public void setListeners() {
-        binding.getRoot().addOnUnhandledKeyEventListener((v, event) -> {
-            binding.getRoot().post(() -> {
-                MyAlertDialog result = myAlertDialog;
-                if (event != null && (event.getAction() == KeyEvent.ACTION_DOWN || event.getAction() == KeyEvent.ACTION_UP)) {
-                    myAlertDialog.dismiss();
-                    getMyAlertDialogButtonListener(result).dialogOk(result);
-                }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            binding.getRoot().addOnUnhandledKeyEventListener((v, event) -> {
+                binding.getRoot().post(() -> {
+                    MyAlertDialog result = myAlertDialog;
+                    if (event != null && (event.getAction() == KeyEvent.ACTION_DOWN || event.getAction() == KeyEvent.ACTION_UP)) {
+                        myAlertDialog.dismiss();
+                        getMyAlertDialogButtonListener(result).dialogOk(result);
+                    }
+                });
+                return false;
             });
-            return false;
-        });
+        }
 
         binding.editText.setOnEditorActionListener((v, actionId, event) -> {
             editTextListenerProcess(myAlertDialog, actionId, event);

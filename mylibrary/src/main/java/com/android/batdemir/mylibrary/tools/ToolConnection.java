@@ -12,9 +12,9 @@ import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.List;
 
-@SuppressLint({"MissingPermission", "StaticFieldLeak"})
 public class ToolConnection {
 
+    @SuppressLint("StaticFieldLeak")
     private static ToolConnection ourInstance = null;
     private Context context;
 
@@ -31,6 +31,7 @@ public class ToolConnection {
         this.context = context;
     }
 
+    @SuppressLint("MissingPermission")
     private NetworkInfo getNetworkInfo() {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo();

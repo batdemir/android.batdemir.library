@@ -17,11 +17,11 @@ import java.net.SocketTimeoutException;
 import retrofit2.Call;
 import retrofit2.Response;
 
-@SuppressLint("StaticFieldLeak")
 public class ConnectService extends AsyncTask<Call, Void, Response> {
 
-    private ProgressDialog progressDialog;
+    @SuppressLint("StaticFieldLeak")
     private Context context;
+    private ProgressDialog progressDialog;
     private String operationType;
     private ConnectServiceListener connectServiceListener;
     private ConnectServiceErrorListener connectServiceErrorListener;
@@ -63,7 +63,6 @@ public class ConnectService extends AsyncTask<Call, Void, Response> {
         }
     }
 
-    @SuppressLint("LongLogTag")
     @Override
     protected void onPreExecute() {
         showProgressBar();
@@ -71,7 +70,7 @@ public class ConnectService extends AsyncTask<Call, Void, Response> {
         try {
             connectServiceErrorListener = (ConnectServiceErrorListener) context;
         } catch (ClassCastException e) {
-            Log.e("ConnectionServiceErrorListener", "If you want to use this listener, main context must be implements to this listener");
+            Log.e("ConnectionErrorListener", "If you want to use this listener, main context must be implements to this listener");
         }
     }
 

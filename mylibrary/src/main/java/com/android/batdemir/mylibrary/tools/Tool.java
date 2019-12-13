@@ -12,9 +12,9 @@ import android.view.animation.AnimationUtils;
 
 import com.android.batdemir.mylibrary.R;
 
-@SuppressLint("StaticFieldLeak")
 public class Tool {
 
+    @SuppressLint("StaticFieldLeak")
     private static Tool ourInstance = null;
     private Context context;
 
