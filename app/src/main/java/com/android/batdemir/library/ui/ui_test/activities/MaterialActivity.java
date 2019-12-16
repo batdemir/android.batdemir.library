@@ -48,6 +48,7 @@ public class MaterialActivity extends BaseActivity {
         binding.btnOutLinesValid.setOnClickListener(v -> MyAlertDialog.getInstance(binding.autoCompleteOutLine.getSelectedItemDescription() == null ? "not found" : binding.autoCompleteOutLine.getSelectedItemDescription(), MyAlertDialog.DialogStyle.SUCCESS).show(getSupportFragmentManager(), ""));
         binding.btnFilledValid.setOnClickListener(v -> MyAlertDialog.getInstance(binding.autoCompleteFilled.getSelectedItemDescription().isEmpty() ? "not found" : binding.autoCompleteFilled.getSelectedItemDescription(), MyAlertDialog.DialogStyle.SUCCESS).show(getSupportFragmentManager(), ""));
         binding.btnSpinnerValid.setOnClickListener(v -> MyAlertDialog.getInstance(binding.spinner.getSelectedItemDescription().isEmpty() ? "not found" : binding.spinner.getSelectedItemDescription(), MyAlertDialog.DialogStyle.SUCCESS).show(getSupportFragmentManager(), ""));
+        binding.autoCompleteOutLine.setAutoOnItemSelected((model, position) -> Log.v("AutoItem", model.getDescription()));
     }
 
     private void fillSpinners() {
@@ -68,6 +69,8 @@ public class MaterialActivity extends BaseActivity {
             binding.autoCompleteFilled.fill(strings);
             binding.spinner.setTextAppearance(R.style.TextAppearance_AppCompat_Large);
             binding.spinner.fill(R.array.testing);
+
+            binding.autoCompleteOutLine.setSelectByItemModel(userList.get(5));
         } catch (Exception e) {
             Log.e(MaterialActivity.class.getSimpleName(), e.getMessage());
         }

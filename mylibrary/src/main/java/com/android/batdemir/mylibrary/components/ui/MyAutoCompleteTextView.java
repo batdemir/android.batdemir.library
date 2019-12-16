@@ -1,6 +1,8 @@
 package com.android.batdemir.mylibrary.components.ui;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.inputmethod.EditorInfo;
 
@@ -11,6 +13,7 @@ import androidx.annotation.StyleRes;
 
 import com.android.batdemir.mylibrary.components.adapters.SpinnerAdapter;
 import com.android.batdemir.mylibrary.components.helper.SpinnerHelper;
+import com.android.batdemir.mylibrary.components.listeners.AutoOnItemSelected;
 import com.android.batdemir.mylibrary.components.models.SpinnerModel;
 import com.google.android.material.textview.MaterialAutoCompleteTextView;
 import com.google.gson.Gson;
@@ -21,6 +24,7 @@ import java.util.List;
 
 public class MyAutoCompleteTextView extends MaterialAutoCompleteTextView {
 
+    private AutoOnItemSelected autoOnItemSelected;
     private int textAppearance;
 
     public MyAutoCompleteTextView(@NonNull Context context) {
@@ -73,7 +77,39 @@ public class MyAutoCompleteTextView extends MaterialAutoCompleteTextView {
         return selectedItem;
     }
 
+    private void setListener() {
+        if (autoOnItemSelected != null) {
+            addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    //Not Implemented
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    //Not Implemented
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    SpinnerAdapter spinnerAdapter = (SpinnerAdapter) getAdapter();
+                    for (int i = 0; i < spinnerAdapter.getModels().size(); i++) {
+                        if (spinnerAdapter.getModels().get(i).getDescription().equals(s.toString())) {
+                            autoOnItemSelected.onItemSelected(spinnerAdapter.getModels().get(i), i);
+                            break;
+                        }
+                    }
+                }
+            });
+        }
+    }
+
     //Component Fill & Clear Functions
+
+    public void setAutoOnItemSelected(AutoOnItemSelected autoOnItemSelected) {
+        this.autoOnItemSelected = autoOnItemSelected;
+        setListener();
+    }
 
     public void setTextAppearance(@StyleRes int textAppearance) {
         this.textAppearance = textAppearance;
