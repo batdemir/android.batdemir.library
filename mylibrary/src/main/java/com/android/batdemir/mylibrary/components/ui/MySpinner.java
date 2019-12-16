@@ -80,12 +80,9 @@ public class MySpinner extends AppCompatSpinner {
     }
 
     public boolean isValid(boolean checkFirstItem) {
-        if (checkFirstItem) {
-            if (getSelectedItemPosition() == -1)
-                return false;
-            return getSelectedItemPosition() != 0;
-        }
-        return true;
+        if (checkFirstItem)
+            return getSelectedItemPosition() != SpinnerHelper.FIRST_ITEM_POSITION && getSelectedItemPosition() != SpinnerHelper.INVALID_POSITION;
+        return getSelectedItemPosition() != SpinnerHelper.INVALID_POSITION;
     }
 
     public void fill(@ArrayRes int arrayId) {

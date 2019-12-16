@@ -16,6 +16,10 @@ public class SpinnerHelper {
     private SpinnerHelper() {
     }
 
+    public static final int INVALID_POSITION = -1;
+
+    public static final int FIRST_ITEM_POSITION = 0;
+
     public static SpinnerHelper getInstance() {
         if (ourInstance == null)
             ourInstance = new SpinnerHelper();

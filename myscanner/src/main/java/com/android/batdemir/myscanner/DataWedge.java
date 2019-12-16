@@ -1,11 +1,13 @@
 package com.android.batdemir.myscanner;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 public class DataWedge {
 
+    @SuppressLint("StaticFieldLeak")
     private static DataWedge ourInstance = null;
     private Context context;
 

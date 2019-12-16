@@ -118,12 +118,9 @@ public class MyAutoCompleteTextView extends MaterialAutoCompleteTextView {
     public boolean isValid(boolean checkFirstItem) {
         if (getText().toString().isEmpty())
             return false;
-        if (checkFirstItem) {
-            if (getSelectedItemPosition() == null)
-                return false;
-            return getSelectedItemPosition() != 0;
-        }
-        return true;
+        if (checkFirstItem)
+            return getSelectedItemPosition() != SpinnerHelper.FIRST_ITEM_POSITION && getSelectedItemPosition() != SpinnerHelper.INVALID_POSITION;
+        return getSelectedItemPosition() != SpinnerHelper.INVALID_POSITION;
     }
 
     public void fill(@ArrayRes int arrayId) {
@@ -177,9 +174,9 @@ public class MyAutoCompleteTextView extends MaterialAutoCompleteTextView {
         return new Gson().fromJson(getSelectedItem().getModel(), classType);
     }
 
-    public Integer getSelectedItemPosition() {
+    public int getSelectedItemPosition() {
         if (getSelectedItem() == null)
-            return null;
+            return -1;
         return ((SpinnerAdapter) getAdapter()).getModels().indexOf(getSelectedItem());
     }
 

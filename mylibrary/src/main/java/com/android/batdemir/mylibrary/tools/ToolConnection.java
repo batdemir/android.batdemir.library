@@ -11,6 +11,7 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class ToolConnection {
 
@@ -146,7 +147,7 @@ public class ToolConnection {
                         }
                         if (!useIPv4 && !isIPv4) {
                             int delim = sAddr.indexOf('%'); // drop ip6 zone suffix
-                            return delim < 0 ? sAddr.toUpperCase() : sAddr.substring(0, delim).toUpperCase();
+                            return delim < 0 ? sAddr.toUpperCase(Locale.getDefault()) : sAddr.substring(0, delim).toUpperCase(Locale.getDefault());
                         }
                     }
                 }
