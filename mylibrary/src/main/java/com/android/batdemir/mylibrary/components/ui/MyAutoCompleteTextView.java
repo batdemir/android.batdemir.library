@@ -79,7 +79,7 @@ public class MyAutoCompleteTextView extends MaterialAutoCompleteTextView {
 
     private void setListener() {
         if (autoOnItemSelected != null) {
-            addTextChangedListener(new TextWatcher() {
+            post(() -> addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                     //Not Implemented
@@ -100,7 +100,7 @@ public class MyAutoCompleteTextView extends MaterialAutoCompleteTextView {
                         }
                     }
                 }
-            });
+            }));
         }
     }
 
@@ -113,6 +113,17 @@ public class MyAutoCompleteTextView extends MaterialAutoCompleteTextView {
 
     public void setTextAppearance(@StyleRes int textAppearance) {
         this.textAppearance = textAppearance;
+    }
+
+    public boolean isValid(boolean checkFirstItem) {
+        if (getText().toString().isEmpty())
+            return false;
+        if (checkFirstItem) {
+            if (getSelectedItemPosition() == null)
+                return false;
+            return getSelectedItemPosition() != 0;
+        }
+        return true;
     }
 
     public void fill(@ArrayRes int arrayId) {
@@ -164,6 +175,12 @@ public class MyAutoCompleteTextView extends MaterialAutoCompleteTextView {
         if (getSelectedItem() == null)
             return null;
         return new Gson().fromJson(getSelectedItem().getModel(), classType);
+    }
+
+    public Integer getSelectedItemPosition() {
+        if (getSelectedItem() == null)
+            return null;
+        return ((SpinnerAdapter) getAdapter()).getModels().indexOf(getSelectedItem());
     }
 
     public boolean setSelectByItem(SpinnerModel item) {

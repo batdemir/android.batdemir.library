@@ -79,6 +79,15 @@ public class MySpinner extends AppCompatSpinner {
         this.textAppearance = textAppearance;
     }
 
+    public boolean isValid(boolean checkFirstItem) {
+        if (checkFirstItem) {
+            if (getSelectedItemPosition() == -1)
+                return false;
+            return getSelectedItemPosition() != 0;
+        }
+        return true;
+    }
+
     public void fill(@ArrayRes int arrayId) {
         setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance().cast(Arrays.asList(getResources().getStringArray(arrayId))), textAppearance));
     }
