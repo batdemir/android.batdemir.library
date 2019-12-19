@@ -15,12 +15,13 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.text.HtmlCompat;
 
 import com.android.batdemir.library.ui.ui_test.activities.MainActivity;
+import com.android.batdemir.mylibrary.connection.RetrofitClient;
+
+import java.util.Objects;
 
 public class MyApplication extends Application {
 
-    private static final String TAG = "Application Warning:\t";
     private static MyApplication myApplication = null;
-    private ActivityLifecycleCallbacks activityLifecycleCallbacks;
 
     public static MyApplication getInstance() {
         return myApplication;
@@ -29,24 +30,27 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        if (myApplication == null) myApplication = this;
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        activityLifecycleCallbacks = getActivityLifecycleCallbacks();
-        registerActivityLifecycleCallbacks(activityLifecycleCallbacks);
-        Log.d(TAG, "Created");
+        if (myApplication == null) setMyApplication(this);
+        setApi();
+        setAppTheme();
+        registerActivityLifecycleCallbacks(getActivityLifecycleCallbacks());
+        Log.d(MyApplication.class.getSimpleName(), "Created");
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        Log.d(TAG, "Low Memory");
+        Log.d(MyApplication.class.getSimpleName(), "Low Memory");
     }
 
     @Override
     public void onTerminate() {
         super.onTerminate();
-        unregisterActivityLifecycleCallbacks(activityLifecycleCallbacks);
-        Log.d(TAG, "Terminated");
+        Log.d(MyApplication.class.getSimpleName(), "Terminated");
+    }
+
+    private static void setMyApplication(MyApplication myApplication) {
+        MyApplication.myApplication = myApplication;
     }
 
     private ActivityLifecycleCallbacks getActivityLifecycleCallbacks() {
@@ -92,10 +96,6 @@ public class MyApplication extends Application {
     private void setExceptionHandler() {
         Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("<div style=\"text-align: start\"");
-            stringBuilder.append("<p>Son Yapılan İşlem Başarız Oldu</p>");
-            stringBuilder.append("<p>Beklenmedik Hata Üzerine Kapatıldı.</p>");
-            stringBuilder.append("<p>Lütfen Yöneticiniz İle Görüşünüz.</p>");
             stringBuilder.append("<p>Exception: ").append(e.getMessage()).append("</p>");
             for (int i = 0; i < e.getStackTrace().length; i++) {
                 if (!e.getStackTrace()[i].isNativeMethod()) {
@@ -113,9 +113,18 @@ public class MyApplication extends Application {
 
             PendingIntent pendingIntent = PendingIntent.getActivity(MyApplication.getInstance().getBaseContext(), 0, crashedIntent, PendingIntent.FLAG_ONE_SHOT);
             AlarmManager alarmManager = (AlarmManager) MyApplication.getInstance().getBaseContext().getSystemService(Context.ALARM_SERVICE);
-            alarmManager.set(AlarmManager.RTC, System.currentTimeMillis() + 100, pendingIntent);
+            Objects.requireNonNull(alarmManager).set(AlarmManager.RTC, System.currentTimeMillis() + 100, pendingIntent);
 
             System.exit(2);
         });
+    }
+
+    private void setApi() {
+        RetrofitClient.setSll(false);
+        RetrofitClient.setBaseUrl("https://batdemir-todoapi.azurewebsites.net");
+    }
+
+    private void setAppTheme() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
     }
 }
