@@ -35,7 +35,7 @@ dependencies {
     //Android Design
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0@aar'
-    implementation 'com.google.android.material:material:1.2.0-alpha02@aar'
+    implementation 'com.google.android.material:material:1.2.0-alpha03@aar'
     implementation 'com.google.code.gson:gson:2.8.6'
 
     //Retrofit

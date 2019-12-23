@@ -47,22 +47,6 @@ public class ConnectService extends AsyncTask<Call, Void, Response> {
         this.connectionTimeOutMessage = connectionTimeOutMessage;
     }
 
-    private void showProgressBar() {
-        if (progressDialog == null) {
-            progressDialog = new ProgressDialog(context);
-            progressDialog.setMessage(progressBarMessage);
-            progressDialog.show();
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.setCancelable(false);
-        }
-    }
-
-    private void hideProgressBar() {
-        if (progressDialog.isShowing()) {
-            progressDialog.dismiss();
-        }
-    }
-
     @Override
     protected void onPreExecute() {
         showProgressBar();
@@ -101,6 +85,8 @@ public class ConnectService extends AsyncTask<Call, Void, Response> {
         hideProgressBar();
     }
 
+    //Customizable Functions
+
     protected void onPreProcess() {
         connectServiceListener = (ConnectServiceListener) context;
         try {
@@ -115,5 +101,21 @@ public class ConnectService extends AsyncTask<Call, Void, Response> {
             connectServiceListener.onSuccess(operationType, response);
         else
             connectServiceListener.onFailure(operationType, response);
+    }
+
+    protected void showProgressBar() {
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setMessage(progressBarMessage);
+            progressDialog.show();
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.setCancelable(false);
+        }
+    }
+
+    protected void hideProgressBar() {
+        if (progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
     }
 }
