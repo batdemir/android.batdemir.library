@@ -66,12 +66,7 @@ public class ConnectService extends AsyncTask<Call, Void, Response> {
     @Override
     protected void onPreExecute() {
         showProgressBar();
-        connectServiceListener = (ConnectServiceListener) context;
-        try {
-            connectServiceErrorListener = (ConnectServiceErrorListener) context;
-        } catch (ClassCastException e) {
-            Log.e("ConnectionErrorListener", "If you want to use this listener, main context must be implements to this listener");
-        }
+        onPreProcess();
     }
 
     @Override
@@ -97,15 +92,28 @@ public class ConnectService extends AsyncTask<Call, Void, Response> {
     @Override
     protected void onPostExecute(Response response) {
         hideProgressBar();
-        if (response.isSuccessful())
-            connectServiceListener.onSuccess(operationType, response);
-        else
-            connectServiceListener.onFailure(operationType, response);
+        onPostProcess(response);
     }
 
     @Override
     protected void onCancelled() {
         super.onCancelled();
         hideProgressBar();
+    }
+
+    protected void onPreProcess() {
+        connectServiceListener = (ConnectServiceListener) context;
+        try {
+            connectServiceErrorListener = (ConnectServiceErrorListener) context;
+        } catch (ClassCastException e) {
+            Log.e("ConnectionErrorListener", "If you want to use this listener, main context must be implements to this listener");
+        }
+    }
+
+    protected void onPostProcess(Response response) {
+        if (response.isSuccessful())
+            connectServiceListener.onSuccess(operationType, response);
+        else
+            connectServiceListener.onFailure(operationType, response);
     }
 }
