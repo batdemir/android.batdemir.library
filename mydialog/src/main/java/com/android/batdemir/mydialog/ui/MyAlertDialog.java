@@ -151,7 +151,7 @@ public class MyAlertDialog extends BaseDialogFragment {
 
     @Override
     public void show(@NonNull FragmentManager manager, @Nullable String tag) {
-        if (!myAlertDialog.isAdded())
+        if (!myAlertDialog.isAdded() && myAlertDialog.getTag() == null)
             super.show(manager, tag);
     }
 
