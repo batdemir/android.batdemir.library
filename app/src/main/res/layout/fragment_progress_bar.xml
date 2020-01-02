@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.richpath.RichPathView
+            android:id="@+id/richPathView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:vector="@drawable/ic_rich_path_test" />
+
+        <com.richpath.RichPathView
+            android:id="@+id/richPathView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:vector="@drawable/ic_rich_path_test_2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnClose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Close" />
+
+    </LinearLayout>
+
+</layout>

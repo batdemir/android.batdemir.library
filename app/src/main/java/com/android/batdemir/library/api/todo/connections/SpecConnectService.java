@@ -1,7 +1,6 @@
 package com.android.batdemir.library.api.todo.connections;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 
@@ -9,6 +8,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.batdemir.library.models.todo.response.ResponseModel;
 import com.android.batdemir.library.models.todo.response.ResponseStatus;
+import com.android.batdemir.library.ui.ui_app.fragments.ProgressDialogFragment;
 import com.android.batdemir.mydialog.ui.MyAlertDialog;
 import com.android.batdemir.mylibrary.connection.ConnectService;
 
@@ -20,41 +20,25 @@ public class SpecConnectService extends ConnectService {
 
     @SuppressLint("StaticFieldLeak")
     private Context context;
-    private ProgressDialog progressDialog;
+    private ProgressDialogFragment progressDialogFragment;
     private String operationType;
-
-    private void showProgressBarSpec() {
-        if (progressDialog == null) {
-            progressDialog = new ProgressDialog(context);
-            progressDialog.setMessage("Please Wait...");
-            progressDialog.show();
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.setCancelable(false);
-        }
-    }
-
-    private void hideProgressBarSpec() {
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.dismiss();
-        }
-    }
+    private ConnectionServiceListener connectServiceListener;
 
     public SpecConnectService(Context context, String operationType) {
         super(context, operationType);
         this.context = context;
         this.operationType = operationType;
+        this.progressDialogFragment = new ProgressDialogFragment();
     }
 
     @Override
-    protected void onPreExecute() {
-        showProgressBarSpec();
+    protected void onPreProcess() {
+        connectServiceListener = (ConnectionServiceListener) context;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void onPostExecute(Response response) {
-        hideProgressBarSpec();
-        ConnectionServiceListener connectServiceListener = (ConnectionServiceListener) context;
+    protected void onPostProcess(Response response) {
         if (response.isSuccessful()) {
             ResponseModel<Object> model = (ResponseModel<Object>) response.body();
             MyAlertDialog.DialogStyle style;
@@ -94,8 +78,13 @@ public class SpecConnectService extends ConnectService {
     }
 
     @Override
-    protected void onCancelled() {
-        hideProgressBarSpec();
+    protected void showProgressBar() {
+        progressDialogFragment.show(((FragmentActivity) context).getSupportFragmentManager(), "");
+    }
+
+    @Override
+    protected void hideProgressBar() {
+        progressDialogFragment.dismiss();
     }
 
     public interface ConnectionServiceListener {
