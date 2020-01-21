@@ -38,7 +38,7 @@ public class SpecConnectService extends ConnectService {
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void onPostProcess(Response response) {
+    protected void onPostProcess(String operationType, Response response) {
         if (response.isSuccessful()) {
             ResponseModel<Object> model = (ResponseModel<Object>) response.body();
             MyAlertDialog.DialogStyle style;

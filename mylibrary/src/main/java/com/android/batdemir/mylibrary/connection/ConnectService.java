@@ -47,6 +47,16 @@ public class ConnectService extends AsyncTask<Call, Void, Response> {
         this.connectionTimeOutMessage = connectionTimeOutMessage;
     }
 
+    public ConnectService setConnectServiceListener(ConnectServiceListener connectServiceListener) {
+        this.connectServiceListener = connectServiceListener;
+        return this;
+    }
+
+    public ConnectService setConnectServiceErrorListener(ConnectServiceErrorListener connectServiceErrorListener) {
+        this.connectServiceErrorListener = connectServiceErrorListener;
+        return this;
+    }
+
     @Override
     protected void onPreExecute() {
         showProgressBar();
@@ -76,7 +86,7 @@ public class ConnectService extends AsyncTask<Call, Void, Response> {
     @Override
     protected void onPostExecute(Response response) {
         hideProgressBar();
-        onPostProcess(response);
+        onPostProcess(operationType, response);
     }
 
     @Override
@@ -88,15 +98,15 @@ public class ConnectService extends AsyncTask<Call, Void, Response> {
     //Customizable Functions
 
     protected void onPreProcess() {
-        connectServiceListener = (ConnectServiceListener) context;
+        connectServiceListener = connectServiceListener == null ? (ConnectServiceListener) context : connectServiceListener;
         try {
-            connectServiceErrorListener = (ConnectServiceErrorListener) context;
+            connectServiceErrorListener = connectServiceErrorListener == null ? (ConnectServiceErrorListener) context : connectServiceErrorListener;
         } catch (ClassCastException e) {
             Log.e("ConnectionErrorListener", "If you want to use this listener, main context must be implements to this listener");
         }
     }
 
-    protected void onPostProcess(Response response) {
+    protected void onPostProcess(String operationType, Response response) {
         if (response.isSuccessful())
             connectServiceListener.onSuccess(operationType, response);
         else
