@@ -5,7 +5,7 @@ buildscript {
         user_org = "batdemirorg"
         repo_name = "batdemirlibrary"
         web_site = "https://github.com/batdemirorg/android.batdemir.library"
-        lib_version = "0.1.5-beta"
+        lib_version = "0.2.1-last"
     }
 
     repositories {
@@ -14,7 +14,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.android.tools.build:gradle:3.6.0'
         classpath 'com.novoda:bintray-release:0.9.2'
     }
 }
@@ -29,4 +29,10 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
 }

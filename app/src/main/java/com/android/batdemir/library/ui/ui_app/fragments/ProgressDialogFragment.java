@@ -1,15 +1,18 @@
 package com.android.batdemir.library.ui.ui_app.fragments;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.FragmentProgressBarBinding;
-import com.android.batdemir.mydialog.ui.base.BaseDialogFragment;
+import com.android.batdemir.library.ui.base.BaseDialogFragment;
 import com.richpath.RichPath;
 import com.richpathanimator.RichPathAnimator;
 
@@ -22,10 +25,11 @@ public class ProgressDialogFragment extends BaseDialogFragment {
         //Not Implemented
     }
 
+    @Nullable
     @Override
-    public ViewDataBinding setBinding(LayoutInflater layoutInflater, ViewGroup container) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.fragment_progress_bar, container, false);
-        return binding;
+        return binding.getRoot();
     }
 
     @Override

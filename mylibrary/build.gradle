@@ -35,14 +35,14 @@ dependencies {
     //Android Design
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0@aar'
-    implementation 'com.google.android.material:material:1.2.0-alpha03@aar'
+    implementation 'com.google.android.material:material:1.2.0-alpha05@aar'
     implementation 'com.google.code.gson:gson:2.8.6'
 
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
     implementation 'com.squareup.okhttp:okhttp:2.7.5'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.3.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.4.0'
 
     implementation project(':mydialog')
 }

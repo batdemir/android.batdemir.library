@@ -9,6 +9,7 @@ import android.util.Log;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.batdemir.mydialog.ui.MyAlertDialog;
+import com.android.batdemir.mydialog.ui.MyDialogStyle;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -70,11 +71,11 @@ public class ConnectService extends AsyncTask<Call, Void, Response> {
         } catch (Exception e) {
             cancel(true);
             if (e.getClass().equals(ConnectException.class)) {
-                MyAlertDialog.getInstance(connectionFailMessage + "\n" + e.getMessage(), MyAlertDialog.DialogStyle.FAILED).show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
+                MyAlertDialog.getInstance(connectionFailMessage + "\n" + e.getMessage(), MyDialogStyle.FAILED).show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
             } else if (e.getClass().equals(SocketTimeoutException.class) || e.getClass().equals(IOException.class)) {
-                MyAlertDialog.getInstance(connectionTimeOutMessage + "\n" + e.getMessage(), MyAlertDialog.DialogStyle.FAILED).show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
+                MyAlertDialog.getInstance(connectionTimeOutMessage + "\n" + e.getMessage(), MyDialogStyle.FAILED).show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
             } else {
-                MyAlertDialog.getInstance(e.getMessage(), MyAlertDialog.DialogStyle.FAILED).show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
+                MyAlertDialog.getInstance(e.getMessage(), MyDialogStyle.FAILED).show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
             }
             if (connectServiceErrorListener != null)
                 connectServiceErrorListener.onException(operationType, e.getMessage());

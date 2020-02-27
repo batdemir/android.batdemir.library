@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/android.batdemir.library.iml" filepath="$PROJECT_DIR$/android.batdemir.library.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mybluetooth/mybluetooth.iml" filepath="$PROJECT_DIR$/mybluetooth/mybluetooth.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mydialog/mydialog.iml" filepath="$PROJECT_DIR$/mydialog/mydialog.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mylibrary/mylibrary.iml" filepath="$PROJECT_DIR$/mylibrary/mylibrary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/myresources/myresources.iml" filepath="$PROJECT_DIR$/myresources/myresources.iml" />
-      <module fileurl="file://$PROJECT_DIR$/myscanner/myscanner.iml" filepath="$PROJECT_DIR$/myscanner/myscanner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android.batdemir.library.iml" filepath="$PROJECT_DIR$/android.batdemir.library.iml" group="android.batdemir.library" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="android.batdemir.library/app" />
+      <module fileurl="file://$PROJECT_DIR$/mybluetooth/mybluetooth.iml" filepath="$PROJECT_DIR$/mybluetooth/mybluetooth.iml" group="android.batdemir.library/mybluetooth" />
+      <module fileurl="file://$PROJECT_DIR$/mydialog/mydialog.iml" filepath="$PROJECT_DIR$/mydialog/mydialog.iml" group="android.batdemir.library/mydialog" />
+      <module fileurl="file://$PROJECT_DIR$/mylibrary/mylibrary.iml" filepath="$PROJECT_DIR$/mylibrary/mylibrary.iml" group="android.batdemir.library/mylibrary" />
+      <module fileurl="file://$PROJECT_DIR$/myresources/myresources.iml" filepath="$PROJECT_DIR$/myresources/myresources.iml" group="android.batdemir.library/myresources" />
+      <module fileurl="file://$PROJECT_DIR$/myscanner/myscanner.iml" filepath="$PROJECT_DIR$/myscanner/myscanner.iml" group="android.batdemir.library/myscanner" />
     </modules>
   </component>
 </project>

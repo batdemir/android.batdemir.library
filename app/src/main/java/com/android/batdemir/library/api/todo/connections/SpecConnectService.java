@@ -10,6 +10,7 @@ import com.android.batdemir.library.models.todo.response.ResponseModel;
 import com.android.batdemir.library.models.todo.response.ResponseStatus;
 import com.android.batdemir.library.ui.ui_app.fragments.ProgressDialogFragment;
 import com.android.batdemir.mydialog.ui.MyAlertDialog;
+import com.android.batdemir.mydialog.ui.MyDialogStyle;
 import com.android.batdemir.mylibrary.connection.ConnectService;
 
 import java.io.IOException;
@@ -41,26 +42,26 @@ public class SpecConnectService extends ConnectService {
     protected void onPostProcess(String operationType, Response response) {
         if (response.isSuccessful()) {
             ResponseModel<Object> model = (ResponseModel<Object>) response.body();
-            MyAlertDialog.DialogStyle style;
+            MyDialogStyle style;
             if (model == null)
                 return;
             ResponseStatus status = getStatus(model.getStatus());
             switch (status) {
                 case SUCCESS:
                     connectServiceListener.onSuccess(operationType, model.getModel());
-                    style = MyAlertDialog.DialogStyle.SUCCESS;
+                    style = MyDialogStyle.SUCCESS;
                     break;
                 case FAIL:
                     connectServiceListener.onFailure(operationType);
-                    style = MyAlertDialog.DialogStyle.FAILED;
+                    style = MyDialogStyle.FAILED;
                     break;
                 case NOT_FOUND:
                     connectServiceListener.onFailure(operationType);
-                    style = MyAlertDialog.DialogStyle.WARNING;
+                    style = MyDialogStyle.WARNING;
                     break;
                 case DUPLICATE:
                     connectServiceListener.onFailure(operationType);
-                    style = MyAlertDialog.DialogStyle.INFO;
+                    style = MyDialogStyle.INFO;
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + model.getStatus());
@@ -70,7 +71,7 @@ public class SpecConnectService extends ConnectService {
         } else {
             try {
                 connectServiceListener.onFailure(operationType);
-                MyAlertDialog.getInstance(response.errorBody() == null ? "Failed" : response.errorBody().string(), MyAlertDialog.DialogStyle.FAILED).show(((FragmentActivity) context).getSupportFragmentManager(), "failure");
+                MyAlertDialog.getInstance(response.errorBody() == null ? "Failed" : response.errorBody().string(), MyDialogStyle.FAILED).show(((FragmentActivity) context).getSupportFragmentManager(), "failure");
             } catch (IOException e) {
                 Log.e(SpecConnectService.class.getSimpleName(), e.getMessage());
             }

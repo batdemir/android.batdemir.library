@@ -18,13 +18,14 @@ import com.android.batdemir.library.models.Player;
 import com.android.batdemir.library.ui.base.BaseActivity;
 import com.android.batdemir.library.ui.ui_test.adapters.AdapterRecyclerView;
 import com.android.batdemir.mydialog.ui.MyAlertDialog;
+import com.android.batdemir.mydialog.ui.MyDialogStyle;
+import com.android.batdemir.mylibrary.components.helper.SwipeController;
+import com.android.batdemir.mylibrary.components.listeners.SwipeControllerActions;
 import com.android.batdemir.mylibrary.connection.Connect;
 import com.android.batdemir.mylibrary.connection.ConnectServiceErrorListener;
 import com.android.batdemir.mylibrary.connection.ConnectServiceListener;
 import com.android.batdemir.mylibrary.connection.RetrofitClient;
 import com.android.batdemir.mylibrary.tools.Tool;
-import com.android.batdemir.mylibrary.components.helper.SwipeController;
-import com.android.batdemir.mylibrary.components.listeners.SwipeControllerActions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,12 +70,12 @@ public class RecyclerActivity extends BaseActivity implements
 
     @Override
     public void onSuccess(String operationType, Response response) {
-        MyAlertDialog.getInstance("onSuccess\n" + Objects.requireNonNull(response.body()).toString(), MyAlertDialog.DialogStyle.WARNING).show(getSupportFragmentManager(), "success");
+        MyAlertDialog.getInstance("onSuccess\n" + Objects.requireNonNull(response.body()).toString(), MyDialogStyle.WARNING).show(getSupportFragmentManager(), "success");
     }
 
     @Override
     public void onFailure(String operationType, Response response) {
-        MyAlertDialog.getInstance("onFailure\n", MyAlertDialog.DialogStyle.ACTION).show(getSupportFragmentManager(), "failure");
+        MyAlertDialog.getInstance("onFailure\n", MyDialogStyle.ACTION).show(getSupportFragmentManager(), "failure");
     }
 
     @Override

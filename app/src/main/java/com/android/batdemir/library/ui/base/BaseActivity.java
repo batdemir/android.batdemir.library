@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.batdemir.library.R;
 import com.android.batdemir.mydialog.listeners.MyAlertDialogButtonListener;
 import com.android.batdemir.mydialog.ui.MyAlertDialog;
+import com.android.batdemir.mydialog.ui.MyDialogStyle;
 
 import java.util.Objects;
 
@@ -35,7 +36,7 @@ public abstract class BaseActivity extends AppCompatActivity implements
     @Override
     public void onBackPressed() {
         if (isFirstActivity) {
-            MyAlertDialog.getInstance(getString(R.string.alert_dialog_key_exit), MyAlertDialog.DialogStyle.ACTION).show(getSupportFragmentManager(), getString(R.string.alert_dialog_key_exit));
+            MyAlertDialog.getInstance(getString(R.string.alert_dialog_key_exit), MyDialogStyle.ACTION).show(getSupportFragmentManager(), getString(R.string.alert_dialog_key_exit));
             return;
         } else {
             finish();

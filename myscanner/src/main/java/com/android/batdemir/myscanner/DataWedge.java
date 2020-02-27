@@ -14,15 +14,15 @@ public class DataWedge {
     private DataWedge() {
     }
 
-    private void setContext(Context context) {
-        this.context = context;
-    }
-
     public static DataWedge getInstance(Context context) {
         if (ourInstance == null)
             ourInstance = new DataWedge();
         ourInstance.setContext(context);
         return ourInstance;
+    }
+
+    private void setContext(Context context) {
+        this.context = context;
     }
 
     public void init() {

@@ -44,6 +44,11 @@ public class BluetoothService {
         mHandler = handler;
     }
 
+    // Return the current connection state.
+    public synchronized int getState() {
+        return mState;
+    }
+
     // Set the current state of the chat connection
     // state : An integer defining the current connection state
     private synchronized void setState(int state) {
@@ -52,11 +57,6 @@ public class BluetoothService {
 
         // Give the new state to the Handler so the UI Activity can update
         mHandler.obtainMessage(BluetoothUtils.MESSAGE_STATE_CHANGE, state, -1).sendToTarget();
-    }
-
-    // Return the current connection state.
-    public synchronized int getState() {
-        return mState;
     }
 
     // Start the chat service. Specifically start AcceptThread to begin a

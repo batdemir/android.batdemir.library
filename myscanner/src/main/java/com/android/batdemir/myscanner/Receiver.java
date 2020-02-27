@@ -12,9 +12,9 @@ public class Receiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String receivedBarcode = intent.getStringExtra(Resources.getSystem().getString(R.string.data_wedge_default_data_string));
         ReceiverListener receiverListener = (ReceiverListener) context;
-       if(receiverListener != null)
-           receiverListener.onReceived(receivedBarcode);
-       else
-           throw new NotYetBoundException();
+        if (receiverListener != null)
+            receiverListener.onReceived(receivedBarcode);
+        else
+            throw new NotYetBoundException();
     }
 }

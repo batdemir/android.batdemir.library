@@ -44,7 +44,7 @@ public class PlaceholderFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentTabbedBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tabbed, container, false);
-        pageViewModel.getText().observe(this, binding.sectionLabel::setText);
+        pageViewModel.getText().observe(getViewLifecycleOwner(), binding.sectionLabel::setText);
         return binding.getRoot();
     }
 }

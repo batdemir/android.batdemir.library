@@ -111,8 +111,10 @@ public class MyAutoCompleteTextView extends MaterialAutoCompleteTextView {
         setListener();
     }
 
-    public void setTextAppearance(@StyleRes int textAppearance) {
+    public MyAutoCompleteTextView setTextAppearances(@StyleRes int textAppearance) {
+        setTextAppearance(textAppearance);
         this.textAppearance = textAppearance;
+        return this;
     }
 
     public boolean isValid(boolean checkFirstItem) {
