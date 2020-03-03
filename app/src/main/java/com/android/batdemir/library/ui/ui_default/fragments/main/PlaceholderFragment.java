@@ -6,11 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.FragmentTabbedBinding;
 
 /**
@@ -43,7 +41,7 @@ public class PlaceholderFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FragmentTabbedBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tabbed, container, false);
+        FragmentTabbedBinding binding = FragmentTabbedBinding.inflate(inflater, container, false);
         pageViewModel.getText().observe(getViewLifecycleOwner(), binding.sectionLabel::setText);
         return binding.getRoot();
     }

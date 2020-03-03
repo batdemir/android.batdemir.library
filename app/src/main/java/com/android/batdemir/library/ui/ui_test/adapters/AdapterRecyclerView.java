@@ -5,12 +5,10 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.batdemir.library.databinding.ItemPlayerBinding;
 import com.android.batdemir.library.models.Player;
-import com.android.batdemir.library.R;
 
 import java.util.List;
 
@@ -45,7 +43,7 @@ public class AdapterRecyclerView extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_player, viewGroup, false);
+        binding = ItemPlayerBinding.inflate(LayoutInflater.from(context), viewGroup, false);
         return new MyViewHolder(binding);
     }
 

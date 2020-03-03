@@ -4,17 +4,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.android.batdemir.library.R;
-import com.android.batdemir.library.databinding.ActivityBottomNavigationBinding;
-import com.android.batdemir.library.ui.base.BaseActivity;
-import com.android.batdemir.mylibrary.tools.Tool;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import com.android.batdemir.library.R;
+import com.android.batdemir.library.databinding.ActivityBottomNavigationBinding;
+import com.android.batdemir.library.ui.base.BaseActivity;
+import com.android.batdemir.mylibrary.tools.Tool;
 
 public class BottomNavigationActivity extends BaseActivity {
 
@@ -31,8 +30,10 @@ public class BottomNavigationActivity extends BaseActivity {
     @Override
     public void getObjectReferences() {
         context = this;
-        if (binding == null)
-            binding = DataBindingUtil.setContentView((Activity) context, R.layout.activity_bottom_navigation);
+        if (binding == null) {
+            binding = ActivityBottomNavigationBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
+        }
     }
 
     @Override

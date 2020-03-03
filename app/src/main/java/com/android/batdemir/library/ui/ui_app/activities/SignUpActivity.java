@@ -1,8 +1,5 @@
 package com.android.batdemir.library.ui.ui_app.activities;
 
-import androidx.databinding.DataBindingUtil;
-
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,8 +32,10 @@ public class SignUpActivity extends BaseActivity implements
     @Override
     public void getObjectReferences() {
         context = this;
-        if (binding == null)
-            binding = DataBindingUtil.setContentView((Activity) context, R.layout.activity_sign_up);
+        if (binding == null) {
+            binding = ActivitySignUpBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
+        }
     }
 
     @Override

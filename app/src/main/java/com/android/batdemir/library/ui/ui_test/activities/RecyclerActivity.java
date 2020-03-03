@@ -1,13 +1,11 @@
 package com.android.batdemir.library.ui.ui_test.activities;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 
@@ -49,8 +47,10 @@ public class RecyclerActivity extends BaseActivity implements
     @Override
     public void getObjectReferences() {
         context = this;
-        if (binding == null)
-            binding = DataBindingUtil.setContentView((Activity) context, R.layout.activity_recycler);
+        if (binding == null) {
+            binding = ActivityRecyclerBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
+        }
     }
 
     @Override

@@ -9,7 +9,6 @@ import android.util.Log;
 import android.widget.EditText;
 
 import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
@@ -44,8 +43,10 @@ public class MainActivity extends BaseActivity implements
     @Override
     public void getObjectReferences() {
         context = MainActivity.this;
-        if (binding == null)
-            binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        if (binding == null) {
+            binding = ActivityMainBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
+        }
     }
 
     @Override

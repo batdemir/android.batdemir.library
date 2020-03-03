@@ -1,36 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<com.google.android.material.circularreveal.CircularRevealLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootRecyclerListView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.ui_test.activities.RecyclerActivity">
 
-    <com.google.android.material.circularreveal.CircularRevealLinearLayout
-        android:id="@+id/rootRecyclerListView"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnNextPage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Go Next Page"
+        android:textAllCaps="false"
+        tools:ignore="HardcodedText" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnConnectService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ConnectService"
+        android:textAllCaps="false"
+        tools:ignore="HardcodedText" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".RecyclerListViewActivity">
+        tools:listitem="@layout/item_player" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnNextPage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Go Next Page"
-            android:textAllCaps="false"
-            tools:ignore="HardcodedText" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnConnectService"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ConnectService"
-            android:textAllCaps="false"
-            tools:ignore="HardcodedText" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerListView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/item_player" />
-
-    </com.google.android.material.circularreveal.CircularRevealLinearLayout>
-
-</layout>
+</com.google.android.material.circularreveal.CircularRevealLinearLayout>

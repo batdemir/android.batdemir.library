@@ -1,128 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.circularreveal.CircularRevealLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootMaterial"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16sp"
+    tools:context=".ui.ui_test.activities.MaterialActivity">
 
-    <com.google.android.material.circularreveal.CircularRevealLinearLayout
-        android:id="@+id/rootMaterial"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnPreviousPage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16sp"
-        tools:context=".ui.ui_test.activities.MaterialActivity">
+        android:layout_height="wrap_content"
+        android:text="PreviousPage"
+        tools:ignore="HardcodedText" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnPreviousPage"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputAutoOutLine"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Seçiniz"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        tools:ignore="HardcodedText">
+
+        <com.android.batdemir.mylibrary.components.ui.MyAutoCompleteTextView
+            android:id="@+id/autoCompleteOutLine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="PreviousPage"
-            tools:ignore="HardcodedText" />
+            tools:ignore="LabelFor" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputAutoOutLine"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnOutLinesValid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ListSelection"
+        tools:ignore="HardcodedText" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputAutoFilled"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Seçiniz"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        tools:ignore="HardcodedText">
+
+        <com.android.batdemir.mylibrary.components.ui.MyAutoCompleteTextView
+            android:id="@+id/autoCompleteFilled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Seçiniz"
-            app:hintAnimationEnabled="true"
-            app:hintEnabled="true"
-            tools:ignore="HardcodedText">
+            tools:ignore="LabelFor" />
 
-            <com.android.batdemir.mylibrary.components.ui.MyAutoCompleteTextView
-                android:id="@+id/autoCompleteOutLine"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:ignore="LabelFor" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnFilledValid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ListSelection"
+        tools:ignore="HardcodedText" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnOutLinesValid"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputEditOutline"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        tools:ignore="HardcodedText">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextOutLine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ListSelection"
-            tools:ignore="HardcodedText" />
+            android:imeOptions="actionDone"
+            android:singleLine="true">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputAutoFilled"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        </com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputEditFilled"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        app:hintAnimationEnabled="true"
+        app:hintEnabled="true"
+        tools:ignore="HardcodedText">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextFilled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Seçiniz"
-            app:hintAnimationEnabled="true"
-            app:hintEnabled="true"
-            tools:ignore="HardcodedText">
+            android:imeOptions="actionDone"
+            android:singleLine="true">
 
-            <com.android.batdemir.mylibrary.components.ui.MyAutoCompleteTextView
-                android:id="@+id/autoCompleteFilled"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:ignore="LabelFor" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnFilledValid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ListSelection"
-            tools:ignore="HardcodedText" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputEditOutline"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            app:hintAnimationEnabled="true"
-            app:hintEnabled="true"
-            tools:ignore="HardcodedText">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextOutLine"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:imeOptions="actionDone"
-                android:singleLine="true">
-
-            </com.google.android.material.textfield.TextInputEditText>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputEditFilled"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            app:hintAnimationEnabled="true"
-            app:hintEnabled="true"
-            tools:ignore="HardcodedText">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextFilled"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:imeOptions="actionDone"
-                android:singleLine="true">
-
-            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputEditText>
 
 
-        </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-        <com.android.batdemir.mylibrary.components.ui.MySpinner
-            android:id="@+id/spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    <com.android.batdemir.mylibrary.components.ui.MySpinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSpinnerValid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ListSelection"
-            tools:ignore="HardcodedText" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSpinnerValid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ListSelection"
+        tools:ignore="HardcodedText" />
 
-    </com.google.android.material.circularreveal.CircularRevealLinearLayout>
-
-</layout>
+</com.google.android.material.circularreveal.CircularRevealLinearLayout>

@@ -8,7 +8,6 @@ import android.view.animation.DecelerateInterpolator;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
 
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.FragmentProgressBarBinding;
@@ -28,7 +27,7 @@ public class ProgressDialogFragment extends BaseDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.fragment_progress_bar, container, false);
+        binding = FragmentProgressBarBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 

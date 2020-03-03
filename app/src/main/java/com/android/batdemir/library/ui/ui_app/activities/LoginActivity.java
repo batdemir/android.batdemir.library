@@ -1,10 +1,7 @@
 package com.android.batdemir.library.ui.ui_app.activities;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.databinding.DataBindingUtil;
 
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.api.todo.IUser;
@@ -30,8 +27,10 @@ public class LoginActivity extends BaseActivity implements SpecConnectService.Co
     @Override
     public void getObjectReferences() {
         context = this;
-        if (binding == null)
-            binding = DataBindingUtil.setContentView((Activity) context, R.layout.activity_login);
+        if (binding == null) {
+            binding = ActivityLoginBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
+        }
     }
 
     @Override

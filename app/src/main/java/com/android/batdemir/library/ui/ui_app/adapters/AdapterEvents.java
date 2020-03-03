@@ -6,12 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.batdemir.library.models.Event;
-import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ItemEventBinding;
+import com.android.batdemir.library.models.Event;
 
 import java.util.List;
 
@@ -51,7 +49,7 @@ public class AdapterEvents extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_event, viewGroup, false);
+        binding = ItemEventBinding.inflate(LayoutInflater.from(context), viewGroup, false);
         return new AdapterEvents.MyViewHolder(binding);
     }
 

@@ -1,12 +1,9 @@
 package com.android.batdemir.library.ui.ui_test.activities;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-
-import androidx.databinding.DataBindingUtil;
 
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ActivityMaterialBinding;
@@ -33,8 +30,10 @@ public class MaterialActivity extends BaseActivity {
     @Override
     public void getObjectReferences() {
         context = this;
-        if (binding == null)
-            binding = DataBindingUtil.setContentView((Activity) context, R.layout.activity_material);
+        if (binding == null) {
+            binding = ActivityMaterialBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
+        }
     }
 
     @Override

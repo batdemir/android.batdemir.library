@@ -1,11 +1,8 @@
 package com.android.batdemir.library.ui.ui_test.activities;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.os.Bundle;
-
-import androidx.databinding.DataBindingUtil;
 
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ActivityBarcodeBinding;
@@ -47,8 +44,10 @@ public class BarcodeActivity extends BaseActivity implements
     @Override
     public void getObjectReferences() {
         context = this;
-        if (binding == null)
-            binding = DataBindingUtil.setContentView((Activity) context, R.layout.activity_barcode);
+        if (binding == null) {
+            binding = ActivityBarcodeBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
+        }
         DataWedge.getInstance(context).init();
     }
 

@@ -15,16 +15,14 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.batdemir.mydialog.R;
 import com.android.batdemir.mydialog.databinding.FragmentMyDialogBinding;
 import com.android.batdemir.mydialog.listeners.MyAlertDialogButtonListener;
 import com.android.batdemir.mydialog.listeners.MyAlertDialogCreator;
 import com.android.batdemir.mydialog.listeners.MyAlertDialogEditTextListener;
-
-import java.util.Objects;
 
 import static com.android.batdemir.mydialog.ui.MyDialogConstant.KEY_CANCEL_TEXT;
 import static com.android.batdemir.mydialog.ui.MyDialogConstant.KEY_MESSAGE;
@@ -36,7 +34,6 @@ import static com.android.batdemir.mydialog.ui.MyDialogDefault.failedTitle;
 import static com.android.batdemir.mydialog.ui.MyDialogDefault.failedTitleColor;
 import static com.android.batdemir.mydialog.ui.MyDialogDefault.informationTitle;
 import static com.android.batdemir.mydialog.ui.MyDialogDefault.informationTitleColor;
-import static com.android.batdemir.mydialog.ui.MyDialogDefault.inputEmptyMessage;
 import static com.android.batdemir.mydialog.ui.MyDialogDefault.okButtonText;
 import static com.android.batdemir.mydialog.ui.MyDialogDefault.successTitle;
 import static com.android.batdemir.mydialog.ui.MyDialogDefault.successTitleColor;
@@ -64,10 +61,6 @@ public class MyAlertDialog extends DialogFragment {
         return myAlertDialog;
     }
 
-    /**
-     * @implNote Info Style
-     * @param message Showing message
-     */
     public static synchronized MyAlertDialog getInstance(String message) {
         Bundle bundle = new Bundle();
         bundle.putString(KEY_MESSAGE, message);
@@ -75,11 +68,6 @@ public class MyAlertDialog extends DialogFragment {
         return init(bundle);
     }
 
-    /**
-     * @implNote Info Style
-     * @param message Showing message text
-     * @param okText Showing ok button text
-     */
     public static synchronized MyAlertDialog getInstance(String message, String okText) {
         Bundle bundle = new Bundle();
         bundle.putString(KEY_MESSAGE, message);
@@ -88,10 +76,6 @@ public class MyAlertDialog extends DialogFragment {
         return init(bundle);
     }
 
-    /**
-     * @param message Showing message text
-     * @param dialogStyle Showing dialog style
-     */
     public static synchronized MyAlertDialog getInstance(String message, MyDialogStyle dialogStyle) {
         Bundle bundle = new Bundle();
         bundle.putString(KEY_MESSAGE, message);
@@ -99,13 +83,6 @@ public class MyAlertDialog extends DialogFragment {
         return init(bundle);
     }
 
-    /**
-     * @implNote Only working Action or Input Style
-     * @param message Showing message text
-     * @param okText Showing ok button text, override default ok name
-     * @param cancelText Showing cancel button text, override default cancel name
-     * @param dialogStyle Showing dialog style
-     */
     public static synchronized MyAlertDialog getInstance(String message, String okText, String cancelText, MyDialogStyle dialogStyle) {
         Bundle bundle = new Bundle();
         bundle.putString(KEY_MESSAGE, message);
@@ -115,11 +92,6 @@ public class MyAlertDialog extends DialogFragment {
         return init(bundle);
     }
 
-    /**
-     * @param title Showing title text, override default title name
-     * @param message Showing message text
-     * @param dialogStyle Showing dialog style
-     */
     public static synchronized MyAlertDialog getInstance(String title, String message, MyDialogStyle dialogStyle) {
         Bundle bundle = new Bundle();
         bundle.putString(KEY_TITLE_TEXT, title);
@@ -128,14 +100,6 @@ public class MyAlertDialog extends DialogFragment {
         return init(bundle);
     }
 
-    /**
-     * @implNote Only working Action or Input Style
-     * @param title Showing title text, override default title name
-     * @param message Showing message text
-     * @param okText Showing ok button text, override default ok name
-     * @param cancelText Showing cancel button text, override default cancel name
-     * @param dialogStyle Showing dialog style
-     */
     public static synchronized MyAlertDialog getInstance(String title, String message, String okText, String cancelText, MyDialogStyle dialogStyle) {
         Bundle bundle = new Bundle();
         bundle.putString(KEY_TITLE_TEXT, title);
@@ -159,7 +123,7 @@ public class MyAlertDialog extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         synchronized (this) {
-            binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.fragment_my_dialog, container, false);
+            binding = FragmentMyDialogBinding.inflate(inflater, container, false);
             return binding.getRoot();
         }
     }
@@ -169,6 +133,14 @@ public class MyAlertDialog extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
         loadData();
         setListeners();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        if (getFragmentManager() != null) {
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.commitAllowingStateLoss();
+        }
     }
 
     //Initialize Methods
@@ -230,8 +202,12 @@ public class MyAlertDialog extends DialogFragment {
     private void editTextListenerProcess(int action, KeyEvent event) {
         binding.editText.post(() -> {
             if ((event == null && action == EditorInfo.IME_ACTION_DONE) || (event != null && event.getAction() == KeyEvent.ACTION_DOWN && action == KeyEvent.KEYCODE_ENTER)) {
-                if (Objects.requireNonNull(binding.editText.getText()).toString().isEmpty()) {
-                    binding.editText.setError(inputEmptyMessage);
+                if (binding.editText.getText() == null) {
+                    dismiss();
+                    return;
+                }
+                if (binding.editText.getText().toString().isEmpty()) {
+                    binding.editText.setError(MyDialogDefault.inputEmptyMessage);
                 } else {
                     MyAlertDialog temp = myAlertDialog;
                     dismiss();
@@ -380,14 +356,22 @@ public class MyAlertDialog extends DialogFragment {
     //Listeners
 
     private MyAlertDialogButtonListener getMyAlertDialogButtonListener() {
-        if (myAlertDialogButtonListener == null)
-            myAlertDialogButtonListener = (MyAlertDialogButtonListener) getActivity();
+        try {
+            if (myAlertDialogButtonListener == null)
+                myAlertDialogButtonListener = (MyAlertDialogButtonListener) getActivity();
+        } catch (Exception e) {
+            Log.e(MyAlertDialog.class.getSimpleName(), e.getMessage());
+        }
         return myAlertDialogButtonListener;
     }
 
     private MyAlertDialogEditTextListener getMyAlertDialogEditTextListener() {
-        if (myAlertDialogEditTextListener == null)
-            myAlertDialogEditTextListener = (MyAlertDialogEditTextListener) getActivity();
+        try {
+            if (myAlertDialogEditTextListener == null)
+                myAlertDialogEditTextListener = (MyAlertDialogEditTextListener) getActivity();
+        } catch (Exception e) {
+            Log.e(MyAlertDialog.class.getSimpleName(), e.getMessage());
+        }
         return myAlertDialogEditTextListener;
     }
 

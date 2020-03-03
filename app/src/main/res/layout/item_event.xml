@@ -1,40 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.circularreveal.cardview.CircularRevealCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootItemEvent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="4dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
 
-    <com.google.android.material.circularreveal.cardview.CircularRevealCardView
-        android:id="@+id/rootItemEvent"
-        android:layout_width="match_parent"
+    <com.google.android.material.circularreveal.CircularRevealLinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="4dp"
-        app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="true">
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="8dp"
+        tools:ignore="UseCompoundDrawables">
 
-        <com.google.android.material.circularreveal.CircularRevealLinearLayout
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgEditEvent"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="@string/todo" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtEditEvent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="8dp"
-            tools:ignore="UseCompoundDrawables">
+            android:textAlignment="center" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgEditEvent"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:contentDescription="@string/todo" />
+    </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/txtEditEvent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="center" />
-
-        </com.google.android.material.circularreveal.CircularRevealLinearLayout>
-
-    </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
-
-</layout>
+</com.google.android.material.circularreveal.cardview.CircularRevealCardView>

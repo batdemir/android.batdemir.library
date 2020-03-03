@@ -6,10 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.FragmentNotificationsBinding;
 import com.android.batdemir.library.ui.base.BaseFragment;
 
@@ -19,7 +17,7 @@ public class NotificationsFragment extends BaseFragment {
     private NotificationsViewModel notificationsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_notifications, container, false);
+        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 

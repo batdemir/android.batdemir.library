@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/rootMyDialog"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:cardBackgroundColor="@android:color/white"
-        app:cardPreventCornerOverlap="true">
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootMyDialog"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardPreventCornerOverlap="true">
 
         <com.google.android.material.circularreveal.CircularRevealLinearLayout
             android:id="@+id/linearSub"
@@ -110,6 +108,4 @@
 
         </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
-    </com.google.android.material.card.MaterialCardView>
-
-</layout>
+</com.google.android.material.card.MaterialCardView>

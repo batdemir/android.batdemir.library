@@ -1,18 +1,16 @@
 package com.android.batdemir.library.ui.ui_app.activities;
 
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.android.batdemir.library.ui.base.BaseActivity;
-import com.android.batdemir.library.ui.ui_app.adapters.AdapterEvents;
-import com.android.batdemir.library.models.Event;
+import androidx.annotation.Nullable;
+
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ActivityMenuBinding;
+import com.android.batdemir.library.models.Event;
+import com.android.batdemir.library.ui.base.BaseActivity;
+import com.android.batdemir.library.ui.ui_app.adapters.AdapterEvents;
 import com.android.batdemir.mylibrary.tools.Tool;
 
 import java.util.ArrayList;
@@ -33,8 +31,10 @@ public class MenuActivity extends BaseActivity implements
     @Override
     public void getObjectReferences() {
         context = this;
-        if (binding == null)
-            binding = DataBindingUtil.setContentView((Activity) context, R.layout.activity_menu);
+        if (binding == null) {
+            binding = ActivityMenuBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
+        }
     }
 
     @Override
