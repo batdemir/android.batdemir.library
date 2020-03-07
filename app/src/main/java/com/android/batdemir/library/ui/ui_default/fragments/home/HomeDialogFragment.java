@@ -6,12 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.android.batdemir.library.databinding.FragmentHomeBinding;
-import com.android.batdemir.library.ui.base.BaseFragment;
 
-public class HomeDialogFragment extends BaseFragment {
+public class HomeDialogFragment extends Fragment {
 
     private FragmentHomeBinding binding;
     private HomeViewModel homeViewModel;
@@ -22,17 +23,9 @@ public class HomeDialogFragment extends BaseFragment {
     }
 
     @Override
-    public void getObjectReferences() {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
-    }
-
-    @Override
-    public void loadData() {
-        homeViewModel.getText().observe(this, binding.textHome::setText);
-    }
-
-    @Override
-    public void setListeners() {
-        //Nothings
+        homeViewModel.getText().observe(getViewLifecycleOwner(), binding.textHome::setText);
     }
 }

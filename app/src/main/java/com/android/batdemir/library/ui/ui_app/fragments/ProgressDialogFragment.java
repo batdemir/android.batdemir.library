@@ -8,20 +8,20 @@ import android.view.animation.DecelerateInterpolator;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.FragmentProgressBarBinding;
-import com.android.batdemir.library.ui.base.BaseDialogFragment;
 import com.richpath.RichPath;
 import com.richpathanimator.RichPathAnimator;
 
-public class ProgressDialogFragment extends BaseDialogFragment {
+public class ProgressDialogFragment extends DialogFragment {
 
     private FragmentProgressBarBinding binding;
 
     @Override
-    public void getObjectReferences() {
-        //Not Implemented
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Nullable
@@ -32,13 +32,14 @@ public class ProgressDialogFragment extends BaseDialogFragment {
     }
 
     @Override
-    public void loadData() {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         setCancelable(false);
         notificationAnimate();
         morphingAnimate();
+        setListeners();
     }
 
-    @Override
     public void setListeners() {
         binding.btnClose.setOnClickListener(v -> dismiss());
     }

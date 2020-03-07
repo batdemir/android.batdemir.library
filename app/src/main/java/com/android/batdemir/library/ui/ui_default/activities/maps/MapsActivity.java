@@ -1,8 +1,8 @@
-package com.android.batdemir.library.ui.ui_default.activities;
-
-import androidx.fragment.app.FragmentActivity;
+package com.android.batdemir.library.ui.ui_default.activities.maps;
 
 import android.os.Bundle;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.batdemir.library.R;
 import com.google.android.gms.maps.CameraUpdateFactory;

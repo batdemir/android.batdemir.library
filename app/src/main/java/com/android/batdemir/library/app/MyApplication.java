@@ -14,7 +14,7 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.text.HtmlCompat;
 
-import com.android.batdemir.library.ui.ui_test.activities.MainActivity;
+import com.android.batdemir.library.ui.ui_test.activities.main.MainActivity;
 import com.android.batdemir.mylibrary.connection.RetrofitClient;
 
 import java.util.Objects;

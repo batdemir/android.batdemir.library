@@ -6,12 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.android.batdemir.library.databinding.FragmentNotificationsBinding;
-import com.android.batdemir.library.ui.base.BaseFragment;
 
-public class NotificationsFragment extends BaseFragment {
+public class NotificationsFragment extends Fragment {
 
     private FragmentNotificationsBinding binding;
     private NotificationsViewModel notificationsViewModel;
@@ -22,17 +23,9 @@ public class NotificationsFragment extends BaseFragment {
     }
 
     @Override
-    public void getObjectReferences() {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         notificationsViewModel = ViewModelProviders.of(this).get(NotificationsViewModel.class);
-    }
-
-    @Override
-    public void loadData() {
-        notificationsViewModel.getText().observe(this, binding.textNotifications::setText);
-    }
-
-    @Override
-    public void setListeners() {
-        //Nothings
+        notificationsViewModel.getText().observe(getViewLifecycleOwner(), binding.textNotifications::setText);
     }
 }

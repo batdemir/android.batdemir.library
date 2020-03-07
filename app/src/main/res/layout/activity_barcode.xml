@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.ui_test.activities.BarcodeActivity">
+    tools:context=".ui.ui_test.activities.barcode.BarcodeActivity">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnNextPage"

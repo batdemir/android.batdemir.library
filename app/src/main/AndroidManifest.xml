@@ -23,7 +23,7 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning,InnerclassSeparator">
         <!-- TEST -->
         <activity
-            android:name=".ui.ui_test.activities.MainActivity"
+            android:name=".ui.ui_test.activities.main.MainActivity"
             android:screenOrientation="sensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,17 +32,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.ui_test.activities.RecyclerActivity"
+            android:name=".ui.ui_test.activities.recycler.RecyclerActivity"
             android:screenOrientation="sensor" />
         <activity
-            android:name=".ui.ui_test.activities.BarcodeActivity"
+            android:name=".ui.ui_test.activities.barcode.BarcodeActivity"
             android:screenOrientation="sensor" />
         <activity
-            android:name=".ui.ui_test.activities.MaterialActivity"
+            android:name=".ui.ui_test.activities.material.MaterialActivity"
             android:screenOrientation="sensor" />
         <!-- APP -->
         <activity
-            android:name=".ui.ui_app.activities.LoginActivity"
+            android:name=".ui.ui_app.activities.login.LoginActivity"
             android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,13 +51,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.ui_app.activities.SignUpActivity"
+            android:name=".ui.ui_app.activities.signup.SignUpActivity"
             android:screenOrientation="sensorPortrait" />
         <activity
-            android:name=".ui.ui_app.activities.MenuActivity"
+            android:name=".ui.ui_app.activities.menu.MenuActivity"
             android:screenOrientation="sensorPortrait" /> <!-- DEFAULT -->
         <activity
-            android:name=".ui.ui_default.activities.ScrollingActivity"
+            android:name=".ui.ui_default.activities.scrolling.ScrollingActivity"
             android:screenOrientation="sensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -66,13 +66,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.ui_default.activities.MapsActivity"
+            android:name=".ui.ui_default.activities.maps.MapsActivity"
             android:screenOrientation="sensor" />
         <activity
-            android:name=".ui.ui_default.activities.TabbedActivity"
+            android:name=".ui.ui_default.activities.tabbed.TabbedActivity"
             android:screenOrientation="sensor" />
         <activity
-            android:name=".ui.ui_default.activities.BottomNavigationActivity"
+            android:name=".ui.ui_default.activities.bottomnavigation.BottomNavigationActivity"
             android:screenOrientation="sensor" />
 
         <meta-data

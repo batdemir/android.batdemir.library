@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/root_padding"
-    tools:context=".ui.ui_app.activities.MenuActivity">
+    tools:context=".ui.ui_app.activities.menu.MenuActivity">
 
     <com.google.android.material.circularreveal.CircularRevealRelativeLayout
         android:id="@+id/relativeUserInfo"

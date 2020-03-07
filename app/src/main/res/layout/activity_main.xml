@@ -4,7 +4,7 @@
     android:id="@+id/rootMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ui_test.activities.MainActivity">
+    tools:context=".ui.ui_test.activities.main.MainActivity">
 
     <com.google.android.material.circularreveal.CircularRevealLinearLayout
         android:id="@+id/linearProps"

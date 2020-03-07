@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16sp"
-    tools:context=".ui.ui_test.activities.MaterialActivity">
+    tools:context=".ui.ui_test.activities.material.MaterialActivity">
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnPreviousPage"

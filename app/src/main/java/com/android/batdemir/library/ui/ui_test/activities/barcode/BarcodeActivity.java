@@ -1,29 +1,20 @@
-package com.android.batdemir.library.ui.ui_test.activities;
+package com.android.batdemir.library.ui.ui_test.activities.barcode;
 
-import android.content.Context;
 import android.content.IntentFilter;
-import android.os.Bundle;
 
 import com.android.batdemir.library.R;
 import com.android.batdemir.library.databinding.ActivityBarcodeBinding;
-import com.android.batdemir.library.ui.base.BaseActivity;
+import com.android.batdemir.library.ui.base.activity.BaseActivity;
+import com.android.batdemir.library.ui.ui_test.activities.material.MaterialActivity;
 import com.android.batdemir.mylibrary.tools.Tool;
 import com.android.batdemir.myscanner.DataWedge;
 import com.android.batdemir.myscanner.Receiver;
 import com.android.batdemir.myscanner.ReceiverListener;
 
-public class BarcodeActivity extends BaseActivity implements
+public class BarcodeActivity extends BaseActivity<ActivityBarcodeBinding, BarcodeController> implements
         ReceiverListener {
 
-    private Context context;
-    private ActivityBarcodeBinding binding;
     private Receiver receiver;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        init(false, true, getString(R.string.title_barcode), R.style.AppThemeActionBar);
-    }
 
     @Override
     protected void onStart() {
@@ -42,27 +33,27 @@ public class BarcodeActivity extends BaseActivity implements
     }
 
     @Override
+    public void onCreated() {
+        init(R.style.AppThemeActionBar, getString(R.string.title_barcode), 16f, true);
+    }
+
+    @Override
     public void getObjectReferences() {
-        context = this;
-        if (binding == null) {
-            binding = ActivityBarcodeBinding.inflate(getLayoutInflater());
-            setContentView(binding.getRoot());
-        }
-        DataWedge.getInstance(context).init();
+        DataWedge.getInstance(getBinding().getRoot().getContext()).init();
     }
 
     @Override
     public void loadData() {
-        binding.txtEditBarcode.setText("");
+        getBinding().txtEditBarcode.setText("");
     }
 
     @Override
     public void setListeners() {
-        binding.btnNextPage.setOnClickListener(v -> Tool.getInstance(context).move(MaterialActivity.class, true, true, null));
+        getBinding().btnNextPage.setOnClickListener(v -> Tool.getInstance(getBinding().getRoot().getContext()).move(MaterialActivity.class, true, true, null));
     }
 
     @Override
     public void onReceived(String barcode) {
-        binding.txtEditBarcode.setText(barcode);
+        getBinding().txtEditBarcode.setText(barcode);
     }
 }

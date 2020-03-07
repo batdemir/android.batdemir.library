@@ -7,12 +7,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.android.batdemir.library.databinding.FragmentDashboardBinding;
-import com.android.batdemir.library.ui.base.BaseFragment;
 
-public class DashboardDialogFragment extends BaseFragment {
+public class DashboardDialogFragment extends Fragment {
 
     private FragmentDashboardBinding binding;
     private DashboardViewModel dashboardViewModel;
@@ -25,17 +25,9 @@ public class DashboardDialogFragment extends BaseFragment {
     }
 
     @Override
-    public void getObjectReferences() {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         dashboardViewModel = ViewModelProviders.of(this).get(DashboardViewModel.class);
-    }
-
-    @Override
-    public void loadData() {
-        dashboardViewModel.getText().observe(this, binding.textDashboard::setText);
-    }
-
-    @Override
-    public void setListeners() {
-        //Nothings
+        dashboardViewModel.getText().observe(getViewLifecycleOwner(), binding.textDashboard::setText);
     }
 }
