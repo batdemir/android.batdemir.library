@@ -141,7 +141,7 @@ public class MyAutoCompleteTextView extends MaterialAutoCompleteTextView {
     }
 
     public void fill(List<?> models, Field id, Field description) {
-        setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance().cast(models, id, description), textAppearance));
+        setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance().cast(models, id, description), SpinnerAdapter.SpinnerType.AUTO_COMPLETE_TEXT_VIEW, textAppearance));
     }
 
     public void fill(SpinnerAdapter spinnerAdapter) {

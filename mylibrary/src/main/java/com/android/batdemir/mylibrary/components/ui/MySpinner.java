@@ -101,7 +101,7 @@ public class MySpinner extends AppCompatSpinner {
     }
 
     public void fill(List<?> models, Field id, Field description) {
-        setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance().cast(models, id, description), textAppearance));
+        setAdapter(new SpinnerAdapter(getContext(), SpinnerHelper.getInstance().cast(models, id, description), SpinnerAdapter.SpinnerType.SPINNER, textAppearance));
     }
 
     public void fill(SpinnerAdapter spinnerAdapter) {
