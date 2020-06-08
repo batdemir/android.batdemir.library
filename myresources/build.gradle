@@ -28,18 +28,3 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     implementation 'androidx.appcompat:appcompat:1.1.0'
 }
-
-apply plugin: 'com.novoda.bintray-release'
-publish {
-    def groupProjectID = group_project_id
-    def artifactProjectID = 'myresources'
-    def publishVersionID = lib_version
-
-    userOrg = user_org
-    repoName = repo_name
-    groupId = groupProjectID
-    artifactId = artifactProjectID
-    publishVersion = publishVersionID
-    desc = 'Batdemir Library for base resources'
-    website = web_site
-}

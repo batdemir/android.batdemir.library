@@ -15,7 +15,7 @@ import com.android.batdemir.mylibrary.components.adapters.SpinnerAdapter;
 import com.android.batdemir.mylibrary.components.helper.SpinnerHelper;
 import com.android.batdemir.mylibrary.components.listeners.AutoOnItemSelected;
 import com.android.batdemir.mylibrary.components.models.SpinnerModel;
-import com.google.android.material.textview.MaterialAutoCompleteTextView;
+import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.gson.Gson;
 
 import java.lang.reflect.Field;

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="informationTitle">Bilgi</string>
+    <string name="warningTitle">Dikkat</string>
+    <string name="successTitle">Başarılı</string>
+    <string name="failedTitle">Başarısız</string>
+    <string name="cancelButtonText">İptal</string>
+    <string name="okButtonText">Tamam</string>
+    <string name="inputEmptyMessage">Lütfen değer giriniz.</string>
+</resources>

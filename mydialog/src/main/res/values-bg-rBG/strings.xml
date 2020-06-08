@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="informationTitle">информация</string>
+    <string name="warningTitle">внимание</string>
+    <string name="successTitle">успех</string>
+    <string name="failedTitle">"Се провали "</string>
+    <string name="cancelButtonText">Отказ</string>
+    <string name="okButtonText">Добре</string>
+    <string name="inputEmptyMessage">Моля, въведете стойност.</string>
+</resources>

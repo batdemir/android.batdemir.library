@@ -29,15 +29,9 @@ import static com.android.batdemir.mydialog.ui.MyDialogConstant.KEY_MESSAGE;
 import static com.android.batdemir.mydialog.ui.MyDialogConstant.KEY_OK_TEXT;
 import static com.android.batdemir.mydialog.ui.MyDialogConstant.KEY_STYLE;
 import static com.android.batdemir.mydialog.ui.MyDialogConstant.KEY_TITLE_TEXT;
-import static com.android.batdemir.mydialog.ui.MyDialogDefault.cancelButtonText;
-import static com.android.batdemir.mydialog.ui.MyDialogDefault.failedTitle;
 import static com.android.batdemir.mydialog.ui.MyDialogDefault.failedTitleColor;
-import static com.android.batdemir.mydialog.ui.MyDialogDefault.informationTitle;
 import static com.android.batdemir.mydialog.ui.MyDialogDefault.informationTitleColor;
-import static com.android.batdemir.mydialog.ui.MyDialogDefault.okButtonText;
-import static com.android.batdemir.mydialog.ui.MyDialogDefault.successTitle;
 import static com.android.batdemir.mydialog.ui.MyDialogDefault.successTitleColor;
-import static com.android.batdemir.mydialog.ui.MyDialogDefault.warningTitle;
 import static com.android.batdemir.mydialog.ui.MyDialogDefault.warningTitleColor;
 
 public class MyAlertDialog extends DialogFragment {
@@ -54,6 +48,8 @@ public class MyAlertDialog extends DialogFragment {
     private int inputType = InputType.TYPE_CLASS_TEXT;
     private MyAlertDialogButtonListener myAlertDialogButtonListener = null;
     private MyAlertDialogEditTextListener myAlertDialogEditTextListener = null;
+
+    private MyDialogDefault myDialogDefault;
 
     private static MyAlertDialog init(Bundle bundle) {
         myAlertDialog = myAlertDialogCreator == null ? new MyAlertDialog() : myAlertDialogCreator.create();
@@ -148,6 +144,9 @@ public class MyAlertDialog extends DialogFragment {
     private void getObjectReferences() {
         if (getArguments() == null)
             return;
+        if (getContext() == null)
+            return;
+        myDialogDefault = new MyDialogDefault(getContext());
         title = getArguments().getString(KEY_TITLE_TEXT);
         okText = getArguments().getString(KEY_OK_TEXT);
         cancelText = getArguments().getString(KEY_CANCEL_TEXT);
@@ -207,7 +206,7 @@ public class MyAlertDialog extends DialogFragment {
                     return;
                 }
                 if (binding.editText.getText().toString().isEmpty()) {
-                    binding.editText.setError(MyDialogDefault.inputEmptyMessage);
+                    binding.editText.setError(myDialogDefault.getInputEmptyMessage());
                 } else {
                     MyAlertDialog temp = myAlertDialog;
                     dismiss();
@@ -270,19 +269,19 @@ public class MyAlertDialog extends DialogFragment {
             case INPUT:
             case ACTION:
             case INFO:
-                binding.txtEditTitle.setText(title == null ? informationTitle : title);
+                binding.txtEditTitle.setText(title == null ? myDialogDefault.getInformationTitle() : title);
                 binding.txtEditTitle.setTextColor(informationTitleColor);
                 break;
             case WARNING:
-                binding.txtEditTitle.setText(title == null ? warningTitle : title);
+                binding.txtEditTitle.setText(title == null ? myDialogDefault.getWarningTitle() : title);
                 binding.txtEditTitle.setTextColor(warningTitleColor);
                 break;
             case SUCCESS:
-                binding.txtEditTitle.setText(title == null ? successTitle : title);
+                binding.txtEditTitle.setText(title == null ? myDialogDefault.getSuccessTitle() : title);
                 binding.txtEditTitle.setTextColor(successTitleColor);
                 break;
             case FAILED:
-                binding.txtEditTitle.setText(title == null ? failedTitle : title);
+                binding.txtEditTitle.setText(title == null ? myDialogDefault.getFailedTitle() : title);
                 binding.txtEditTitle.setTextColor(failedTitleColor);
                 break;
             default:
@@ -324,7 +323,7 @@ public class MyAlertDialog extends DialogFragment {
         switch (style) {
             case INPUT:
             case ACTION:
-                binding.btnCancel.setText(cancelText == null ? cancelButtonText : cancelText);
+                binding.btnCancel.setText(cancelText == null ? myDialogDefault.getCancelButtonText() : cancelText);
                 break;
             case INFO:
             case FAILED:
@@ -339,7 +338,7 @@ public class MyAlertDialog extends DialogFragment {
                 binding.btnOk.setLayoutParams(params1);
                 break;
         }
-        binding.btnOk.setText(okText == null ? okButtonText : okText);
+        binding.btnOk.setText(okText == null ? myDialogDefault.getOkButtonText() : okText);
     }
 
     //Component EditTextType

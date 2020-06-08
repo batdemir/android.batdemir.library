@@ -1,4 +1,11 @@
 <resources>
-    <string name="library_name">myDialog</string>
-    <string name="todo">TODO</string>
+    <string name="library_name" translatable="false">myDialog</string>
+    <string name="todo" translatable="false">TODO</string>
+    <string name="informationTitle">Information</string>
+    <string name="warningTitle">Warning</string>
+    <string name="successTitle">Success</string>
+    <string name="failedTitle">Failed</string>
+    <string name="cancelButtonText">Cancel</string>
+    <string name="okButtonText">Ok</string>
+    <string name="inputEmptyMessage">Please enter value.</string>
 </resources>

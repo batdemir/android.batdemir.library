@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="informationTitle">Πληροφορίες</string>
+    <string name="warningTitle">Προειδοποίηση</string>
+    <string name="successTitle">Επιτυχία</string>
+    <string name="failedTitle">Απέτυχε</string>
+    <string name="cancelButtonText">Ματαίωση</string>
+    <string name="okButtonText">Εντάξει</string>
+    <string name="inputEmptyMessage">Εισαγάγετε την τιμή.</string>
+</resources>

@@ -334,24 +334,24 @@ public class BluetoothSPP {
     }
 
     public interface BluetoothStateListener {
-        public void onServiceStateChanged(int state);
+        void onServiceStateChanged(int state);
     }
 
     public interface OnDataReceivedListener {
-        public void onDataReceived(byte[] data, String message);
+        void onDataReceived(byte[] data, String message);
     }
 
     public interface BluetoothConnectionListener {
-        public void onDeviceConnected(String name, String address);
+        void onDeviceConnected(String name, String address);
 
-        public void onDeviceDisconnected();
+        void onDeviceDisconnected();
 
-        public void onDeviceConnectionFailed();
+        void onDeviceConnectionFailed();
     }
 
     public interface AutoConnectionListener {
-        public void onAutoConnectionStarted();
+        void onAutoConnectionStarted();
 
-        public void onNewConnection(String name, String address);
+        void onNewConnection(String name, String address);
     }
 }
