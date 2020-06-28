@@ -1,13 +1,28 @@
+import jdk.nashorn.internal.objects.NativeDebug
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
-        group_project_id ="android.batdemir.library"
+        group_project_id = "android.batdemir.library"
         user_org = "batdemirorg"
         repo_name = "batdemirlibrary"
         web_site = "https://github.com/batdemirorg/android.batdemir.library"
         web_site_vcs = "https://github.com/batdemirorg/android.batdemir.library.git"
-        lib_version = "0.2.2.9"
+        lib_version = "0.2.3.0-beta3"
         desc = "Batdemir Library"
+        licences_array = ["Apache-2.0"]
+        developers_info = {
+            developer {
+                id 'batdemir'
+                name 'Batuhan Demir'
+                email 'batuhandemirp@gmail.com'
+            }
+        }
+        scm_info = {
+            connection web_site_vcs
+            developerConnection web_site_vcs
+            url web_site_vcs
+        }
     }
 
     repositories {
@@ -18,6 +33,8 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:4.0.0'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
     }
 }
 
@@ -27,4 +44,14 @@ allprojects {
         jcenter()
         maven { url 'https://jitpack.io' }
     }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
 }

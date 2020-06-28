@@ -13,6 +13,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/local.properties">
           <value>
             <set />
@@ -33,7 +38,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/mydialog/bintray.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/mydialog/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mydialog/install.gradle">
           <value>
             <set />
           </value>
@@ -58,7 +73,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/mylibrary/bintray.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/mylibrary/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mylibrary/install.gradle">
           <value>
             <set />
           </value>
@@ -78,12 +103,32 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/myresources/bintray.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/myresources/build.gradle">
           <value>
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/myresources/install.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/myscanner/bintray.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/myscanner/build.gradle">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/myscanner/install.gradle">
           <value>
             <set />
           </value>

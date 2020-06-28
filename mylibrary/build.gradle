@@ -39,3 +39,6 @@ dependencies {
 
     implementation project(':mydialog')
 }
+
+apply from: 'install.gradle'
+apply from: 'bintray.gradle'
