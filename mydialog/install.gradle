@@ -1,13 +1,12 @@
 apply plugin: 'com.github.dcendents.android-maven'
 
-group = 'mydialog'
+group = group_project_id
 
 install {
     repositories.mavenInstaller {
         pom {
             project {
-                packaging 'aar'
-                groupId 'mydialog'
+                groupId group_project_id
                 artifactId 'mydialog'
                 name 'mydialog'
                 description 'mydialog'

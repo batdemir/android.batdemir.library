@@ -1,13 +1,12 @@
 apply plugin: 'com.github.dcendents.android-maven'
 
-group = 'mybluetooth'
+group = group_project_id
 
 install {
     repositories.mavenInstaller {
         pom {
             project {
-                packaging 'aar'
-                groupId 'mybluetooth'
+                groupId group_project_id
                 artifactId 'mybluetooth'
                 name 'mybluetooth'
                 description 'mybluetooth'

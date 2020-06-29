@@ -1,13 +1,12 @@
 apply plugin: 'com.github.dcendents.android-maven'
 
-group = 'myresources'
+group = group_project_id
 
 install {
     repositories.mavenInstaller {
         pom {
             project {
-                packaging 'aar'
-                groupId 'myresources'
+                groupId group_project_id
                 artifactId 'myresources'
                 name 'myresources'
                 description 'myresources'
