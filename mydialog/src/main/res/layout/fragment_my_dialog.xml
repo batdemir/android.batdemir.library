@@ -7,105 +7,129 @@
     app:cardBackgroundColor="@android:color/white"
     app:cardPreventCornerOverlap="true">
 
-        <com.google.android.material.circularreveal.CircularRevealLinearLayout
-            android:id="@+id/linearSub"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgDialog"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/paddingTop"
+            android:paddingBottom="@dimen/paddingBottom"
+            android:src="@drawable/ic_dialog_info"
+            app:layout_constraintBottom_toTopOf="@+id/rootContentMyDialog"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgDialog"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/rootContentMyDialog"
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayoutButtons"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgDialog">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayoutSub"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/alert_dialog_success"
-                android:paddingTop="@dimen/paddingTop"
-                android:paddingBottom="@dimen/paddingBottom"
-                android:src="@drawable/ic_dialog_success" />
+                android:layout_height="0sp">
 
-            <androidx.core.widget.NestedScrollView
-                android:id="@+id/rootContentMyDialog"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-
-                <com.google.android.material.circularreveal.CircularRevealLinearLayout
-                    android:id="@+id/linearContent"
-                    android:layout_width="match_parent"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txtEditTitle"
+                    android:layout_width="0sp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/padding">
+                    android:gravity="center"
+                    android:padding="@dimen/padding"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/txtEditMessage"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/txtEditTitle"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txtEditMessage"
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/padding"
+                    app:layout_constraintBottom_toTopOf="@+id/inputLayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtEditTitle" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0sp"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtEditMessage">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textStyle="bold" />
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxLength="50"
+                        android:minLines="1"
+                        android:singleLine="true"
+                        android:textColor="@android:color/black"
+                        android:visibility="invisible" />
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/txtEditMessage"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textColor="@android:color/black" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/inputLayout"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editText"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:imeOptions="actionDone"
-                            android:inputType="text"
-                            android:lines="1"
-                            android:maxLength="50"
-                            android:minLines="1"
-                            android:singleLine="true"
-                            android:textColor="@android:color/black" />
+        </androidx.core.widget.NestedScrollView>
 
-                    </com.google.android.material.textfield.TextInputLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rootContentMyDialog">
 
-                </com.google.android.material.circularreveal.CircularRevealLinearLayout>
-
-            </androidx.core.widget.NestedScrollView>
-
-            <com.google.android.material.circularreveal.CircularRevealLinearLayout
-                android:id="@+id/linearButtons"
-                android:layout_width="match_parent"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancel"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0sp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/padding">
+                android:backgroundTint="@android:color/darker_gray"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnOk"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnCancel"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="0sp"
-                    android:layout_marginEnd="@dimen/marginEnd"
-                    android:layout_weight="1"
-                    android:backgroundTint="@android:color/darker_gray"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-                    android:textColor="@android:color/white" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOk"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/darker_gray"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnCancel"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnOk"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/marginStart"
-                    android:layout_marginEnd="0sp"
-                    android:layout_weight="1"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-                    android:textColor="@android:color/white" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </com.google.android.material.circularreveal.CircularRevealLinearLayout>
-
-        </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

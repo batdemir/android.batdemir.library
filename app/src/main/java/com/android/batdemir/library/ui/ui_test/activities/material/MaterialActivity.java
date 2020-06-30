@@ -36,9 +36,9 @@ public class MaterialActivity extends BaseActivity<ActivityMaterialBinding, Mate
     @Override
     public void setListeners() {
         getBinding().btnPreviousPage.setOnClickListener(v -> Tool.getInstance(getBinding().getRoot().getContext()).move(BarcodeActivity.class, false, false, null));
-        getBinding().btnOutLinesValid.setOnClickListener(v -> MyAlertDialog.getInstance(getBinding().autoCompleteOutLine.isValid(false) ? getBinding().autoCompleteOutLine.getSelectedItemDescription() : "not found", MyDialogStyle.SUCCESS).show(getSupportFragmentManager(), ""));
-        getBinding().btnFilledValid.setOnClickListener(v -> MyAlertDialog.getInstance(getBinding().autoCompleteFilled.isValid(true) ? getBinding().autoCompleteFilled.getSelectedItemDescription() : "not found", MyDialogStyle.SUCCESS).show(getSupportFragmentManager(), ""));
-        getBinding().btnSpinnerValid.setOnClickListener(v -> MyAlertDialog.getInstance(getBinding().spinner.isValid(true) ? getBinding().spinner.getSelectedItemDescription() : "not found", MyDialogStyle.SUCCESS).show(getSupportFragmentManager(), ""));
+//        getBinding().btnOutLinesValid.setOnClickListener(v -> MyAlertDialog.getInstance(getBinding().autoCompleteOutLine.isValid(false) ? getBinding().autoCompleteOutLine.getSelectedItemDescription() : "not found", MyDialogStyle.SUCCESS).show(getSupportFragmentManager(), ""));
+//        getBinding().btnFilledValid.setOnClickListener(v -> MyAlertDialog.getInstance(getBinding().autoCompleteFilled.isValid(true) ? getBinding().autoCompleteFilled.getSelectedItemDescription() : "not found", MyDialogStyle.SUCCESS).show(getSupportFragmentManager(), ""));
+//        getBinding().btnSpinnerValid.setOnClickListener(v -> MyAlertDialog.getInstance(getBinding().spinner.isValid(true) ? getBinding().spinner.getSelectedItemDescription() : "not found", MyDialogStyle.SUCCESS).show(getSupportFragmentManager(), ""));
         getBinding().autoCompleteOutLine.setAutoOnItemSelected((model, position) -> Log.v("AutoItem", model.getDescription()));
     }
 

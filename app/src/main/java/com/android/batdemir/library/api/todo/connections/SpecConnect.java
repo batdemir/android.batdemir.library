@@ -16,7 +16,7 @@ public class SpecConnect extends Connect {
     @Override
     public void connect(Context context, Call call, String operationType) {
         if (!ToolConnection.getInstance(context).isConnected()) {
-            MyAlertDialog.getInstance("Please check internet connection.", MyDialogStyle.WARNING).show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
+            //MyAlertDialog.getInstance("Please check internet connection.", MyDialogStyle.WARNING).show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
             return;
         }
         new SpecConnectService(context, operationType).execute(call);

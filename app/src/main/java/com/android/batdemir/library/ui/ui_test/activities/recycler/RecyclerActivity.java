@@ -60,12 +60,12 @@ public class RecyclerActivity extends BaseActivity<ActivityRecyclerBinding, Recy
 
     @Override
     public void onSuccess(String operationType, Response response) {
-        MyAlertDialog.getInstance("onSuccess\n" + Objects.requireNonNull(response.body()).toString(), MyDialogStyle.WARNING).show(getSupportFragmentManager(), "success");
+        //MyAlertDialog.getInstance("onSuccess\n" + Objects.requireNonNull(response.body()).toString(), MyDialogStyle.WARNING).show(getSupportFragmentManager(), "success");
     }
 
     @Override
     public void onFailure(String operationType, Response response) {
-        MyAlertDialog.getInstance("onFailure\n", MyDialogStyle.ACTION).show(getSupportFragmentManager(), "failure");
+        //MyAlertDialog.getInstance("onFailure\n", MyDialogStyle.ACTION).show(getSupportFragmentManager(), "failure");
     }
 
     @Override
