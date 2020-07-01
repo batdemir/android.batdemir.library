@@ -66,18 +66,27 @@ public class SpecConnectService extends ConnectService {
                 default:
                     throw new IllegalStateException("Unexpected value: " + model.getStatus());
             }
-            //if (model.getMessage() != null && !model.getMessage().isEmpty())
-
-                //MyAlertDialog.getInstance(model.getMessage(), style).show(((FragmentActivity) context).getSupportFragmentManager(), status.name());
+            if (model.getMessage() != null && !model.getMessage().isEmpty())
+                new MyAlertDialog
+                        .Builder()
+                        .setStyle(style)
+                        .setMessage(model.getMessage())
+                        .build()
+                        .show(((FragmentActivity) context).getSupportFragmentManager(), status.name());
+            else {
+                try {
+                    connectServiceListener.onFailure(operationType);
+                    new MyAlertDialog
+                            .Builder()
+                            .setStyle(MyDialogStyle.FAILED)
+                            .setMessage(response.errorBody() == null ? "Failed" : response.errorBody().string())
+                            .build()
+                            .show(((FragmentActivity) context).getSupportFragmentManager(), status.name());
+                } catch (IOException e) {
+                    Log.e(SpecConnectService.class.getSimpleName(), e.getMessage());
+                }
+            }
         }
-//        else {
-//            try {
-//                connectServiceListener.onFailure(operationType);
-//                //MyAlertDialog.getInstance(response.errorBody() == null ? "Failed" : response.errorBody().string(), MyDialogStyle.FAILED).show(((FragmentActivity) context).getSupportFragmentManager(), "failure");
-//            } catch (IOException e) {
-//                Log.e(SpecConnectService.class.getSimpleName(), e.getMessage());
-//            }
-//        }
     }
 
     @Override

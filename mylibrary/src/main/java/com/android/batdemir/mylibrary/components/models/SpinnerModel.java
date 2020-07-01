@@ -18,6 +18,7 @@ public class SpinnerModel implements Serializable, Parcelable {
             return new SpinnerModel[size];
         }
     };
+    @SuppressWarnings("java:S1948")
     @SerializedName("id")
     private Object id;
     @SerializedName("description")

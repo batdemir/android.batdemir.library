@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SonarLintProjectSettings">
+    <option name="fileExclusions">
+      <list>
+        <option value="FILE:myscanner/build/generated/source/buildConfig/debug/com/android/batdemir/myscanner/BuildConfig.java" />
+        <option value="FILE:myscanner/build/generated/source/buildConfig/release/com/android/batdemir/myscanner/BuildConfig.java" />
+        <option value="FILE:myresources/build/generated/source/buildConfig/debug/com/android/batdemir/myresources/BuildConfig.java" />
+        <option value="FILE:myresources/build/generated/source/buildConfig/release/com/android/batdemir/myresources/BuildConfig.java" />
+        <option value="FILE:mylibrary/build/generated/source/buildConfig/debug/com/android/batdemir/mylibrary/BuildConfig.java" />
+        <option value="FILE:mylibrary/build/generated/source/buildConfig/release/com/android/batdemir/mylibrary/BuildConfig.java" />
+      </list>
+    </option>
+  </component>
+</project>

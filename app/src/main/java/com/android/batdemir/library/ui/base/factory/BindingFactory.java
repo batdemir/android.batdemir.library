@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 
 import com.android.batdemir.library.databinding.ActivityBarcodeBinding;
 import com.android.batdemir.library.databinding.ActivityBottomNavigationBinding;
+import com.android.batdemir.library.databinding.ActivityLoginBinding;
 import com.android.batdemir.library.databinding.ActivityMainBinding;
 import com.android.batdemir.library.databinding.ActivityMapsBinding;
 import com.android.batdemir.library.databinding.ActivityMaterialBinding;
@@ -33,7 +34,7 @@ public class BindingFactory {
 
         //APP
         if (strBinding.equalsIgnoreCase("Login")) {
-            com.android.batdemir.library.databinding.ActivityLoginBinding binding = com.android.batdemir.library.databinding.ActivityLoginBinding.inflate(inflater);
+            ActivityLoginBinding binding = ActivityLoginBinding.inflate(inflater);
             ((Activity) inflater.getContext()).setContentView(binding.getRoot());
             return (Binding) binding;
         }

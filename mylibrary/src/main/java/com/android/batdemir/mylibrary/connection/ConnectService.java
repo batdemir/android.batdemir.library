@@ -18,7 +18,7 @@ import java.net.SocketTimeoutException;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class ConnectService extends AsyncTask<Call, Void, Response> {
+public class ConnectService extends AsyncTask<Call<?>, Void, Response<?>> {
 
     @SuppressLint("StaticFieldLeak")
     private Context context;
@@ -65,17 +65,32 @@ public class ConnectService extends AsyncTask<Call, Void, Response> {
     }
 
     @Override
-    protected Response doInBackground(Call... calls) {
+    protected Response<?> doInBackground(Call... calls) {
         try {
             return calls[0].execute();
         } catch (Exception e) {
             cancel(true);
             if (e.getClass().equals(ConnectException.class)) {
-                //MyAlertDialog.getInstance(connectionFailMessage + "\n" + e.getMessage(), MyDialogStyle.FAILED).show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
+                new MyAlertDialog
+                        .Builder()
+                        .setStyle(MyDialogStyle.FAILED)
+                        .setMessage(connectionFailMessage + "\n" + e.getMessage())
+                        .build()
+                        .show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
             } else if (e.getClass().equals(SocketTimeoutException.class) || e.getClass().equals(IOException.class)) {
-                //MyAlertDialog.getInstance(connectionTimeOutMessage + "\n" + e.getMessage(), MyDialogStyle.FAILED).show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
+                new MyAlertDialog
+                        .Builder()
+                        .setStyle(MyDialogStyle.FAILED)
+                        .setMessage(connectionTimeOutMessage + "\n" + e.getMessage())
+                        .build()
+                        .show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
             } else {
-                //MyAlertDialog.getInstance(e.getMessage(), MyDialogStyle.FAILED).show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
+                new MyAlertDialog
+                        .Builder()
+                        .setStyle(MyDialogStyle.FAILED)
+                        .setMessage(e.getMessage())
+                        .build()
+                        .show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
             }
             if (connectServiceErrorListener != null)
                 connectServiceErrorListener.onException(operationType, e.getMessage());
@@ -85,7 +100,7 @@ public class ConnectService extends AsyncTask<Call, Void, Response> {
     }
 
     @Override
-    protected void onPostExecute(Response response) {
+    protected void onPostExecute(Response<?> response) {
         hideProgressBar();
         onPostProcess(operationType, response);
     }
@@ -107,7 +122,7 @@ public class ConnectService extends AsyncTask<Call, Void, Response> {
         }
     }
 
-    protected void onPostProcess(String operationType, Response response) {
+    protected void onPostProcess(String operationType, Response<?> response) {
         if (response.isSuccessful())
             connectServiceListener.onSuccess(operationType, response);
         else

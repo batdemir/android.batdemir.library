@@ -3,6 +3,7 @@
     <dimen name="padding">8sp</dimen>
     <dimen name="paddingTop">16sp</dimen>
     <dimen name="paddingBottom">16sp</dimen>
+    <dimen name="margin">8sp</dimen>
     <dimen name="marginStart">4sp</dimen>
     <dimen name="marginEnd">4sp</dimen>
 </resources>

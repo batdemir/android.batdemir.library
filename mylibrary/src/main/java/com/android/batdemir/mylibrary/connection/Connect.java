@@ -18,9 +18,14 @@ public class Connect {
         this.noConnectionMessage = noConnectionMessage;
     }
 
-    public void connect(Context context, Call call, String operationType) {
+    public void connect(Context context, Call<?> call, String operationType) {
         if (!ToolConnection.getInstance(context).isConnected()) {
-            //MyAlertDialog.getInstance(noConnectionMessage, MyDialogStyle.WARNING).show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
+            new MyAlertDialog
+                    .Builder()
+                    .setStyle(MyDialogStyle.WARNING)
+                    .setMessage(noConnectionMessage)
+                    .build()
+                    .show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
             return;
         }
         new ConnectService(context, operationType).execute(call);

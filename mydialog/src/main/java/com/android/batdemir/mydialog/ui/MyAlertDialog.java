@@ -1,7 +1,9 @@
 package com.android.batdemir.mydialog.ui;
 
+import android.app.Activity;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -10,11 +12,12 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
+import android.widget.LinearLayout;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.android.batdemir.mydialog.R;
 import com.android.batdemir.mydialog.databinding.FragmentMyDialogBinding;
@@ -24,9 +27,9 @@ import com.android.batdemir.mydialog.listeners.MyAlertDialogEditTextListener;
 
 import java.io.Serializable;
 
-@SuppressWarnings({"java:S1948", "unused", "UnusedReturnValue", "ConstantConditions"})
+@SuppressWarnings({"java:S1948", "java:S1450", "UnusedReturnValue", "ConstantConditions"})
 public class MyAlertDialog extends DialogFragment {
-
+    private Activity activity;
     private static final String KEY_BUILDER = "KEY_BUILDER";
     private static MyAlertDialog myAlertDialog = null;
     private static MyAlertDialogCreator myAlertDialogCreator = null;
@@ -70,11 +73,9 @@ public class MyAlertDialog extends DialogFragment {
     }
 
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        if (getFragmentManager() != null) {
-            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-            fragmentTransaction.commitAllowingStateLoss();
-        }
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        this.activity = getActivity();
     }
 
     //Initialize Methods
@@ -115,7 +116,7 @@ public class MyAlertDialog extends DialogFragment {
         });
 
         binding.btnOk.setOnClickListener(v -> {
-            if (builder.getStyle() == MyDialogStyle.INPUT) {
+            if (builder.getStyle() == MyDialogStyle.INPUT && (builder.getShowEditText() == null || (builder.getShowEditText() != null && builder.getShowEditText()))) {
                 editTextListenerProcess(KeyEvent.KEYCODE_ENTER, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
             } else {
                 MyAlertDialog temp = myAlertDialog;
@@ -148,43 +149,24 @@ public class MyAlertDialog extends DialogFragment {
     //Component Style
 
     private void setComponentStyle() {
+        binding.editText.clearFocus();
+
         binding.txtEditMessage.setText(builder.getMessage());
         binding.txtEditMessage.post(() -> {
             if (binding.txtEditMessage.getLineCount() > 3) {
                 binding.txtEditMessage.setGravity(View.TEXT_ALIGNMENT_TEXT_START);
             }
         });
-        binding.editText.clearFocus();
+
         switch (builder.getStyle()) {
             case INFO:
-                binding.imgDialog.setBackgroundColor(getContext().getColor(R.color.alert_dialog_info));
-                binding.imgDialog.setImageResource(R.drawable.ic_dialog_info);
-                binding.txtEditTitle.setText(getContext().getString(R.string.informationTitle));
-                binding.txtEditTitle.setTextColor(getContext().getColor(R.color.alert_dialog_info));
-                binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(getContext().getColor(R.color.alert_dialog_info)));
                 break;
             case INPUT:
-                binding.imgDialog.setBackgroundColor(getContext().getColor(R.color.alert_dialog_info));
-                binding.imgDialog.setImageResource(R.drawable.ic_dialog_info);
-                binding.txtEditTitle.setText(getContext().getString(R.string.informationTitle));
-                binding.txtEditTitle.setTextColor(getContext().getColor(R.color.alert_dialog_info));
-                binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(getContext().getColor(R.color.alert_dialog_info)));
-                ((ConstraintLayout.LayoutParams) binding.btnCancel.getLayoutParams()).matchConstraintPercentWidth = 0.5f;
-                ((ConstraintLayout.LayoutParams) binding.btnOk.getLayoutParams()).matchConstraintPercentWidth = 0.5f;
-                ((ConstraintLayout.LayoutParams) binding.inputLayout.getLayoutParams()).height = ConstraintLayout.LayoutParams.WRAP_CONTENT;
-                binding.editText.setVisibility(View.VISIBLE);
-                binding.editText.requestFocus();
-                binding.editText.setInputType(builder.getInputType());
+                showEditText(true);
+                showCancelButton(true);
                 break;
             case ACTION:
-                binding.imgDialog.setBackgroundColor(getContext().getColor(R.color.alert_dialog_info));
-                binding.imgDialog.setImageResource(R.drawable.ic_dialog_info);
-                binding.txtEditTitle.setText(getContext().getString(R.string.informationTitle));
-                binding.txtEditTitle.setTextColor(getContext().getColor(R.color.alert_dialog_info));
-                binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(getContext().getColor(R.color.alert_dialog_info)));
-                binding.btnOk.setTextColor(getContext().getColor(android.R.color.white));
-                ((ConstraintLayout.LayoutParams) binding.btnCancel.getLayoutParams()).matchConstraintPercentWidth = 0.5f;
-                ((ConstraintLayout.LayoutParams) binding.btnOk.getLayoutParams()).matchConstraintPercentWidth = 0.5f;
+                showCancelButton(true);
                 break;
             case WARNING:
                 binding.imgDialog.setBackgroundColor(getContext().getColor(R.color.alert_dialog_warning));
@@ -192,7 +174,6 @@ public class MyAlertDialog extends DialogFragment {
                 binding.txtEditTitle.setText(getContext().getString(R.string.warningTitle));
                 binding.txtEditTitle.setTextColor(getContext().getColor(R.color.alert_dialog_warning));
                 binding.btnOk.setBackgroundTintList(ColorStateList.valueOf(getContext().getColor(R.color.alert_dialog_warning)));
-                binding.btnOk.setTextColor(getContext().getColor(android.R.color.white));
                 break;
             case SUCCESS:
                 binding.imgDialog.setBackgroundColor(getContext().getColor(R.color.alert_dialog_success));
@@ -211,8 +192,37 @@ public class MyAlertDialog extends DialogFragment {
             default:
                 throw new IllegalStateException("Unexpected value: " + builder.getStyle());
         }
-        binding.btnOk.setText(builder.getOkText().isEmpty() ? getContext().getString(R.string.okButtonText) : builder.getOkText());
-        binding.btnCancel.setText(builder.getCancelText().isEmpty() ? getContext().getString(R.string.cancelButtonText) : builder.getCancelText());
+
+        if (!builder.getTitle().isEmpty())
+            binding.txtEditTitle.setText(builder.getTitle());
+        if (builder.getTitleColor() != 0)
+            binding.txtEditTitle.setTextColor(builder.getTitleColor());
+
+        if (!builder.getOkText().isEmpty())
+            binding.btnOk.setText(builder.getOkText());
+        if (builder.getOkTextColor() != 0)
+            binding.btnOk.setTextColor(builder.getOkTextColor());
+        if (builder.getOkBtnColor() != null)
+            binding.btnOk.setBackgroundTintList(builder.getOkBtnColor());
+
+        if (!builder.getCancelText().isEmpty())
+            binding.btnCancel.setText(builder.getCancelText());
+        if (builder.getCancelTextColor() != 0)
+            binding.btnCancel.setTextColor(builder.getCancelTextColor());
+        if (builder.getCancelBtnColor() != null)
+            binding.btnCancel.setBackgroundTintList(builder.getCancelBtnColor());
+
+        if (builder.getImgColor() != 0)
+            binding.imgDialog.setBackgroundColor(builder.getImgColor());
+
+        if (builder.getMessageColor() != 0)
+            binding.txtEditMessage.setTextColor(builder.getMessageColor());
+
+        if (builder.getShowEditText() != null)
+            showEditText(builder.getShowEditText());
+
+        if (builder.getShowCancelButton() != null)
+            showCancelButton(builder.getShowCancelButton());
     }
 
     private void setComponentAnim() {
@@ -224,12 +234,31 @@ public class MyAlertDialog extends DialogFragment {
         }
     }
 
+    private void showEditText(boolean isShow) {
+        ((LinearLayout.LayoutParams) binding.inputLayout.getLayoutParams()).width = isShow ? LinearLayout.LayoutParams.MATCH_PARENT : 0;
+        ((LinearLayout.LayoutParams) binding.inputLayout.getLayoutParams()).height = isShow ? LinearLayout.LayoutParams.WRAP_CONTENT : 0;
+        ((LinearLayout.LayoutParams) binding.inputLayout.getLayoutParams()).setMargins(
+                isShow ? getResources().getDimensionPixelOffset(R.dimen.margin) : 0,
+                isShow ? getResources().getDimensionPixelOffset(R.dimen.margin) : 0,
+                isShow ? getResources().getDimensionPixelOffset(R.dimen.margin) : 0,
+                isShow ? getResources().getDimensionPixelOffset(R.dimen.margin) : 0);
+        binding.editText.setVisibility(isShow ? View.VISIBLE : View.INVISIBLE);
+        binding.editText.setInputType(builder.getInputType());
+    }
+
+    private void showCancelButton(boolean isShow) {
+        ((LinearLayout.LayoutParams) binding.btnCancel.getLayoutParams()).width = isShow ? LinearLayout.LayoutParams.MATCH_PARENT : 0;
+        ((LinearLayout.LayoutParams) binding.btnCancel.getLayoutParams()).height = isShow ? LinearLayout.LayoutParams.WRAP_CONTENT : 0;
+        ((LinearLayout.LayoutParams) binding.btnCancel.getLayoutParams()).setMarginStart(isShow ? getResources().getDimensionPixelOffset(R.dimen.marginStart) : 0);
+        ((LinearLayout.LayoutParams) binding.btnCancel.getLayoutParams()).setMarginEnd(isShow ? getResources().getDimensionPixelOffset(R.dimen.marginEnd) : 0);
+    }
+
     //Listeners
 
     private MyAlertDialogButtonListener getMyAlertDialogButtonListener() {
         try {
             if (builder.getMyAlertDialogButtonListener() == null)
-                builder.setMyAlertDialogButtonListener((MyAlertDialogButtonListener) getActivity());
+                builder.setMyAlertDialogButtonListener((MyAlertDialogButtonListener) activity);
         } catch (Exception e) {
             Log.e(MyAlertDialog.class.getSimpleName(), e.getMessage());
         }
@@ -239,7 +268,7 @@ public class MyAlertDialog extends DialogFragment {
     private MyAlertDialogEditTextListener getMyAlertDialogEditTextListener() {
         try {
             if (builder.getMyAlertDialogButtonListener() == null)
-                builder.setMyAlertDialogEditTextListener((MyAlertDialogEditTextListener) getActivity());
+                builder.setMyAlertDialogEditTextListener((MyAlertDialogEditTextListener) activity);
         } catch (Exception e) {
             Log.e(MyAlertDialog.class.getSimpleName(), e.getMessage());
         }
@@ -260,15 +289,22 @@ public class MyAlertDialog extends DialogFragment {
         private String cancelText;
         private String message;
         private String errorMessage;
-        private int titleColor;
-        private int imgColor;
-        private int messageColor;
-        private int okTextColor;
-        private int cancelTextColor;
-        private int okBtnColor;
-        private int cancelBtnColor;
+        private @ColorInt
+        int titleColor;
+        private @ColorInt
+        int imgColor;
+        private @ColorInt
+        int messageColor;
+        private @ColorInt
+        int okTextColor;
+        private @ColorInt
+        int cancelTextColor;
+        private ColorStateList okBtnColor;
+        private ColorStateList cancelBtnColor;
         private int inputType;
         private MyDialogStyle style;
+        private Boolean showEditText;
+        private Boolean showCancelButton;
 
         public Builder() {
             this.title = "";
@@ -277,6 +313,7 @@ public class MyAlertDialog extends DialogFragment {
             this.message = "";
             this.errorMessage = "";
             this.style = MyDialogStyle.INFO;
+            this.inputType = InputType.TYPE_CLASS_TEXT;
         }
 
         public MyAlertDialogButtonListener getMyAlertDialogButtonListener() {
@@ -342,65 +379,70 @@ public class MyAlertDialog extends DialogFragment {
             return this;
         }
 
+        @ColorInt
         public int getTitleColor() {
             return titleColor;
         }
 
-        public Builder setTitleColor(int titleColor) {
+        public Builder setTitleColor(@ColorInt int titleColor) {
             this.titleColor = titleColor;
             return this;
         }
 
+        @ColorInt
         public int getImgColor() {
             return imgColor;
         }
 
-        public Builder setImgColor(int imgColor) {
+        public Builder setImgColor(@ColorInt int imgColor) {
             this.imgColor = imgColor;
             return this;
         }
 
+        @ColorInt
         public int getMessageColor() {
             return messageColor;
         }
 
-        public Builder setMessageColor(int messageColor) {
+        public Builder setMessageColor(@ColorInt int messageColor) {
             this.messageColor = messageColor;
             return this;
         }
 
+        @ColorInt
         public int getOkTextColor() {
             return okTextColor;
         }
 
-        public Builder setOkTextColor(int okTextColor) {
+        public Builder setOkTextColor(@ColorInt int okTextColor) {
             this.okTextColor = okTextColor;
             return this;
         }
 
+        @ColorInt
         public int getCancelTextColor() {
             return cancelTextColor;
         }
 
-        public Builder setCancelTextColor(int cancelTextColor) {
+        public Builder setCancelTextColor(@ColorInt int cancelTextColor) {
             this.cancelTextColor = cancelTextColor;
             return this;
         }
 
-        public int getOkBtnColor() {
+        public ColorStateList getOkBtnColor() {
             return okBtnColor;
         }
 
-        public Builder setOkBtnColor(int okBtnColor) {
+        public Builder setOkBtnColor(ColorStateList okBtnColor) {
             this.okBtnColor = okBtnColor;
             return this;
         }
 
-        public int getCancelBtnColor() {
+        public ColorStateList getCancelBtnColor() {
             return cancelBtnColor;
         }
 
-        public Builder setCancelBtnColor(int cancelBtnColor) {
+        public Builder setCancelBtnColor(ColorStateList cancelBtnColor) {
             this.cancelBtnColor = cancelBtnColor;
             return this;
         }
@@ -410,7 +452,10 @@ public class MyAlertDialog extends DialogFragment {
         }
 
         public Builder setInputType(int inputType) {
-            this.inputType = inputType;
+            if (inputType == 0)
+                this.inputType = InputType.TYPE_CLASS_TEXT;
+            else
+                this.inputType = inputType;
             return this;
         }
 
@@ -425,6 +470,24 @@ public class MyAlertDialog extends DialogFragment {
 
         public MyAlertDialog build() {
             return getInstance(this);
+        }
+
+        public Boolean getShowEditText() {
+            return showEditText;
+        }
+
+        public Builder setShowEditText(Boolean showEditText) {
+            this.showEditText = showEditText;
+            return this;
+        }
+
+        public Boolean getShowCancelButton() {
+            return showCancelButton;
+        }
+
+        public Builder setShowCancelButton(Boolean showCancelButton) {
+            this.showCancelButton = showCancelButton;
+            return this;
         }
     }
 
