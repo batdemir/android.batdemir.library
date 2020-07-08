@@ -29,10 +29,10 @@ import java.io.Serializable;
 
 @SuppressWarnings({"java:S1948", "java:S1450", "UnusedReturnValue", "ConstantConditions"})
 public class MyAlertDialog extends DialogFragment {
-    private Activity activity;
     private static final String KEY_BUILDER = "KEY_BUILDER";
     private static MyAlertDialog myAlertDialog = null;
     private static MyAlertDialogCreator myAlertDialogCreator = null;
+    private Activity activity;
     private FragmentMyDialogBinding binding;
     private Builder builder;
 
@@ -49,6 +49,10 @@ public class MyAlertDialog extends DialogFragment {
     }
 
     //Fragment Methods
+
+    public static void setMyAlertDialogCreator(MyAlertDialogCreator myAlertDialogCreator) {
+        MyAlertDialog.myAlertDialogCreator = myAlertDialogCreator;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,13 +76,13 @@ public class MyAlertDialog extends DialogFragment {
         setListeners();
     }
 
+    //Initialize Methods
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.activity = getActivity();
     }
-
-    //Initialize Methods
 
     private void getObjectReferences() {
         if (getArguments() == null)
@@ -91,6 +95,8 @@ public class MyAlertDialog extends DialogFragment {
         setComponentStyle();
         setComponentAnim();
     }
+
+    //Functions
 
     private void setListeners() {
         binding.editText.setOnEditorActionListener((v, actionId, event) -> {
@@ -126,7 +132,7 @@ public class MyAlertDialog extends DialogFragment {
         });
     }
 
-    //Functions
+    //Component Style
 
     private void editTextListenerProcess(int action, KeyEvent event) {
         binding.editText.post(() -> {
@@ -145,8 +151,6 @@ public class MyAlertDialog extends DialogFragment {
             }
         });
     }
-
-    //Component Style
 
     private void setComponentStyle() {
         binding.editText.clearFocus();
@@ -246,14 +250,14 @@ public class MyAlertDialog extends DialogFragment {
         binding.editText.setInputType(builder.getInputType());
     }
 
+    //Listeners
+
     private void showCancelButton(boolean isShow) {
         ((LinearLayout.LayoutParams) binding.btnCancel.getLayoutParams()).width = isShow ? LinearLayout.LayoutParams.MATCH_PARENT : 0;
         ((LinearLayout.LayoutParams) binding.btnCancel.getLayoutParams()).height = isShow ? LinearLayout.LayoutParams.WRAP_CONTENT : 0;
         ((LinearLayout.LayoutParams) binding.btnCancel.getLayoutParams()).setMarginStart(isShow ? getResources().getDimensionPixelOffset(R.dimen.marginStart) : 0);
         ((LinearLayout.LayoutParams) binding.btnCancel.getLayoutParams()).setMarginEnd(isShow ? getResources().getDimensionPixelOffset(R.dimen.marginEnd) : 0);
     }
-
-    //Listeners
 
     private MyAlertDialogButtonListener getMyAlertDialogButtonListener() {
         try {
@@ -273,10 +277,6 @@ public class MyAlertDialog extends DialogFragment {
             Log.e(MyAlertDialog.class.getSimpleName(), e.getMessage());
         }
         return builder.getMyAlertDialogEditTextListener();
-    }
-
-    public static void setMyAlertDialogCreator(MyAlertDialogCreator myAlertDialogCreator) {
-        MyAlertDialog.myAlertDialogCreator = myAlertDialogCreator;
     }
 
     //Builder

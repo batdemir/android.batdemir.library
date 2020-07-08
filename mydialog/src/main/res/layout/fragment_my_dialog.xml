@@ -17,9 +17,9 @@
             android:id="@+id/imgDialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/alert_dialog_info"
             android:paddingTop="@dimen/paddingTop"
             android:paddingBottom="@dimen/paddingBottom"
-            android:background="@color/alert_dialog_info"
             android:src="@drawable/ic_dialog_info" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -94,9 +94,9 @@
                 android:layout_marginStart="0sp"
                 android:layout_marginEnd="0sp"
                 android:layout_weight="1"
+                android:text="@string/cancelButtonText"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
                 android:textColor="@android:color/white"
-                android:text="@string/cancelButtonText"
                 app:backgroundTint="@android:color/darker_gray" />
 
             <com.google.android.material.button.MaterialButton
@@ -107,9 +107,9 @@
                 android:layout_marginStart="@dimen/marginStart"
                 android:layout_marginEnd="@dimen/marginEnd"
                 android:layout_weight="1"
+                android:text="@string/okButtonText"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
                 android:textColor="@android:color/white"
-                android:text="@string/okButtonText"
                 app:backgroundTint="@color/alert_dialog_info" />
 
         </com.google.android.material.circularreveal.CircularRevealLinearLayout>

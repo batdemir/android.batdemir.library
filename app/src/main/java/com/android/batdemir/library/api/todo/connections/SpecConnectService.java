@@ -22,13 +22,11 @@ public class SpecConnectService extends ConnectService {
     @SuppressLint("StaticFieldLeak")
     private Context context;
     private ProgressDialogFragment progressDialogFragment;
-    private String operationType;
     private ConnectionServiceListener connectServiceListener;
 
     public SpecConnectService(Context context, String operationType) {
         super(context, operationType);
         this.context = context;
-        this.operationType = operationType;
         this.progressDialogFragment = new ProgressDialogFragment();
     }
 

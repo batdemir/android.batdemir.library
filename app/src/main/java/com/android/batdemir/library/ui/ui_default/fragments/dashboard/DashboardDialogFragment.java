@@ -8,14 +8,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.android.batdemir.library.databinding.FragmentDashboardBinding;
 
 public class DashboardDialogFragment extends Fragment {
 
     private FragmentDashboardBinding binding;
-    private DashboardViewModel dashboardViewModel;
 
     @Nullable
     @Override
@@ -27,7 +26,7 @@ public class DashboardDialogFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        dashboardViewModel = ViewModelProviders.of(this).get(DashboardViewModel.class);
+        DashboardViewModel dashboardViewModel = new ViewModelProvider.NewInstanceFactory().create(DashboardViewModel.class);
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), binding.textDashboard::setText);
     }
 }

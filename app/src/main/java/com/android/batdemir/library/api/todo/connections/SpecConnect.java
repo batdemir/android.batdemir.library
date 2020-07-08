@@ -14,7 +14,7 @@ import retrofit2.Call;
 public class SpecConnect extends Connect {
 
     @Override
-    public void connect(Context context, Call call, String operationType) {
+    public void connect(Context context, Call<?> call, String operationType) {
         if (!ToolConnection.getInstance(context).isConnected()) {
             new MyAlertDialog
                     .Builder()
