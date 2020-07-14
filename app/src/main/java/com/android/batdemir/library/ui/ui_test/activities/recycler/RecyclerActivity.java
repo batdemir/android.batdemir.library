@@ -60,12 +60,22 @@ public class RecyclerActivity extends BaseActivity<ActivityRecyclerBinding, Recy
 
     @Override
     public void onSuccess(String operationType, Response response) {
-        MyAlertDialog.getInstance("onSuccess\n" + Objects.requireNonNull(response.body()).toString(), MyDialogStyle.WARNING).show(getSupportFragmentManager(), "success");
+        new MyAlertDialog
+                .Builder()
+                .setStyle(MyDialogStyle.WARNING)
+                .setMessage("onSuccess\n" + Objects.requireNonNull(response.body()).toString())
+                .build()
+                .show(getSupportFragmentManager(), "success");
     }
 
     @Override
     public void onFailure(String operationType, Response response) {
-        MyAlertDialog.getInstance("onFailure\n", MyDialogStyle.ACTION).show(getSupportFragmentManager(), "failure");
+        new MyAlertDialog
+                .Builder()
+                .setStyle(MyDialogStyle.ACTION)
+                .setMessage("onFailure\n")
+                .build()
+                .show(getSupportFragmentManager(), "failure");
     }
 
     @Override
@@ -100,7 +110,7 @@ public class RecyclerActivity extends BaseActivity<ActivityRecyclerBinding, Recy
                 str += "\tItem Name: " + player.getName();
                 str += "\tItem Age: " + player.getAge().toString();
                 str += "\tItem Rating: " + player.getRating().toString();
-                super.onLeftSwiped(position, getBinding().rootRecyclerListView, str, v -> {
+                SwipeControllerActions.super.onLeftSwiped(position, getBinding().rootRecyclerListView, str, v -> {
                     adapterRecyclerView.getModels().add(position, player);
                     getBinding().recyclerListView.setAdapter(new AdapterRecyclerView(getBinding().getRoot().getContext(), adapterRecyclerView.getModels()));
                     getBinding().recyclerListView.smoothScrollToPosition(position);
@@ -118,7 +128,7 @@ public class RecyclerActivity extends BaseActivity<ActivityRecyclerBinding, Recy
                 str += "\tItem Name: " + player.getName();
                 str += "\tItem Age: " + player.getAge().toString();
                 str += "\tItem Rating: " + player.getRating().toString();
-                super.onRightSwiped(position, getBinding().rootRecyclerListView, str, v -> {
+                SwipeControllerActions.super.onRightSwiped(position, getBinding().rootRecyclerListView, str, v -> {
                     adapterRecyclerView.getModels().remove(player);
                     getBinding().recyclerListView.setAdapter(new AdapterRecyclerView(getBinding().getRoot().getContext(), adapterRecyclerView.getModels()));
                     getBinding().recyclerListView.smoothScrollToPosition(position);

@@ -14,9 +14,14 @@ import retrofit2.Call;
 public class SpecConnect extends Connect {
 
     @Override
-    public void connect(Context context, Call call, String operationType) {
+    public void connect(Context context, Call<?> call, String operationType) {
         if (!ToolConnection.getInstance(context).isConnected()) {
-            MyAlertDialog.getInstance("Please check internet connection.", MyDialogStyle.WARNING).show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
+            new MyAlertDialog
+                    .Builder()
+                    .setStyle(MyDialogStyle.WARNING)
+                    .setMessage("Please check internet connection.")
+                    .build()
+                    .show(((FragmentActivity) context).getSupportFragmentManager(), Connect.class.getSimpleName());
             return;
         }
         new SpecConnectService(context, operationType).execute(call);

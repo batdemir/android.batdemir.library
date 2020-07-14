@@ -9,7 +9,6 @@ import com.google.gson.GsonBuilder;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
@@ -108,11 +107,9 @@ public class RetrofitClient {
                     }
             };
 
-            final SSLContext sslContext = SSLContext.getInstance("SSL");
+            SSLContext sslContext = SSLContext.getInstance("TLSv1.2");
             sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
-            final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
 
-            builder.sslSocketFactory(sslSocketFactory);
             builder.hostnameVerifier((hostname, session) -> Boolean.TRUE);
         } catch (Exception e) {
             Log.e(RetrofitClient.class.getSimpleName(), e.getMessage());

@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="library_name">myLibrary</string>
+    <string name="library_name" translatable="false">myLibrary</string>
+
+    <string name="message_please_check_internet_connection">Please, check internet connection.</string>
+    <string name="message_please_wait">Pleaase wait...</string>
+    <string name="message_connection_not_successfully_with_service">Connection not successfully with service. Please try again.</string>
+    <string name="message_connection_time_out">Connection have been timeout. Please try again.</string>
 </resources>

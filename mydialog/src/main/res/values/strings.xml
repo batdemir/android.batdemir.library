@@ -6,6 +6,6 @@
     <string name="successTitle">Success</string>
     <string name="failedTitle">Failed</string>
     <string name="cancelButtonText">Cancel</string>
-    <string name="okButtonText">Ok</string>
+    <string name="okButtonText">OK</string>
     <string name="inputEmptyMessage">Please enter value.</string>
 </resources>

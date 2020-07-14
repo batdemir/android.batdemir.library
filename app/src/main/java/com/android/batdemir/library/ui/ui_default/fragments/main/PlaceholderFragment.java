@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.android.batdemir.library.databinding.FragmentTabbedBinding;
 
@@ -31,7 +31,7 @@ public class PlaceholderFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pageViewModel = ViewModelProviders.of(this).get(PageViewModel.class);
+        pageViewModel = new ViewModelProvider.NewInstanceFactory().create(PageViewModel.class);
         int index = 1;
         if (getArguments() != null) {
             index = getArguments().getInt(ARG_SECTION_NUMBER);

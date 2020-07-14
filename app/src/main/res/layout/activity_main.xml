@@ -6,78 +6,100 @@
     android:layout_height="match_parent"
     tools:context=".ui.ui_test.activities.main.MainActivity">
 
-    <com.google.android.material.circularreveal.CircularRevealLinearLayout
-        android:id="@+id/linearProps"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnNextPage"
+        <com.google.android.material.circularreveal.CircularRevealLinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Go Next Page"
-            android:textAllCaps="false"
-            tools:ignore="HardcodedText" />
+            android:orientation="vertical">
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNextPage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Go Next Page"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnDialogWarning"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="DialogWarning"
-            android:textAllCaps="false"
-            tools:ignore="HardcodedText" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDialogDefaultShortText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DialogDefaultShortText"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnDialogSuccess"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="DialogSuccess"
-            android:textAllCaps="false"
-            tools:ignore="HardcodedText" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDialogDefault"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DialogDefault"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnDialogFailed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="DialogFailed"
-            android:textAllCaps="false"
-            tools:ignore="HardcodedText" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDialogEditTextNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DialogEditTextNumber"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnDialogDefault"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="DialogDefault"
-            android:textAllCaps="false"
-            tools:ignore="HardcodedText" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDialogEditTextString"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DialogEditTextString"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnDialogEditTextNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="DialogEditTextNumber"
-            android:textAllCaps="false"
-            tools:ignore="HardcodedText" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDialogAction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DialogAction"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnDialogEditTextString"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="DialogEditTextString"
-            android:textAllCaps="false"
-            tools:ignore="HardcodedText" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDialogWarning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DialogWarning"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnDialogAction"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="DialogAction"
-            android:textAllCaps="false"
-            tools:ignore="HardcodedText" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDialogSuccess"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DialogSuccess"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
 
-    </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDialogFailed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DialogFailed"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDialogCustom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DialogCustom"
+                android:textAllCaps="false"
+                tools:ignore="HardcodedText" />
+
+        </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.core.widget.NestedScrollView>
 

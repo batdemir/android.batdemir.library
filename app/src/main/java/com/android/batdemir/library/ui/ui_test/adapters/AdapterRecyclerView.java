@@ -24,14 +24,11 @@ public class AdapterRecyclerView extends RecyclerView.Adapter {
     }
 
     private class MyViewHolder extends RecyclerView.ViewHolder {
-        private Player model;
-
         private MyViewHolder(ItemPlayerBinding binding) {
             super(binding.getRoot());
         }
 
         private void setData(Player model) {
-            this.model = model;
             binding.txtEditAge.setText(String.valueOf(model.getAge()));
             binding.txtEditating.setText(String.valueOf(model.getRating()));
             binding.txtEditClub.setText(model.getClub());

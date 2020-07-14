@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="message_please_check_internet_connection">Ве молиме, проверете ја интернет-врската.</string>
+    <string name="message_please_wait">Ве молам почекајте...</string>
+    <string name="message_connection_not_successfully_with_service">Врската не е успешно со услугата. Ве молиме обидете се повторно.</string>
+    <string name="message_connection_time_out">Истек на време за врска Ве молиме обидете се повторно.</string>
+</resources>

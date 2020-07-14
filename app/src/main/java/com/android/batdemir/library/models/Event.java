@@ -13,9 +13,9 @@ public class Event implements Serializable {
     private int eventIcon;
 
     @SerializedName("to")
-    private Class to;
+    private Class<?> to;
 
-    public Event(String eventName, int eventIcon, Class to) {
+    public Event(String eventName, int eventIcon, Class<?> to) {
         this.eventName = eventName;
         this.eventIcon = eventIcon;
         this.to = to;
@@ -37,11 +37,11 @@ public class Event implements Serializable {
         this.eventIcon = eventIcon;
     }
 
-    public Class getTo() {
+    public Class<?> getTo() {
         return to;
     }
 
-    public void setTo(Class to) {
+    public void setTo(Class<?> to) {
         this.to = to;
     }
 }

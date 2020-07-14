@@ -7,105 +7,113 @@
     app:cardBackgroundColor="@android:color/white"
     app:cardPreventCornerOverlap="true">
 
-        <com.google.android.material.circularreveal.CircularRevealLinearLayout
-            android:id="@+id/linearSub"
+    <com.google.android.material.circularreveal.CircularRevealLinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgDialog"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:background="@color/alert_dialog_info"
+            android:paddingTop="@dimen/paddingTop"
+            android:paddingBottom="@dimen/paddingBottom"
+            android:src="@drawable/ic_dialog_info" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgDialog"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/alert_dialog_success"
-                android:paddingTop="@dimen/paddingTop"
-                android:paddingBottom="@dimen/paddingBottom"
-                android:src="@drawable/ic_dialog_success" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtEditTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/informationTitle"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.DialogWindowTitle"
+            android:textColor="@color/alert_dialog_info"
+            android:textStyle="bold" />
 
-            <androidx.core.widget.NestedScrollView
-                android:id="@+id/rootContentMyDialog"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-
-                <com.google.android.material.circularreveal.CircularRevealLinearLayout
-                    android:id="@+id/linearContent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/padding">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/txtEditTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textStyle="bold" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/txtEditMessage"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textColor="@android:color/black" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/inputLayout"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editText"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:imeOptions="actionDone"
-                            android:inputType="text"
-                            android:lines="1"
-                            android:maxLength="50"
-                            android:minLines="1"
-                            android:singleLine="true"
-                            android:textColor="@android:color/black" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </com.google.android.material.circularreveal.CircularRevealLinearLayout>
-
-            </androidx.core.widget.NestedScrollView>
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/rootContentMyDialog"
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1"
+            android:padding="8sp">
 
             <com.google.android.material.circularreveal.CircularRevealLinearLayout
-                android:id="@+id/linearButtons"
+                android:id="@+id/linearLayoutSub"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/padding">
+                android:orientation="vertical">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnCancel"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txtEditMessage"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="0sp"
-                    android:layout_marginEnd="@dimen/marginEnd"
-                    android:layout_weight="1"
-                    android:backgroundTint="@android:color/darker_gray"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-                    android:textColor="@android:color/white" />
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.TextView"
+                    android:textColor="@android:color/black" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnOk"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/marginStart"
-                    android:layout_marginEnd="0sp"
-                    android:layout_weight="1"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-                    android:textColor="@android:color/white" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0sp"
+                    android:layout_height="0sp"
+                    app:boxStrokeColor="@android:color/darker_gray">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:lines="1"
+                        android:maxLength="50"
+                        android:minLines="1"
+                        android:singleLine="true"
+                        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.EditText"
+                        android:textColor="@android:color/black"
+                        android:visibility="invisible" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
             </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.circularreveal.CircularRevealLinearLayout
+            android:id="@+id/linearLayoutButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancel"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0sp"
+                android:layout_height="0sp"
+                android:layout_marginStart="0sp"
+                android:layout_marginEnd="0sp"
+                android:layout_weight="1"
+                android:text="@string/cancelButtonText"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+                android:textColor="@android:color/white"
+                app:backgroundTint="@android:color/darker_gray" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOk"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginStart"
+                android:layout_marginEnd="@dimen/marginEnd"
+                android:layout_weight="1"
+                android:text="@string/okButtonText"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+                android:textColor="@android:color/white"
+                app:backgroundTint="@color/alert_dialog_info" />
+
         </com.google.android.material.circularreveal.CircularRevealLinearLayout>
+
+    </com.google.android.material.circularreveal.CircularRevealLinearLayout>
 
 </com.google.android.material.card.MaterialCardView>
