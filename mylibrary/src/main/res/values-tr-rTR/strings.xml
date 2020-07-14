@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="message_please_check_internet_connection">Lütfen, internet bağlantınızı kontrol edin.</string>
+    <string name="message_please_wait">Lütfen bekleyin...</string>
+    <string name="message_connection_not_successfully_with_service">Servis ile bağlantı sağlanamadı. Lütfen tekrar deneyiniz.</string>
+    <string name="message_connection_time_out">Bağlantı zaman aşımı oldu. Lütfen tekrar deneyin.</string>
+</resources>

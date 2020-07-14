@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="message_please_check_internet_connection">Ελέγξτε τη σύνδεση στο Διαδίκτυο.</string>
+    <string name="message_please_wait">Παρακαλώ περιμένετε...</string>
+    <string name="message_connection_not_successfully_with_service">Η σύνδεση δεν ολοκληρώθηκε με επιτυχία με την υπηρεσία. ΠΑΡΑΚΑΛΩ προσπαθησε ξανα.</string>
+    <string name="message_connection_time_out">Χρονικό όριο σύνδεσης. ΠΑΡΑΚΑΛΩ προσπαθησε ξανα.</string>
+</resources>

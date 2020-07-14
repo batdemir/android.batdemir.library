@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.batdemir.mydialog.ui.MyAlertDialog;
 import com.android.batdemir.mydialog.ui.MyDialogStyle;
+import com.android.batdemir.mylibrary.R;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -27,25 +28,9 @@ public class ConnectService extends AsyncTask<Call<?>, Void, Response<?>> {
     private ConnectServiceListener connectServiceListener;
     private ConnectServiceErrorListener connectServiceErrorListener;
 
-    private String progressBarMessage = "Lütfen Bekleyiniz...";
-    private String connectionFailMessage = "Servis İle Bağlantı Sağlanamadı. Lütfen Tekrar Deneyiniz.";
-    private String connectionTimeOutMessage = "Servis İle Bağlantı Zaman Aşımına Uğradı. Lütfen Tekrar Deneyiniz.";
-
     public ConnectService(Context context, String operationType) {
         this.context = context;
         this.operationType = operationType;
-    }
-
-    public void setProgressBarMessage(String progressBarMessage) {
-        this.progressBarMessage = progressBarMessage;
-    }
-
-    public void setConnectionFailMessage(String connectionFailMessage) {
-        this.connectionFailMessage = connectionFailMessage;
-    }
-
-    public void setConnectionTimeOutMessage(String connectionTimeOutMessage) {
-        this.connectionTimeOutMessage = connectionTimeOutMessage;
     }
 
     public ConnectService setConnectServiceListener(ConnectServiceListener connectServiceListener) {
@@ -74,14 +59,14 @@ public class ConnectService extends AsyncTask<Call<?>, Void, Response<?>> {
                 new MyAlertDialog
                         .Builder()
                         .setStyle(MyDialogStyle.FAILED)
-                        .setMessage(connectionFailMessage + "\n" + e.getMessage())
+                        .setMessage(context.getString(R.string.message_connection_not_successfully_with_service) + "\n" + e.getMessage())
                         .build()
                         .show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
             } else if (e.getClass().equals(SocketTimeoutException.class) || e.getClass().equals(IOException.class)) {
                 new MyAlertDialog
                         .Builder()
                         .setStyle(MyDialogStyle.FAILED)
-                        .setMessage(connectionTimeOutMessage + "\n" + e.getMessage())
+                        .setMessage(context.getString(R.string.message_connection_time_out) + "\n" + e.getMessage())
                         .build()
                         .show(((FragmentActivity) context).getSupportFragmentManager(), operationType);
             } else {
@@ -132,7 +117,7 @@ public class ConnectService extends AsyncTask<Call<?>, Void, Response<?>> {
     protected void showProgressBar() {
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(context);
-            progressDialog.setMessage(progressBarMessage);
+            progressDialog.setMessage(context.getString(R.string.message_please_wait));
             progressDialog.show();
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.setCancelable(false);
