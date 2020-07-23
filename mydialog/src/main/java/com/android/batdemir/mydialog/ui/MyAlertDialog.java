@@ -255,6 +255,7 @@ public class MyAlertDialog extends DialogFragment {
     private void showCancelButton(boolean isShow) {
         ((LinearLayout.LayoutParams) binding.btnCancel.getLayoutParams()).width = isShow ? LinearLayout.LayoutParams.MATCH_PARENT : 0;
         ((LinearLayout.LayoutParams) binding.btnCancel.getLayoutParams()).height = isShow ? LinearLayout.LayoutParams.WRAP_CONTENT : 0;
+        ((LinearLayout.LayoutParams) binding.btnCancel.getLayoutParams()).weight = isShow ? 1 : 0;
         ((LinearLayout.LayoutParams) binding.btnCancel.getLayoutParams()).setMarginStart(isShow ? getResources().getDimensionPixelOffset(R.dimen.marginStart) : 0);
         ((LinearLayout.LayoutParams) binding.btnCancel.getLayoutParams()).setMarginEnd(isShow ? getResources().getDimensionPixelOffset(R.dimen.marginEnd) : 0);
     }
