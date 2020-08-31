@@ -121,7 +121,7 @@ public class ToolConnection {
         try {
             List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
             for (NetworkInterface networkInterface : interfaces) {
-                if (interfaceName != null && (!networkInterface.getName().equalsIgnoreCase(interfaceName))) {
+                if (interfaceName != null && networkInterface.getName().equals(interfaceName)) {
                     mac = getMACFormatter(networkInterface.getHardwareAddress());
                     break;
                 }
